@@ -1,0 +1,14 @@
+bin/
+gen/
+.settings/
+resbuilder/
+spoon-output/
+assets/
+obj/
+
+*.class
+.classpath
+.cproject
+.project
+local.properties
+lint.xml
