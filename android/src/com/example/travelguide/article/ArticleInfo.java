@@ -2,11 +2,18 @@ package com.example.travelguide.article;
 
 public class ArticleInfo
 {
-  private String mArticleId;
+
+  public ArticleInfo(String articleUrl, String iconUrl, String title)
+  {
+    this.mArticleUrl = articleUrl;
+    this.mIconUrl = iconUrl;
+    this.mTitle = title;
+  }
+  private String mArticleUrl;
   private String mIconUrl;
-  private String mName;
+  private String mTitle;
   
-  public String getName()      { return mName; }
+  public String getName()      { return mTitle; }
   public String getIconUrl()   { return mIconUrl; }
-  public String getArticleId() { return mArticleId; }
+  public String getArticleId() { return mArticleUrl; }
 }

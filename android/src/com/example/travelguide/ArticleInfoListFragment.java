@@ -9,7 +9,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.example.travelguide.cpp.Storage;
 import com.example.travelguide.dummy.DummyContent;
+import com.example.travelguide.widget.StorageArticleInfoAdapter;
 
 /**
  * A list fragment representing a list of ArticleInfos. This fragment also
@@ -23,7 +25,7 @@ import com.example.travelguide.dummy.DummyContent;
 public class ArticleInfoListFragment extends ListFragment
 {
   private View mRootView;
-  
+  private Storage mStorage;
 
   /**
    * The serialization (saved instance state) Bundle key representing the
@@ -77,10 +79,10 @@ public class ArticleInfoListFragment extends ListFragment
   public void onCreate(Bundle savedInstanceState)
   {
     super.onCreate(savedInstanceState);
-
-    // TODO: replace with a real list adapter.
-    setListAdapter(new ArrayAdapter<DummyContent.DummyItem>(getActivity(),
-        android.R.layout.simple_list_item_activated_1, android.R.id.text1, DummyContent.ITEMS));
+    mStorage = new Storage();
+    // TODO: remove it
+    mStorage.query("", false, 0, 0);
+    setListAdapter(new StorageArticleInfoAdapter(mStorage, getActivity()));
   }
 
   @Override

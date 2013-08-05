@@ -2,7 +2,7 @@
 
 #include "../../std/string.hpp"
 
-string JString2StdString(JNIEnv * env, jstring javaStr)
+inline string JString2StdString(JNIEnv * env, jstring javaStr)
 {
   string res;
   char const * buffer = env->GetStringUTFChars(javaStr, 0);
@@ -14,7 +14,7 @@ string JString2StdString(JNIEnv * env, jstring javaStr)
   return res;
 }
 
-jstring StdString2JString(JNIEnv * env, string stdString)
+inline jstring StdString2JString(JNIEnv * env, string const & stdString)
 {
   return env->NewStringUTF(stdString.c_str());
 }
