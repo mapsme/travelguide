@@ -13,9 +13,9 @@ TEST(Storage, Smoke)
 
   ArticleInfo expected[] =
   {
-    ArticleInfo("London", "London", "stub_url.png"),
-    ArticleInfo("Lancaster", "Lancaster", "stub_url.png"),
-    ArticleInfo("Great_Britain", "Great Britain", "stub_url.png"),
+    ArticleInfo("London", "London", "london.jpg"),
+    ArticleInfo("Lancaster", "Lancaster", "lancaster.jpg"),
+    ArticleInfo("Great_Britain", "Great Britain", "great_britain.jpg"),
   };
 
   EXPECT_EQ(vector<ArticleInfo>(&expected[0], &expected[0] + 3), artInfos);
@@ -29,5 +29,5 @@ TEST(Storage, PrefixQuery)
   storage.QueryArticleInfos(artInfos, "Lo");
 
   EXPECT_EQ(artInfos.size(), 1);
-  EXPECT_EQ(artInfos[0], ArticleInfo("London", "London", "stub_url.png"));
+  EXPECT_EQ(artInfos[0], ArticleInfo("London", "London", "london.jpg"));
 }
