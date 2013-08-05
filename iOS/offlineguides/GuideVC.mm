@@ -1,6 +1,8 @@
 #import "GuideVC.h"
 #import "../../std/algorithm.hpp"
 
+#define DATAFOLDER @"/data/"
+
 @interface GuideVC ()
 {
   float m_webViewScale;
@@ -30,11 +32,20 @@
   return self;
 }
 
+
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  NSString * pathtoHtml = [[NSBundle mainBundle] pathForResource:@"simple_html" ofType:@"html"];
-  NSURL * url = [NSURL fileURLWithPath: pathtoHtml isDirectory:NO];
+}
+
+-(void)loadPage:(NSString *)pageUrl
+{
+  NSRange r = [pageUrl rangeOfString:@"."];
+  NSString * pageName = [pageUrl substringToIndex:r.location];
+  NSString * pageType = [pageUrl substringFromIndex:r.location + 1];
+  NSString * pathtoPage = [[NSBundle mainBundle] pathForResource:pageName ofType:pageType inDirectory:DATAFOLDER];
+  
+  NSURL * url = [NSURL fileURLWithPath: pathtoPage isDirectory:NO];
   [self.webView loadRequest:[NSURLRequest requestWithURL: url]];
 }
 
