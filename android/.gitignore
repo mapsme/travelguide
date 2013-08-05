@@ -5,6 +5,7 @@ resbuilder/
 spoon-output/
 assets/
 obj/
+armeabi/
 
 *.class
 .classpath
