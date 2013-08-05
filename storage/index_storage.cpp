@@ -10,6 +10,6 @@ void IndexStorageMock::QueryArticleInfos(vector<ArticleInfoId> & out,  string co
   else if (prefix == "L")
     for (uint32_t i = 0; i < 2; ++i)
       out.push_back(i);
-  else if (prefix.size() <= 6 && string("London").substr(prefix.size()) == prefix)
-      out.push_back(1);
+  else if (prefix.size() <= 6 && string("London").substr(0, prefix.size()) == prefix)
+      out.push_back(0);
 }
