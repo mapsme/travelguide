@@ -10,6 +10,9 @@
 		A3E221EF17AFB4AE0018AB9E /* article_info_storage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A3E221EE17AFB4AE0018AB9E /* article_info_storage.cpp */; };
 		A3E221F117AFB4B90018AB9E /* index_storage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A3E221F017AFB4B90018AB9E /* index_storage.cpp */; };
 		A3E221F317AFB4C20018AB9E /* storage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A3E221F217AFB4C20018AB9E /* storage.cpp */; };
+		A3E2220C17AFD5840018AB9E /* data in Resources */ = {isa = PBXBuildFile; fileRef = A3E2220B17AFD5840018AB9E /* data */; };
+		A3E2220F17AFD9E10018AB9E /* assert.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A3E2220E17AFD9E10018AB9E /* assert.cpp */; };
+		A3E2221117AFDA0A0018AB9E /* source_address.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A3E2221017AFDA0A0018AB9E /* source_address.cpp */; };
 		ED81954717AED762004F3803 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED81954617AED762004F3803 /* UIKit.framework */; };
 		ED81954917AED762004F3803 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED81954817AED762004F3803 /* Foundation.framework */; };
 		ED81954B17AED762004F3803 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED81954A17AED762004F3803 /* CoreGraphics.framework */; };
@@ -20,7 +23,6 @@
 		ED81955B17AED762004F3803 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED81955A17AED762004F3803 /* Default@2x.png */; };
 		ED81955D17AED762004F3803 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED81955C17AED762004F3803 /* Default-568h@2x.png */; };
 		ED81956517AEE129004F3803 /* ArticleVC.mm in Sources */ = {isa = PBXBuildFile; fileRef = ED81956417AEE129004F3803 /* ArticleVC.mm */; };
-		ED81956717AEF0F8004F3803 /* plus.png in Resources */ = {isa = PBXBuildFile; fileRef = ED81956617AEF0F8004F3803 /* plus.png */; };
 		ED81956A17AEF6B6004F3803 /* GuideVC.mm in Sources */ = {isa = PBXBuildFile; fileRef = ED81956917AEF6B6004F3803 /* GuideVC.mm */; };
 		ED81956C17AEFE66004F3803 /* simple_html.html in Resources */ = {isa = PBXBuildFile; fileRef = ED81956B17AEFE66004F3803 /* simple_html.html */; };
 /* End PBXBuildFile section */
@@ -29,6 +31,9 @@
 		A3E221EE17AFB4AE0018AB9E /* article_info_storage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = article_info_storage.cpp; path = ../../storage/article_info_storage.cpp; sourceTree = "<group>"; };
 		A3E221F017AFB4B90018AB9E /* index_storage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = index_storage.cpp; path = ../../storage/index_storage.cpp; sourceTree = "<group>"; };
 		A3E221F217AFB4C20018AB9E /* storage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = storage.cpp; path = ../../storage/storage.cpp; sourceTree = "<group>"; };
+		A3E2220B17AFD5840018AB9E /* data */ = {isa = PBXFileReference; lastKnownFileType = folder; name = data; path = ../../data; sourceTree = "<group>"; };
+		A3E2220E17AFD9E10018AB9E /* assert.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = assert.cpp; path = ../../env/assert.cpp; sourceTree = "<group>"; };
+		A3E2221017AFDA0A0018AB9E /* source_address.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = source_address.cpp; path = ../../env/source_address.cpp; sourceTree = "<group>"; };
 		ED81954317AED762004F3803 /* offlineguides.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = offlineguides.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED81954617AED762004F3803 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		ED81954817AED762004F3803 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -44,7 +49,6 @@
 		ED81955C17AED762004F3803 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		ED81956317AEE129004F3803 /* ArticleVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleVC.h; sourceTree = "<group>"; };
 		ED81956417AEE129004F3803 /* ArticleVC.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ArticleVC.mm; sourceTree = "<group>"; };
-		ED81956617AEF0F8004F3803 /* plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plus.png; sourceTree = "<group>"; };
 		ED81956817AEF6B6004F3803 /* GuideVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuideVC.h; sourceTree = "<group>"; };
 		ED81956917AEF6B6004F3803 /* GuideVC.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GuideVC.mm; sourceTree = "<group>"; };
 		ED81956B17AEFE66004F3803 /* simple_html.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = simple_html.html; sourceTree = "<group>"; };
@@ -72,6 +76,15 @@
 				A3E221EE17AFB4AE0018AB9E /* article_info_storage.cpp */,
 			);
 			name = storage;
+			sourceTree = "<group>";
+		};
+		A3E2220D17AFD9CC0018AB9E /* env */ = {
+			isa = PBXGroup;
+			children = (
+				A3E2221017AFDA0A0018AB9E /* source_address.cpp */,
+				A3E2220E17AFD9E10018AB9E /* assert.cpp */,
+			);
+			name = env;
 			sourceTree = "<group>";
 		};
 		ED81953A17AED761004F3803 = {
@@ -104,6 +117,8 @@
 		ED81954C17AED762004F3803 /* offlineguides */ = {
 			isa = PBXGroup;
 			children = (
+				A3E2220D17AFD9CC0018AB9E /* env */,
+				A3E2220B17AFD5840018AB9E /* data */,
 				A3E221ED17AFB49B0018AB9E /* storage */,
 				ED81955517AED762004F3803 /* AppDelegate.h */,
 				ED81955617AED762004F3803 /* AppDelegate.mm */,
@@ -120,7 +135,6 @@
 			isa = PBXGroup;
 			children = (
 				ED81956B17AEFE66004F3803 /* simple_html.html */,
-				ED81956617AEF0F8004F3803 /* plus.png */,
 				ED81954E17AED762004F3803 /* offlineguides-Info.plist */,
 				ED81954F17AED762004F3803 /* InfoPlist.strings */,
 				ED81955217AED762004F3803 /* main.m */,
@@ -187,8 +201,8 @@
 				ED81955917AED762004F3803 /* Default.png in Resources */,
 				ED81955B17AED762004F3803 /* Default@2x.png in Resources */,
 				ED81955D17AED762004F3803 /* Default-568h@2x.png in Resources */,
-				ED81956717AEF0F8004F3803 /* plus.png in Resources */,
 				ED81956C17AEFE66004F3803 /* simple_html.html in Resources */,
+				A3E2220C17AFD5840018AB9E /* data in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -206,6 +220,8 @@
 				A3E221EF17AFB4AE0018AB9E /* article_info_storage.cpp in Sources */,
 				A3E221F117AFB4B90018AB9E /* index_storage.cpp in Sources */,
 				A3E221F317AFB4C20018AB9E /* storage.cpp in Sources */,
+				A3E2220F17AFD9E10018AB9E /* assert.cpp in Sources */,
+				A3E2221117AFDA0A0018AB9E /* source_address.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
