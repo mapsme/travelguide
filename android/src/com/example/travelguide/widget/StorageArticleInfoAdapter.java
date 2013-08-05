@@ -3,6 +3,8 @@ package com.example.travelguide.widget;
 import com.example.travelguide.R;
 import com.example.travelguide.article.ArticleInfo;
 import com.example.travelguide.cpp.Storage;
+import com.example.travelguide.thumb.AssetsThumbnailProvider;
+import com.example.travelguide.thumb.ThumbnailsProvider;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -16,11 +18,13 @@ public class StorageArticleInfoAdapter extends BaseAdapter
 {
   private Storage mStorage;
   private Context mContext;
+  private ThumbnailsProvider mThumbnailsProvider;
 
   public StorageArticleInfoAdapter(Storage storage, Context context)
   {
     mStorage = storage;
     mContext = context;
+    mThumbnailsProvider = new AssetsThumbnailProvider(context);
   }
 
   @Override
@@ -76,7 +80,7 @@ public class StorageArticleInfoAdapter extends BaseAdapter
     {
       mInfo = info;
       mTitle.setText(info.getName());
-      // TODO set image
+      mThumbnail.setImageDrawable(mThumbnailsProvider.getThumbnailByUrl(info.getIconUrl()));
     }
   }
 
