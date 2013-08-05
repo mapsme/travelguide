@@ -14,7 +14,6 @@ HEADERS += \
 
 SOURCES += \
   article_info_storage.cpp \
-  tests/storage_test.cpp \
   index_storage.cpp \
   storage.cpp \
 
@@ -22,3 +21,4 @@ SOURCES += \
 SOURCES += \
   ../3rdparty/googletest/src/gtest-all.cc \
   ../3rdparty/googletest/src/gtest_main.cc \
+  tests/storage_test.cpp \
