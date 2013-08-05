@@ -19,6 +19,7 @@ HEADERS += \
   strings.hpp \
   writer.hpp \
   thread.hpp \
+  message_std.hpp \
 
 SOURCES += \
   assert.cpp \
