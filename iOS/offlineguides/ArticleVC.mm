@@ -1,7 +1,17 @@
 #import "ArticleVC.h"
 #import "GuideVC.h"
 
+#import "../../storage/storage.hpp"
+#import "../../storage/article_info_storage.hpp"
+#import "../../storage/article_info.hpp"
+#import "../../storage/index_storage.hpp"
+#import "../../std/vector.hpp"
+
 @interface ArticleVC ()
+{
+  Storage * m_storage;
+  vector<ArticleInfo> m_infos;
+}
 
 @property (nonatomic, strong) UISearchBar * searchBar;
 @end
@@ -16,6 +26,9 @@
     _searchBar = [[UISearchBar alloc] init];
     self.searchBar.delegate = self;
     self.tableView.tableHeaderView = self.searchBar;
+    self.searchBar.text = @"";
+    m_storage = new Storage(new ArticleInfoStorageMock(), new IndexStorageMock());
+    [self searchBar:self.searchBar textDidChange:@""];
   }
   return self;
 }
@@ -30,14 +43,13 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-  // @todo
   return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-  // @todo
-  return 10;
+  NSLog(@"Number of rows = %zd", m_infos.size());
+  return static_cast<NSInteger>(m_infos.size());
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -47,10 +59,14 @@
 
   if (!cell)
     cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-  // @todo
-  cell.textLabel.text = [NSString stringWithFormat:@"%d - %d %@", indexPath.row, indexPath.section, self.searchBar.text, nil];
-  UIImage * image = [UIImage imageNamed:@"plus.png"];
-  cell.imageView.image = image;
+  
+  size_t const index = static_cast<size_t>(indexPath.row);
+  NSAssert(m_infos.size() > index, @"To big row index.");
+  ArticleInfo const & info = m_infos[index];
+  cell.textLabel.text = [NSString stringWithUTF8String:info.m_title.c_str()];
+  //@todo load image from info.m_thumbnailUrl
+  //UIImage * image = [UIImage imageNamed:[NSString ]];
+  //cell.imageView.image = image;
 
   return cell;
 }
@@ -74,7 +90,8 @@
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
-  // @todo We need to search guides and load it's by search query
+  //@todo add lat and lon to QueryInfos
+  m_storage->QueryArticleInfos(m_infos, [searchText UTF8String]);
   [self.tableView reloadData];
 }
 

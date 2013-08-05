@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A3E221EF17AFB4AE0018AB9E /* article_info_storage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A3E221EE17AFB4AE0018AB9E /* article_info_storage.cpp */; };
+		A3E221F117AFB4B90018AB9E /* index_storage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A3E221F017AFB4B90018AB9E /* index_storage.cpp */; };
+		A3E221F317AFB4C20018AB9E /* storage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A3E221F217AFB4C20018AB9E /* storage.cpp */; };
 		ED81954717AED762004F3803 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED81954617AED762004F3803 /* UIKit.framework */; };
 		ED81954917AED762004F3803 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED81954817AED762004F3803 /* Foundation.framework */; };
 		ED81954B17AED762004F3803 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED81954A17AED762004F3803 /* CoreGraphics.framework */; };
@@ -23,6 +26,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A3E221EE17AFB4AE0018AB9E /* article_info_storage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = article_info_storage.cpp; path = ../../storage/article_info_storage.cpp; sourceTree = "<group>"; };
+		A3E221F017AFB4B90018AB9E /* index_storage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = index_storage.cpp; path = ../../storage/index_storage.cpp; sourceTree = "<group>"; };
+		A3E221F217AFB4C20018AB9E /* storage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = storage.cpp; path = ../../storage/storage.cpp; sourceTree = "<group>"; };
 		ED81954317AED762004F3803 /* offlineguides.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = offlineguides.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED81954617AED762004F3803 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		ED81954817AED762004F3803 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -58,6 +64,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A3E221ED17AFB49B0018AB9E /* storage */ = {
+			isa = PBXGroup;
+			children = (
+				A3E221F217AFB4C20018AB9E /* storage.cpp */,
+				A3E221F017AFB4B90018AB9E /* index_storage.cpp */,
+				A3E221EE17AFB4AE0018AB9E /* article_info_storage.cpp */,
+			);
+			name = storage;
+			sourceTree = "<group>";
+		};
 		ED81953A17AED761004F3803 = {
 			isa = PBXGroup;
 			children = (
@@ -88,6 +104,7 @@
 		ED81954C17AED762004F3803 /* offlineguides */ = {
 			isa = PBXGroup;
 			children = (
+				A3E221ED17AFB49B0018AB9E /* storage */,
 				ED81955517AED762004F3803 /* AppDelegate.h */,
 				ED81955617AED762004F3803 /* AppDelegate.mm */,
 				ED81954D17AED762004F3803 /* Supporting Files */,
@@ -186,6 +203,9 @@
 				ED81955717AED762004F3803 /* AppDelegate.mm in Sources */,
 				ED81956517AEE129004F3803 /* ArticleVC.mm in Sources */,
 				ED81956A17AEF6B6004F3803 /* GuideVC.mm in Sources */,
+				A3E221EF17AFB4AE0018AB9E /* article_info_storage.cpp in Sources */,
+				A3E221F117AFB4B90018AB9E /* index_storage.cpp in Sources */,
+				A3E221F317AFB4C20018AB9E /* storage.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -289,8 +309,10 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "offlineguides/offlineguides-Prefix.pch";
+				HEADER_SEARCH_PATHS = ../3rdparty/boost;
 				INFOPLIST_FILE = "offlineguides/offlineguides-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = ../3rdparty/boost;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -300,8 +322,10 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "offlineguides/offlineguides-Prefix.pch";
+				HEADER_SEARCH_PATHS = ../3rdparty/boost;
 				INFOPLIST_FILE = "offlineguides/offlineguides-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = ../3rdparty/boost;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
