@@ -6,6 +6,7 @@
 #import "../../storage/article_info.hpp"
 #import "../../storage/index_storage.hpp"
 #import "../../std/vector.hpp"
+#import "../../env/assert.hpp"
 
 @interface ArticleVC ()
 {
@@ -60,13 +61,11 @@
   if (!cell)
     cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
   
-  size_t const index = static_cast<size_t>(indexPath.row);
-  NSAssert(m_infos.size() > index, @"To big row index.");
-  ArticleInfo const & info = m_infos[index];
-  cell.textLabel.text = [NSString stringWithUTF8String:info.m_title.c_str()];
-  //@todo load image from info.m_thumbnailUrl
-  //UIImage * image = [UIImage imageNamed:[NSString ]];
-  //cell.imageView.image = image;
+  ArticleInfo const * info = [self infoByIndexPath:indexPath];
+  cell.textLabel.text = [NSString stringWithUTF8String:info->m_title.c_str()];
+  
+  UIImage * image = [UIImage imageNamed: [NSString stringWithUTF8String:info->m_thumbnailUrl.c_str()]];
+  cell.imageView.image = image;
 
   return cell;
 }
@@ -93,6 +92,14 @@
   //@todo add lat and lon to QueryInfos
   m_storage->QueryArticleInfos(m_infos, [searchText UTF8String]);
   [self.tableView reloadData];
+}
+
+#pragma mark - Utils methods
+-(ArticleInfo const *)infoByIndexPath:(NSIndexPath *)indexPath
+{
+  size_t const index = static_cast<size_t>(indexPath.row);
+  CHECK(index < m_infos.size(), ("Index is too big"));
+  return &m_infos[index];
 }
 
 @end
