@@ -8,6 +8,8 @@
 #import "../../std/vector.hpp"
 #import "../../env/assert.hpp"
 
+#define THUMBNAILSFOLDER @"/data/thumbnails/"
+
 @interface ArticleVC ()
 {
   Storage * m_storage;
@@ -49,7 +51,6 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-  NSLog(@"Number of rows = %zd", m_infos.size());
   return static_cast<NSInteger>(m_infos.size());
 }
 
@@ -63,8 +64,13 @@
   
   ArticleInfo const * info = [self infoByIndexPath:indexPath];
   cell.textLabel.text = [NSString stringWithUTF8String:info->m_title.c_str()];
-  
-  UIImage * image = [UIImage imageNamed: [NSString stringWithUTF8String:info->m_thumbnailUrl.c_str()]];
+
+  size_t pos = info->m_thumbnailUrl.find_last_of(".");
+  string imageName = info->m_thumbnailUrl.substr(0,pos);
+  string imageType = info->m_thumbnailUrl.substr(pos+1);
+  NSString * imagePath = [[NSBundle mainBundle] pathForResource:[NSString stringWithUTF8String:imageName.c_str()] ofType:[NSString stringWithUTF8String:imageType.c_str()] inDirectory:THUMBNAILSFOLDER];
+
+  UIImage * image = [UIImage imageWithContentsOfFile:imagePath];
   cell.imageView.image = image;
 
   return cell;
