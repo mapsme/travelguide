@@ -16,7 +16,7 @@ DUMP_FILES = page.sql.gz redirect.sql.gz category.sql.gz page_props.sql.gz image
 
 
 .PHONY: all
-all: download_images
+all: download_images rename_articles
 
 .PHONY: clean
 clean:
@@ -46,3 +46,7 @@ image_url.txt: download_articles
 download_images: image_url.txt
 	wget --wait=0.2 --random-wait --no-clobber --directory-prefix=images --input-file=image_url.txt || true
 	touch download_images
+
+rename_articles:
+	for f in articles/*; do mv $$f $$(echo $$f | sed 's/wiki.curid=//g'); done
+	touch rename_articles
