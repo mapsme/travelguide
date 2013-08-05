@@ -12,13 +12,13 @@
 		ED81954B17AED762004F3803 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED81954A17AED762004F3803 /* CoreGraphics.framework */; };
 		ED81955117AED762004F3803 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = ED81954F17AED762004F3803 /* InfoPlist.strings */; };
 		ED81955317AED762004F3803 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ED81955217AED762004F3803 /* main.m */; };
-		ED81955717AED762004F3803 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ED81955617AED762004F3803 /* AppDelegate.m */; };
+		ED81955717AED762004F3803 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = ED81955617AED762004F3803 /* AppDelegate.mm */; };
 		ED81955917AED762004F3803 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = ED81955817AED762004F3803 /* Default.png */; };
 		ED81955B17AED762004F3803 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED81955A17AED762004F3803 /* Default@2x.png */; };
 		ED81955D17AED762004F3803 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED81955C17AED762004F3803 /* Default-568h@2x.png */; };
-		ED81956517AEE129004F3803 /* ArticleVC.m in Sources */ = {isa = PBXBuildFile; fileRef = ED81956417AEE129004F3803 /* ArticleVC.m */; };
+		ED81956517AEE129004F3803 /* ArticleVC.mm in Sources */ = {isa = PBXBuildFile; fileRef = ED81956417AEE129004F3803 /* ArticleVC.mm */; };
 		ED81956717AEF0F8004F3803 /* plus.png in Resources */ = {isa = PBXBuildFile; fileRef = ED81956617AEF0F8004F3803 /* plus.png */; };
-		ED81956A17AEF6B6004F3803 /* GuideVC.m in Sources */ = {isa = PBXBuildFile; fileRef = ED81956917AEF6B6004F3803 /* GuideVC.m */; };
+		ED81956A17AEF6B6004F3803 /* GuideVC.mm in Sources */ = {isa = PBXBuildFile; fileRef = ED81956917AEF6B6004F3803 /* GuideVC.mm */; };
 		ED81956C17AEFE66004F3803 /* simple_html.html in Resources */ = {isa = PBXBuildFile; fileRef = ED81956B17AEFE66004F3803 /* simple_html.html */; };
 /* End PBXBuildFile section */
 
@@ -32,15 +32,15 @@
 		ED81955217AED762004F3803 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		ED81955417AED762004F3803 /* offlineguides-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "offlineguides-Prefix.pch"; sourceTree = "<group>"; };
 		ED81955517AED762004F3803 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		ED81955617AED762004F3803 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		ED81955617AED762004F3803 /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
 		ED81955817AED762004F3803 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		ED81955A17AED762004F3803 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		ED81955C17AED762004F3803 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		ED81956317AEE129004F3803 /* ArticleVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleVC.h; sourceTree = "<group>"; };
-		ED81956417AEE129004F3803 /* ArticleVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleVC.m; sourceTree = "<group>"; };
+		ED81956417AEE129004F3803 /* ArticleVC.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ArticleVC.mm; sourceTree = "<group>"; };
 		ED81956617AEF0F8004F3803 /* plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plus.png; sourceTree = "<group>"; };
 		ED81956817AEF6B6004F3803 /* GuideVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuideVC.h; sourceTree = "<group>"; };
-		ED81956917AEF6B6004F3803 /* GuideVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuideVC.m; sourceTree = "<group>"; };
+		ED81956917AEF6B6004F3803 /* GuideVC.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GuideVC.mm; sourceTree = "<group>"; };
 		ED81956B17AEFE66004F3803 /* simple_html.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = simple_html.html; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -89,12 +89,12 @@
 			isa = PBXGroup;
 			children = (
 				ED81955517AED762004F3803 /* AppDelegate.h */,
-				ED81955617AED762004F3803 /* AppDelegate.m */,
+				ED81955617AED762004F3803 /* AppDelegate.mm */,
 				ED81954D17AED762004F3803 /* Supporting Files */,
 				ED81956317AEE129004F3803 /* ArticleVC.h */,
-				ED81956417AEE129004F3803 /* ArticleVC.m */,
+				ED81956417AEE129004F3803 /* ArticleVC.mm */,
 				ED81956817AEF6B6004F3803 /* GuideVC.h */,
-				ED81956917AEF6B6004F3803 /* GuideVC.m */,
+				ED81956917AEF6B6004F3803 /* GuideVC.mm */,
 			);
 			path = offlineguides;
 			sourceTree = "<group>";
@@ -183,9 +183,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED81955317AED762004F3803 /* main.m in Sources */,
-				ED81955717AED762004F3803 /* AppDelegate.m in Sources */,
-				ED81956517AEE129004F3803 /* ArticleVC.m in Sources */,
-				ED81956A17AEF6B6004F3803 /* GuideVC.m in Sources */,
+				ED81955717AED762004F3803 /* AppDelegate.mm in Sources */,
+				ED81956517AEE129004F3803 /* ArticleVC.mm in Sources */,
+				ED81956A17AEF6B6004F3803 /* GuideVC.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,4 +1,4 @@
 #import <UIKit/UIKit.h>
 
-@interface GuideVC : UIViewController
+@interface GuideVC : UIViewController <UIWebViewDelegate, UIGestureRecognizerDelegate>
 @end
