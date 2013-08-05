@@ -60,7 +60,7 @@
   UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 
   if (!cell)
-    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
   
   ArticleInfo const * info = [self infoByIndexPath:indexPath];
   cell.textLabel.text = [NSString stringWithUTF8String:info->m_title.c_str()];
@@ -69,6 +69,8 @@
   string imageName = info->m_thumbnailUrl.substr(0,pos);
   string imageType = info->m_thumbnailUrl.substr(pos+1);
   NSString * imagePath = [[NSBundle mainBundle] pathForResource:[NSString stringWithUTF8String:imageName.c_str()] ofType:[NSString stringWithUTF8String:imageType.c_str()] inDirectory:THUMBNAILSFOLDER];
+
+  cell.detailTextLabel.text = [NSString stringWithUTF8String:info->m_parentPath.c_str()];
 
   UIImage * image = [UIImage imageWithContentsOfFile:imagePath];
   cell.imageView.image = image;
