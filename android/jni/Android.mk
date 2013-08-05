@@ -17,7 +17,6 @@ LOCAL_SRC_FILES := \
 # Storage files
 LOCAL_SRC_FILES += \
 	../../storage/storage.cpp \
-	../../storage/article_info_storage.cpp \
-	../../storage/index_storage.cpp \
+	../../storage/article_info.cpp \
 
 include $(BUILD_SHARED_LIBRARY)

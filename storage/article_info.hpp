@@ -1,31 +1,86 @@
 #pragma once
 
 #include "storage_common.hpp"
-#include <iostream>
 
-struct ArticleInfo
+#include "../std/algorithm.hpp"
+
+
+class ArticleInfo
 {
+  void GenerateKey();
+
+  string m_key;
+
+public:
   ArticleInfo() {}
-  ArticleInfo(string const & url, string const & title, string const & thumbnailUrl, string const & parentPath)
-      : m_url(url), m_title(title), m_thumbnailUrl(thumbnailUrl), m_parentPath(parentPath) {}
+  ArticleInfo(string const & title) : m_title(title)
+  {
+    GenerateKey();
+  }
 
   string m_url;
   string m_title;
   string m_thumbnailUrl;
-  string m_parentPath;
+  string m_parentUrl;
+
+  double m_lat, m_lon;
+
+  double Score(double currLat, double currLon) const;
+
+  void Swap(ArticleInfo & i);
+
+  class LessScore
+  {
+    double m_lat, m_lon;
+  public:
+    LessScore(double lat, double lon) : m_lat(lat), m_lon(lon) {}
+    bool operator() (ArticleInfo const & i1, ArticleInfo const & i2) const
+    {
+      return i1.Score(m_lat, m_lon) < i2.Score(m_lat, m_lon);
+    }
+  };
+
+  struct LessStorage
+  {
+    bool operator() (ArticleInfo const & i1, ArticleInfo const & i2) const
+    {
+      return (i1.m_key < i2.m_key);
+    }
+  };
+
+  class LessPrefix
+  {
+    int Compare(ArticleInfo const & info, string const & prefix) const
+    {
+      size_t const count = min(info.m_key.size(), prefix.size());
+      for (size_t i = 0; i < count; ++i)
+      {
+        if (info.m_key[i] < prefix[i])
+          return -1;
+        else if (info.m_key[i] > prefix[i])
+          return 1;
+      }
+      return (info.m_key.size() < prefix.size() ? -1 : 0);
+    }
+
+  public:
+    bool operator() (ArticleInfo const & info, string const & prefix) const
+    {
+      return (Compare(info, prefix) == -1);
+    }
+    bool operator() (string const & prefix, ArticleInfo const & info) const
+    {
+      return (Compare(info, prefix) == 1);
+    }
+  };
 };
 
-inline bool operator == (ArticleInfo const & a1, ArticleInfo const & a2)
+inline void swap(ArticleInfo & a1, ArticleInfo & a2)
 {
-  return a1.m_url == a2.m_url && a1.m_title == a2.m_title &&
-          a1.m_thumbnailUrl == a2.m_thumbnailUrl && a1.m_parentPath == a2.m_parentPath;
+  a1.Swap(a2);
 }
 
-// It's important that PrintTo() is defined in the SAME
-// namespace that defines Bar.  C++'s look-up rules rely on that.
-inline void PrintTo(ArticleInfo const & artInfo, ::std::ostream* os) {
-   *os << "ArticleInfi {" << artInfo.m_url << ", "
-     << artInfo.m_title << ", "
-     << artInfo.m_thumbnailUrl << ", "
-     << artInfo.m_parentPath   << "}";
+inline string ToString(ArticleInfo const & i)
+{
+  return i.m_title;
 }

@@ -2,17 +2,18 @@
 #import "GuideVC.h"
 
 #import "../../storage/storage.hpp"
-#import "../../storage/article_info_storage.hpp"
 #import "../../storage/article_info.hpp"
-#import "../../storage/index_storage.hpp"
-#import "../../std/vector.hpp"
+
 #import "../../env/assert.hpp"
+
+#import "../../std/vector.hpp"
+
 
 #define THUMBNAILSFOLDER @"/data/thumbnails/"
 
 @interface ArticleVC ()
 {
-  Storage * m_storage;
+  StorageMock m_storage;
   vector<ArticleInfo> m_infos;
 }
 
@@ -30,7 +31,6 @@
     self.searchBar.delegate = self;
     self.tableView.tableHeaderView = self.searchBar;
     self.searchBar.text = @"";
-    m_storage = new Storage(new ArticleInfoStorageMock(), new IndexStorageMock());
     [self searchBar:self.searchBar textDidChange:@""];
   }
   return self;
@@ -70,7 +70,7 @@
   string imageType = info->m_thumbnailUrl.substr(pos+1);
   NSString * imagePath = [[NSBundle mainBundle] pathForResource:[NSString stringWithUTF8String:imageName.c_str()] ofType:[NSString stringWithUTF8String:imageType.c_str()] inDirectory:THUMBNAILSFOLDER];
 
-  cell.detailTextLabel.text = [NSString stringWithUTF8String:info->m_parentPath.c_str()];
+  cell.detailTextLabel.text = [NSString stringWithUTF8String:info->m_parentUrl.c_str()];
 
   UIImage * image = [UIImage imageWithContentsOfFile:imagePath];
   cell.imageView.image = image;
@@ -106,7 +106,7 @@
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
   //@todo add lat and lon to QueryInfos
-  m_storage->QueryArticleInfos(m_infos, [searchText UTF8String]);
+  m_storage.QueryArticleInfos(m_infos, [searchText UTF8String]);
   [self.tableView reloadData];
 }
 

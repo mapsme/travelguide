@@ -7,15 +7,17 @@ INCLUDEPATH += ../3rdparty/boost ../3rdparty/googletest/include
 
 HEADERS += \
   storage.hpp \
-  article_info_storage.hpp \
   article_info.hpp \
-  index_storage.hpp \
   storage_common.hpp \
 
 SOURCES += \
-  article_info_storage.cpp \
-  index_storage.cpp \
   storage.cpp \
+  article_info.cpp \
+
+# env sources
+SOURCES += \
+  ../env/logging.cpp \
+  ../env/source_address.cpp \
 
 # unit tests
 SOURCES += \

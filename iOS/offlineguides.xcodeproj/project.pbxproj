@@ -7,8 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A3E221EF17AFB4AE0018AB9E /* article_info_storage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A3E221EE17AFB4AE0018AB9E /* article_info_storage.cpp */; };
-		A3E221F117AFB4B90018AB9E /* index_storage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A3E221F017AFB4B90018AB9E /* index_storage.cpp */; };
+		7722E14817B01B0700CFB817 /* article_info.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7722E14717B01B0700CFB817 /* article_info.cpp */; };
 		A3E221F317AFB4C20018AB9E /* storage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A3E221F217AFB4C20018AB9E /* storage.cpp */; };
 		A3E2220C17AFD5840018AB9E /* data in Resources */ = {isa = PBXBuildFile; fileRef = A3E2220B17AFD5840018AB9E /* data */; };
 		A3E2220F17AFD9E10018AB9E /* assert.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A3E2220E17AFD9E10018AB9E /* assert.cpp */; };
@@ -28,8 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		A3E221EE17AFB4AE0018AB9E /* article_info_storage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = article_info_storage.cpp; path = ../../storage/article_info_storage.cpp; sourceTree = "<group>"; };
-		A3E221F017AFB4B90018AB9E /* index_storage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = index_storage.cpp; path = ../../storage/index_storage.cpp; sourceTree = "<group>"; };
+		7722E14717B01B0700CFB817 /* article_info.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = article_info.cpp; path = ../../storage/article_info.cpp; sourceTree = "<group>"; };
 		A3E221F217AFB4C20018AB9E /* storage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = storage.cpp; path = ../../storage/storage.cpp; sourceTree = "<group>"; };
 		A3E2220B17AFD5840018AB9E /* data */ = {isa = PBXFileReference; lastKnownFileType = folder; name = data; path = ../../data; sourceTree = "<group>"; };
 		A3E2220E17AFD9E10018AB9E /* assert.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = assert.cpp; path = ../../env/assert.cpp; sourceTree = "<group>"; };
@@ -71,9 +69,8 @@
 		A3E221ED17AFB49B0018AB9E /* storage */ = {
 			isa = PBXGroup;
 			children = (
+				7722E14717B01B0700CFB817 /* article_info.cpp */,
 				A3E221F217AFB4C20018AB9E /* storage.cpp */,
-				A3E221F017AFB4B90018AB9E /* index_storage.cpp */,
-				A3E221EE17AFB4AE0018AB9E /* article_info_storage.cpp */,
 			);
 			name = storage;
 			sourceTree = "<group>";
@@ -217,11 +214,10 @@
 				ED81955717AED762004F3803 /* AppDelegate.mm in Sources */,
 				ED81956517AEE129004F3803 /* ArticleVC.mm in Sources */,
 				ED81956A17AEF6B6004F3803 /* GuideVC.mm in Sources */,
-				A3E221EF17AFB4AE0018AB9E /* article_info_storage.cpp in Sources */,
-				A3E221F117AFB4B90018AB9E /* index_storage.cpp in Sources */,
 				A3E221F317AFB4C20018AB9E /* storage.cpp in Sources */,
 				A3E2220F17AFD9E10018AB9E /* assert.cpp in Sources */,
 				A3E2221117AFDA0A0018AB9E /* source_address.cpp in Sources */,
+				7722E14817B01B0700CFB817 /* article_info.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

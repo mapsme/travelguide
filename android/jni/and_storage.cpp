@@ -2,14 +2,11 @@
 #include "jni_util.hpp"
 
 #include "../../storage/storage.hpp"
-#include "../../storage/article_info_storage.hpp"
-#include "../../storage/index_storage.hpp"
+
 
 class AndStorage
 {
 public:
-  AndStorage()
-  : m_storage(new ArticleInfoStorageMock(), new IndexStorageMock()) {}
 
   static AndStorage & Instance()
   {
@@ -36,7 +33,7 @@ public:
   }
 
 private:
-  Storage m_storage;
+  StorageMock m_storage;
   vector<ArticleInfo> m_result;
 };
 
