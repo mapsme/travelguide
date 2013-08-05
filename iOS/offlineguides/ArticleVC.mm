@@ -93,6 +93,11 @@
   [self.navigationController pushViewController:[[GuideVC alloc] init] animated:YES];
 }
 
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+  [self.searchBar resignFirstResponder];
+}
+
 #pragma mark - UISearchBarDelegate
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
