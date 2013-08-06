@@ -20,6 +20,9 @@ SOURCES += \
   ../env/source_address.cpp \
   ../env/strings.cpp \
   ../env/assert.cpp \
+  ../env/file_handle.cpp \
+  ../env/posix.cpp \
+  ../env/file_system.cpp \
 
 # utf8proc
 SOURCES += \

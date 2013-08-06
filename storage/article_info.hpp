@@ -5,6 +5,9 @@
 #include "../std/algorithm.hpp"
 
 
+namespace wr { class Writer; }
+namespace rd { class Reader; }
+
 class ArticleInfo
 {
   void GenerateKey();
@@ -25,9 +28,14 @@ public:
 
   double m_lat, m_lon;
 
+  void Write(wr::Writer & w) const;
+  void Read(rd::Reader & r);
+
   double Score(double currLat, double currLon) const;
 
   void Swap(ArticleInfo & i);
+
+  bool operator == (ArticleInfo const & r) const;
 
   class LessScore
   {

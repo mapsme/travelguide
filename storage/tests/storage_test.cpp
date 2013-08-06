@@ -4,6 +4,9 @@
 
 #include "../env/message_std.hpp"
 #include "../env/logging.hpp"
+#include "../env/reader.hpp"
+#include "../env/writer.hpp"
+#include "../env/file_system.hpp"
 
 #include "../std/array.hpp"
 
@@ -28,7 +31,7 @@ public:
     for (size_t i = 0; i < size; ++i)
       m_info.push_back(ArticleInfo(arr[i]));
 
-    sort(m_info.begin(), m_info.end(), ArticleInfo::LessStorage());
+    SortByKey();
   }
 
   void CheckBounds(string const & beg, string const & end) const
@@ -136,4 +139,52 @@ TEST(Storage, PrefixQuery_lowerCaseTest)
   storage.QueryArticleInfos(out, "GR");
   EXPECT_EQ(out.size(), 1);
   CheckBounds(out, "Great Britan", "Great Britan");
+}
+
+TEST(Storage, ArticleInfoRW)
+{
+  ArticleInfo i("Über Karten");
+  i.m_url = "Great_Britain";
+  i.m_thumbnailUrl = "great_britain.jpg";
+  i.m_parentUrl = "Schließen";
+  i.m_lat = 5.67894;
+  i.m_lon = 89.12345;
+
+  char const * name = "file.dat";
+  {
+    wr::FileWriter w(name);
+    i.Write(w);
+  }
+  {
+    ArticleInfo test;
+    rd::SequenceFileReader r(name);
+    test.Read(r);
+
+    EXPECT_EQ(i, test);
+  }
+
+  fs::DeleteFile(name);
+}
+
+TEST(Storage, StorageReadWriteTest)
+{
+  StorageMock s1;
+
+  ArticleInfo i("Über Karten");
+  i.m_url = "Great_Britain";
+  i.m_thumbnailUrl = "great_britain.jpg";
+  i.m_parentUrl = "Schließen";
+  i.m_lat = 5.67894;
+  i.m_lon = 89.12345;
+  s1.Add(i);
+
+  char const * name = "storage_mock.dat";
+  s1.Save(name);
+
+  StorageMock s2;
+  s2.Load(name);
+
+  EXPECT_EQ(s1, s2);
+
+  fs::DeleteFile(name);
 }
