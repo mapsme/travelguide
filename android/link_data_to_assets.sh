@@ -6,7 +6,7 @@ DST=assets
 
 rm -rf ${DST}/*
 
-files=(thumbnails)
+files=(thumbnails images styles GreatBritain.html Lancaster.html London.html)
 
 for item in ${files[*]}
 do
