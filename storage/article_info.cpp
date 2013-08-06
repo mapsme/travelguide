@@ -1,4 +1,5 @@
 #include "article_info.hpp"
+#include "distance.hpp"
 
 #include "../env/strings.hpp"
 #include "../env/writer.hpp"
@@ -58,8 +59,10 @@ void ArticleInfo::Read(rd::Reader & r)
 
 double ArticleInfo::Score(double currLat, double currLon) const
 {
-  /// @todo
-  return 0.0;
+  if (m_lat != EMPTY_COORD && m_lon != EMPTY_COORD)
+    return earth::Distance(m_lat, m_lon, currLat, currLon);
+  else
+    return 0.0;
 }
 
 void ArticleInfo::Swap(ArticleInfo & i)

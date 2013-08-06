@@ -65,21 +65,24 @@ StorageMock::StorageMock()
   i1.m_url = "London";
   i1.m_thumbnailUrl = "london.jpg";
   i1.m_parentUrl = "Europe -> Great Britain";
-  i1.m_lat = i1.m_lon = -66.666;
+  i1.m_lat = 51.50726;
+  i1.m_lon = -0.12765;
   m_info.push_back(i1);
 
   ArticleInfo i2("Lancaster");
   i2.m_url = "Lancaster";
   i2.m_thumbnailUrl = "lancaster.jpg";
   i2.m_parentUrl = "Europe -> Great Britain";
-  i2.m_lat = i2.m_lon = 66.666;
+  i2.m_lat = 54.04839;
+  i2.m_lon = -2.79904;
   m_info.push_back(i2);
 
   ArticleInfo i3("Great Britain");
   i3.m_url = "Great_Britain";
   i3.m_thumbnailUrl = "great_britain.jpg";
   i3.m_parentUrl = "Europe";
-  i3.m_lat = i3.m_lon = -66.666;
+  i3.m_lat = 54.70235;
+  i3.m_lon = -3.27656;
   m_info.push_back(i3);
 
   SortByKey();

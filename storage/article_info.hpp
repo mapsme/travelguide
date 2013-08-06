@@ -1,12 +1,14 @@
 #pragma once
 
-#include "storage_common.hpp"
-
+#include "../std/string.hpp"
 #include "../std/algorithm.hpp"
 
 
 namespace wr { class Writer; }
 namespace rd { class Reader; }
+
+const int EMPTY_COORD = 1000;
+
 
 class ArticleInfo
 {
@@ -31,6 +33,7 @@ public:
   void Write(wr::Writer & w) const;
   void Read(rd::Reader & r);
 
+  /// Calculate score for info. Less is better.
   double Score(double currLat, double currLon) const;
 
   void Swap(ArticleInfo & i);

@@ -18,7 +18,7 @@ public:
   void Load(string const & path);
 
   void QueryArticleInfos(vector<ArticleInfo> & out, string const & prefix,
-                         double lat = INVALID_LAT, double lon = INVALID_LON) const;
+                         double lat = EMPTY_COORD, double lon = EMPTY_COORD) const;
 
 protected:
   void SortByKey();

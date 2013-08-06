@@ -16,15 +16,18 @@ LOCAL_SRC_FILES := \
 
 # Env files
 LOCAL_SRC_FILES += \
-	../../env/strings.cpp \
-	../../env/source_address.cpp \
 	../../env/assert.cpp \
+	../../env/file_handle.cpp \
+	../../env/logging.cpp \
+	../../env/posix.cpp \
+	../../env/source_address.cpp \
+	../../env/strings.cpp \
 	../../3rdparty/utf8proc/utf8proc.c \
-
 
 # Storage files
 LOCAL_SRC_FILES += \
-	../../storage/storage.cpp \
 	../../storage/article_info.cpp \
+	../../storage/distance.cpp \
+	../../storage/storage.cpp \
 
 include $(BUILD_SHARED_LIBRARY)
