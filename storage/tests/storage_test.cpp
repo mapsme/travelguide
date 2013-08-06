@@ -106,3 +106,34 @@ TEST(Storage, PrefixQuery_Utf8)
   EXPECT_EQ(out.size(), 1);
   CheckBounds(out, "Schließen", "Schließen");
 }
+
+TEST(Storage, PrefixQuery_lowerCaseTest)
+{
+  StorageTest storage;
+
+  char const * arrTitle[] = { "Great Britan"};
+  size_t const count = ArraySize(arrTitle);
+
+  storage.FillStorage(arrTitle, count);
+
+  vector<ArticleInfo> out;
+  storage.QueryArticleInfos(out, "");
+  EXPECT_EQ(out.size(), 1);
+  CheckBounds(out, "Great Britan", "Great Britan");
+
+  storage.QueryArticleInfos(out, "g");
+  EXPECT_EQ(out.size(), 1);
+  CheckBounds(out, "Great Britan", "Great Britan");
+
+  storage.QueryArticleInfos(out, "G");
+  EXPECT_EQ(out.size(), 1);
+  CheckBounds(out, "Great Britan", "Great Britan");
+
+  storage.QueryArticleInfos(out, "gR");
+  EXPECT_EQ(out.size(), 1);
+  CheckBounds(out, "Great Britan", "Great Britan");
+
+  storage.QueryArticleInfos(out, "GR");
+  EXPECT_EQ(out.size(), 1);
+  CheckBounds(out, "Great Britan", "Great Britan");
+}

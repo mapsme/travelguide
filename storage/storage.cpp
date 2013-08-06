@@ -3,6 +3,8 @@
 #include "../std/algorithm.hpp"
 #include "../std/utility.hpp"
 
+#include "../env/strings.hpp"
+
 
 void Storage::QueryArticleInfos(vector<ArticleInfo> & out, string const & prefix,
                                 double lat, double lon) const
@@ -11,7 +13,7 @@ void Storage::QueryArticleInfos(vector<ArticleInfo> & out, string const & prefix
 
   typedef vector<ArticleInfo>::const_iterator IterT;
   pair<IterT, IterT> const range = equal_range(m_info.begin(), m_info.end(),
-                                               prefix, ArticleInfo::LessPrefix());
+                                               str::MakeNormalizeAndLowerUtf8(prefix), ArticleInfo::LessPrefix());
 
   out.assign(range.first, range.second);
   sort(out.begin(), out.end(), ArticleInfo::LessScore(lat, lon));
