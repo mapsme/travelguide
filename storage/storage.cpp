@@ -62,7 +62,7 @@ void Storage::SortByKey()
 StorageMock::StorageMock()
 {
   ArticleInfo i1("London");
-  i1.m_url = "London";
+  i1.m_url = "London.html";
   i1.m_thumbnailUrl = "london.jpg";
   i1.m_parentUrl = "Europe -> Great Britain";
   i1.m_lat = 51.50726;
@@ -70,7 +70,7 @@ StorageMock::StorageMock()
   m_info.push_back(i1);
 
   ArticleInfo i2("Lancaster");
-  i2.m_url = "Lancaster";
+  i2.m_url = "Lancaster.html";
   i2.m_thumbnailUrl = "lancaster.jpg";
   i2.m_parentUrl = "Europe -> Great Britain";
   i2.m_lat = 54.04839;
@@ -78,7 +78,7 @@ StorageMock::StorageMock()
   m_info.push_back(i2);
 
   ArticleInfo i3("Great Britain");
-  i3.m_url = "Great_Britain";
+  i3.m_url = "GreatBritain.html";
   i3.m_thumbnailUrl = "great_britain.jpg";
   i3.m_parentUrl = "Europe";
   i3.m_lat = 54.70235;
