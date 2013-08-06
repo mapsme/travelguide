@@ -14,4 +14,6 @@ template <class T> string ToString(T const & t)
   return ss.str();
 }
 
+string MakeNormalizeAndLowerUtf8(string const & s);
+
 }

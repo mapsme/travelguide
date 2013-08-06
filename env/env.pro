@@ -31,9 +31,14 @@ SOURCES += \
   posix.cpp \
   source_address.cpp \
   thread_posix.cpp \
+  strings.cpp \
+
+# utf8proc
+SOURCES += \
+  ../3rdparty/utf8proc/utf8proc.c \
 
 # unit tests
 SOURCES += \
   ../3rdparty/googletest/src/gtest-all.cc \
   ../3rdparty/googletest/src/gtest_main.cc \
-  tests/smoke.cpp \
+  tests/env_tests.cpp \

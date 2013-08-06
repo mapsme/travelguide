@@ -3,9 +3,11 @@
 #include "../file_handle.hpp"
 #include "../file_system.hpp"
 #include "../logging.hpp"
+#include "../strings.hpp"
 
 #include "../../std/algorithm.hpp"
 #include "../../std/vector.hpp"
+#include "../../std/array.hpp"
 
 
 /// @note Do not edit formatting here (SRC() test):
@@ -18,7 +20,7 @@ namespace
   }
 }
 
-TEST(EnvSmoke, SourceAddress)
+TEST(Env, SourceAddress)
 {
   string s = GetSourceAddress();
   size_t const beg = s.find_last_of('/');
@@ -28,7 +30,7 @@ TEST(EnvSmoke, SourceAddress)
   size_t const end = s.find_last_of(',');
   EXPECT_NE(end, string::npos);
   string const test = s.substr(0, end);
-  EXPECT_EQ(test, "smoke.cpp, GetSourceAddress");
+  EXPECT_EQ(test, "env_tests.cpp, GetSourceAddress");
 
   ostringstream ss;
   ss << test << ", " << (__LINE__ - 17) << ": ";  // magic constant
@@ -37,7 +39,7 @@ TEST(EnvSmoke, SourceAddress)
 //@}
 
 
-TEST(EnvSmoke, FileHandle)
+TEST(Env, FileHandle)
 {
   typedef file::FileHandle HandleT;
 
@@ -67,4 +69,13 @@ TEST(EnvSmoke, FileHandle)
   }
 
   EXPECT_TRUE(fs::DeleteFile(name));
+}
+
+TEST(Env, MakeNormalizeAndLowerUtf8)
+{
+  char const * arr[] = { "Atualização disponível", "Můžeš", "Über Karten", "Schließen" };
+  char const * res[] = { "atualizacao disponivel", "muzes", "uber karten", "schliessen" };
+
+  for (size_t i = 0; i < ArraySize(arr); ++i)
+    EXPECT_EQ(str::MakeNormalizeAndLowerUtf8(arr[i]), res[i]);
 }
