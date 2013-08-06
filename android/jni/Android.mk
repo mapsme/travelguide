@@ -14,6 +14,14 @@ LOCAL_HEADER_FILES := \
 LOCAL_SRC_FILES := \
 	and_storage.cpp \
 
+# Env files
+LOCAL_SRC_FILES += \
+	../../env/strings.cpp \
+	../../env/source_address.cpp \
+	../../env/assert.cpp \
+	../../3rdparty/utf8proc/utf8proc.c \
+
+
 # Storage files
 LOCAL_SRC_FILES += \
 	../../storage/storage.cpp \

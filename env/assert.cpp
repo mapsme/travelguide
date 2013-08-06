@@ -2,7 +2,8 @@
 
 #include "../std/iostream.hpp"
 
-#include <cassert>  // for assert
+#include <cassert>    // for assert
+#include <stdlib.h>   // for abort
 
 
 namespace dbg
