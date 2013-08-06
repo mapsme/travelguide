@@ -87,3 +87,22 @@ TEST(Storage, PrefixQuery2)
   EXPECT_EQ(out.size(), 2);
   CheckBounds(out, "Lancaster", "London");
 }
+
+TEST(Storage, PrefixQuery_Utf8)
+{
+  StorageTest storage;
+
+  char const * arrTitle[] = { "Über Karten", "Schließen" };
+  size_t const count = ArraySize(arrTitle);
+
+  storage.FillStorage(arrTitle, count);
+
+  vector<ArticleInfo> out;
+  storage.QueryArticleInfos(out, "ub");
+  EXPECT_EQ(out.size(), 1);
+  CheckBounds(out, "Über Karten", "Über Karten");
+
+  storage.QueryArticleInfos(out, "schliessen");
+  EXPECT_EQ(out.size(), 1);
+  CheckBounds(out, "Schließen", "Schließen");
+}

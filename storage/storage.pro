@@ -18,6 +18,12 @@ SOURCES += \
 SOURCES += \
   ../env/logging.cpp \
   ../env/source_address.cpp \
+  ../env/strings.cpp \
+  ../env/assert.cpp \
+
+# utf8proc
+SOURCES += \
+  ../3rdparty/utf8proc/utf8proc.c \
 
 # unit tests
 SOURCES += \

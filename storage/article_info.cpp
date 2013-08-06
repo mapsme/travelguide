@@ -1,13 +1,14 @@
 #include "article_info.hpp"
 
+#include "../env/strings.hpp"
+
 #include "../std/iterator.hpp"
 #include "../std/algorithm.hpp"
 
 
 void ArticleInfo::GenerateKey()
 {
-  m_key.reserve(m_title.size());
-  transform(m_title.begin(), m_title.end(), back_inserter(m_key), &::tolower);
+  m_key = str::MakeNormalizeAndLowerUtf8(m_title);
 }
 
 double ArticleInfo::Score(double currLat, double currLon) const
