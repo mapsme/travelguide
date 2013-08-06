@@ -20,6 +20,7 @@ HEADERS += \
   writer.hpp \
   thread.hpp \
   message_std.hpp \
+  reader.hpp \
 
 SOURCES += \
   assert.cpp \

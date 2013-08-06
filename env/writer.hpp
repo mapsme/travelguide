@@ -11,7 +11,20 @@ class Writer
 public:
   virtual ~Writer() {}
   virtual void Write(void const * p, size_t size) = 0;
+
+  template <typename T> void Write(T const & t)
+  {
+    Write(static_cast<void const *>(&t), sizeof(T));
+  }
+
+  void Write(string const & s)
+  {
+    size_t const count = s.size();
+    Write(static_cast<uint32_t>(count));
+    Write(s.c_str(), count);
+  }
 };
+
 
 class FileWriter : public Writer
 {
@@ -24,6 +37,7 @@ public:
   {
   }
 
+  using Writer::Write;
   virtual void Write(void const * p, size_t size)
   {
     m_file.Write(p, size);
