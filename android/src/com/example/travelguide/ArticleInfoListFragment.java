@@ -3,15 +3,25 @@ package com.example.travelguide;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.support.v4.app.LoaderManager.LoaderCallbacks;
+import android.support.v4.content.Loader;
+import android.support.v4.text.TextUtilsCompat;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
+import com.example.travelguide.async.QueryResultLoader;
 import com.example.travelguide.cpp.Storage;
 import com.example.travelguide.dummy.DummyContent;
 import com.example.travelguide.widget.StorageArticleInfoAdapter;
+
+import static com.example.travelguide.util.Utils.*;
 
 /**
  * A list fragment representing a list of ArticleInfos. This fragment also
@@ -22,9 +32,14 @@ import com.example.travelguide.widget.StorageArticleInfoAdapter;
  * Activities containing this fragment MUST implement the {@link Callbacks}
  * interface.
  */
-public class ArticleInfoListFragment extends ListFragment
+public class ArticleInfoListFragment extends ListFragment implements LoaderCallbacks<Storage>, TextWatcher,
+    OnClickListener
 {
   private View mRootView;
+  private TextView mSearchText;
+  private View mCross;
+  private View mSearchIcon;
+
   private Storage mStorage;
 
   /**
@@ -80,9 +95,6 @@ public class ArticleInfoListFragment extends ListFragment
   {
     super.onCreate(savedInstanceState);
     mStorage = new Storage();
-    // TODO: remove it
-    mStorage.query("", false, 0, 0);
-    setListAdapter(new StorageArticleInfoAdapter(mStorage, getActivity()));
   }
 
   @Override
@@ -109,6 +121,11 @@ public class ArticleInfoListFragment extends ListFragment
     }
 
     mCallbacks = (Callbacks) activity;
+
+    // Load initial data
+    final Bundle args = new Bundle(1);
+    args.putString(KEY_QUERY, "");
+    getLoaderManager().initLoader(SEARCH_LOADER, args, this).forceLoad();
   }
 
   @Override
@@ -118,6 +135,8 @@ public class ArticleInfoListFragment extends ListFragment
 
     // Reset the active callbacks interface to the dummy implementation.
     mCallbacks = sDummyCallbacks;
+
+    getLoaderManager().destroyLoader(SEARCH_LOADER);
   }
 
   @Override
@@ -165,11 +184,89 @@ public class ArticleInfoListFragment extends ListFragment
 
     mActivatedPosition = position;
   }
-  
+
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
   {
     mRootView = inflater.inflate(R.layout.fragment_articleinfo_list, null, false);
+    mSearchText = (TextView) mRootView.findViewById(R.id.searchText);
+    mSearchIcon = mRootView.findViewById(R.id.searchIcon);
+    mCross = mRootView.findViewById(R.id.clearSearch);
+
+    // setup listeners
+    mSearchText.addTextChangedListener(this);
+    mCross.setOnClickListener(this);
+
     return mRootView;
   }
+
+  /**
+   *
+   * LOADER
+   *
+   */
+
+  private static int SEARCH_LOADER = 0x1;
+  private String KEY_QUERY = "key_query";
+
+  @Override
+  public Loader<Storage> onCreateLoader(int id, Bundle args)
+  {
+    if (id == SEARCH_LOADER)
+    {
+      final String query = args.getString(KEY_QUERY);
+      // TODO: add location check
+      // TODO: add progress
+      return new QueryResultLoader(getActivity(), query);
+    }
+    return null;
+  }
+
+  @Override
+  public void onLoadFinished(Loader<Storage> loader, Storage result)
+  {
+    setListAdapter(new StorageArticleInfoAdapter(result, getActivity()));
+  }
+
+  @Override
+  public void onLoaderReset(Loader<Storage> loader)
+  {}
+
+  /**
+   *
+   * TEXT WATCHER
+   *
+   */
+
+  @Override
+  public void onTextChanged(CharSequence s, int start, int before, int count)
+  {
+    final Bundle args = new Bundle(1);
+    args.putString(KEY_QUERY, s.toString());
+    getLoaderManager().restartLoader(SEARCH_LOADER, args, this).forceLoad();
+
+    hideIf(TextUtils.isEmpty(s), mCross);
+  }
+
+  @Override
+  public void afterTextChanged(Editable s)
+  {}
+
+  @Override
+  public void beforeTextChanged(CharSequence s, int start, int count, int after)
+  {}
+
+  /**
+   *
+   * CLICK
+   *
+   */
+
+  @Override
+  public void onClick(View v)
+  {
+    if (v.getId() == mCross.getId())
+      mSearchText.setText(""); // clean up text field
+  }
+
 }
