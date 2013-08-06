@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 
 #include "storage.hpp"
+#include "distance.hpp"
 
 #include "../env/message_std.hpp"
 #include "../env/logging.hpp"
@@ -187,4 +188,10 @@ TEST(Storage, StorageReadWriteTest)
   EXPECT_EQ(s1, s2);
 
   fs::DeleteFile(name);
+}
+
+TEST(Distance, Smoke)
+{
+  // Equator length from wiki.
+  EXPECT_TRUE(fabs(earth::Distance(0, 0, 0, 180) / 1000.0 - 40075 / 2.0) < 1.0);
 }

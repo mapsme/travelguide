@@ -6,13 +6,14 @@ CONFIG -= app_bundle
 INCLUDEPATH += ../3rdparty/boost ../3rdparty/googletest/include
 
 HEADERS += \
-  storage.hpp \
   article_info.hpp \
-  storage_common.hpp \
+  distance.hpp \
+  storage.hpp \
 
 SOURCES += \
-  storage.cpp \
   article_info.cpp \
+  distance.cpp \
+  storage.cpp \
 
 # env sources
 SOURCES += \
