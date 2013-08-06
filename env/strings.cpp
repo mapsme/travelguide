@@ -12,6 +12,9 @@ namespace str
 string MakeNormalizeAndLowerUtf8(string const & s)
 {
   int const count = static_cast<int>(s.size());
+  if (count == 0)
+    return string();
+
   vector<int32_t> buffer(count);
   int sz = utf8proc_decompose(reinterpret_cast<uint8_t const *>(s.c_str()), count, buffer.data(), count,
                               UTF8PROC_CASEFOLD | UTF8PROC_DECOMPOSE | UTF8PROC_STRIPMARK);
