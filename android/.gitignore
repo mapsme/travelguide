@@ -6,6 +6,9 @@ spoon-output/
 assets/
 obj/
 armeabi/
+mips/
+x86/
+armeabi-v7a/
 
 *.class
 .classpath
