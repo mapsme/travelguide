@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
+import com.example.travelguide.article.ArticleInfo;
+
 /**
  * An activity representing a list of ArticleInfos. This activity has different
  * presentations for handset and tablet-size devices. On handsets, the activity
@@ -37,14 +39,7 @@ public class ArticleInfoListActivity extends FragmentActivity implements Article
 
     if (findViewById(R.id.articleinfo_detail_container) != null)
     {
-      // The detail container view will be present only in the
-      // large-screen layouts (res/values-large and
-      // res/values-sw600dp). If this view is present, then the
-      // activity should be in two-pane mode.
       mTwoPane = true;
-
-      // In two-pane mode, list items should be given the
-      // 'activated' state when touched.
       ((ArticleInfoListFragment) getSupportFragmentManager().findFragmentById(R.id.articleinfo_list))
           .setActivateOnItemClick(true);
     }
@@ -57,26 +52,21 @@ public class ArticleInfoListActivity extends FragmentActivity implements Article
    * that the item with the given ID was selected.
    */
   @Override
-  public void onItemSelected(String id)
+  public void onItemSelected(ArticleInfo info)
   {
     if (mTwoPane)
     {
-      // In two-pane mode, show the detail view in this activity by
-      // adding or replacing the detail fragment using a
-      // fragment transaction.
       Bundle arguments = new Bundle();
-      arguments.putString(ArticleInfoDetailFragment.ARG_ITEM_ID, id);
+      arguments.putSerializable(ArticleInfoDetailFragment.ARTICLE_INFO, info);
       ArticleInfoDetailFragment fragment = new ArticleInfoDetailFragment();
+
       fragment.setArguments(arguments);
       getSupportFragmentManager().beginTransaction().replace(R.id.articleinfo_detail_container, fragment).commit();
-
     }
     else
     {
-      // In single-pane mode, simply start the detail activity
-      // for the selected item ID.
       Intent detailIntent = new Intent(this, ArticleInfoDetailActivity.class);
-      detailIntent.putExtra(ArticleInfoDetailFragment.ARG_ITEM_ID, id);
+      detailIntent.putExtra(ArticleInfoDetailFragment.ARTICLE_INFO, info);
       startActivity(detailIntent);
     }
   }

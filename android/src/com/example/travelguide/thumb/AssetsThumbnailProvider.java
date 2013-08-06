@@ -2,6 +2,7 @@ package com.example.travelguide.thumb;
 
 import java.io.IOException;
 import java.io.InputStream;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.AssetManager;
@@ -17,7 +18,7 @@ public class AssetsThumbnailProvider implements ThumbnailsProvider
   public AssetsThumbnailProvider(Context context)
   {
     mContext = context;
-    mAssetManager = context.getAssets();
+    mAssetManager = mContext.getAssets();
   }
 
   @SuppressLint("DefaultLocale")

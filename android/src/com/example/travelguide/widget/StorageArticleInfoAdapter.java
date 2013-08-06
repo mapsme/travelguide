@@ -1,11 +1,5 @@
 package com.example.travelguide.widget;
 
-import com.example.travelguide.R;
-import com.example.travelguide.article.ArticleInfo;
-import com.example.travelguide.cpp.Storage;
-import com.example.travelguide.thumb.AssetsThumbnailProvider;
-import com.example.travelguide.thumb.ThumbnailsProvider;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +7,12 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.travelguide.R;
+import com.example.travelguide.article.ArticleInfo;
+import com.example.travelguide.cpp.Storage;
+import com.example.travelguide.thumb.AssetsThumbnailProvider;
+import com.example.travelguide.thumb.ThumbnailsProvider;
 
 public class StorageArticleInfoAdapter extends BaseAdapter
 {

@@ -25,7 +25,7 @@ public class ArticleInfoDetailActivity extends FragmentActivity
     setContentView(R.layout.activity_articleinfo_detail);
 
     // Show the Up button in the action bar.
-    getActionBar().setDisplayHomeAsUpEnabled(true);
+    // getActionBar().setDisplayHomeAsUpEnabled(true);
 
     // savedInstanceState is non-null when there is fragment state
     // saved from previous configurations of this activity
@@ -41,8 +41,9 @@ public class ArticleInfoDetailActivity extends FragmentActivity
       // Create the detail fragment and add it to the activity
       // using a fragment transaction.
       Bundle arguments = new Bundle();
-      arguments.putString(ArticleInfoDetailFragment.ARG_ITEM_ID,
-          getIntent().getStringExtra(ArticleInfoDetailFragment.ARG_ITEM_ID));
+      arguments.putSerializable(ArticleInfoDetailFragment.ARTICLE_INFO,
+          getIntent().getSerializableExtra(ArticleInfoDetailFragment.ARTICLE_INFO));
+
       ArticleInfoDetailFragment fragment = new ArticleInfoDetailFragment();
       fragment.setArguments(arguments);
       getSupportFragmentManager().beginTransaction().add(R.id.articleinfo_detail_container, fragment).commit();

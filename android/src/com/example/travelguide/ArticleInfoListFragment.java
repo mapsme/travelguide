@@ -1,11 +1,11 @@
 package com.example.travelguide;
 
+import static com.example.travelguide.util.Utils.hideIf;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
-import android.support.v4.text.TextUtilsCompat;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -16,12 +16,10 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.travelguide.article.ArticleInfo;
 import com.example.travelguide.async.QueryResultLoader;
 import com.example.travelguide.cpp.Storage;
-import com.example.travelguide.dummy.DummyContent;
 import com.example.travelguide.widget.StorageArticleInfoAdapter;
-
-import static com.example.travelguide.util.Utils.*;
 
 /**
  * A list fragment representing a list of ArticleInfos. This fragment also
@@ -38,9 +36,7 @@ public class ArticleInfoListFragment extends ListFragment implements LoaderCallb
   private View mRootView;
   private TextView mSearchText;
   private View mCross;
-  private View mSearchIcon;
 
-  private Storage mStorage;
 
   /**
    * The serialization (saved instance state) Bundle key representing the
@@ -69,7 +65,7 @@ public class ArticleInfoListFragment extends ListFragment implements LoaderCallb
     /**
      * Callback for when an item has been selected.
      */
-    public void onItemSelected(String id);
+    public void onItemSelected(ArticleInfo info);
   }
 
   /**
@@ -79,7 +75,7 @@ public class ArticleInfoListFragment extends ListFragment implements LoaderCallb
   private static Callbacks sDummyCallbacks = new Callbacks()
   {
     @Override
-    public void onItemSelected(String id)
+    public void onItemSelected(ArticleInfo info)
     {}
   };
 
@@ -89,13 +85,6 @@ public class ArticleInfoListFragment extends ListFragment implements LoaderCallb
    */
   public ArticleInfoListFragment()
   {}
-
-  @Override
-  public void onCreate(Bundle savedInstanceState)
-  {
-    super.onCreate(savedInstanceState);
-    mStorage = new Storage();
-  }
 
   @Override
   public void onViewCreated(View view, Bundle savedInstanceState)
@@ -143,10 +132,7 @@ public class ArticleInfoListFragment extends ListFragment implements LoaderCallb
   public void onListItemClick(ListView listView, View view, int position, long id)
   {
     super.onListItemClick(listView, view, position, id);
-
-    // Notify the active callbacks interface (the activity, if the
-    // fragment is attached to one) that an item has been selected.
-    mCallbacks.onItemSelected(DummyContent.ITEMS.get(position).id);
+    mCallbacks.onItemSelected((ArticleInfo) getListAdapter().getItem(position));
   }
 
   @Override
@@ -154,10 +140,7 @@ public class ArticleInfoListFragment extends ListFragment implements LoaderCallb
   {
     super.onSaveInstanceState(outState);
     if (mActivatedPosition != ListView.INVALID_POSITION)
-    {
-      // Serialize and persist the activated item position.
       outState.putInt(STATE_ACTIVATED_POSITION, mActivatedPosition);
-    }
   }
 
   /**
@@ -190,7 +173,6 @@ public class ArticleInfoListFragment extends ListFragment implements LoaderCallb
   {
     mRootView = inflater.inflate(R.layout.fragment_articleinfo_list, null, false);
     mSearchText = (TextView) mRootView.findViewById(R.id.searchText);
-    mSearchIcon = mRootView.findViewById(R.id.searchIcon);
     mCross = mRootView.findViewById(R.id.clearSearch);
 
     // setup listeners

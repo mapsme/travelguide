@@ -1,6 +1,9 @@
 package com.example.travelguide.article;
 
-public class ArticleInfo
+import java.io.Serializable;
+
+@SuppressWarnings("serial")
+public class ArticleInfo implements Serializable
 {
 
   public ArticleInfo(String articleUrl, String iconUrl, String title)

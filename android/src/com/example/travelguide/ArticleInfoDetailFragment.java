@@ -5,9 +5,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.TextView;
 
-import com.example.travelguide.dummy.DummyContent;
+import com.example.travelguide.article.ArticleInfo;
+import com.example.travelguide.article.ArticlePathFinder;
+import com.example.travelguide.article.AssetsArticlePathFinder;
 
 /**
  * A fragment representing a single ArticleInfo detail screen. This fragment is
@@ -16,16 +19,14 @@ import com.example.travelguide.dummy.DummyContent;
  */
 public class ArticleInfoDetailFragment extends Fragment
 {
-  /**
-   * The fragment argument representing the item ID that this fragment
-   * represents.
-   */
-  public static final String ARG_ITEM_ID = "item_id";
+  public static final String ARTICLE_INFO = "article_info";
 
-  /**
-   * The dummy content this fragment is presenting.
-   */
-  private DummyContent.DummyItem mItem;
+  private ArticleInfo mItem;
+
+  private View mRootView;
+  private WebView mWebView;
+
+  private ArticlePathFinder mFinder;
 
   /**
    * Mandatory empty constructor for the fragment manager to instantiate the
@@ -39,26 +40,25 @@ public class ArticleInfoDetailFragment extends Fragment
   {
     super.onCreate(savedInstanceState);
 
-    if (getArguments().containsKey(ARG_ITEM_ID))
-    {
-      // Load the dummy content specified by the fragment
-      // arguments. In a real-world scenario, use a Loader
-      // to load content from a content provider.
-      mItem = DummyContent.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
-    }
+    if (getArguments().containsKey(ARTICLE_INFO))
+      mItem = (ArticleInfo) getArguments().getSerializable(ARTICLE_INFO);
+
+    if (mItem == null)
+      throw new RuntimeException("ArticleInfo must be specified.");
+
+    mFinder = new AssetsArticlePathFinder();
   }
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
   {
-    View rootView = inflater.inflate(R.layout.fragment_articleinfo_detail, container, false);
+    mRootView = inflater.inflate(R.layout.fragment_articleinfo_detail, container, false);
+    mWebView = (WebView) mRootView.findViewById(R.id.webView);
+    ((TextView) mRootView.findViewById(R.id.articleinfo_detail)).setText(mItem.getName());
 
-    // Show the dummy content as text in a TextView.
-    if (mItem != null)
-    {
-      ((TextView) rootView.findViewById(R.id.articleinfo_detail)).setText(mItem.content);
-    }
+    mWebView.loadUrl(mFinder.getPath(mItem));
 
-    return rootView;
+    return mRootView;
   }
+
 }
