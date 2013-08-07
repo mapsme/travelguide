@@ -19,6 +19,12 @@ def cleanUp(soup):
   [s.decompose() for s in content.findAll("a", {"class": "section_anchors"})]
   [s.decompose() for s in content.findAll("div", {"id": "mw-mf-language-section"})]
 
+  # delete empty sections
+  sections = content.findAll("div", {"class": "section"})
+  for section in sections:
+    if section.div.string:
+      section.decompose()
+
   # Wrap content with our own header and body, and restore original div structure for css
   divContentWrapper = soup.new_tag("div", id="content_wrapper")
   divContentWrapper["class"] = "show"
@@ -57,7 +63,7 @@ def rewriteImages(soup):
     del imgElement['alt']
     #todo rewrite srcset attr if we can get callback on image loading in webview
     del imgElement['srcset']
-    
+
     index = -1
     if "thumb" in imgElement['src'] and not '.pdf' in imgElement['src'].split("/")[-2]:
       index = -2
