@@ -33,6 +33,11 @@ public:
     return m_result[index];
   }
 
+  string GetParentName(ArticleInfo const & info)
+  {
+    return m_storage.GetParentName(info);
+  }
+
 private:
   /// @todo Replace on Storage
   StorageMock m_storage;
@@ -87,7 +92,7 @@ JNIEXPORT jobject JNICALL Java_com_example_travelguide_cpp_Storage_getArticleInf
        StdString2JString(env, info.m_url),
        StdString2JString(env, info.m_thumbnailUrl),
        StdString2JString(env, info.m_title),
-       StdString2JString(env, info.m_parentUrl),
+       StdString2JString(env, STORAGE.GetParentName(info)),
        info.m_lat,
        info.m_lon);
 }
