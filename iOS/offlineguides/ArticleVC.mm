@@ -1,18 +1,17 @@
 #import "ArticleVC.h"
 #import "GuideVC.h"
 
-#import "../../storage/storage.hpp"
-#import "../../storage/article_info.hpp"
+/// @todo Replace on storage.hpp
+#import "../../storage/storage_builder.hpp"
 
 #import "../../env/assert.hpp"
-
-#import "../../std/vector.hpp"
 
 
 #define THUMBNAILSFOLDER @"/data/thumbnails/"
 
 @interface ArticleVC ()
 {
+  /// @todo Replace on Storage
   StorageMock m_storage;
   vector<ArticleInfo> m_infos;
 }
@@ -70,7 +69,7 @@
   string imageType = info->m_thumbnailUrl.substr(pos+1);
   NSString * imagePath = [[NSBundle mainBundle] pathForResource:[NSString stringWithUTF8String:imageName.c_str()] ofType:[NSString stringWithUTF8String:imageType.c_str()] inDirectory:THUMBNAILSFOLDER];
 
-  cell.detailTextLabel.text = [NSString stringWithUTF8String:info->m_parentUrl.c_str()];
+  cell.detailTextLabel.text = [NSString stringWithUTF8String:m_storage.GetParentName(*info).c_str()];
 
   UIImage * image = [UIImage imageWithContentsOfFile:imagePath];
   cell.imageView.image = image;

@@ -2,29 +2,10 @@
 
 #include "../env/strings.hpp"
 #include "../env/reader.hpp"
-#include "../env/writer.hpp"
-#include "../env/logging.hpp"
 
 #include "../std/algorithm.hpp"
 #include "../std/utility.hpp"
 
-
-void Storage::Add(ArticleInfo const & a)
-{
-  m_info.push_back(a);
-}
-
-void Storage::Save(string const & path)
-{
-  SortByKey();
-
-  wr::FileWriter w(path);
-  size_t const count = m_info.size();
-  w.Write(static_cast<uint32_t>(count));
-
-  for (size_t i = 0; i < count; ++i)
-    m_info[i].Write(w);
-}
 
 void Storage::Load(string const & path)
 {
@@ -51,49 +32,4 @@ void Storage::QueryArticleInfos(vector<ArticleInfo> & out, string const & prefix
 
   out.assign(range.first, range.second);
   sort(out.begin(), out.end(), ArticleInfo::LessScore(lat, lon));
-}
-
-void Storage::SortByKey()
-{
-  sort(m_info.begin(), m_info.end(), ArticleInfo::LessStorage());
-}
-
-
-StorageMock::StorageMock()
-{
-  ArticleInfo i1("London");
-  i1.m_url = "London.html";
-  i1.m_thumbnailUrl = "london.jpg";
-  i1.m_parentUrl = "Europe -> Great Britain";
-  i1.m_lat = 51.50726;
-  i1.m_lon = -0.12765;
-  m_info.push_back(i1);
-
-  ArticleInfo i2("Lancaster");
-  i2.m_url = "Lancaster.html";
-  i2.m_thumbnailUrl = "lancaster.jpg";
-  i2.m_parentUrl = "Europe -> Great Britain";
-  i2.m_lat = 54.04839;
-  i2.m_lon = -2.79904;
-  m_info.push_back(i2);
-
-  ArticleInfo i3("Great Britain");
-  i3.m_url = "GreatBritain.html";
-  i3.m_thumbnailUrl = "great_britain.jpg";
-  i3.m_parentUrl = "Europe";
-  i3.m_lat = 54.70235;
-  i3.m_lon = -3.27656;
-  m_info.push_back(i3);
-
-  SortByKey();
-}
-
-bool StorageMock::operator == (StorageMock const & r) const
-{
-  if (r.m_info.size() != m_info.size())
-    return false;
-  for (size_t i = 0; i < m_info.size();++i)
-    if (!(m_info[i] == r.m_info[i]))
-      return false;
-  return true;
 }

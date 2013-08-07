@@ -1,7 +1,8 @@
 #include "and_storage.hpp"
 #include "jni_util.hpp"
 
-#include "../../storage/storage.hpp"
+/// @todo Replace on storage.hpp
+#include "../../storage/storage_builder.hpp"
 
 
 class AndStorage
@@ -33,6 +34,7 @@ public:
   }
 
 private:
+  /// @todo Replace on Storage
   StorageMock m_storage;
   vector<ArticleInfo> m_result;
 };

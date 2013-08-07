@@ -12,21 +12,22 @@ const int EMPTY_COORD = 1000;
 
 class ArticleInfo
 {
+  string m_key;
   void GenerateKey();
 
-  string m_key;
-
 public:
-  ArticleInfo() {}
-  ArticleInfo(string const & title) : m_title(title)
+  ArticleInfo() : m_parentIndex(NO_PARENT) {}
+  ArticleInfo(string const & title) : m_title(title), m_parentIndex(NO_PARENT)
   {
     GenerateKey();
   }
 
-  string m_url;
+  static const int32_t NO_PARENT = -1;
+
   string m_title;
+  string m_url;
   string m_thumbnailUrl;
-  string m_parentUrl;
+  int32_t m_parentIndex;  // NO_PARENT is the root article
 
   double m_lat, m_lon;
 

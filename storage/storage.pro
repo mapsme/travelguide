@@ -9,11 +9,13 @@ HEADERS += \
   article_info.hpp \
   distance.hpp \
   storage.hpp \
+  storage_builder.hpp \
 
 SOURCES += \
   article_info.cpp \
   distance.cpp \
   storage.cpp \
+  storage_builder.cpp \
 
 # env sources
 SOURCES += \

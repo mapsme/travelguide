@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include "storage.hpp"
+#include "storage_builder.hpp"
 #include "distance.hpp"
 
 #include "../env/message_std.hpp"
@@ -32,7 +32,7 @@ public:
     for (size_t i = 0; i < size; ++i)
       m_info.push_back(ArticleInfo(arr[i]));
 
-    SortByKey();
+    sort(m_info.begin(), m_info.end(), ArticleInfo::LessStorage());
   }
 
   void CheckBounds(string const & beg, string const & end) const
@@ -43,7 +43,7 @@ public:
 
 }
 
-TEST(Storage, PrefixQuery1)
+TEST(Storage, PrefixQuery)
 {
   StorageTest storage;
 
@@ -75,21 +75,6 @@ TEST(Storage, PrefixQuery1)
 
   storage.QueryArticleInfos(out, "lor");
   EXPECT_EQ(out.size(), 0);
-}
-
-TEST(Storage, PrefixQuery2)
-{
-  StorageTest storage;
-
-  char const * arrTitle[] = { "London", "Lancaster", "Great Britan" };
-  size_t const count = ArraySize(arrTitle);
-
-  storage.FillStorage(arrTitle, count);
-
-  vector<ArticleInfo> out;
-  storage.QueryArticleInfos(out, "l");
-  EXPECT_EQ(out.size(), 2);
-  CheckBounds(out, "Lancaster", "London");
 }
 
 TEST(Storage, PrefixQuery_Utf8)
@@ -145,13 +130,12 @@ TEST(Storage, PrefixQuery_lowerCaseTest)
 TEST(Storage, ArticleInfoRW)
 {
   ArticleInfo i("Über Karten");
-  i.m_url = "Great_Britain";
+  i.m_url = "Éařízení";
   i.m_thumbnailUrl = "great_britain.jpg";
-  i.m_parentUrl = "Schließen";
   i.m_lat = 5.67894;
   i.m_lon = 89.12345;
 
-  char const * name = "file.dat";
+  char const * name = "article.dat";
   {
     wr::FileWriter w(name);
     i.Write(w);
@@ -167,25 +151,32 @@ TEST(Storage, ArticleInfoRW)
   fs::DeleteFile(name);
 }
 
-TEST(Storage, StorageReadWriteTest)
+TEST(Storage, StorageBuilderRW)
 {
-  StorageMock s1;
+  StorageBuilder builder;
+  InitStorageBuilderMock(builder);
 
-  ArticleInfo i("Über Karten");
-  i.m_url = "Great_Britain";
+  ArticleInfoBuilder i("Über Karten");
+  i.m_url = "Éařízení";
   i.m_thumbnailUrl = "great_britain.jpg";
   i.m_parentUrl = "Schließen";
   i.m_lat = 5.67894;
   i.m_lon = 89.12345;
-  s1.Add(i);
+  builder.Add(i);
 
-  char const * name = "storage_mock.dat";
-  s1.Save(name);
+  char const * name = "storage.dat";
+  builder.Save(name);
 
-  StorageMock s2;
-  s2.Load(name);
+  Storage storage;
+  storage.Load(name);
 
-  EXPECT_EQ(s1, s2);
+  EXPECT_EQ(builder, storage);
+
+  ArticleInfo const * zero = 0;
+  EXPECT_EQ(storage.GetParentArticle(storage.GetArticle(0)), zero);
+  EXPECT_NE(storage.GetParentArticle(storage.GetArticle(1)), zero);
+  EXPECT_NE(storage.GetParentArticle(storage.GetArticle(2)), zero);
+  EXPECT_EQ(storage.GetParentArticle(storage.GetArticle(3)), zero);
 
   fs::DeleteFile(name);
 }
