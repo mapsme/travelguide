@@ -63,6 +63,7 @@ public class ArticleInfoListFragment extends ListFragment implements LoaderCallb
   private View mListContainer;
   private View mProgressContainer;
   private View mHeader;
+  private View mAbout;
 
   private LocationManager mLocationManager;
 
@@ -208,9 +209,11 @@ public class ArticleInfoListFragment extends ListFragment implements LoaderCallb
     mListContainer = mRootView.findViewById(R.id.listContainer);
     mProgressContainer = mRootView.findViewById(R.id.progressContainer);
     mHeader = mRootView.findViewById(R.id.header);
+    mAbout = mRootView.findViewById(R.id.about);
     // setup listeners
     mSearchText.addTextChangedListener(this);
     mCross.setOnClickListener(this);
+    mAbout.setOnClickListener(this);
 
     return mRootView;
   }
@@ -287,6 +290,10 @@ public class ArticleInfoListFragment extends ListFragment implements LoaderCallb
   {
     if (v.getId() == mCross.getId())
       mSearchText.setText(""); // clean up text field
+    else if (v.getId() == mAbout.getId())
+    {
+      // TODO: show about dialog
+    }
   }
 
 }

@@ -8,8 +8,7 @@
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="@dimen/search_bar"
-        android:background="@color/dark_grey"
-        android:paddingRight="@dimen/pad_mid" >
+        android:background="@color/dark_grey" >
 
         <TextView
             style="@android:style/TextAppearance.Medium"
@@ -26,6 +25,9 @@
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
+            android:background="@drawable/top_bar_selector"
+            android:paddingLeft="@dimen/pad_small"
+            android:paddingRight="@dimen/pad_small"
             android:src="@drawable/ic_info" />
     </RelativeLayout>
 
