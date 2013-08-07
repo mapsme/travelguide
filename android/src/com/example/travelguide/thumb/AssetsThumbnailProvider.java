@@ -3,6 +3,8 @@ package com.example.travelguide.thumb;
 import java.io.IOException;
 import java.io.InputStream;
 
+import com.example.travelguide.R;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.AssetManager;
@@ -33,7 +35,8 @@ public class AssetsThumbnailProvider implements ThumbnailsProvider
     }
     catch (IOException e)
     {
-      throw new RuntimeException("Cant find asset: " + fullPath, e);
+//      throw new RuntimeException("Cant find asset: " + fullPath, e);
+      return mContext.getResources().getDrawable(R.drawable.ic_launcher);
     }
   }
 

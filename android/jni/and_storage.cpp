@@ -9,6 +9,13 @@ class AndStorage
 {
 public:
 
+
+  AndStorage()
+  {
+    // TODO: change path
+    m_storage.Load("/storage/sdcard0/index.dat");
+  }
+
   static AndStorage & Instance()
   {
     static AndStorage storage;
@@ -40,7 +47,7 @@ public:
 
 private:
   /// @todo Replace on Storage
-  StorageMock m_storage;
+  Storage m_storage;
   vector<ArticleInfo> m_result;
 };
 
