@@ -20,6 +20,9 @@
 		ED4F8BA517B2C97300ADD795 /* ic_back.png in Resources */ = {isa = PBXBuildFile; fileRef = ED4F8BA117B2C97300ADD795 /* ic_back.png */; };
 		ED4F8BA617B2C97300ADD795 /* ic_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED4F8BA217B2C97300ADD795 /* ic_back@2x.png */; };
 		ED4F8BA717B2C97300ADD795 /* ic_articleselection@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED4F8BA317B2C97300ADD795 /* ic_articleselection@2x.png */; };
+		ED4F8BAD17B2E67100ADD795 /* file_handle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED4F8BAC17B2E67100ADD795 /* file_handle.cpp */; };
+		ED4F8BAF17B2E69600ADD795 /* posix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED4F8BAE17B2E69600ADD795 /* posix.cpp */; };
+		ED4F8BB117B2E6B700ADD795 /* logging.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED4F8BB017B2E6B700ADD795 /* logging.cpp */; };
 		ED81954717AED762004F3803 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED81954617AED762004F3803 /* UIKit.framework */; };
 		ED81954917AED762004F3803 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED81954817AED762004F3803 /* Foundation.framework */; };
 		ED81954B17AED762004F3803 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED81954A17AED762004F3803 /* CoreGraphics.framework */; };
@@ -52,6 +55,9 @@
 		ED4F8BA117B2C97300ADD795 /* ic_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_back.png; sourceTree = "<group>"; };
 		ED4F8BA217B2C97300ADD795 /* ic_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_back@2x.png"; sourceTree = "<group>"; };
 		ED4F8BA317B2C97300ADD795 /* ic_articleselection@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_articleselection@2x.png"; sourceTree = "<group>"; };
+		ED4F8BAC17B2E67100ADD795 /* file_handle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = file_handle.cpp; path = ../../env/file_handle.cpp; sourceTree = "<group>"; };
+		ED4F8BAE17B2E69600ADD795 /* posix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = posix.cpp; path = ../../env/posix.cpp; sourceTree = "<group>"; };
+		ED4F8BB017B2E6B700ADD795 /* logging.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = logging.cpp; path = ../../env/logging.cpp; sourceTree = "<group>"; };
 		ED81954317AED762004F3803 /* offlineguides.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = offlineguides.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED81954617AED762004F3803 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		ED81954817AED762004F3803 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -106,6 +112,9 @@
 		A3E2220D17AFD9CC0018AB9E /* env */ = {
 			isa = PBXGroup;
 			children = (
+				ED4F8BB017B2E6B700ADD795 /* logging.cpp */,
+				ED4F8BAE17B2E69600ADD795 /* posix.cpp */,
+				ED4F8BAC17B2E67100ADD795 /* file_handle.cpp */,
 				ED81956D17B10578004F3803 /* strings.cpp */,
 				A3E2221017AFDA0A0018AB9E /* source_address.cpp */,
 				A3E2220E17AFD9E10018AB9E /* assert.cpp */,
@@ -278,6 +287,9 @@
 				7722E14C17B2638B00CFB817 /* storage_builder.cpp in Sources */,
 				ED893F6917B223920074E05A /* MapsWithMeAPI.m in Sources */,
 				ED893F6C17B231F20074E05A /* IPadSplitVC.m in Sources */,
+				ED4F8BAD17B2E67100ADD795 /* file_handle.cpp in Sources */,
+				ED4F8BAF17B2E69600ADD795 /* posix.cpp in Sources */,
+				ED4F8BB117B2E6B700ADD795 /* logging.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
