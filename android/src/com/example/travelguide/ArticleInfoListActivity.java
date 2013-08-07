@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
 import com.example.travelguide.article.ArticleInfo;
+import com.example.travelguide.article.ArticlePathFinder;
 
 /**
  * An activity representing a list of ArticleInfos. This activity has different
@@ -22,7 +23,8 @@ import com.example.travelguide.article.ArticleInfo;
  * {@link ArticleInfoListFragment.Callbacks} interface to listen for item
  * selections.
  */
-public class ArticleInfoListActivity extends FragmentActivity implements ArticleInfoListFragment.Callbacks
+public class ArticleInfoListActivity extends FragmentActivity implements ArticleInfoListFragment.Callbacks,
+    ArticleInfoListFragment.OnListIconClickedListener, ArticleInfoListFragment.OnFirstLoadListener
 {
 
   /**
@@ -30,6 +32,9 @@ public class ArticleInfoListActivity extends FragmentActivity implements Article
    * device.
    */
   private boolean mTwoPane;
+
+  private ArticleInfoListFragment mArtInfoListFragment;
+  private ArticleInfoDetailFragment mArtInfoDetailFragment;
 
   @Override
   protected void onCreate(Bundle savedInstanceState)
@@ -40,11 +45,20 @@ public class ArticleInfoListActivity extends FragmentActivity implements Article
     if (findViewById(R.id.articleinfo_detail_container) != null)
     {
       mTwoPane = true;
-      ((ArticleInfoListFragment) getSupportFragmentManager().findFragmentById(R.id.articleinfo_list))
-          .setActivateOnItemClick(true);
-    }
 
-    // TODO: If exposing deep links into your app, handle intents here.
+      mArtInfoListFragment = (ArticleInfoListFragment) getSupportFragmentManager().findFragmentById(R.id.articleinfo_list);
+      mArtInfoListFragment.setActivateOnItemClick(true);
+      mArtInfoListFragment.setOnFirstLoadListener(this);
+      mArtInfoListFragment.setHeaderVisible(false);
+
+      mArtInfoDetailFragment = new ArticleInfoDetailFragment();
+      mArtInfoDetailFragment.setOnIconClickedListener(this);
+
+      getSupportFragmentManager()
+        .beginTransaction()
+        .add(R.id.articleinfo_detail_container, mArtInfoDetailFragment)
+        .commit();
+    }
   }
 
   /**
@@ -56,12 +70,8 @@ public class ArticleInfoListActivity extends FragmentActivity implements Article
   {
     if (mTwoPane)
     {
-      Bundle arguments = new Bundle();
-      arguments.putSerializable(ArticleInfoDetailFragment.ARTICLE_INFO, info);
-      ArticleInfoDetailFragment fragment = new ArticleInfoDetailFragment();
-
-      fragment.setArguments(arguments);
-      getSupportFragmentManager().beginTransaction().replace(R.id.articleinfo_detail_container, fragment).commit();
+      mArtInfoDetailFragment.setArticleInfo(info);
+      toogleListVisible();
     }
     else
     {
@@ -69,5 +79,31 @@ public class ArticleInfoListActivity extends FragmentActivity implements Article
       detailIntent.putExtra(ArticleInfoDetailFragment.ARTICLE_INFO, info);
       startActivity(detailIntent);
     }
+  }
+
+  @Override
+  public void onIconClicked()
+  {
+    toogleListVisible();
+  }
+
+  public void toogleListVisible()
+  {
+    if (mArtInfoListFragment.isVisible())
+      getSupportFragmentManager()
+        .beginTransaction()
+        .hide(mArtInfoListFragment)
+        .commit();
+    else
+      getSupportFragmentManager()
+        .beginTransaction()
+        .show(mArtInfoListFragment)
+        .commit();
+  }
+
+  @Override
+  public void onLoad(ArticleInfo info)
+  {
+    mArtInfoDetailFragment.setArticleInfo(info);
   }
 }

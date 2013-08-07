@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/thumb_size"
+    android:baselineAligned="false"
     android:gravity="center_vertical"
     android:orientation="horizontal" >
 
@@ -21,7 +22,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/thumb_sep"
-            android:layout_gravity="top"
+            android:layout_gravity="bottom"
             android:background="@color/thumb_sep" />
     </FrameLayout>
 
@@ -38,7 +39,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="@dimen/pad_mid"
-            android:text="London"
             android:textStyle="bold" />
 
         <TextView
@@ -46,8 +46,7 @@
             style="@android:style/TextAppearance.Small"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="@dimen/pad_mid"
-            android:text="Europe -> UK" />
+            android:paddingLeft="@dimen/pad_mid" />
     </LinearLayout>
 
 </LinearLayout>

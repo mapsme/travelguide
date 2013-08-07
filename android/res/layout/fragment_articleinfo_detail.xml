@@ -4,15 +4,30 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/articleinfo_detail"
-        style="?android:attr/textAppearanceLarge"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:padding="16dp"
-        android:textIsSelectable="true"
-        tools:context=".ArticleInfoDetailFragment" />
+        android:layout_height="@dimen/search_bar"
+        android:background="@color/dark_grey" >
+
+        <TextView
+            android:id="@+id/title"
+            style="@android:style/TextAppearance.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textColor="@color/yellow"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/showList"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:paddingLeft="@dimen/pad_mid"
+            android:paddingRight="@dimen/pad_mid"
+            android:src="@android:drawable/ic_menu_search" />
+    </RelativeLayout>
 
     <WebView
         android:id="@+id/webView"

@@ -1,6 +1,8 @@
 package com.example.travelguide;
 
-import static com.example.travelguide.util.Utils.*;
+import static com.example.travelguide.util.Utils.hideIf;
+import static com.example.travelguide.util.Utils.hideView;
+import static com.example.travelguide.util.Utils.showView;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
@@ -33,12 +35,31 @@ import com.example.travelguide.widget.StorageArticleInfoAdapter;
 public class ArticleInfoListFragment extends ListFragment implements LoaderCallbacks<Storage>, TextWatcher,
     OnClickListener
 {
+  public interface OnListIconClickedListener
+  {
+    public void onIconClicked();
+  }
+
+  public interface OnFirstLoadListener
+  {
+    void onLoad(ArticleInfo info);
+  }
+
+  private OnFirstLoadListener mOnFirstLoad;
+  private boolean mFirstLoad = true;
+
+  public void setOnFirstLoadListener(OnFirstLoadListener l)
+  {
+    mOnFirstLoad = l;
+  }
+
   private View mRootView;
   private TextView mSearchText;
   private View mCross;
 
   private View mListContainer;
   private View mPorgressContainer;
+  private View mHeader;
 
   /**
    * The serialization (saved instance state) Bundle key representing the
@@ -179,11 +200,17 @@ public class ArticleInfoListFragment extends ListFragment implements LoaderCallb
 
     mListContainer = mRootView.findViewById(R.id.listContainer);
     mPorgressContainer = mRootView.findViewById(R.id.progressContainer);
+    mHeader = mRootView.findViewById(R.id.header);
     // setup listeners
     mSearchText.addTextChangedListener(this);
     mCross.setOnClickListener(this);
 
     return mRootView;
+  }
+
+  public void setHeaderVisible(boolean visible)
+  {
+    hideIf(!visible, mHeader);
   }
 
   /**
@@ -213,10 +240,15 @@ public class ArticleInfoListFragment extends ListFragment implements LoaderCallb
   @Override
   public void onLoadFinished(Loader<Storage> loader, Storage result)
   {
-
     setListAdapter(new StorageArticleInfoAdapter(result, getActivity()));
     hideView(mPorgressContainer);
     showView(mListContainer);
+
+    if (mFirstLoad && mOnFirstLoad != null && result.getResultSize() > 0)
+    {
+      mFirstLoad = false;
+      mOnFirstLoad.onLoad(result.getArticleInfoByIndex(0));
+    }
   }
 
   @Override
@@ -224,6 +256,7 @@ public class ArticleInfoListFragment extends ListFragment implements LoaderCallb
   {
     hideView(mPorgressContainer);
     showView(mListContainer);
+
   }
 
   /**
