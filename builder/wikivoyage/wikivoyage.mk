@@ -1,7 +1,3 @@
-MYSQL_BINARY=mysql
-MYSQL_USER=root
-MYSQL_DATABASE=wikivoyage_build
-
 DUMP_VERSION=latest
 DUMP_URL_PREFIX="http://dumps.wikimedia.org/enwikivoyage/$(DUMP_VERSION)/enwikivoyage-$(DUMP_VERSION)"
 DUMP_PAGE_URL=$(DUMP_URL_PREFIX)"-page.sql.gz"
