@@ -1,11 +1,10 @@
 import sys
 import os
 import urllib
+from bs4 import BeautifulSoup
 
 reload(sys)
 sys.setdefaultencoding('utf-8')
-
-from bs4 import BeautifulSoup
 
 def cleanUp(soup):
   content = soup.find("div", {"id": "content"})
@@ -20,15 +19,19 @@ def cleanUp(soup):
   [s.decompose() for s in content.findAll("a", {"class": "section_anchors"})]
   [s.decompose() for s in content.findAll("div", {"id": "mw-mf-language-section"})]
 
-  # Wrap content with our own header and body
-  content = content.wrap(soup.new_tag("body"))
-  content = content.wrap(soup.new_tag("html"))
+  # Wrap content with our own header and body, and restore original div structure for css
+  divContentWrapper = soup.new_tag("div", id="content_wrapper")
+  divContentWrapper["class"] = "show"
+  content = content.wrap(divContentWrapper)
+  content = content.wrap(soup.new_tag("div", id="mw-mf-page-center"))
+  content = content.wrap(soup.new_tag("div", id="mw-mf-viewport"))
+  bodyTag = soup.new_tag("body")
+  bodyTag["class"] = "mediawiki ltr sitedir-ltr mobile stable skin-mobile action-view"
+  content = content.wrap(bodyTag)
+  content = content.wrap(soup.new_tag("html", lang="en", dir="ltr"))
   # Here we add our own js and css into the <head>
   headTag = soup.new_tag("head")
-  cType = soup.new_tag("meta", content="text/html; charset=UTF-8")
-  # workaround as we can't use dashes in python names
-  cType["http-equiv"] = "Content-Type"
-  headTag.append(cType)
+  headTag.append(soup.new_tag("meta", charset="UTF-8"))
   headTag.append(soup.new_tag("link", rel="stylesheet", type="text/css", href="article.css"))
   headTag.append(soup.new_tag("script", type="text/javascript", href="article.js"))
   meta1 = soup.new_tag("meta", content="yes")
@@ -39,6 +42,7 @@ def cleanUp(soup):
   meta2["name"] = "viewport"
   headTag.append(meta2)
   content.body.insert_before(headTag)
+
   return content
 
 def imageExist(fileName):
