@@ -21,6 +21,7 @@ HEADERS += \
   thread.hpp \
   message_std.hpp \
   reader.hpp \
+  latlon.hpp \
 
 SOURCES += \
   assert.cpp \
