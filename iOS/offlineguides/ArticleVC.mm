@@ -94,6 +94,7 @@
   GuideVC * vc = [[GuideVC alloc] init];
   [vc loadPage:[NSString stringWithUTF8String:info->m_url.c_str()]];
   [self.navigationController pushViewController:vc animated:YES];
+  [self.delegate selectHtmlPageUrl:[NSString stringWithUTF8String:info->m_url.c_str()]];
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
@@ -116,6 +117,11 @@
   size_t const index = static_cast<size_t>(indexPath.row);
   CHECK(index < m_infos.size(), ("Index is too big"));
   return &m_infos[index];
+}
+
+-(NSString *)getDefaultArticle
+{
+  return [NSString stringWithUTF8String:m_infos[0].m_url.c_str()];
 }
 
 @end
