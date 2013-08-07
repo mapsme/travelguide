@@ -12,7 +12,7 @@ DUMP_FILES = page.sql.gz redirect.sql.gz category.sql.gz page_props.sql.gz image
 
 
 .PHONY: all
-all: download_images rename_articles
+all: download_images rename_articles countries.txt
 
 .PHONY: clean
 clean:
@@ -46,3 +46,6 @@ download_images: image_url.txt
 rename_articles:
 	for f in articles/*; do mv $$f $$(echo $$f | sed 's/wiki.curid=//g'); done
 	touch rename_articles
+
+countries.txt: load_sql_dumps
+	$$BIN/generate_article_info.sh
