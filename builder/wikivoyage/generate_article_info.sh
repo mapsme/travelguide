@@ -76,6 +76,7 @@ do
         from_id, from_title, page_id, to_title \
         FROM $REDIRECT_TABLE \
         JOIN page ON page_title = to_title AND page_namespace = 0 AND page_is_redirect = 0
+        JOIN $REGION ON id = page_id
         ORDER BY from_title" \
         --skip-column-names > $REGION.redirect.txt
 
