@@ -23,6 +23,11 @@ public:
     Write(static_cast<uint32_t>(count));
     Write(s.c_str(), count);
   }
+
+  void Write(bool b)
+  {
+    Write(static_cast<int8_t>(b ? 1 : 0));
+  }
 };
 
 

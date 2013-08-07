@@ -25,6 +25,13 @@ public:
     s.resize(size);
     Read(&s[0], size);
   }
+
+  void Read(bool & b)
+  {
+    int8_t i;
+    Read(i);
+    b = (i != 0 ? true : false);
+  }
 };
 
 
