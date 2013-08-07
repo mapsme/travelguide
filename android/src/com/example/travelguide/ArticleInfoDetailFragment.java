@@ -101,16 +101,16 @@ public class ArticleInfoDetailFragment extends Fragment implements OnClickListen
     public void onPageFinished(WebView view, String url)
     {
       super.onPageFinished(view, url);
-      hideView(mProgressContainer);
       showView(mWebView);
+      hideView(mProgressContainer);
     }
 
     @Override
     public void onPageStarted(WebView view, String url, Bitmap favicon)
     {
       super.onPageStarted(view, url, favicon);
-      hideView(mWebView);
       showView(mProgressContainer);
+      hideView(mWebView);
     }
   }
 

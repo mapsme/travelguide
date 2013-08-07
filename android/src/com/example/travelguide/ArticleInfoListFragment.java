@@ -4,6 +4,9 @@ import static com.example.travelguide.util.Utils.hideIf;
 import static com.example.travelguide.util.Utils.hideView;
 import static com.example.travelguide.util.Utils.showView;
 import android.app.Activity;
+import android.content.Context;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
@@ -61,6 +64,8 @@ public class ArticleInfoListFragment extends ListFragment implements LoaderCallb
   private View mProgressContainer;
   private View mHeader;
 
+  private LocationManager mLocationManager;
+
   /**
    * The serialization (saved instance state) Bundle key representing the
    * activated item position. Only used on tablets.
@@ -113,6 +118,8 @@ public class ArticleInfoListFragment extends ListFragment implements LoaderCallb
   public void onViewCreated(View view, Bundle savedInstanceState)
   {
     super.onViewCreated(view, savedInstanceState);
+
+    mLocationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
 
     // Load initial data
     final Bundle args = new Bundle(1);
@@ -213,12 +220,6 @@ public class ArticleInfoListFragment extends ListFragment implements LoaderCallb
     hideIf(!visible, mHeader);
   }
 
-  /**
-   * 
-   * LOADER
-   * 
-   */
-
   private static int SEARCH_LOADER = 0x1;
   private String KEY_QUERY = "key_query";
 
@@ -228,11 +229,15 @@ public class ArticleInfoListFragment extends ListFragment implements LoaderCallb
     if (id == SEARCH_LOADER)
     {
       final String query = args.getString(KEY_QUERY);
-      // TODO: add location check
-      hideView(mListContainer);
       showView(mProgressContainer);
+      hideView(mListContainer);
 
-      return new QueryResultLoader(getActivity(), query);
+      final Location loc = mLocationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+
+      if (loc != null)
+        return new QueryResultLoader(getActivity(), query, loc.getLatitude(), loc.getLongitude());
+      else
+        return new QueryResultLoader(getActivity(), query);
     }
     return null;
   }
@@ -241,8 +246,8 @@ public class ArticleInfoListFragment extends ListFragment implements LoaderCallb
   public void onLoadFinished(Loader<Storage> loader, Storage result)
   {
     setListAdapter(new StorageArticleInfoAdapter(result, getActivity()));
-    hideView(mProgressContainer);
     showView(mListContainer);
+    hideView(mProgressContainer);
 
     if (mFirstLoad && mOnFirstLoad != null && result.getResultSize() > 0)
     {
@@ -258,12 +263,6 @@ public class ArticleInfoListFragment extends ListFragment implements LoaderCallb
     showView(mListContainer);
 
   }
-
-  /**
-   * 
-   * TEXT WATCHER
-   * 
-   */
 
   @Override
   public void onTextChanged(CharSequence s, int start, int before, int count)
@@ -282,12 +281,6 @@ public class ArticleInfoListFragment extends ListFragment implements LoaderCallb
   @Override
   public void beforeTextChanged(CharSequence s, int start, int count, int after)
   {}
-
-  /**
-   * 
-   * CLICK
-   * 
-   */
 
   @Override
   public void onClick(View v)

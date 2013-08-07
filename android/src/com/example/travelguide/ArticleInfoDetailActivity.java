@@ -48,6 +48,7 @@ public class ArticleInfoDetailActivity extends FragmentActivity
 
       mArticleInfoDetailFragment = new ArticleInfoDetailFragment();
       mArticleInfoDetailFragment.setArguments(arguments);
+
       getSupportFragmentManager()
         .beginTransaction()
         .add(R.id.articleinfo_detail_container, mArticleInfoDetailFragment)
@@ -77,7 +78,7 @@ public class ArticleInfoDetailActivity extends FragmentActivity
   @Override
   public void onBackPressed()
   {
-    if (mArticleInfoDetailFragment.canGoBack())
+    if (mArticleInfoDetailFragment != null && mArticleInfoDetailFragment.canGoBack())
       mArticleInfoDetailFragment.goBack();
     else
       super.onBackPressed();
