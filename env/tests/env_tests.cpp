@@ -79,3 +79,14 @@ TEST(Env, MakeNormalizeAndLowerUtf8)
   for (size_t i = 0; i < ArraySize(arr); ++i)
     EXPECT_EQ(str::MakeNormalizeAndLowerUtf8(arr[i]), res[i]);
 }
+
+TEST(Env, Tokenizer)
+{
+  string in = "\taaa, bbb?,\tccc ";
+  string out[] = { "aaa", "bbb", "ccc" };
+
+  vector<string> v;
+  str::Tokenize(in, " ,\t?", back_inserter(v));
+
+  EXPECT_TRUE(equal(out, out + ArraySize(out), v.begin()));
+}
