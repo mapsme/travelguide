@@ -7,8 +7,9 @@
     <LinearLayout
         android:id="@+id/searchBar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
+        android:layout_height="@dimen/search_bar"
+        android:background="@color/grey"
+        android:gravity="center_vertical"
         android:orientation="horizontal" >
 
         <ImageView
@@ -16,31 +17,88 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="0"
+            android:paddingLeft="@dimen/pad_small"
+            android:paddingRight="@dimen/pad_small"
             android:src="@android:drawable/ic_menu_search" />
 
-        <EditText
-            android:id="@+id/searchText"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="Enter Search Term"
-            android:inputType="textCapWords"
-            android:singleLine="true"
-            android:textStyle="bold" />
+            android:layout_margin="@dimen/pad_small"
+            android:background="@color/dark_grey"
+            android:gravity="center_vertical" >
 
-        <ImageView
-            android:id="@+id/clearSearch"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="0"
-            android:src="@android:drawable/ic_delete"
-            android:visibility="gone" />
+            <EditText
+                android:id="@+id/searchText"
+                style="@android:style/TextAppearance.Medium.Inverse"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/search_text"
+                android:layout_weight="1"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="Enter Search Term"
+                android:inputType="textCapWords"
+                android:paddingLeft="@dimen/pad_small"
+                android:paddingRight="@dimen/pad_small"
+                android:singleLine="true"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/clearSearch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:src="@android:drawable/ic_delete"
+                android:visibility="gone" />
+        </LinearLayout>
     </LinearLayout>
 
-    <include
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        layout="@android:layout/list_content" />
+        android:layout_weight="0" >
+
+        <LinearLayout
+            android:id="@+id/progressContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone" >
+
+            <ProgressBar
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="4dip"
+                android:singleLine="true"
+                android:text="@string/searching"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/listContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <ListView
+                android:id="@android:id/list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:drawSelectorOnTop="false" />
+
+            <TextView
+                android:id="@android:id/empty"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/nothing_found"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+        </FrameLayout>
+    </FrameLayout>
 
 </LinearLayout>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <color name="dark_grey">#333333</color>
+  <color name="grey">#666666</color>
+  <color name="thumb_sep">#FFFF00</color>
+</resources>

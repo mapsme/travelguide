@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.TwoLineListItem;
 
 import com.example.travelguide.R;
 import com.example.travelguide.article.ArticleInfo;
@@ -65,15 +66,17 @@ public class StorageArticleInfoAdapter extends BaseAdapter
 
   class ViewHolder
   {
-    final TextView  mTitle;
+    final TextView mTitle;
+    final TextView mParent;
     final ImageView mThumbnail;
 
     ArticleInfo mInfo;
 
     ViewHolder(View view)
     {
-      mTitle = (TextView) view.findViewById(R.id.title);
       mThumbnail = (ImageView) view.findViewById(R.id.thumbnail);
+      mTitle = (TextView) view.findViewById(R.id.title);
+      mParent = (TextView) view.findViewById(R.id.parent);
     }
 
     void fill(ArticleInfo info)

@@ -1,25 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
+    android:layout_height="@dimen/thumb_size"
     android:gravity="center_vertical"
     android:orientation="horizontal" >
 
-    <ImageView
-        android:id="@+id/thumbnail"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_weight="0"
-        android:scaleType="centerCrop"
-        android:src="@drawable/ic_launcher" />
+    <FrameLayout
+        android:layout_width="@dimen/thumb_size"
+        android:layout_height="@dimen/thumb_size"
+        android:layout_weight="0" >
 
-    <TextView
-        android:id="@+id/title"
-        style="@android:style/TextAppearance.Medium"
+        <ImageView
+            android:id="@+id/thumbnail"
+            android:layout_width="@dimen/thumb_size"
+            android:layout_height="@dimen/thumb_size"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_launcher" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/thumb_sep"
+            android:layout_gravity="top"
+            android:background="@color/thumb_sep" />
+    </FrameLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:text="Hello World!"
-        android:textStyle="bold" />
+        android:gravity="center_vertical"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/title"
+            style="@android:style/TextAppearance.Medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/pad_mid"
+            android:text="London"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/parent"
+            style="@android:style/TextAppearance.Small"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/pad_mid"
+            android:text="Europe -> UK" />
+    </LinearLayout>
 
 </LinearLayout>

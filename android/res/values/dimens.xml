@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="thumb_size">67dp</dimen>
+    <dimen name="search_bar">50dp</dimen>
+    <dimen name="search_text">34dp</dimen>
+    <dimen name="pad_mid">8dp</dimen>
+    <dimen name="pad_small">4dp</dimen>
+    <dimen name="thumb_sep">3dp</dimen>
+
+</resources>

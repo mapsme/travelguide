@@ -1,6 +1,6 @@
 package com.example.travelguide;
 
-import static com.example.travelguide.util.Utils.hideIf;
+import static com.example.travelguide.util.Utils.*;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
@@ -37,6 +37,8 @@ public class ArticleInfoListFragment extends ListFragment implements LoaderCallb
   private TextView mSearchText;
   private View mCross;
 
+  private View mListContainer;
+  private View mPorgressContainer;
 
   /**
    * The serialization (saved instance state) Bundle key representing the
@@ -91,6 +93,11 @@ public class ArticleInfoListFragment extends ListFragment implements LoaderCallb
   {
     super.onViewCreated(view, savedInstanceState);
 
+    // Load initial data
+    final Bundle args = new Bundle(1);
+    args.putString(KEY_QUERY, "");
+    getLoaderManager().initLoader(SEARCH_LOADER, args, this).forceLoad();
+
     // Restore the previously serialized activated item position.
     if (savedInstanceState != null && savedInstanceState.containsKey(STATE_ACTIVATED_POSITION))
     {
@@ -110,11 +117,6 @@ public class ArticleInfoListFragment extends ListFragment implements LoaderCallb
     }
 
     mCallbacks = (Callbacks) activity;
-
-    // Load initial data
-    final Bundle args = new Bundle(1);
-    args.putString(KEY_QUERY, "");
-    getLoaderManager().initLoader(SEARCH_LOADER, args, this).forceLoad();
   }
 
   @Override
@@ -175,6 +177,8 @@ public class ArticleInfoListFragment extends ListFragment implements LoaderCallb
     mSearchText = (TextView) mRootView.findViewById(R.id.searchText);
     mCross = mRootView.findViewById(R.id.clearSearch);
 
+    mListContainer = mRootView.findViewById(R.id.listContainer);
+    mPorgressContainer = mRootView.findViewById(R.id.progressContainer);
     // setup listeners
     mSearchText.addTextChangedListener(this);
     mCross.setOnClickListener(this);
@@ -183,9 +187,9 @@ public class ArticleInfoListFragment extends ListFragment implements LoaderCallb
   }
 
   /**
-   *
+   * 
    * LOADER
-   *
+   * 
    */
 
   private static int SEARCH_LOADER = 0x1;
@@ -198,7 +202,9 @@ public class ArticleInfoListFragment extends ListFragment implements LoaderCallb
     {
       final String query = args.getString(KEY_QUERY);
       // TODO: add location check
-      // TODO: add progress
+      hideView(mListContainer);
+      showView(mPorgressContainer);
+
       return new QueryResultLoader(getActivity(), query);
     }
     return null;
@@ -207,17 +213,23 @@ public class ArticleInfoListFragment extends ListFragment implements LoaderCallb
   @Override
   public void onLoadFinished(Loader<Storage> loader, Storage result)
   {
+
     setListAdapter(new StorageArticleInfoAdapter(result, getActivity()));
+    hideView(mPorgressContainer);
+    showView(mListContainer);
   }
 
   @Override
   public void onLoaderReset(Loader<Storage> loader)
-  {}
+  {
+    hideView(mPorgressContainer);
+    showView(mListContainer);
+  }
 
   /**
-   *
+   * 
    * TEXT WATCHER
-   *
+   * 
    */
 
   @Override
@@ -239,9 +251,9 @@ public class ArticleInfoListFragment extends ListFragment implements LoaderCallb
   {}
 
   /**
-   *
+   * 
    * CLICK
-   *
+   * 
    */
 
   @Override
