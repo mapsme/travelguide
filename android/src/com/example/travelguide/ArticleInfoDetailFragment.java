@@ -67,7 +67,7 @@ public class ArticleInfoDetailFragment extends Fragment implements OnClickListen
     final String url = mFinder.getPath(mItem);
     mTitle.setText(mItem.getName());
 
-    if (mWebView.getUrl() != url)
+    if (!url.equalsIgnoreCase(mWebView.getUrl()))
       mWebView.loadUrl(url);
   }
 

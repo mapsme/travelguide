@@ -58,7 +58,7 @@ public class ArticleInfoListFragment extends ListFragment implements LoaderCallb
   private View mCross;
 
   private View mListContainer;
-  private View mPorgressContainer;
+  private View mProgressContainer;
   private View mHeader;
 
   /**
@@ -199,7 +199,7 @@ public class ArticleInfoListFragment extends ListFragment implements LoaderCallb
     mCross = mRootView.findViewById(R.id.clearSearch);
 
     mListContainer = mRootView.findViewById(R.id.listContainer);
-    mPorgressContainer = mRootView.findViewById(R.id.progressContainer);
+    mProgressContainer = mRootView.findViewById(R.id.progressContainer);
     mHeader = mRootView.findViewById(R.id.header);
     // setup listeners
     mSearchText.addTextChangedListener(this);
@@ -230,7 +230,7 @@ public class ArticleInfoListFragment extends ListFragment implements LoaderCallb
       final String query = args.getString(KEY_QUERY);
       // TODO: add location check
       hideView(mListContainer);
-      showView(mPorgressContainer);
+      showView(mProgressContainer);
 
       return new QueryResultLoader(getActivity(), query);
     }
@@ -241,7 +241,7 @@ public class ArticleInfoListFragment extends ListFragment implements LoaderCallb
   public void onLoadFinished(Loader<Storage> loader, Storage result)
   {
     setListAdapter(new StorageArticleInfoAdapter(result, getActivity()));
-    hideView(mPorgressContainer);
+    hideView(mProgressContainer);
     showView(mListContainer);
 
     if (mFirstLoad && mOnFirstLoad != null && result.getResultSize() > 0)
@@ -254,7 +254,7 @@ public class ArticleInfoListFragment extends ListFragment implements LoaderCallb
   @Override
   public void onLoaderReset(Loader<Storage> loader)
   {
-    hideView(mPorgressContainer);
+    hideView(mProgressContainer);
     showView(mListContainer);
 
   }
