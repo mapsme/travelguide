@@ -2,6 +2,7 @@
 
 #include "../env/strings.hpp"
 #include "../env/reader.hpp"
+#include "../env/logging.hpp"
 
 #include "../std/algorithm.hpp"
 #include "../std/utility.hpp"
@@ -9,16 +10,26 @@
 
 void Storage::Load(string const & path)
 {
-  rd::SequenceFileReader reader(path);
+  try
+  {
+    rd::SequenceFileReader reader(path);
 
-  m_info.clear();
+    m_info.clear();
 
-  uint32_t count;
-  reader.Read(count);
+    uint32_t count;
+    reader.Read(count);
 
-  m_info.resize(count);
-  for (uint32_t i = 0; i < count; ++i)
-    m_info[i].Read(reader);
+    m_info.resize(count);
+    for (uint32_t i = 0; i < count; ++i)
+      m_info[i].Read(reader);
+  }
+  catch (file::FileException const & ex)
+  {
+    LOG(ERROR, (ex));
+
+    // no way to continue
+    throw;
+  }
 }
 
 void Storage::QueryArticleInfos(vector<ArticleInfo> & out, string const & prefix,
