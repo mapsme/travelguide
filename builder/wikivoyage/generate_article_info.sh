@@ -62,7 +62,7 @@ do
         (SELECT page_title FROM page JOIN $REGION ON page_id = id)"
 
     # Add double and triple redirects
-    for i in `seq 1 2`
+    for i in `seq 1 5`
     do
         $MYSQL_BINARY --user=$MYSQL_USER --database=$MYSQL_DATABASE --execute="INSERT INTO $REDIRECT_TABLE \
             SELECT page_id, page_title, rd_title \
