@@ -1,4 +1,5 @@
 #import "GuideVC.h"
+#import "MapsWithMeAPI.h"
 #import "../../std/algorithm.hpp"
 
 #define DATAFOLDER @"/data/"
@@ -7,6 +8,7 @@
 {
   float m_webViewScale;
   float m_webViewScaleOnStart;
+  NSString * m_guide;
 }
 
 @property (nonatomic, strong) UIWebView * webView;
@@ -28,6 +30,8 @@
     self.view  = self.webView;
     m_webViewScale = 1.0;
     m_webViewScaleOnStart = 0.0;
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+      self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Search" style: UIBarButtonItemStylePlain target:self action:@selector(showSearch)];
   }
   return self;
 }
@@ -40,6 +44,7 @@
 
 -(void)loadPage:(NSString *)pageUrl
 {
+  m_guide = [pageUrl copy];
   NSRange r = [pageUrl rangeOfString:@"."];
   NSString * pageName = [pageUrl substringToIndex:r.location];
   NSString * pageType = [pageUrl substringFromIndex:r.location + 1];
@@ -70,23 +75,30 @@
 
 -(void)onPinch:(UIPinchGestureRecognizer *)sender
 {
-  if (m_webViewScale == 0.0)
-    m_webViewScale = 1.0;
-  if (m_webViewScaleOnStart == 0.0 || sender.state == UIGestureRecognizerStateBegan)
-    m_webViewScaleOnStart = m_webViewScale;
+//  if (m_webViewScale == 0.0)
+//    m_webViewScale = 1.0;
+//  if (m_webViewScaleOnStart == 0.0 || sender.state == UIGestureRecognizerStateBegan)
+//    m_webViewScaleOnStart = m_webViewScale;
+//
+//  m_webViewScale = min(4.0f, max(0.25f, m_webViewScaleOnStart * sender.scale));
+//
+//  [self.webView stringByEvaluatingJavaScriptFromString:
+//   [NSString stringWithFormat:
+//    @"document.getElementsByTagName('body')[0]"
+//    ".style.webkitTextSizeAdjust= '%d%%'", [self textSizeAdjustment]]];
 
-  m_webViewScale = min(4.0f, max(0.25f, m_webViewScaleOnStart * sender.scale));
-
-  [self.webView stringByEvaluatingJavaScriptFromString:
-   [NSString stringWithFormat:
-    @"document.getElementsByTagName('body')[0]"
-    ".style.webkitTextSizeAdjust= '%d%%'", [self textSizeAdjustment]]];
+  // @todo kill keyboard after search UINOTIFICATION
 }
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer
 shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognize
 {
   return YES;
+}
+
+-(void)showSearch
+{
+  [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 @end

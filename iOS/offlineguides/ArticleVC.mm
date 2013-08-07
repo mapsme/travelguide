@@ -90,6 +90,7 @@
   // @todo Show details guide info
   [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
   ArticleInfo const * info = [self infoByIndexPath:indexPath];
+
   GuideVC * vc = [[GuideVC alloc] init];
   [vc loadPage:[NSString stringWithUTF8String:info->m_url.c_str()]];
   [self.navigationController pushViewController:vc animated:YES];

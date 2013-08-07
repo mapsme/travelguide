@@ -28,6 +28,8 @@
 		ED81956C17AEFE66004F3803 /* simple_html.html in Resources */ = {isa = PBXBuildFile; fileRef = ED81956B17AEFE66004F3803 /* simple_html.html */; };
 		ED81956E17B10578004F3803 /* strings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED81956D17B10578004F3803 /* strings.cpp */; };
 		ED81957117B10598004F3803 /* utf8proc.c in Sources */ = {isa = PBXBuildFile; fileRef = ED81957017B10598004F3803 /* utf8proc.c */; };
+		ED893F6917B223920074E05A /* MapsWithMeAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = ED893F6817B223920074E05A /* MapsWithMeAPI.m */; };
+		ED893F6C17B231F20074E05A /* IPadSplitVC.m in Sources */ = {isa = PBXBuildFile; fileRef = ED893F6B17B231F20074E05A /* IPadSplitVC.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +60,10 @@
 		ED81956B17AEFE66004F3803 /* simple_html.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = simple_html.html; sourceTree = "<group>"; };
 		ED81956D17B10578004F3803 /* strings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = strings.cpp; path = ../../env/strings.cpp; sourceTree = "<group>"; };
 		ED81957017B10598004F3803 /* utf8proc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = utf8proc.c; path = ../../3rdparty/utf8proc/utf8proc.c; sourceTree = "<group>"; };
+		ED893F6717B223920074E05A /* MapsWithMeAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapsWithMeAPI.h; sourceTree = "<group>"; };
+		ED893F6817B223920074E05A /* MapsWithMeAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapsWithMeAPI.m; sourceTree = "<group>"; };
+		ED893F6A17B231F20074E05A /* IPadSplitVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPadSplitVC.h; sourceTree = "<group>"; };
+		ED893F6B17B231F20074E05A /* IPadSplitVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPadSplitVC.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +140,8 @@
 				ED81954D17AED762004F3803 /* Supporting Files */,
 				ED81956317AEE129004F3803 /* ArticleVC.h */,
 				ED81956417AEE129004F3803 /* ArticleVC.mm */,
+				ED893F6A17B231F20074E05A /* IPadSplitVC.h */,
+				ED893F6B17B231F20074E05A /* IPadSplitVC.m */,
 				ED81956817AEF6B6004F3803 /* GuideVC.h */,
 				ED81956917AEF6B6004F3803 /* GuideVC.mm */,
 			);
@@ -158,6 +166,8 @@
 		ED81956F17B10585004F3803 /* 3rdParty */ = {
 			isa = PBXGroup;
 			children = (
+				ED893F6717B223920074E05A /* MapsWithMeAPI.h */,
+				ED893F6817B223920074E05A /* MapsWithMeAPI.m */,
 				ED81957017B10598004F3803 /* utf8proc.c */,
 			);
 			name = 3rdParty;
@@ -242,6 +252,8 @@
 				ED81957117B10598004F3803 /* utf8proc.c in Sources */,
 				7722E14A17B15C3600CFB817 /* distance.cpp in Sources */,
 				7722E14C17B2638B00CFB817 /* storage_builder.cpp in Sources */,
+				ED893F6917B223920074E05A /* MapsWithMeAPI.m in Sources */,
+				ED893F6C17B231F20074E05A /* IPadSplitVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -291,7 +303,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_PARAMETER = NO;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LLVM_LTO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -331,7 +343,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_PARAMETER = NO;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LLVM_LTO = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
