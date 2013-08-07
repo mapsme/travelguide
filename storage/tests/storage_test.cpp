@@ -3,7 +3,6 @@
 #include "storage_builder.hpp"
 #include "distance.hpp"
 
-#include "../env/message_std.hpp"
 #include "../env/logging.hpp"
 #include "../env/reader.hpp"
 #include "../env/writer.hpp"

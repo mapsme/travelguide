@@ -29,7 +29,13 @@ public:
     GenerateKey();
   }
 
-  void SetAsRedirect(ArticleInfo const & src);
+  ArticleInfo(string const & title, ArticleInfo const & src, bool redirect)
+    : m_title(title), m_url(src.m_url), m_thumbnailUrl(src.m_thumbnailUrl),
+      m_length(src.m_length), m_parentIndex(NO_PARENT),
+      m_lat(src.m_lat), m_lon(src.m_lon), m_redirect(redirect)
+  {
+    GenerateKey();
+  }
 
   static const int32_t NO_PARENT = -1;
 

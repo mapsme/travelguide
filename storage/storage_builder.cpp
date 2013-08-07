@@ -2,11 +2,101 @@
 
 #include "../env/writer.hpp"
 #include "../env/assert.hpp"
+#include "../env/logging.hpp"
 
+#include "../std/fstream.hpp"
+#include "../std/iterator.hpp"
+
+
+namespace
+{
+
+template <class ToDo>
+void ProcessEntriesFile(string const & path, ToDo & toDo)
+{
+  ifstream fs(path.c_str());
+
+  string str;
+  vector<string> entries;
+
+  while (!fs.eof())
+  {
+    getline(fs, str);
+    if (str.empty())
+      continue;
+
+    entries.clear();
+    str::Tokenize(str, "\t", back_inserter(entries));
+
+    toDo(entries);
+  }
+}
+
+string EncodeTitle(string const & s)
+{
+  string res(s);
+  replace(res.begin(), res.end(), '_', ' ');
+  return res;
+}
+
+class DoAddEntries
+{
+  StorageBuilder & m_storage;
+public:
+  DoAddEntries(StorageBuilder & storage) : m_storage(storage) {}
+
+  void operator() (vector<string> const & entries)
+  {
+    CHECK(entries.size() == 8, (entries));
+
+    ArticleInfoBuilder builder(EncodeTitle(entries[1]));
+    builder.m_url = entries[0];
+    builder.m_length = atoi(entries[2].c_str());
+    CHECK(builder.m_length != 0, (entries[2]));
+    builder.m_thumbnailUrl = entries[3];
+    builder.m_parentUrl = entries[4];
+
+    m_storage.Add(builder);
+  }
+};
+
+class DoAddRedirects
+{
+  StorageBuilder & m_storage;
+public:
+  DoAddRedirects(StorageBuilder & storage) : m_storage(storage) {}
+
+  void operator() (vector<string> const & entries)
+  {
+    CHECK(entries.size() == 4, (entries));
+
+    ArticleInfoBuilder const * p = m_storage.GetArticle(entries[2]);
+    if (p)
+      m_storage.Add(ArticleInfoBuilder(EncodeTitle(entries[1]), *p, true));
+    else
+      LOG(WARNING, ("No article for url:", entries[2]));
+  }
+};
+
+}
+
+void StorageBuilder::ParseEntries(string const & path)
+{
+  DoAddEntries doAdd(*this);
+  ProcessEntriesFile(path, doAdd);
+}
+
+void StorageBuilder::ParseRedirects(string const & path)
+{
+  DoAddRedirects doAdd(*this);
+  ProcessEntriesFile(path, doAdd);
+}
 
 void StorageBuilder::Add(ArticleInfoBuilder const & info)
 {
   m_info.push_back(info);
+  if (!info.m_redirect)
+    CHECK(m_url2info.insert(make_pair(info.m_url, m_info.size()-1)).second, (info.m_url));
 }
 
 void StorageBuilder::ProcessArticles()
@@ -32,12 +122,19 @@ void StorageBuilder::Save(string const & path)
 {
   ProcessArticles();
 
-  wr::FileWriter w(path);
-  size_t const count = m_info.size();
-  w.Write(static_cast<uint32_t>(count));
+  try
+  {
+    wr::FileWriter w(path);
+    size_t const count = m_info.size();
+    w.Write(static_cast<uint32_t>(count));
 
-  for (size_t i = 0; i < count; ++i)
-    m_info[i].Write(w);
+    for (size_t i = 0; i < count; ++i)
+      m_info[i].Write(w);
+  }
+  catch (file::FileException const & ex)
+  {
+    LOG(ERROR, (ex));
+  }
 }
 
 void StorageBuilder::Assign(Storage & storage)

@@ -5,3 +5,4 @@ CONFIG += ordered
 
 SUBDIRS = env \
           storage \
+          builder/genindex \

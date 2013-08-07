@@ -15,17 +15,6 @@ void ArticleInfo::GenerateKey()
   m_key = str::MakeNormalizeAndLowerUtf8(m_title);
 }
 
-void ArticleInfo::SetAsRedirect(ArticleInfo const & src)
-{
-  m_url = src.m_url;
-  m_thumbnailUrl = src.m_thumbnailUrl;
-  m_length = src.m_length;
-  m_lat = src.m_lat;
-  m_lon = src.m_lon;
-
-  m_redirect = true;
-}
-
 namespace
 {
 
