@@ -16,20 +16,32 @@ class ArticleInfo
   void GenerateKey();
 
 public:
-  ArticleInfo() : m_parentIndex(NO_PARENT) {}
-  ArticleInfo(string const & title) : m_title(title), m_parentIndex(NO_PARENT)
+  ArticleInfo()
+    : m_length(0), m_parentIndex(NO_PARENT),
+      m_lat(EMPTY_COORD), m_lon(EMPTY_COORD), m_redirect(false)
+  {
+  }
+
+  ArticleInfo(string const & title)
+    : m_title(title), m_length(0), m_parentIndex(NO_PARENT),
+      m_lat(EMPTY_COORD), m_lon(EMPTY_COORD), m_redirect(false)
   {
     GenerateKey();
   }
+
+  void SetAsRedirect(ArticleInfo const & src);
 
   static const int32_t NO_PARENT = -1;
 
   string m_title;
   string m_url;
   string m_thumbnailUrl;
+  uint32_t m_length;
   int32_t m_parentIndex;  // NO_PARENT is the root article
 
   double m_lat, m_lon;
+
+  bool m_redirect;
 
   void Write(wr::Writer & w) const;
   void Read(rd::Reader & r);
