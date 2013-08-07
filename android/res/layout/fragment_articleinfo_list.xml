@@ -26,7 +26,7 @@
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:src="@android:drawable/ic_dialog_info" />
+            android:src="@drawable/ic_info" />
     </RelativeLayout>
 
     <LinearLayout
@@ -53,7 +53,7 @@
                 android:layout_weight="0"
                 android:paddingLeft="@dimen/pad_small"
                 android:paddingRight="@dimen/pad_small"
-                android:src="@android:drawable/ic_menu_search" />
+                android:src="@drawable/ic_search" />
 
             <EditText
                 android:id="@+id/searchText"
@@ -75,7 +75,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
-                android:src="@android:drawable/ic_delete"
+                android:src="@drawable/ic_clearsearch"
                 android:visibility="gone" />
         </LinearLayout>
     </LinearLayout>
