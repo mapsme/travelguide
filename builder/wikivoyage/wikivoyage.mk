@@ -12,7 +12,7 @@ DUMP_FILES = page.sql.gz redirect.sql.gz category.sql.gz page_props.sql.gz image
 
 
 .PHONY: all
-all: download_images rename_articles countries.txt
+all: download_images rename_articles countries.txt geocodes.txt
 
 .PHONY: clean
 clean:
@@ -49,3 +49,9 @@ rename_articles:
 
 countries.txt: load_sql_dumps
 	$$BIN/generate_article_info.sh
+
+geocodes_from_html.txt: download_articles
+	grep '<span id="geodata" class="geo">[-0-9.]*; [-0-9.]*</span>' -R articles/ --only-matching | sed 's@articles//@@' | sed 's@:<span id=.geodata. class=.geo.>@        @' | sed 's@; @        @' | sed 's@</span>@@' | sort -u -n -k1 > geocodes_from_html.txt
+
+geocodes.txt: geocodes_from_html.txt
+	cp geocodes_from_html.txt geocodes.txt
