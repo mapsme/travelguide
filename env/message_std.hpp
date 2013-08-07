@@ -13,8 +13,13 @@ template <class T> string ToString(vector<T> const & v)
 {
   ostringstream ss;
   ss << "{ ";
-  for (size_t i = 0; i < v.size(); ++i)
-    ss << ToString(v[i]) << ", ";
+  size_t const count = v.size();
+  for (size_t i = 0; i < count; ++i)
+  {
+    ss << ToString(v[i]);
+    if (i != count - 1)
+      ss << ", ";
+  }
   ss << " }";
 
   return ss.str();
