@@ -106,4 +106,13 @@ public class ArticleInfoListActivity extends FragmentActivity implements Article
   {
     mArtInfoDetailFragment.setArticleInfo(info);
   }
+
+  @Override
+  public void onBackPressed()
+  {
+    if (mTwoPane && mArtInfoDetailFragment.canGoBack())
+      mArtInfoDetailFragment.goBack();
+    else
+      super.onBackPressed();
+  }
 }

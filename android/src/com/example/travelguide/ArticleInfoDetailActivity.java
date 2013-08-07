@@ -18,6 +18,8 @@ import android.view.MenuItem;
 public class ArticleInfoDetailActivity extends FragmentActivity
 {
 
+  private ArticleInfoDetailFragment mArticleInfoDetailFragment;
+
   @Override
   protected void onCreate(Bundle savedInstanceState)
   {
@@ -44,9 +46,12 @@ public class ArticleInfoDetailActivity extends FragmentActivity
       arguments.putSerializable(ArticleInfoDetailFragment.ARTICLE_INFO,
           getIntent().getSerializableExtra(ArticleInfoDetailFragment.ARTICLE_INFO));
 
-      ArticleInfoDetailFragment fragment = new ArticleInfoDetailFragment();
-      fragment.setArguments(arguments);
-      getSupportFragmentManager().beginTransaction().add(R.id.articleinfo_detail_container, fragment).commit();
+      mArticleInfoDetailFragment = new ArticleInfoDetailFragment();
+      mArticleInfoDetailFragment.setArguments(arguments);
+      getSupportFragmentManager()
+        .beginTransaction()
+        .add(R.id.articleinfo_detail_container, mArticleInfoDetailFragment)
+        .commit();
     }
   }
 
@@ -67,5 +72,14 @@ public class ArticleInfoDetailActivity extends FragmentActivity
         return true;
     }
     return super.onOptionsItemSelected(item);
+  }
+
+  @Override
+  public void onBackPressed()
+  {
+    if (mArticleInfoDetailFragment.canGoBack())
+      mArticleInfoDetailFragment.goBack();
+    else
+      super.onBackPressed();
   }
 }

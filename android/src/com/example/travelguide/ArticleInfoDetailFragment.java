@@ -134,4 +134,14 @@ public class ArticleInfoDetailFragment extends Fragment implements OnClickListen
     mIconClickedListener = listener;
   }
 
+  public boolean canGoBack()
+  {
+    return mWebView.canGoBack();
+  }
+
+  public void goBack()
+  {
+    mWebView.goBack();
+  }
+
 }
