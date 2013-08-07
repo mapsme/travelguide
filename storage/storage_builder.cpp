@@ -63,23 +63,23 @@ bool StorageBuilder::operator == (Storage const & s) const
 void InitStorageBuilderMock(StorageBuilder & builder)
 {
   ArticleInfoBuilder i1("London");
-  i1.m_url = "London";
+  i1.m_url = "London.html";
   i1.m_thumbnailUrl = "london.jpg";
-  i1.m_parentUrl = "Great_Britain";
+  i1.m_parentUrl = "Great_Britain.html";
   i1.m_lat = 51.50726;
   i1.m_lon = -0.12765;
   builder.Add(i1);
 
   ArticleInfoBuilder i2("Lancaster");
-  i2.m_url = "Lancaster";
+  i2.m_url = "Lancaster.html";
   i2.m_thumbnailUrl = "lancaster.jpg";
-  i2.m_parentUrl = "Great_Britain";
+  i2.m_parentUrl = "Great_Britain.html";
   i2.m_lat = 54.04839;
   i2.m_lon = -2.79904;
   builder.Add(i2);
 
   ArticleInfoBuilder i3("Great Britain");
-  i3.m_url = "Great_Britain";
+  i3.m_url = "Great_Britain.html";
   i3.m_thumbnailUrl = "great_britain.jpg";
   i3.m_lat = 54.70235;
   i3.m_lon = -3.27656;
