@@ -28,6 +28,11 @@
   {
     _searchBar = [[UISearchBar alloc] init];
     self.searchBar.delegate = self;
+    [self clearSearchBackGround];
+    [self.searchBar setBackgroundColor:[UIColor colorWithRed:102.f/255.f
+                                 green:102.f/255.f
+                                  blue:102.f/255.f
+                                 alpha:1.f]];
     self.tableView.tableHeaderView = self.searchBar;
     self.searchBar.text = @"";
     [self searchBar:self.searchBar textDidChange:@""];
@@ -122,6 +127,13 @@
 -(NSString *)getDefaultArticle
 {
   return [NSString stringWithUTF8String:m_infos[0].m_url.c_str()];
+}
+
+-(void)clearSearchBackGround
+{
+  for (UIView * sub in self.searchBar.subviews)
+    if ([sub isKindOfClass:NSClassFromString(@"UISearchBarBackground")])
+        [sub removeFromSuperview];
 }
 
 @end

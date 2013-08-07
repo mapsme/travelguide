@@ -30,8 +30,6 @@
     self.view  = self.webView;
     m_webViewScale = 1.0;
     m_webViewScaleOnStart = 0.0;
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
-      self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Search" style: UIBarButtonItemStylePlain target:self action:@selector(showSearch)];
   }
   return self;
 }
@@ -58,6 +56,14 @@
 {
   [super viewWillAppear:animated];
   [self.navigationController setNavigationBarHidden:NO animated:NO];
+  [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"bg_header.png"] forBarMetrics:UIBarMetricsDefault];
+  [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"bg_header.png"] forBarMetrics:UIBarMetricsLandscapePhone];
+
+  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+  {
+    self.navigationItem.leftBarButtonItem =  [self getCustomButtonWithImage:@"ic_back"];
+    self.navigationItem.rightBarButtonItem =  [self getCustomButtonWithImage:@"ic_articleselection"];
+  }
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request
@@ -101,4 +107,22 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
   [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
+-(void)back
+{
+  //@todo
+  [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
+-(UIBarButtonItem *)getCustomButtonWithImage:(NSString *)name
+{
+  UIImage * backButton = [UIImage imageNamed:name];
+
+  UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
+  [button setImage:backButton forState:UIControlStateNormal];
+  button.frame = CGRectMake(0, 0, backButton.size.width, backButton.size.height);
+
+  [button addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
+
+  return [[UIBarButtonItem alloc] initWithCustomView:button];
+}
 @end
