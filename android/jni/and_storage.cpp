@@ -81,12 +81,15 @@ JNIEXPORT jobject JNICALL Java_com_example_travelguide_cpp_Storage_getArticleInf
 {
   ArticleInfo const & info = STORAGE.GetArticleInfoByIndex(index);
   jclass ArtInfoClass = env->FindClass("com/example/travelguide/article/ArticleInfo");
-  jmethodID initId = env->GetMethodID(ArtInfoClass, "<init>", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V");
+  jmethodID initId = env->GetMethodID(ArtInfoClass, "<init>", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;DD)V");
 
   return env->NewObject(ArtInfoClass, initId,
        StdString2JString(env, info.m_url),
        StdString2JString(env, info.m_thumbnailUrl),
-       StdString2JString(env, info.m_title));
+       StdString2JString(env, info.m_title),
+       StdString2JString(env, info.m_parentUrl),
+       info.m_lat,
+       info.m_lon);
 }
 
 

@@ -60,6 +60,7 @@ public class StorageArticleInfoAdapter extends BaseAdapter
       holder = (ViewHolder) view.getTag();
 
     holder.fill(mStorage.getArticleInfoByIndex(position));
+    view.setTag(holder);
 
     return view;
   }
@@ -83,6 +84,7 @@ public class StorageArticleInfoAdapter extends BaseAdapter
     {
       mInfo = info;
       mTitle.setText(info.getName());
+      mParent.setText(info.getParent());
       mThumbnail.setImageDrawable(mThumbnailsProvider.getThumbnailByUrl(info.getIconUrl()));
     }
   }
