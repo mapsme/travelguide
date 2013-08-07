@@ -44,7 +44,7 @@ do
         FROM $REGION \
         JOIN page ON page_id = id \
         LEFT JOIN page_props image ON image.pp_page = id and image.pp_propname = 'page_image' \
-        WHERE page_namespace = 0 \
+        WHERE page_namespace = 0 AND page_is_redirect = 0 \
         ORDER BY page_title" \
         --skip-column-names > $REGION.info.txt
 
