@@ -1,13 +1,12 @@
 #pragma once
 
 #include "strings.hpp"
-
+#include "message_std.hpp"
 
 namespace msg
 {
 
 inline string ToString(char const * s) { return s; }
-inline string ToString(string const & s) { return s; }
 
 /// Override ToString function for your custom class in it's namespace.
 /// Your function will be called according to the ADL lookup.

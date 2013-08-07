@@ -4,8 +4,10 @@
 #include "../std/sstream.hpp"
 
 
-namespace msg
+namespace std
 {
+
+inline string ToString(string const & s) { return s; }
 
 template <class T> string ToString(vector<T> const & v)
 {
