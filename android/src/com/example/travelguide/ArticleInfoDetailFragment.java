@@ -1,12 +1,16 @@
 package com.example.travelguide;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.TextView;
+
+import static com.example.travelguide.util.Utils.*;
 
 import com.example.travelguide.article.ArticleInfo;
 import com.example.travelguide.article.ArticlePathFinder;
@@ -25,6 +29,8 @@ public class ArticleInfoDetailFragment extends Fragment
 
   private View mRootView;
   private WebView mWebView;
+
+  private View mProgressContainer;
 
   private ArticlePathFinder mFinder;
 
@@ -54,11 +60,32 @@ public class ArticleInfoDetailFragment extends Fragment
   {
     mRootView = inflater.inflate(R.layout.fragment_articleinfo_detail, container, false);
     mWebView = (WebView) mRootView.findViewById(R.id.webView);
-    ((TextView) mRootView.findViewById(R.id.articleinfo_detail)).setText(mItem.getName());
+    mProgressContainer = mRootView.findViewById(R.id.progressContainer);
 
+    ((TextView) mRootView.findViewById(R.id.articleinfo_detail)).setText(mItem.getName());
+    mWebView.setWebViewClient(new TgWebViewClient());
     mWebView.loadUrl(mFinder.getPath(mItem));
 
     return mRootView;
+  }
+
+  class TgWebViewClient extends WebViewClient
+  {
+    @Override
+    public void onPageFinished(WebView view, String url)
+    {
+      super.onPageFinished(view, url);
+      hideView(mProgressContainer);
+      showView(mWebView);
+    }
+
+    @Override
+    public void onPageStarted(WebView view, String url, Bitmap favicon)
+    {
+      super.onPageStarted(view, url, favicon);
+      hideView(mWebView);
+      showView(mProgressContainer);
+    }
   }
 
 }
