@@ -46,6 +46,7 @@ public:
   int32_t m_parentIndex;  // NO_PARENT is the root article
 
   double m_lat, m_lon;
+  bool IsValidCoordinates() const;
 
   bool m_redirect;
 

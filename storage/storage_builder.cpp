@@ -3,6 +3,7 @@
 #include "../env/writer.hpp"
 #include "../env/assert.hpp"
 #include "../env/logging.hpp"
+#include "../env/latlon.hpp"
 
 #include "../std/fstream.hpp"
 #include "../std/iterator.hpp"
@@ -26,7 +27,7 @@ void ProcessEntriesFile(string const & path, ToDo & toDo)
       continue;
 
     entries.clear();
-    str::Tokenize(str, "\t", back_inserter(entries));
+    str::Tokenize(str, "\t ", back_inserter(entries));
 
     toDo(entries);
   }
@@ -78,6 +79,42 @@ public:
   }
 };
 
+class DoAddGeocodes
+{
+  StorageBuilder & m_storage;
+
+  static double ToDouble(string const & s)
+  {
+    char * stop;
+    double const d = strtod(s.c_str(), &stop);
+    CHECK(stop && *stop == 0, (s));
+    return d;
+  }
+
+public:
+  DoAddGeocodes(StorageBuilder & storage) : m_storage(storage) {}
+
+  void operator() (vector<string> const & entries)
+  {
+    CHECK(entries.size() == 3, (entries));
+
+    ArticleInfoBuilder * p = m_storage.GetArticle(entries[0]);
+    if (p)
+    {
+      double const lat = ToDouble(entries[1]);
+      double const lon = ToDouble(entries[2]);
+
+      if (ll::ValidLat(lat) && ll::ValidLon(lon))
+      {
+        p->m_lat = lat;
+        p->m_lon = lon;
+      }
+      else
+        LOG(WARNING, ("Bad Lat, Lon:", entries[1], entries[2]));
+    }
+  }
+};
+
 }
 
 void StorageBuilder::ParseEntries(string const & path)
@@ -90,6 +127,23 @@ void StorageBuilder::ParseRedirects(string const & path)
 {
   DoAddRedirects doAdd(*this);
   ProcessEntriesFile(path, doAdd);
+}
+
+void StorageBuilder::ParseGeocodes(string const & path)
+{
+  DoAddGeocodes doAdd(*this);
+  ProcessEntriesFile(path, doAdd);
+
+  for (size_t i = 0; i < m_info.size(); ++i)
+  {
+    if (m_info[i].m_redirect)
+    {
+      ArticleInfoBuilder const * p = GetArticle(m_info[i].m_url);
+      CHECK(p, ());
+      m_info[i].m_lat = p->m_lat;
+      m_info[i].m_lon = p->m_lon;
+    }
+  }
 }
 
 void StorageBuilder::Add(ArticleInfoBuilder const & info)

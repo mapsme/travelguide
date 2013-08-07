@@ -40,6 +40,7 @@ class StorageBuilder
 public:
   void ParseEntries(string const & path);
   void ParseRedirects(string const & path);
+  void ParseGeocodes(string const & path);
 
   void Add(ArticleInfoBuilder const & info);
 
@@ -49,7 +50,7 @@ public:
 
   bool operator == (Storage const & s) const;
 
-  ArticleInfoBuilder const * GetArticle(string const & url) const
+  ArticleInfoBuilder * GetArticle(string const & url)
   {
     map<string, size_t>::const_iterator i = m_url2info.find(url);
     return (i == m_url2info.end() ? 0 : &m_info[i->second]);

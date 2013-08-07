@@ -4,15 +4,29 @@
 #include "../env/strings.hpp"
 #include "../env/writer.hpp"
 #include "../env/reader.hpp"
+#include "../env/latlon.hpp"
+#include "../env/assert.hpp"
 
 #include "../std/iterator.hpp"
 #include "../std/algorithm.hpp"
 #include "../std/cmath.hpp"
+#include "../std/static_assert.hpp"
 
 
 void ArticleInfo::GenerateKey()
 {
   m_key = str::MakeNormalizeAndLowerUtf8(m_title);
+}
+
+bool ArticleInfo::IsValidCoordinates() const
+{
+  STATIC_ASSERT(EMPTY_COORD > 200);
+  if (m_lat < 200.0 && m_lon < 200.0)
+  {
+    ASSERT(ll::ValidLat(m_lat) && ll::ValidLon(m_lon), ());
+    return true;
+  }
+  return false;
 }
 
 namespace
@@ -64,7 +78,7 @@ void ArticleInfo::Read(rd::Reader & r)
 
 double ArticleInfo::Score(double currLat, double currLon) const
 {
-  if (m_lat != EMPTY_COORD && m_lon != EMPTY_COORD)
+  if (IsValidCoordinates())
     return earth::Distance(m_lat, m_lon, currLat, currLon);
   else
     return 0.0;
