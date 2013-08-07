@@ -48,6 +48,37 @@ do
         ORDER BY page_title" \
         --skip-column-names > $REGION.info.txt
 
+    REDIRECT_TABLE=$REGION"_redirect"
+    $MYSQL_BINARY --user=$MYSQL_USER --database=$MYSQL_DATABASE --execute="DROP TABLE IF EXISTS $REDIRECT_TABLE"
+    $MYSQL_BINARY --user=$MYSQL_USER --database=$MYSQL_DATABASE --execute="CREATE TABLE $REDIRECT_TABLE \
+        (from_id int(10), from_title varbinary(255), to_title varbinary(255))"
+
+    # Add direct redirects.
+    $MYSQL_BINARY --user=$MYSQL_USER --database=$MYSQL_DATABASE --execute="INSERT INTO $REDIRECT_TABLE \
+        SELECT page_id, page_title, rd_title \
+        FROM redirect \
+        JOIN page ON rd_from = page_id \
+        WHERE rd_title IN \
+        (SELECT page_title FROM page JOIN $REGION ON page_id = id)"
+
+    # Add double and triple redirects
+    for i in `seq 1 2`
+    do
+        $MYSQL_BINARY --user=$MYSQL_USER --database=$MYSQL_DATABASE --execute="INSERT INTO $REDIRECT_TABLE \
+            SELECT page_id, page_title, rd_title \
+            FROM redirect \
+            JOIN $REDIRECT_TABLE ON rd_title = from_title \
+            JOIN page ON rd_from = page_id"
+    done
+
+    # Output the final result.
+    $MYSQL_BINARY --user=$MYSQL_USER --database=$MYSQL_DATABASE --execute="SELECT \
+        from_id, from_title, page_id, to_title \
+        FROM $REDIRECT_TABLE \
+        JOIN page ON page_title = to_title AND page_namespace = 0 AND page_is_redirect = 0
+        ORDER BY from_title" \
+        --skip-column-names > $REGION.redirect.txt
+
     echo $REGION >> countries.tmp
 done
 
