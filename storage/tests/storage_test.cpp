@@ -101,30 +101,28 @@ TEST(Storage, PrefixQuery_lowerCaseTest)
 {
   StorageTest storage;
 
-  char const * arrTitle[] = { "Great Britan"};
-  size_t const count = ArraySize(arrTitle);
-
-  storage.FillStorage(arrTitle, count);
+  char const * title = "Great Britain";
+  storage.FillStorage(&title, 1);
 
   storage.QueryArticleInfo("");
   EXPECT_EQ(storage.GetResultsCount(), 1);
-  storage.CheckResultBounds("Great Britan", "Great Britan");
+  storage.CheckResultBounds(title, title);
 
   storage.QueryArticleInfo("g");
   EXPECT_EQ(storage.GetResultsCount(), 1);
-  storage.CheckResultBounds("Great Britan", "Great Britan");
+  storage.CheckResultBounds(title, title);
 
   storage.QueryArticleInfo("G");
   EXPECT_EQ(storage.GetResultsCount(), 1);
-  storage.CheckResultBounds("Great Britan", "Great Britan");
+  storage.CheckResultBounds(title, title);
 
   storage.QueryArticleInfo("gR");
   EXPECT_EQ(storage.GetResultsCount(), 1);
-  storage.CheckResultBounds("Great Britan", "Great Britan");
+  storage.CheckResultBounds(title, title);
 
   storage.QueryArticleInfo("GR");
   EXPECT_EQ(storage.GetResultsCount(), 1);
-  storage.CheckResultBounds("Great Britan", "Great Britan");
+  storage.CheckResultBounds(title, title);
 }
 
 TEST(Storage, ArticleInfoRW)
