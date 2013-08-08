@@ -59,7 +59,7 @@ public class ArticleInfoDetailFragment extends Fragment implements OnClickListen
     if (args != null && args.containsKey(ARTICLE_INFO))
       mItem = (ArticleInfo) args.getSerializable(ARTICLE_INFO);
 
-    mFinder = new AssetsArticlePathFinder();
+    mFinder = new ObbPathFinder(getActivity().getApplicationContext());
   }
 
   public void setArticleInfo(ArticleInfo info)

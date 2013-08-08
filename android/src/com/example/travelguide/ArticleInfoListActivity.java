@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
 import com.example.travelguide.article.ArticleInfo;
-import com.example.travelguide.article.ArticlePathFinder;
 
 /**
  * An activity representing a list of ArticleInfos. This activity has different

@@ -7,25 +7,24 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.TwoLineListItem;
 
 import com.example.travelguide.R;
 import com.example.travelguide.article.ArticleInfo;
 import com.example.travelguide.cpp.Storage;
-import com.example.travelguide.thumb.AssetsThumbnailProvider;
+import com.example.travelguide.thumb.ObbThumbnailProvider;
 import com.example.travelguide.thumb.ThumbnailsProvider;
 
 public class StorageArticleInfoAdapter extends BaseAdapter
 {
-  private Storage mStorage;
-  private Context mContext;
-  private ThumbnailsProvider mThumbnailsProvider;
+  private final Storage mStorage;
+  private final Context mContext;
+  private final ThumbnailsProvider mThumbnailsProvider;
 
   public StorageArticleInfoAdapter(Storage storage, Context context)
   {
     mStorage = storage;
     mContext = context;
-    mThumbnailsProvider = new AssetsThumbnailProvider(context);
+    mThumbnailsProvider = new ObbThumbnailProvider(context);
   }
 
   @Override
