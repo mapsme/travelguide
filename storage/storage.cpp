@@ -10,12 +10,10 @@
 #include "../std/iterator.hpp"
 
 
-void Storage::Load(string const & path)
+void Storage::Load(rd::Reader & reader)
 {
   try
   {
-    rd::SequenceFileReader reader(path);
-
     m_info.clear();
 
     uint32_t count;
@@ -32,6 +30,12 @@ void Storage::Load(string const & path)
     // no way to continue
     throw;
   }
+}
+
+void Storage::Load(string const & path)
+{
+  rd::SequenceFileReader reader(path);
+  Load(reader);
 }
 
 void Storage::QueryArticleInfo(string const & prefix, double lat, double lon)

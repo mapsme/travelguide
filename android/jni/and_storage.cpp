@@ -3,15 +3,38 @@
 
 #include "../../storage/storage.hpp"
 
+#include "../../env/reader.hpp"
+
+#include <android/asset_manager_jni.h>
+
 
 class AndStorage
 {
-public:
-
-  AndStorage()
+  class AssetReader : public rd::Reader
   {
-    // TODO: ZipReader from apk.
+    AAsset * m_handle;
+  public:
+    AssetReader(char const * name, AAssetManager * manager)
+    {
+      m_handle = AAssetManager_open(manager, name, AASSET_MODE_BUFFER);
+      CHECK(m_handle, ());
+    }
+    ~AssetReader()
+    {
+      AAsset_close(m_handle);
+    }
+    virtual void Read(void * p, size_t size)
+    {
+      AAsset_read(m_handle, p, size);
+    }
+  };
+
+public:
+  void Init(JNIEnv * env, jobject manager)
+  {
+    //AssetReader reader("index.dat", AAssetManager_fromJava(env, manager));
     m_storage.Load("/storage/sdcard0/index.dat");
+    //m_storage.Load(reader);
   }
 
   static AndStorage & Instance()

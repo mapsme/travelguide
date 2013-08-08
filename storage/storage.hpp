@@ -10,7 +10,7 @@
 class Storage
 {
 public:
-
+  void Load(rd::Reader & reader);
   void Load(string const & path);
 
   void QueryArticleInfo(string const & prefix,
