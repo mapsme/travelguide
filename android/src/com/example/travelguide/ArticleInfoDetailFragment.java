@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
+import android.webkit.WebSettings.LayoutAlgorithm;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
@@ -105,6 +107,16 @@ public class ArticleInfoDetailFragment extends Fragment implements OnClickListen
       super.onPageFinished(view, url);
       Utils.fadeOut(getActivity(), mProgressContainer);
       Utils.fadeIn(getActivity(), mWebView);
+
+      // If picture enable zoom, else disable
+      final WebSettings ws = mWebView.getSettings();
+
+      final boolean isPicture = Utils.isPictUrl(url);
+      ws.setBuiltInZoomControls(isPicture);
+      ws.setSupportZoom(isPicture);
+      ws.setLoadWithOverviewMode(isPicture);
+      ws.setLayoutAlgorithm(isPicture ? LayoutAlgorithm.SINGLE_COLUMN : LayoutAlgorithm.NARROW_COLUMNS);
+      ws.setUseWideViewPort(isPicture);
     }
 
     @Override

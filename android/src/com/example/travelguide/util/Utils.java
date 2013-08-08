@@ -3,6 +3,7 @@ package com.example.travelguide.util;
 import java.io.File;
 
 import android.content.Context;
+import android.os.Build;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
@@ -88,6 +89,16 @@ public class Utils
     };
     anim.setAnimationListener(listener);
     target.startAnimation(anim);
+  }
+
+  public static boolean isPictUrl(String url)
+  {
+    return url.endsWith(".png") || url.endsWith(".jpg") || url.endsWith(".jpeg") || url.endsWith(".svg");
+  }
+
+  public static boolean isApiLevelAbove(int version)
+  {
+    return Build.VERSION.SDK_INT > version;
   }
 
 }

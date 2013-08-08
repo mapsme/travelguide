@@ -10,7 +10,7 @@ import android.webkit.WebView;
 
 import com.example.travelguide.util.Utils;
 
-@SuppressLint("SetJavaScriptEnabled")
+@SuppressLint({ "SetJavaScriptEnabled", "NewApi" })
 public class TgWebView extends WebView
 {
 
@@ -19,7 +19,8 @@ public class TgWebView extends WebView
     super(context, attrs, defStyle);
     final WebSettings settings = getSettings();
     settings.setJavaScriptEnabled(true);
-
+    if (Utils.isApiLevelAbove(10))
+      settings.setDisplayZoomControls(false);
   }
 
   public TgWebView(Context context, AttributeSet attrs)
