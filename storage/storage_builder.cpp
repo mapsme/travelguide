@@ -33,11 +33,20 @@ void ProcessEntriesFile(string const & path, ToDo & toDo)
   }
 }
 
-string EncodeTitle(string const & s)
+bool EncodeTitle(string & s)
 {
-  string res(s);
-  replace(res.begin(), res.end(), '_', ' ');
-  return res;
+  CHECK(!s.empty(), ());
+
+  // strip prefix before / or \.
+  size_t const i = s.find_last_of("\\/");
+  if (i != string::npos)
+  {
+    s = s.substr(i+1);
+    return !s.empty();
+  }
+
+  replace(s.begin(), s.end(), '_', ' ');
+  return true;
 }
 
 class DoAddEntries
@@ -50,7 +59,11 @@ public:
   {
     CHECK(entries.size() == 8, (entries));
 
-    ArticleInfoBuilder builder(EncodeTitle(entries[1]));
+    string title = entries[1];
+    if (!EncodeTitle(title))
+      return;
+
+    ArticleInfoBuilder builder(title);
     builder.m_url = entries[0];
     builder.m_length = atoi(entries[2].c_str());
     CHECK(builder.m_length != 0, (entries[2]));
@@ -73,7 +86,13 @@ public:
 
     ArticleInfoBuilder const * p = m_storage.GetArticle(entries[2]);
     if (p)
-      m_storage.Add(ArticleInfoBuilder(EncodeTitle(entries[1]), *p, true));
+    {
+      string title = entries[1];
+      if (!EncodeTitle(title))
+        return;
+
+      m_storage.Add(ArticleInfoBuilder(title, *p, true));
+    }
     else
       LOG(WARNING, ("No article for url:", entries[2]));
   }
@@ -160,8 +179,7 @@ void StorageBuilder::ProcessArticles()
   size_t const count = m_info.size();
   for (size_t i = 0; i < count; ++i)
   {
-    size_t j = 0;
-    for (; j < count; ++j)
+    for (size_t j = 0; j < count; ++j)
     {
       if (i != j && m_info[i].m_parentUrl == m_info[j].m_url)
       {
