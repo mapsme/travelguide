@@ -6,6 +6,7 @@ import static com.example.travelguide.util.Utils.showView;
 import android.app.Activity;
 import android.content.Context;
 import android.location.Location;
+import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
@@ -14,6 +15,7 @@ import android.support.v4.content.Loader;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -36,13 +38,15 @@ import com.example.travelguide.widget.StorageArticleInfoAdapter;
  * interface.
  */
 public class ArticleInfoListFragment extends ListFragment implements LoaderCallbacks<Storage>, TextWatcher,
-    OnClickListener
+    OnClickListener, LocationListener
 {
+
   public interface OnListIconClickedListener
   {
     public void onIconClicked();
   }
 
+  // First load
   public interface OnFirstLoadListener
   {
     void onLoad(ArticleInfo info);
@@ -51,10 +55,12 @@ public class ArticleInfoListFragment extends ListFragment implements LoaderCallb
   private OnFirstLoadListener mOnFirstLoad;
   private boolean mFirstLoad = true;
 
-  public void setOnFirstLoadListener(OnFirstLoadListener l)
+  public void setOnFirstLoadListener(OnFirstLoadListener listener)
   {
-    mOnFirstLoad = l;
+    mOnFirstLoad = listener;
   }
+
+  // !First load
 
   private View mRootView;
   private TextView mSearchText;
@@ -65,42 +71,23 @@ public class ArticleInfoListFragment extends ListFragment implements LoaderCallb
   private View mHeader;
   private View mAbout;
 
+  // Location
   private LocationManager mLocationManager;
+  private static long sLastLocationRequestTime = 0;
+  private final static long LOCATION_UPDATE_INTERVAL = 30 * 60 * 1000;
+  // !Location
 
-  /**
-   * The serialization (saved instance state) Bundle key representing the
-   * activated item position. Only used on tablets.
-   */
   private static final String STATE_ACTIVATED_POSITION = "activated_position";
 
-  /**
-   * The fragment's current callback object, which is notified of list item
-   * clicks.
-   */
   private Callbacks mCallbacks = sDummyCallbacks;
 
-  /**
-   * The current activated item position. Only used on tablets.
-   */
   private int mActivatedPosition = ListView.INVALID_POSITION;
 
-  /**
-   * A callback interface that all activities containing this fragment must
-   * implement. This mechanism allows activities to be notified of item
-   * selections.
-   */
   public interface Callbacks
   {
-    /**
-     * Callback for when an item has been selected.
-     */
     public void onItemSelected(ArticleInfo info);
   }
 
-  /**
-   * A dummy implementation of the {@link Callbacks} interface that does
-   * nothing. Used only when this fragment is not attached to an activity.
-   */
   private static Callbacks sDummyCallbacks = new Callbacks()
   {
     @Override
@@ -132,6 +119,25 @@ public class ArticleInfoListFragment extends ListFragment implements LoaderCallb
     {
       setActivatedPosition(savedInstanceState.getInt(STATE_ACTIVATED_POSITION));
     }
+  }
+
+  @Override
+  public void onResume()
+  {
+    super.onResume();
+
+    final long currentTime = System.currentTimeMillis();
+    if (currentTime - sLastLocationRequestTime > LOCATION_UPDATE_INTERVAL)
+    {
+      // reqestSingleUpdate() listen for single update
+      // and when get it will unsubscribe from LocationManager
+      mLocationManager.requestSingleUpdate(LocationManager.GPS_PROVIDER, this, null);
+      mLocationManager.requestSingleUpdate(LocationManager.NETWORK_PROVIDER, this, null);
+      sLastLocationRequestTime = currentTime;
+    }
+
+    // Update search
+    search(mSearchText.getText().toString());
   }
 
   @Override
@@ -224,7 +230,7 @@ public class ArticleInfoListFragment extends ListFragment implements LoaderCallb
   }
 
   private static int SEARCH_LOADER = 0x1;
-  private String KEY_QUERY = "key_query";
+  private final String KEY_QUERY = "key_query";
 
   @Override
   public Loader<Storage> onCreateLoader(int id, Bundle args)
@@ -235,8 +241,7 @@ public class ArticleInfoListFragment extends ListFragment implements LoaderCallb
       showView(mProgressContainer);
       hideView(mListContainer);
 
-      final Location loc = mLocationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-
+      final Location loc = getLocation();
       if (loc != null)
         return new QueryResultLoader(getActivity(), query, loc.getLatitude(), loc.getLongitude());
       else
@@ -267,14 +272,19 @@ public class ArticleInfoListFragment extends ListFragment implements LoaderCallb
 
   }
 
-  @Override
-  public void onTextChanged(CharSequence s, int start, int before, int count)
+  private void search(CharSequence s)
   {
     final Bundle args = new Bundle(1);
     args.putString(KEY_QUERY, s.toString());
     getLoaderManager().restartLoader(SEARCH_LOADER, args, this).forceLoad();
 
     hideIf(TextUtils.isEmpty(s), mCross);
+  }
+
+  @Override
+  public void onTextChanged(CharSequence s, int start, int before, int count)
+  {
+    search(s);
   }
 
   @Override
@@ -295,5 +305,34 @@ public class ArticleInfoListFragment extends ListFragment implements LoaderCallb
       // TODO: show about dialog
     }
   }
+
+  private Location getLocation()
+  {
+    Location loc = null;
+
+    if ((loc = mLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)) == null)
+      loc = mLocationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+
+    Log.d("TravelGuide", "Got location" + loc);
+    return loc;
+  }
+
+  @Override
+  public void onLocationChanged(Location location)
+  {
+    Log.d("TravelGuide", "Location updated:" + location);
+  }
+
+  @Override
+  public void onProviderDisabled(String provider)
+  {}
+
+  @Override
+  public void onProviderEnabled(String provider)
+  {}
+
+  @Override
+  public void onStatusChanged(String provider, int status, Bundle extras)
+  {}
 
 }
