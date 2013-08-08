@@ -96,7 +96,7 @@ def fixTitle(title):
   return title.split('/')[-1].replace('_', ' ')
 
 ##############################################################################
-if len(sys.argv) < 8:
+if len(sys.argv) < 9:
   print "Usage: " + sys.argv[0] + " <directory with html articles> <images directory> <article set info file> <redirect info file> <geocoords file> <output directory> <threadIndex> <cpu core count>"
   exit(1)
 
