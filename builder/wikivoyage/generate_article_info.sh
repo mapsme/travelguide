@@ -5,7 +5,7 @@ set -e -u -x
 # Do not create article_info.txt now so that if we fail make will not consider the job done.
 rm article_info.tmp || true
 
-for REGION in United_Kingdom Ireland Italy Switzerland Liechtenstein Belarus Spain Portugal France Germany
+for REGION in United_Kingdom Ireland Italy Switzerland Liechtenstein Belarus Spain Portugal France Germany Netherlands
 do
     # Create an empty table.
     $MYSQL_BINARY --user=$MYSQL_USER --database=$MYSQL_DATABASE --execute="DROP TABLE IF EXISTS $REGION"
