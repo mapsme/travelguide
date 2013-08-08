@@ -88,7 +88,8 @@
   else
     v = [self.navigationController.viewControllers objectAtIndex:0];
   NSRange r = [str rangeOfString:@"." options:NSBackwardsSearch];
-  self.navigationItem.title = [v getArticleName:[str substringToIndex:r.location]];
+  if (r.length && [[str substringFromIndex:r.location + 1] isEqualToString:@"html"])
+    self.navigationItem.title = [v getArticleName:[str substringToIndex:r.location]];
   [self.webPages addObject:str];
   if ([self isImage:str])
     self.webView.scalesPageToFit = YES;
