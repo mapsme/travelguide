@@ -129,8 +129,7 @@ public class ArticleInfoDetailFragment extends Fragment implements OnClickListen
       if (!Utils.isExternalUrl(url) && url.endsWith(".html"))
       {
         final String strippedUrl = url.substring(url.lastIndexOf('/') + 1, url.lastIndexOf('.'));
-        final String title = Storage.getTitleByUrl(strippedUrl);
-        mTitle.setText(title);
+        mTitle.setText(Storage.getArticleInfoByUrl(strippedUrl).getName());
       }
     }
 

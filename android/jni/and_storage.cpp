@@ -67,9 +67,9 @@ public:
     return m_storage.FormatParentName(info);
   }
 
-  string GetTitleByUrl(string const & url)
+  ArticleInfo const * GetArticleInfoByUrl(string const & url)
   {
-    return m_storage.GetTitleFromUrl(url)->GetTitle();
+    return m_storage.GetArticleInfoFromUrl(url);
   }
 
 private:
@@ -108,6 +108,23 @@ JNIEXPORT jint JNICALL Java_com_example_travelguide_cpp_Storage_getResultSize
   return STORAGE.GetResultSize();
 }
 
+jobject NativeArticle2JavaArticle(JNIEnv * env, ArticleInfo const * p)
+{
+  if (p == 0)
+    return 0;
+
+  jclass ArtInfoClass = env->FindClass("com/example/travelguide/article/ArticleInfo");
+  jmethodID initId = env->GetMethodID(ArtInfoClass, "<init>", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;DD)V");
+
+  return env->NewObject(ArtInfoClass, initId,
+       StdString2JString(env, p->GetUrl()),
+       StdString2JString(env, p->GetThumbnailUrl()),
+       StdString2JString(env, p->GetTitle()),
+       StdString2JString(env, STORAGE.GetParentName(*p)),
+       p->m_lat,
+       p->m_lon);
+}
+
 /*
  * Class:     com_example_travelguide_cpp_Storage
  * Method:    getArticleInfoByIndex
@@ -116,17 +133,7 @@ JNIEXPORT jint JNICALL Java_com_example_travelguide_cpp_Storage_getResultSize
 JNIEXPORT jobject JNICALL Java_com_example_travelguide_cpp_Storage_getArticleInfoByIndex
   (JNIEnv * env, jclass clazz, jint index)
 {
-  ArticleInfo const & info = STORAGE.GetArticleInfoByIndex(index);
-  jclass ArtInfoClass = env->FindClass("com/example/travelguide/article/ArticleInfo");
-  jmethodID initId = env->GetMethodID(ArtInfoClass, "<init>", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;DD)V");
-
-  return env->NewObject(ArtInfoClass, initId,
-       StdString2JString(env, info.GetUrl()),
-       StdString2JString(env, info.GetThumbnailUrl()),
-       StdString2JString(env, info.GetTitle()),
-       StdString2JString(env, STORAGE.GetParentName(info)),
-       info.m_lat,
-       info.m_lon);
+  return NativeArticle2JavaArticle(env, &STORAGE.GetArticleInfoByIndex(index));
 }
 
 JNIEXPORT void JNICALL Java_com_example_travelguide_cpp_Storage_nativeInitIndex
@@ -135,10 +142,10 @@ JNIEXPORT void JNICALL Java_com_example_travelguide_cpp_Storage_nativeInitIndex
   STORAGE.Init(env, assetManager);
 }
 
-JNIEXPORT jstring JNICALL Java_com_example_travelguide_cpp_Storage_getTitleByUrl
+JNIEXPORT jobject JNICALL Java_com_example_travelguide_cpp_Storage_getArticleInfoByUrl
   (JNIEnv * env, jclass clazz, jstring url)
 {
-  return StdString2JString(env, STORAGE.GetTitleByUrl(JString2StdString(env, url)));
+  return NativeArticle2JavaArticle(env, STORAGE.GetArticleInfoByUrl(JString2StdString(env, url)));
 }
 
 

@@ -101,7 +101,7 @@ string Storage::FormatParentName(ArticleInfo const & info) const
   return res;
 }
 
-ArticleInfo const * Storage::GetTitleFromUrl(string const & url) const
+ArticleInfo const * Storage::GetArticleInfoFromUrl(string const & url) const
 {
   for (size_t i = 0; i < m_info.size(); ++i)
     if (!m_info[i].m_redirect && m_info[i].m_url == url)

@@ -24,7 +24,7 @@ public class Storage
     sIsAssetsInited = true;
   }
 
-  public native static String getTitleByUrl(String url);
+  public native static ArticleInfo getArticleInfoByUrl(String url);
 
   public native static void query(String query, boolean useLocation, double lat, double lon);
 

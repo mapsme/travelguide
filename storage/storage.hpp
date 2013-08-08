@@ -5,9 +5,10 @@
 #include "../env/assert.hpp"
 
 #include "../std/vector.hpp"
+#include "../std/noncopyable.hpp"
 
 
-class Storage
+class Storage : noncopyable
 {
 public:
   void Load(rd::Reader & reader);
@@ -40,7 +41,7 @@ public:
   string FormatParentName(ArticleInfo const & info) const;
 
   /// Find article by url.
-  ArticleInfo const * GetTitleFromUrl(string const & url) const;
+  ArticleInfo const * GetArticleInfoFromUrl(string const & url) const;
   //@}
 
 protected:

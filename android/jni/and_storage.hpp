@@ -12,7 +12,7 @@ extern "C" {
  * Method:    getTitleByUrl
  * Signature: (Ljava/lang/String;)Ljava/lang/String;
  */
-JNIEXPORT jstring JNICALL Java_com_example_travelguide_cpp_Storage_getTitleByUrl
+JNIEXPORT jobject JNICALL Java_com_example_travelguide_cpp_Storage_getArticleInfoByUrl
   (JNIEnv *, jclass, jstring);
 
 /*
