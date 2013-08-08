@@ -6,6 +6,7 @@
 
 @interface ArticleVC : UITableViewController <UISearchBarDelegate, UITableViewDelegate>
 @property (nonatomic, assign) id <ArticleDelegate> delegate;
+@property (nonatomic, strong) NSMutableArray * loadedWebPages;
 //uses on start of application
 -(NSString *)getDefaultArticle;
 @end

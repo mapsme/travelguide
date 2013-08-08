@@ -12,7 +12,7 @@
 @interface ArticleVC ()
 {
   /// @todo Replace on Storage
-  StorageMock m_storage;
+  Storage m_storage;
   vector<ArticleInfo> m_infos;
 }
 
@@ -36,6 +36,12 @@
     self.tableView.tableHeaderView = self.searchBar;
     self.searchBar.text = @"";
     [self searchBar:self.searchBar textDidChange:@""];
+
+    NSString * path = [[NSBundle mainBundle] pathForResource:@"index" ofType:@"dat" inDirectory:@"/data/"];
+    m_storage.Load([path UTF8String]);
+    m_storage.QueryArticleInfos(m_infos, "");
+
+    [self.tableView reloadData];
   }
   return self;
 }
@@ -97,8 +103,18 @@
   ArticleInfo const * info = [self infoByIndexPath:indexPath];
 
   GuideVC * vc = [[GuideVC alloc] init];
+  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+  {
+    BOOL rootVC = [self.navigationController.viewControllers count] == 1 ? YES : NO;
+    [self.navigationController pushViewController:vc animated:YES];
+    if (rootVC)
+      self.loadedWebPages = [[NSMutableArray alloc] init];
+    else
+      [vc clearPreviosViews];
+  }
+
+  vc.webPages = self.loadedWebPages;
   [vc loadPage:[NSString stringWithUTF8String:info->m_url.c_str()]];
-  [self.navigationController pushViewController:vc animated:YES];
   [self.delegate selectHtmlPageUrl:[NSString stringWithUTF8String:info->m_url.c_str()]];
 }
 
