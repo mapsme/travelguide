@@ -85,11 +85,10 @@ def rewriteImages(soup):
     index = -1
     srcPath = imgElement["src"]
     splitedSrc = srcPath.split("/")
-    if "thumb" in srcPath and not ".pdf" in splitedSrc[-2]:
-      index = -2
-    imageName = splitedSrc[index]
-    if imageExist(imageName):
-      imgElement['src'] = "images/" + transformString(imageName)
+    if imageExist(splitedSrc[-1]):
+      imgElement['src'] = "images/" + transformString(splitedSrc[-1])
+    elif imageExist(splitedSrc[-2]):
+      imgElement['src'] = "images/" + transformString(splitedSrc[-2])
     else:
       [s.decompose() for s in imgElement.fetchParents("div", {"class" : ["thumb tright", "thumbinner", "image"]})]
 
@@ -97,21 +96,27 @@ def rewriteCrossLinks(soup):
   global idMapping
   global redirectMapping
   links = soup.findAll("a")
-  for link in links:      
+ 
+  for link in links:
     destTitle = link["href"].split("/",2)[-1]
     destTitle = transformStringWithEncoding(destTitle)
     destTitle = redirectMapping.get(destTitle, destTitle);
+
     if destTitle in idMapping:
       link["href"] = idMapping.get(destTitle, link["href"]) + ".html"
-    elif "/wiki/" in link["href"]:
-      if "File:" in link["href"]:
-        link["href"] = link.find("img")["src"]
-    else:
-        if link.string:
-          link.replace_with(link.string)
-        else:
-          link.replace_with("")
+      continue
 
+    if "/wiki/File:" in link["href"] and "http" not in link["href"] and "www" not in link["href"]:
+      imgElement = link.find("img")
+      if imgElement:
+        link["href"] = imgElement["src"]
+        continue
+  
+    if "/wiki/" in link["href"]:
+      if link.string:
+        link.replace_with(link.string)
+      else:
+        link.replace_with("")
 
 def writeHtml(content, fileName):
   global outDir
@@ -135,17 +140,17 @@ thisFiles = files[threadIndex * len(files) / coreCount : (threadIndex + 1) * len
 imageSet = set()
 
 if not os.path.exists(outDir):
-  os.makedirs(outDir)
+	os.makedirs(outDir)
 
 for file in thisFiles:
-  soup = BeautifulSoup(open(os.path.join(inDir, file)))
-  soup = cleanUp(soup)
-  rewriteImages(soup)
-  rewriteCrossLinks(soup)
-  writeHtml(soup, file)
+	soup = BeautifulSoup(open(os.path.join(inDir, file)))
+	soup = cleanUp(soup)
+	rewriteImages(soup)
+	rewriteCrossLinks(soup)
+	writeHtml(soup, file)
 imagesDstDir = os.path.join(outDir, "images")
 if not os.path.exists(imagesDstDir):
-  os.makedirs(imagesDstDir)
+	os.makedirs(imagesDstDir)
 
 for image in imageSet:
-  shutil.copy2(os.path.join(imagesSrcDir, imageFiles[image]), os.path.join(imagesDstDir, image))
+	shutil.copy2(os.path.join(imagesSrcDir, imageFiles[image]), os.path.join(imagesDstDir, image))
