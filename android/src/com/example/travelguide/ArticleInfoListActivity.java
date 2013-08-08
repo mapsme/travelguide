@@ -96,6 +96,7 @@ public class ArticleInfoListActivity extends FragmentActivity implements Article
     else
       getSupportFragmentManager()
         .beginTransaction()
+        .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
         .show(mArtInfoListFragment)
         .commit();
   }

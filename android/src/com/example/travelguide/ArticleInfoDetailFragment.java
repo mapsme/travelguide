@@ -1,7 +1,5 @@
 package com.example.travelguide;
 
-import static com.example.travelguide.util.Utils.hideView;
-import static com.example.travelguide.util.Utils.showView;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -105,18 +103,18 @@ public class ArticleInfoDetailFragment extends Fragment implements OnClickListen
     public void onPageFinished(WebView view, String url)
     {
       super.onPageFinished(view, url);
-      showView(mWebView);
-      hideView(mProgressContainer);
+      Utils.fadeOut(getActivity(), mProgressContainer);
+      Utils.fadeIn(getActivity(), mWebView);
     }
 
     @Override
     public void onPageStarted(WebView view, String url, Bitmap favicon)
     {
       super.onPageStarted(view, url, favicon);
-      showView(mProgressContainer);
-      hideView(mWebView);
+      Utils.fadeOut(getActivity(), mWebView);
+      Utils.fadeIn(getActivity() ,mProgressContainer);
 
-      if (!Utils.isExternalUrl(url))
+      if (!Utils.isExternalUrl(url) && url.endsWith(".html"))
       {
         final String strippedUrl = url.substring(url.lastIndexOf('/') + 1, url.lastIndexOf('.'));
         final String title = Storage.getTitleByUrl(strippedUrl);

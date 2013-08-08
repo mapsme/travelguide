@@ -2,7 +2,11 @@ package com.example.travelguide.util;
 
 import java.io.File;
 
+import android.content.Context;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
+import android.view.animation.AnimationUtils;
 
 public class Utils
 {
@@ -37,4 +41,53 @@ public class Utils
   {
     return path.startsWith("http") || path.startsWith("www.");
   }
+
+  public static void fadeIn(Context context, final View target)
+  {
+    final Animation anim = AnimationUtils.loadAnimation(context, android.R.anim.fade_in);
+    final AnimationListener listener = new AnimationListener()
+    {
+
+      @Override
+      public void onAnimationStart(Animation animation)
+      {
+        showView(target);
+      }
+
+      @Override
+      public void onAnimationRepeat(Animation animation)
+      {}
+
+      @Override
+      public void onAnimationEnd(Animation animation)
+      {}
+    };
+    anim.setAnimationListener(listener);
+    target.startAnimation(anim);
+  }
+
+  public static void fadeOut(Context context, final View target)
+  {
+    final Animation anim = AnimationUtils.loadAnimation(context, android.R.anim.fade_out);
+    final AnimationListener listener = new AnimationListener()
+    {
+
+      @Override
+      public void onAnimationStart(Animation animation)
+      {}
+
+      @Override
+      public void onAnimationRepeat(Animation animation)
+      {}
+
+      @Override
+      public void onAnimationEnd(Animation animation)
+      {
+        hideView(target);
+      }
+    };
+    anim.setAnimationListener(listener);
+    target.startAnimation(anim);
+  }
+
 }
