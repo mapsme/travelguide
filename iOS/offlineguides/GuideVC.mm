@@ -79,17 +79,7 @@
  navigationType:(UIWebViewNavigationType)navigationType
 {
   NSString * str = [self normalizeUrl:[[request URL] absoluteString]];
-  ArticleVC * v;
-  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-  {
-    UISplitViewController * splitControl =  (UISplitViewController *)[[UIApplication sharedApplication] delegate].window.rootViewController;
-    v = [splitControl.viewControllers objectAtIndex:0];
-  }
-  else
-    v = [self.navigationController.viewControllers objectAtIndex:0];
-  NSRange r = [str rangeOfString:@"." options:NSBackwardsSearch];
-  if (r.length && [[str substringFromIndex:r.location + 1] isEqualToString:@"html"])
-    self.navigationItem.title = [v getArticleName:[str substringToIndex:r.location]];
+  [self updateTitle:str];
   [self.webPages addObject:str];
   if ([self isImage:str])
     self.webView.scalesPageToFit = YES;
@@ -136,7 +126,10 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     return;
   }
   else
+  {
     [self.webView goBack];
+    [self updateTitle:[self normalizeUrl:[[self.webView.request URL] absoluteString]]];
+  }
   if ([self.webPages count]  == 1 && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
     self.navigationItem.leftBarButtonItem = nil;
   [self.webPages removeLastObject];
@@ -183,5 +176,23 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 -(BOOL)isImage:(NSString *)pageUrl
 {
   return (([pageUrl rangeOfString:@".svg"].location != NSNotFound) || ([pageUrl rangeOfString:@".png"].location != NSNotFound) || ([pageUrl rangeOfString:@".jpg"].location != NSNotFound));
+}
+
+-(void)updateTitle:(NSString *)url
+{
+  NSRange r = [url rangeOfString:@"." options:NSBackwardsSearch];
+  if (r.length && [[url substringFromIndex:r.location + 1] isEqualToString:@"html"])
+    self.navigationItem.title = [[self getArticleController] getArticleName:[url substringToIndex:r.location]];
+}
+
+-(ArticleVC *)getArticleController
+{
+  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+  {
+    UISplitViewController * splitControl =  (UISplitViewController *)[[UIApplication sharedApplication] delegate].window.rootViewController;
+    return [splitControl.viewControllers objectAtIndex:0];
+  }
+  else
+    return [self.navigationController.viewControllers objectAtIndex:0];
 }
 @end
