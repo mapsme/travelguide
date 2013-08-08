@@ -24,7 +24,10 @@ def cleanUp(soup):
   # delete empty sections
   sections = content.findAll("div", {"class": "section"})
   for section in sections:
-    if section.div.string:
+    hasText = 0
+    for string in section.div.stripped_strings:
+      hasText += 1
+    if not hasText:
       section.decompose()
 
   # Wrap content with our own header and body, and restore original div structure for css
