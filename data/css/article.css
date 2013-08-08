@@ -207,10 +207,6 @@ A
 	color: black;
   font-weight: bold;
 }
-A:visited
-{
-	color: #5A3696;
-}
 A:active
 {
 	color: #FAA700;
@@ -219,7 +215,7 @@ A:hover
 {
 	text-decoration: underline;
 }
-A.new, A.new:visited, A.new:hover
+A.new, A.new:hover
 {
 	color: #CC0000;
 }
@@ -1315,7 +1311,7 @@ HTML[dir="rtl"] .mw-mf-overlay .header .cancel
 	display: block;
 	color: #666;
 }
-.mw-mf-overlay UL.actionable LI > A:active, .mw-mf-overlay UL.actionable LI > A:hover, .mw-mf-overlay UL.actionable LI > A:visited
+.mw-mf-overlay UL.actionable LI > A:active, .mw-mf-overlay UL.actionable LI > A:hover
 {
 	text-decoration: none;
 	color: #666;
