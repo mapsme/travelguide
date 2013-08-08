@@ -182,7 +182,7 @@ void StorageBuilder::ProcessArticles()
   {
     for (size_t j = 0; j < count; ++j)
     {
-      if (i != j && m_info[i].m_parentUrl == m_info[j].m_url)
+      if (i != j && !m_info[j].m_redirect && m_info[i].m_parentUrl == m_info[j].m_url)
       {
         m_info[i].m_parentIndex = j;
         break;
