@@ -36,7 +36,11 @@ public:
     return m_info[m_lastQuery[i]];
   }
 
+  /// Format parent's name like: father > grand father > ...
   string FormatParentName(ArticleInfo const & info) const;
+
+  /// Find article by url.
+  ArticleInfo const * GetTitleFromUrl(string const & url) const;
   //@}
 
 protected:
