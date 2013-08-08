@@ -69,4 +69,4 @@ if __name__ == '__main__':
   file = sys.stdout
   if len(sys.argv) > 2:
     file = open(sys.argv[2], 'w')
-  file.write(soup.prettify().encode('utf-8'))
+  file.write(soup.encode('utf-8'))

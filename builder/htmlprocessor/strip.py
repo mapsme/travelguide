@@ -84,7 +84,7 @@ def rewriteCrossLinks(soup):
 
 def writeHtml(content, fileName):
   global outDir
-  open(os.path.join(outDir, fileName + ".html"), "w").write(content.prettify().encode('utf-8'))
+  open(os.path.join(outDir, fileName + ".html"), "w").write(content.encode('utf-8'))
 
 ##############################################################################
 if len(sys.argv) < 8:
