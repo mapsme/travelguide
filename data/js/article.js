@@ -17,20 +17,32 @@ function next(elem) {
   return elem;
 }
 
-function onSectionClick(event) {
-  var contentSection = next(this);
+function closeSection(section) {
+  section.className = section.className.replace( /(?:^|\s)openSection(?!\S)/g , '' );
+  var contentSection = next(section);
   if (contentSection) {
-    // Add or remove css openSection class to show/hide section
-    if (contentSection.className.match(/(?:^|\s)openSection(?!\S)/))
-    {
-      this.className = this.className.replace( /(?:^|\s)openSection(?!\S)/g , '' );
-      contentSection.className = contentSection.className.replace( /(?:^|\s)openSection(?!\S)/g , '' );
-    }
-    else
-    {
-      this.className += " openSection";
-      contentSection.className += " openSection";
-    }
+    contentSection.className = contentSection.className.replace( /(?:^|\s)openSection(?!\S)/g , '' );
+  }
+}
+
+function openSection(section) {
+  var sections = document.getElementsByClassName("section_heading");
+  [].forEach.call(sections, function(sectionToClose) {
+    closeSection(sectionToClose);
+  });
+  section.className += " openSection";
+  var contentSection = next(section);
+  if (contentSection) {
+    contentSection.className += " openSection";
+  }
+  location.hash = '#' + section.id;
+}
+
+function onSectionClick(event) {
+  if (this.className.match(/(?:^|\s)openSection(?!\S)/)) {
+    closeSection(this);
+  } else {
+    openSection(this);
   }
 }
 
