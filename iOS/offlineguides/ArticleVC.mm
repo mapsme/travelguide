@@ -126,7 +126,7 @@
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
-  [self.searchBar resignFirstResponder];
+  [self killKeyboard];
 }
 
 #pragma mark - UISearchBarDelegate
@@ -175,6 +175,11 @@
 {
   ArticleInfo const * tmp =  m_storage.GetTitleFromUrl([htmlId UTF8String]);
   return [NSString stringWithUTF8String:tmp->GetTitle().c_str()];
+}
+
+-(void)killKeyboard
+{
+  [self.searchBar resignFirstResponder];
 }
 
 @end

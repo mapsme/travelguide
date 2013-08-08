@@ -10,4 +10,5 @@
 //uses on start of application
 -(NSString *)getDefaultArticle;
 -(NSString *)getArticleName:(NSString *)htmlId;
+-(void)killKeyboard;
 @end

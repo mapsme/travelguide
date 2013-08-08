@@ -26,7 +26,7 @@
   {
     _webView = [[UIWebView alloc] init];
     [self.webView setFrame:self.view.frame];
-    UIPinchGestureRecognizer * pinch = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(onPinch:)];
+    UIPanGestureRecognizer * pinch = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(onPinch:)];
     pinch.delegate = self;
     [self.webView addGestureRecognizer:pinch];
     self.webView.delegate = self;
@@ -106,9 +106,13 @@
   return static_cast<unsigned int>(100 * m_webViewScale);
 }
 
--(void)onPinch:(UIPinchGestureRecognizer *)sender
+-(void)onPinch:(UIPanGestureRecognizer *)sender
 {
-  // @todo kill keyboard after search UINOTIFICATION
+  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+  {
+    UISplitViewController * splitControl =  (UISplitViewController *)[[UIApplication sharedApplication] delegate].window.rootViewController;
+    [[splitControl.viewControllers objectAtIndex:0] killKeyboard];
+  }
 }
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer
