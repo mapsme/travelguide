@@ -36,7 +36,7 @@
 
     NSString * path = [[NSBundle mainBundle] pathForResource:@"index" ofType:@"dat" inDirectory:@"/data/"];
     m_storage.Load([path UTF8String]);
-    m_storage.QueryArticleInfos(m_infos, "");
+    m_storage.QueryArticleInfo(string());
 
     [self.tableView reloadData];
   }
