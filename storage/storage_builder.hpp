@@ -15,12 +15,11 @@ public:
   {
   }
 
-  ArticleInfoBuilder(string const & title, string const & url, string const & thumbnail,
+  ArticleInfoBuilder(string const & title, string const & url,
                      double lat, double lon)
     : ArticleInfo(title)
   {
     m_url = url;
-    m_thumbnailUrl = thumbnail;
     m_lat = lat;
     m_lon = lon;
   }

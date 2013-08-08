@@ -67,7 +67,6 @@ public:
     builder.m_url = entries[0];
     builder.m_length = atoi(entries[2].c_str());
     CHECK(builder.m_length != 0, (entries[2]));
-    builder.m_thumbnailUrl = entries[3];
     builder.m_parentUrl = entries[4];
 
     m_storage.Add(builder);
@@ -235,7 +234,6 @@ void StorageBuilder::InitMock()
 {
   ArticleInfoBuilder i1("London");
   i1.m_url = "London.html";
-  i1.m_thumbnailUrl = "london.jpg";
   i1.m_parentUrl = "Great_Britain.html";
   i1.m_lat = 51.50726;
   i1.m_lon = -0.12765;
@@ -243,7 +241,6 @@ void StorageBuilder::InitMock()
 
   ArticleInfoBuilder i2("Lancaster");
   i2.m_url = "Lancaster.html";
-  i2.m_thumbnailUrl = "lancaster.jpg";
   i2.m_parentUrl = "Great_Britain.html";
   i2.m_lat = 54.04839;
   i2.m_lon = -2.79904;
@@ -251,7 +248,6 @@ void StorageBuilder::InitMock()
 
   ArticleInfoBuilder i3("Great Britain");
   i3.m_url = "Great_Britain.html";
-  i3.m_thumbnailUrl = "great_britain.jpg";
   i3.m_lat = 54.70235;
   i3.m_lon = -3.27656;
   Add(i3);

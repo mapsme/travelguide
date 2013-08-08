@@ -19,7 +19,6 @@ protected:
   string m_key;
   string m_title;
   string m_url;
-  string m_thumbnailUrl;
   uint32_t m_length;
   int32_t m_parentIndex;  // NO_PARENT is the root article
   bool m_redirect;
@@ -46,7 +45,7 @@ public:
   }
 
   ArticleInfo(string const & title, ArticleInfo const & src, bool redirect)
-    : m_title(title), m_url(src.m_url), m_thumbnailUrl(src.m_thumbnailUrl),
+    : m_title(title), m_url(src.m_url),
       m_length(src.m_length), m_parentIndex(NO_PARENT),
       m_redirect(redirect), m_lat(src.m_lat), m_lon(src.m_lon)
   {
@@ -54,8 +53,8 @@ public:
   }
 
   string const & GetTitle() const { return m_title; }
-  string const & GetUrl() const { return m_url; }
-  string const & GetThumbnailUrl() const { return m_thumbnailUrl; }
+  string GetUrl() const { return m_url + ".html"; }
+  string GetThumbnailUrl() const { return m_url + ".jpg"; }
 
   double m_lat, m_lon;
   bool IsValidCoordinates() const;

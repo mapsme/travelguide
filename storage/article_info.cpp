@@ -50,7 +50,6 @@ void ArticleInfo::Write(wr::Writer & w) const
 {
   w.Write(m_title);
   w.Write(m_url);
-  w.Write(m_thumbnailUrl);
   w.Write(m_length);
   w.Write(m_parentIndex);
 
@@ -64,7 +63,6 @@ void ArticleInfo::Read(rd::Reader & r)
 {
   r.Read(m_title);
   r.Read(m_url);
-  r.Read(m_thumbnailUrl);
   r.Read(m_length);
   r.Read(m_parentIndex);
 
@@ -104,7 +102,6 @@ void ArticleInfo::Swap(ArticleInfo & i)
   m_key.swap(i.m_key);
   m_title.swap(i.m_title);
   m_url.swap(i.m_url);
-  m_thumbnailUrl.swap(i.m_thumbnailUrl);
   std::swap(m_length, i.m_length);
   std::swap(m_parentIndex, i.m_parentIndex);
   std::swap(m_lat, i.m_lat);
@@ -125,7 +122,6 @@ bool ArticleInfo::operator == (ArticleInfo const & r) const
   return (m_key == r.m_key &&
           m_title == r.m_title &&
           m_url == r.m_url &&
-          m_thumbnailUrl == r.m_thumbnailUrl &&
           m_parentIndex == r.m_parentIndex &&
           EqualCoord(m_lat, r.m_lat) &&
           EqualCoord(m_lon, r.m_lon));

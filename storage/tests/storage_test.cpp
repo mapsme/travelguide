@@ -22,7 +22,7 @@ public:
     m_info.clear();
 
     for (size_t i = 0; i < size; ++i)
-      m_info.push_back(ArticleInfoBuilder(arr[i], arr[i], string(), 0, 0));
+      m_info.push_back(ArticleInfoBuilder(arr[i], arr[i], 0, 0));
 
     sort(m_info.begin(), m_info.end(), ArticleInfo::LessStorage());
   }
@@ -129,7 +129,7 @@ TEST(Storage, PrefixQuery_lowerCaseTest)
 
 TEST(Storage, ArticleInfoRW)
 {
-  ArticleInfoBuilder builder("Über Karten", "Éařízení", "great_britain.jpg", 5.67894, 89.12345);
+  ArticleInfoBuilder builder("Über Karten", "Éařízení", 5.67894, 89.12345);
   ArticleInfo info(builder);
 
   char const * name = "article.dat";
@@ -153,7 +153,7 @@ TEST(Storage, StorageBuilderRW)
   StorageBuilder builder;
   builder.InitMock();
 
-  ArticleInfoBuilder i("Über Karten", "Éařízení", "great_britain.jpg", 5.67894, 89.12345);
+  ArticleInfoBuilder i("Über Karten", "Éařízení", 5.67894, 89.12345);
   i.m_parentUrl = "Schließen";
   builder.Add(i);
 
