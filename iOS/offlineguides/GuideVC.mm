@@ -66,6 +66,8 @@
     self.navigationItem.rightBarButtonItem =  [self getCustomButtonWithImage:@"ic_articleselection"];
   if ([self.webPages count])
     self.navigationItem.leftBarButtonItem =  [self getCustomButtonWithImage:@"ic_back"];
+  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+    self.navigationItem.leftBarButtonItem =  [self getCustomButtonWithImage:@"ic_back"];
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request
@@ -78,8 +80,6 @@
   else
     self.webView.scalesPageToFit = NO;
   if ([self.webPages count]  > 1 && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-    self.navigationItem.leftBarButtonItem =  [self getCustomButtonWithImage:@"ic_back"];
-  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
     self.navigationItem.leftBarButtonItem =  [self getCustomButtonWithImage:@"ic_back"];
   return YES;
 }
