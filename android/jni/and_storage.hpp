@@ -31,6 +31,14 @@ JNIEXPORT jint JNICALL Java_com_example_travelguide_cpp_Storage_getResultSize
 JNIEXPORT jobject JNICALL Java_com_example_travelguide_cpp_Storage_getArticleInfoByIndex
   (JNIEnv *, jobject, jint);
 
+/*
+ * Class:     com_example_travelguide_cpp_Storage
+ * Method:    nativeInitIndex
+ * Signature: (Ljava/lang/Object;)V
+ */
+JNIEXPORT void JNICALL Java_com_example_travelguide_cpp_Storage_nativeInitIndex
+  (JNIEnv *, jclass, jobject);
+
 #ifdef __cplusplus
 }
 #endif

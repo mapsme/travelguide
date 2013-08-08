@@ -32,6 +32,7 @@ public class QueryResultLoader extends AsyncTaskLoader<Storage>
   @Override
   public Storage loadInBackground()
   {
+    Storage.initAssets(getContext());
     final Storage storage = new Storage();
     storage.query(mQuery, mUseLocation, mLat, mLon);
     return storage;

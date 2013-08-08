@@ -30,4 +30,6 @@ LOCAL_SRC_FILES += \
 	../../storage/distance.cpp \
 	../../storage/storage.cpp \
 
+LOCAL_LDLIBS += -landroid
+
 include $(BUILD_SHARED_LIBRARY)

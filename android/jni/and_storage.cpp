@@ -19,10 +19,12 @@ class AndStorage
       m_handle = AAssetManager_open(manager, name, AASSET_MODE_BUFFER);
       CHECK(m_handle, ());
     }
+
     ~AssetReader()
     {
       AAsset_close(m_handle);
     }
+
     virtual void Read(void * p, size_t size)
     {
       AAsset_read(m_handle, p, size);
@@ -32,9 +34,8 @@ class AndStorage
 public:
   void Init(JNIEnv * env, jobject manager)
   {
-    //AssetReader reader("index.dat", AAssetManager_fromJava(env, manager));
-    m_storage.Load("/storage/sdcard0/index.dat");
-    //m_storage.Load(reader);
+    AssetReader reader("index.dat", AAssetManager_fromJava(env, manager));
+    m_storage.Load(reader);
   }
 
   static AndStorage & Instance()
@@ -121,6 +122,12 @@ JNIEXPORT jobject JNICALL Java_com_example_travelguide_cpp_Storage_getArticleInf
        StdString2JString(env, STORAGE.GetParentName(info)),
        info.m_lat,
        info.m_lon);
+}
+
+JNIEXPORT void JNICALL Java_com_example_travelguide_cpp_Storage_nativeInitIndex
+  (JNIEnv * env, jclass clazz, jobject assetManager)
+{
+  STORAGE.Init(env, assetManager);
 }
 
 
