@@ -5,7 +5,7 @@ set -e -u -x
 # Do not create article_info.txt now so that if we fail make will not consider the job done.
 rm article_info.tmp || true
 
-for REGION in United_Kingdom Ireland Italy Switzerland Liechtenstein Belarus Spain Portugal France Germany Netherlands
+for REGION in United_Kingdom Ireland Italy Switzerland Liechtenstein Belarus Spain Portugal France Germany Netherlands Thailand Greece Russia Ukraine Lithuania Sweden Norway Finland Hawaii
 do
     # Create an empty table.
     $MYSQL_BINARY --user=$MYSQL_USER --database=$MYSQL_DATABASE --execute="DROP TABLE IF EXISTS $REGION"
@@ -54,6 +54,18 @@ do
         SET image = il_to \
         WHERE (il_to LIKE '%.jpg' OR il_to LIKE '%.JPG' OR il_to LIKE '%.jpeg' OR il_to LIKE '%.JPEG')
         AND NOT (image LIKE '%.jpg' OR image LIKE '%.JPG' OR image LIKE '%.jpeg' OR image LIKE '%.JPEG')"
+    $MYSQL_BINARY --user=$MYSQL_USER --database=$MYSQL_DATABASE --execute="UPDATE $REGION \
+        SET image = NULL \
+        WHERE (image LIKE '%default%' OR image LIKE '%Default%' OR image LIKE '%DEFAULT%')"
+
+    # Use image from (grand)*parent if it's not present.
+    for i in `seq 1 10`
+    do
+        $MYSQL_BINARY --user=$MYSQL_USER --database=$MYSQL_DATABASE --execute="UPDATE $REGION r1 \
+            JOIN $REGION r2 ON r1.id1 = r2.id
+            SET r1.image = r2.image
+            WHERE r1.image IS NULL"
+    done
 
     # Output the final result.
     $MYSQL_BINARY --user=$MYSQL_USER --database=$MYSQL_DATABASE --execute="SELECT \
