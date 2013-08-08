@@ -155,7 +155,7 @@
 {
   for (UIView * sub in self.searchBar.subviews)
     if ([sub isKindOfClass:NSClassFromString(@"UISearchBarBackground")])
-        [sub removeFromSuperview];
+      [sub removeFromSuperview];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
