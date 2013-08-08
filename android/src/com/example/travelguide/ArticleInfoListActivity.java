@@ -75,7 +75,7 @@ public class ArticleInfoListActivity extends FragmentActivity implements Article
     }
     else
     {
-      Intent detailIntent = new Intent(this, ArticleInfoDetailActivity.class);
+      final Intent detailIntent = new Intent(this, ArticleInfoDetailActivity.class);
       detailIntent.putExtra(ArticleInfoDetailFragment.ARTICLE_INFO, info);
       startActivity(detailIntent);
     }

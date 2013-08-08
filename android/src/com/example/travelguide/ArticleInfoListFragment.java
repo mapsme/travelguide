@@ -134,9 +134,6 @@ public class ArticleInfoListFragment extends ListFragment implements LoaderCallb
       mLocationManager.requestSingleUpdate(LocationManager.NETWORK_PROVIDER, this, null);
       sLastLocationRequestTime = currentTime;
     }
-
-    // Update search
-    search(mSearchText.getText().toString());
   }
 
   @Override

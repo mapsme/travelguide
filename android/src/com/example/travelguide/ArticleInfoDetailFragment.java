@@ -4,6 +4,7 @@ import static com.example.travelguide.util.Utils.hideView;
 import static com.example.travelguide.util.Utils.showView;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -17,7 +18,8 @@ import android.widget.TextView;
 import com.example.travelguide.ArticleInfoListFragment.OnListIconClickedListener;
 import com.example.travelguide.article.ArticleInfo;
 import com.example.travelguide.article.ArticlePathFinder;
-import com.example.travelguide.article.AssetsArticlePathFinder;
+import com.example.travelguide.article.ObbPathFinder;
+import com.example.travelguide.util.Utils;
 
 /**
  * A fragment representing a single ArticleInfo detail screen. This fragment is
@@ -95,8 +97,9 @@ public class ArticleInfoDetailFragment extends Fragment implements OnClickListen
       setArticleInfo(mItem);
   }
 
-  class TgWebViewClient extends WebViewClient
+  public class TgWebViewClient extends WebViewClient
   {
+
     @Override
     public void onPageFinished(WebView view, String url)
     {
@@ -111,6 +114,21 @@ public class ArticleInfoDetailFragment extends Fragment implements OnClickListen
       super.onPageStarted(view, url, favicon);
       showView(mProgressContainer);
       hideView(mWebView);
+    }
+
+    @Override
+    public boolean shouldOverrideUrlLoading(WebView view, String url)
+    {
+      if (Utils.isExternalUrl(url))
+      {
+        final Intent i = new Intent(Intent.ACTION_VIEW);
+        i.setData(Uri.parse(url));
+        if (getActivity().getPackageManager().resolveActivity(i, 0) != null)
+          startActivity(i);
+
+        return true;
+      }
+      return super.shouldOverrideUrlLoading(view, url);
     }
   }
 

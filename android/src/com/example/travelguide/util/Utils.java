@@ -1,5 +1,7 @@
 package com.example.travelguide.util;
 
+import java.io.File;
+
 import android.view.View;
 
 public class Utils
@@ -23,5 +25,16 @@ public class Utils
     else
       showView(view);
     return view;
+  }
+
+  public static boolean fileExists(String path)
+  {
+    final File file = new File(path);
+    return file.exists();
+  }
+
+  public static boolean isExternalUrl(String path)
+  {
+    return path.startsWith("http") || path.startsWith("www.");
   }
 }
