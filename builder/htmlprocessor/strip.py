@@ -36,12 +36,14 @@ def cleanUp(soup):
   bodyTag = soup.new_tag("body")
   bodyTag["class"] = "mediawiki ltr sitedir-ltr mobile stable skin-mobile action-view"
   content = content.wrap(bodyTag)
-  content = content.wrap(soup.new_tag("html", lang="en", dir="ltr"))
+  htmlTag = soup.new_tag("html", lang="en", dir="ltr")
+  htmlTag["class"] = "client-js"
+  content = content.wrap(htmlTag)
   # Here we add our own js and css into the <head>
   headTag = soup.new_tag("head")
   headTag.append(soup.new_tag("meta", charset="UTF-8"))
   headTag.append(soup.new_tag("link", rel="stylesheet", type="text/css", href="article.css"))
-  headTag.append(soup.new_tag("script", type="text/javascript", href="article.js"))
+  headTag.append(soup.new_tag("script", type="text/javascript", src="article.js"))
   meta1 = soup.new_tag("meta", content="yes")
   # workaround as "name" is used in python
   meta1["name"] = "apple-mobile-web-app-capable"
