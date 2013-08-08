@@ -15,7 +15,6 @@ import android.support.v4.content.Loader;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -313,15 +312,12 @@ public class ArticleInfoListFragment extends ListFragment implements LoaderCallb
     if ((loc = mLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)) == null)
       loc = mLocationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 
-    Log.d("TravelGuide", "Got location" + loc);
     return loc;
   }
 
   @Override
   public void onLocationChanged(Location location)
-  {
-    Log.d("TravelGuide", "Location updated:" + location);
-  }
+  {}
 
   @Override
   public void onProviderDisabled(String provider)
