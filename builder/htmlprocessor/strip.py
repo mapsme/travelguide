@@ -3,6 +3,7 @@ import sys
 import os
 import urllib
 import shutil
+import unicodedata
 from bs4 import BeautifulSoup
 
 reload(sys)
@@ -62,13 +63,18 @@ def transformString(s):
   unquoted = urllib.unquote(str(s));
   for i in u"\"',/\\@#$%^&*()!~`«»":
     unquoted = unquoted.replace(i, "_")
-  unquoted = unquoted.strip("_")
-  return unicode(unquoted.lower())
+  return unicode(unquoted.strip("_"))
+  
+def formatToNFKD(s):
+  return unicodedata.normalize("NFKD", transformString(s))
+  
+def unicodeNormalize(s):
+  return (u"".join( x for x in formatToNFKD(s) if not unicodedata.category(x).startswith("M"))).lower()
 
 def imageExist(fileName):
   global imageFiles
   global imageSet
-  unquotedName = transformString(fileName)
+  unquotedName = unicodeNormalize(fileName)
   if unquotedName in imageFiles:
     imageSet.add(unquotedName)
     return True
@@ -88,10 +94,11 @@ def rewriteImages(soup):
     srcPath = imgElement["src"]
     splitedSrc = srcPath.split("/")
     if imageExist(splitedSrc[-1]):
-      imgElement['src'] = "images/" + transformString(splitedSrc[-1])
+      imgElement['src'] = "images/" + unicodeNormalize(splitedSrc[-1])
     elif imageExist(splitedSrc[-2]):
-      imgElement['src'] = "images/" + transformString(splitedSrc[-2])
+      imgElement['src'] = "images/" + unicodeNormalize(splitedSrc[-2])
     else:
+      print "Image strip = " + unicodeNormalize(splitedSrc[-2])
       [s.decompose() for s in imgElement.fetchParents("div", {"class" : ["thumb tright", "thumbinner", "image"]})]
 
 def rewriteCrossLinks(soup):
@@ -131,7 +138,7 @@ if len(sys.argv) < 8:
 
 inDir = sys.argv[1]
 imagesSrcDir = sys.argv[2]
-imageFiles = dict([(transformString(file), file) for file in os.listdir(imagesSrcDir)])
+imageFiles = dict([(unicodeNormalize(file), file) for file in os.listdir(imagesSrcDir)])
 idMapping = dict([(unicode(i.split("\t")[1]), unicode(i.split("\t")[0])) for i in open(sys.argv[3])])
 redirectMapping = dict([(unicode(line.split("\t")[1]), unicode(line.split("\t")[3].strip())) for line in open(sys.argv[4])])
 outDir = sys.argv[5]
@@ -150,6 +157,7 @@ for file in thisFiles:
 	rewriteImages(soup)
 	rewriteCrossLinks(soup)
 	writeHtml(soup, file)
+  
 imagesDstDir = os.path.join(outDir, "images")
 if not os.path.exists(imagesDstDir):
 	os.makedirs(imagesDstDir)
