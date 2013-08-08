@@ -1,6 +1,7 @@
 #import "GuideVC.h"
 #import "ArticleVC.h"
 #import "MapsWithMeAPI.h"
+#import "AppDelegate.h"
 #import "../../std/algorithm.hpp"
 
 #define DATAFOLDER @"/data/"
@@ -68,12 +69,26 @@
     self.navigationItem.leftBarButtonItem =  [self getCustomButtonWithImage:@"ic_back"];
   if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
     self.navigationItem.leftBarButtonItem =  [self getCustomButtonWithImage:@"ic_back"];
+  self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObject:[UIColor colorWithRed:253.f/255.f
+                                                                                                                   green:241.f/255.f
+                                                                                                                    blue:43.f/255.f
+                                                                                                                   alpha:1.f] forKey:UITextAttributeTextColor];
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request
  navigationType:(UIWebViewNavigationType)navigationType
 {
   NSString * str = [self normalizeUrl:[[request URL] absoluteString]];
+  ArticleVC * v;
+  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+  {
+    UISplitViewController * splitControl =  (UISplitViewController *)[[UIApplication sharedApplication] delegate].window.rootViewController;
+    v = [splitControl.viewControllers objectAtIndex:0];
+  }
+  else
+    v = [self.navigationController.viewControllers objectAtIndex:0];
+  NSRange r = [str rangeOfString:@"." options:NSBackwardsSearch];
+  self.navigationItem.title = [v getArticleName:[str substringToIndex:r.location]];
   [self.webPages addObject:str];
   if ([self isImage:str])
     self.webView.scalesPageToFit = YES;
