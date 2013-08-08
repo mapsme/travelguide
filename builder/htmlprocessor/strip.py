@@ -44,7 +44,7 @@ def rewriteImages(soup):
     del imgElement["alt"]
     #todo rewrite srcset attr if we can get callback on image loading in webview
     del imgElement["srcset"]
-    
+
     index = -1
     srcPath = imgElement["src"]
     splitedSrc = srcPath.split("/")
@@ -60,7 +60,7 @@ def rewriteCrossLinks(soup):
   global idMapping
   global redirectMapping
   links = soup.findAll("a")
- 
+
   for link in links:
     destTitle = link["href"].split("/",2)[-1]
     destTitle = transformStringWithEncoding(destTitle)
@@ -75,7 +75,7 @@ def rewriteCrossLinks(soup):
       if imgElement:
         link["href"] = imgElement["src"]
         continue
-  
+
     if "/wiki/" in link["href"]:
       if link.string:
         link.replace_with(link.string)
@@ -104,18 +104,18 @@ thisFiles = files[threadIndex * len(files) / coreCount : (threadIndex + 1) * len
 imageSet = set()
 
 if not os.path.exists(outDir):
-	os.makedirs(outDir)
+  os.makedirs(outDir)
 
 for file in thisFiles:
-	soup = BeautifulSoup(open(os.path.join(inDir, file)))
-	soup = cleanUp(soup)
-	rewriteImages(soup)
-	rewriteCrossLinks(soup)
-	writeHtml(soup, file)
-  
+  soup = BeautifulSoup(open(os.path.join(inDir, file)))
+  soup = cleanUp(soup)
+  rewriteImages(soup)
+  rewriteCrossLinks(soup)
+  writeHtml(soup, file)
+
 imagesDstDir = os.path.join(outDir, "images")
 if not os.path.exists(imagesDstDir):
-	os.makedirs(imagesDstDir)
+  os.makedirs(imagesDstDir)
 
 for image in imageSet:
-	shutil.copy2(os.path.join(imagesSrcDir, imageFiles[image]), os.path.join(imagesDstDir, image))
+  shutil.copy2(os.path.join(imagesSrcDir, imageFiles[image]), os.path.join(imagesDstDir, image))
