@@ -22,6 +22,8 @@
 		ED4F8BAD17B2E67100ADD795 /* file_handle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED4F8BAC17B2E67100ADD795 /* file_handle.cpp */; };
 		ED4F8BAF17B2E69600ADD795 /* posix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED4F8BAE17B2E69600ADD795 /* posix.cpp */; };
 		ED4F8BB117B2E6B700ADD795 /* logging.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED4F8BB017B2E6B700ADD795 /* logging.cpp */; };
+		ED64330F17B3F673000985FE /* GuideCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ED64330E17B3F673000985FE /* GuideCell.m */; };
+		ED64331117B41534000985FE /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED64331017B41533000985FE /* CoreLocation.framework */; };
 		ED81954717AED762004F3803 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED81954617AED762004F3803 /* UIKit.framework */; };
 		ED81954917AED762004F3803 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED81954817AED762004F3803 /* Foundation.framework */; };
 		ED81954B17AED762004F3803 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED81954A17AED762004F3803 /* CoreGraphics.framework */; };
@@ -56,6 +58,9 @@
 		ED4F8BAC17B2E67100ADD795 /* file_handle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = file_handle.cpp; path = ../../env/file_handle.cpp; sourceTree = "<group>"; };
 		ED4F8BAE17B2E69600ADD795 /* posix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = posix.cpp; path = ../../env/posix.cpp; sourceTree = "<group>"; };
 		ED4F8BB017B2E6B700ADD795 /* logging.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = logging.cpp; path = ../../env/logging.cpp; sourceTree = "<group>"; };
+		ED64330D17B3F672000985FE /* GuideCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuideCell.h; sourceTree = "<group>"; };
+		ED64330E17B3F673000985FE /* GuideCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuideCell.m; sourceTree = "<group>"; };
+		ED64331017B41533000985FE /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		ED81954317AED762004F3803 /* offlineguides.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = offlineguides.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED81954617AED762004F3803 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		ED81954817AED762004F3803 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -87,6 +92,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED64331117B41534000985FE /* CoreLocation.framework in Frameworks */,
 				ED81954717AED762004F3803 /* UIKit.framework in Frameworks */,
 				ED81954917AED762004F3803 /* Foundation.framework in Frameworks */,
 				ED81954B17AED762004F3803 /* CoreGraphics.framework in Frameworks */,
@@ -122,6 +128,7 @@
 		ED81953A17AED761004F3803 = {
 			isa = PBXGroup;
 			children = (
+				ED64331017B41533000985FE /* CoreLocation.framework */,
 				ED81954C17AED762004F3803 /* offlineguides */,
 				ED81954517AED762004F3803 /* Frameworks */,
 				ED81954417AED762004F3803 /* Products */,
@@ -162,6 +169,8 @@
 				ED893F6B17B231F20074E05A /* IPadSplitVC.m */,
 				ED81956817AEF6B6004F3803 /* GuideVC.h */,
 				ED81956917AEF6B6004F3803 /* GuideVC.mm */,
+				ED64330D17B3F672000985FE /* GuideCell.h */,
+				ED64330E17B3F673000985FE /* GuideCell.m */,
 			);
 			path = offlineguides;
 			sourceTree = "<group>";
@@ -286,6 +295,7 @@
 				ED4F8BAD17B2E67100ADD795 /* file_handle.cpp in Sources */,
 				ED4F8BAF17B2E69600ADD795 /* posix.cpp in Sources */,
 				ED4F8BB117B2E6B700ADD795 /* logging.cpp in Sources */,
+				ED64330F17B3F673000985FE /* GuideCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

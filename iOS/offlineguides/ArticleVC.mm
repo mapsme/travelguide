@@ -1,5 +1,6 @@
 #import "ArticleVC.h"
 #import "GuideVC.h"
+#import "GuideCell.h"
 
 #import "../../storage/storage.hpp"
 
@@ -11,9 +12,12 @@
 @interface ArticleVC ()
 {
   Storage m_storage;
+  CLLocationCoordinate2D m_lastLocation;
+  NSDate * m_lastLocationTime;
 }
 
 @property (nonatomic, strong) UISearchBar * searchBar;
+@property (nonatomic, strong) CLLocationManager * locationManager;
 @end
 
 @implementation ArticleVC
@@ -35,9 +39,16 @@
     [self searchBar:self.searchBar textDidChange:@""];
 
     NSString * path = [[NSBundle mainBundle] pathForResource:@"index" ofType:@"dat" inDirectory:@"/data/"];
+    self.locationManager = [[CLLocationManager alloc] init];
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
+    self.locationManager.distanceFilter = 100;
+    self.locationManager.delegate = self;
+    [self.locationManager startUpdatingLocation];
     m_storage.Load([path UTF8String]);
-    m_storage.QueryArticleInfo(string());
-
+    if ([self isValidCoordinates])
+      m_storage.QueryArticleInfo(string(), self.locationManager.location.coordinate.latitude, self.locationManager.location.coordinate.longitude);
+    else
+      m_storage.QueryArticleInfo(string());
     [self.tableView reloadData];
   }
   return self;
@@ -61,34 +72,34 @@
   return static_cast<NSInteger>(m_storage.GetResultsCount());
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  return 62.0;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
   static NSString * CellIdentifier = @"ArticleCell";
-  UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+  GuideCell * cell = (GuideCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 
   if (!cell)
-    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-  
+    cell = [[GuideCell alloc] initWithReuseIdentifier:CellIdentifier];
+
   ArticleInfo const * info = [self infoByIndexPath:indexPath];
-  cell.textLabel.text = [NSString stringWithUTF8String:info->GetTitle().c_str()];
+  cell.mainTitile.text = [NSString stringWithUTF8String:info->GetTitle().c_str()];
 
   string const & thumbnail = info->GetThumbnailUrl();
   size_t const pos = thumbnail.find_last_of(".");
   string const imageName = thumbnail.substr(0, pos);
   string const imageType = thumbnail.substr(pos + 1);
-  NSLog(@"%@ %@", [NSString stringWithUTF8String:imageName.c_str()], [NSString stringWithUTF8String:imageType.c_str()]);
   NSString * imagePath = [[NSBundle mainBundle] pathForResource:[NSString stringWithUTF8String:imageName.c_str()] ofType:[NSString stringWithUTF8String:imageType.c_str()] inDirectory:THUMBNAILSFOLDER];
 
-  cell.detailTextLabel.text = [NSString stringWithUTF8String:m_storage.FormatParentName(*info).c_str()];
+  cell.subTitile.text = [NSString stringWithUTF8String:m_storage.FormatParentName(*info).c_str()];
 
   UIImage * image = [UIImage imageWithContentsOfFile:imagePath];
-  UIImageView * uiview = [[UIImageView alloc] initWithImage:image];
-  [uiview setFrame:CGRectMake(0, 0, 44, 44)];
+  cell.mainImage.image = image;
 
-  cell.accessoryView = uiview;
-//  [cell.imageView setFrame:CGRectMake(cell.imageView.frame.origin.x, cell.imageView.frame.origin.y, cell.imageView.frame.size.height, 44)];
-
-  return cell;
+  return (UITableViewCell *)cell;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -122,8 +133,10 @@
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
-  /// @todo add lat and lon to QueryInfos
-  m_storage.QueryArticleInfo([searchText UTF8String]);
+  if ([self isValidCoordinates])
+    m_storage.QueryArticleInfo([searchText UTF8String], self.locationManager.location.coordinate.latitude, self.locationManager.location.coordinate.longitude);
+  else
+    m_storage.QueryArticleInfo([searchText UTF8String]);
   [self.tableView reloadData];
 }
 
@@ -145,4 +158,16 @@
         [sub removeFromSuperview];
 }
 
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
+{
+  [self.locationManager stopUpdatingLocation];
+}
+
+-(BOOL)isValidCoordinates
+{
+  BOOL isValid = (self.locationManager.location != nil);
+  if ([self.locationManager.location.timestamp timeIntervalSinceNow] > -1500.0)
+    [self.locationManager startUpdatingLocation];
+  return isValid;
+}
 @end
