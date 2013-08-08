@@ -19,6 +19,7 @@ import com.example.travelguide.ArticleInfoListFragment.OnListIconClickedListener
 import com.example.travelguide.article.ArticleInfo;
 import com.example.travelguide.article.ArticlePathFinder;
 import com.example.travelguide.article.ObbPathFinder;
+import com.example.travelguide.cpp.Storage;
 import com.example.travelguide.util.Utils;
 
 /**
@@ -114,6 +115,13 @@ public class ArticleInfoDetailFragment extends Fragment implements OnClickListen
       super.onPageStarted(view, url, favicon);
       showView(mProgressContainer);
       hideView(mWebView);
+
+      if (!Utils.isExternalUrl(url))
+      {
+        final String strippedUrl = url.substring(url.lastIndexOf('/') + 1, url.lastIndexOf('.'));
+        final String title = Storage.getTitleByUrl(strippedUrl);
+        mTitle.setText(title);
+      }
     }
 
     @Override

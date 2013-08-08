@@ -9,11 +9,19 @@ extern "C" {
 #endif
 /*
  * Class:     com_example_travelguide_cpp_Storage
+ * Method:    getTitleByUrl
+ * Signature: (Ljava/lang/String;)Ljava/lang/String;
+ */
+JNIEXPORT jstring JNICALL Java_com_example_travelguide_cpp_Storage_getTitleByUrl
+  (JNIEnv *, jclass, jstring);
+
+/*
+ * Class:     com_example_travelguide_cpp_Storage
  * Method:    query
  * Signature: (Ljava/lang/String;ZDD)V
  */
 JNIEXPORT void JNICALL Java_com_example_travelguide_cpp_Storage_query
-  (JNIEnv *, jobject, jstring, jboolean, jdouble, jdouble);
+  (JNIEnv *, jclass, jstring, jboolean, jdouble, jdouble);
 
 /*
  * Class:     com_example_travelguide_cpp_Storage
@@ -21,7 +29,7 @@ JNIEXPORT void JNICALL Java_com_example_travelguide_cpp_Storage_query
  * Signature: ()I
  */
 JNIEXPORT jint JNICALL Java_com_example_travelguide_cpp_Storage_getResultSize
-  (JNIEnv *, jobject);
+  (JNIEnv *, jclass);
 
 /*
  * Class:     com_example_travelguide_cpp_Storage
@@ -29,7 +37,7 @@ JNIEXPORT jint JNICALL Java_com_example_travelguide_cpp_Storage_getResultSize
  * Signature: (I)Lcom/example/travelguide/article/ArticleInfo;
  */
 JNIEXPORT jobject JNICALL Java_com_example_travelguide_cpp_Storage_getArticleInfoByIndex
-  (JNIEnv *, jobject, jint);
+  (JNIEnv *, jclass, jint);
 
 /*
  * Class:     com_example_travelguide_cpp_Storage

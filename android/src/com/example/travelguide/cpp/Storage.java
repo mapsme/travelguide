@@ -24,11 +24,13 @@ public class Storage
     sIsAssetsInited = true;
   }
 
-  public native void query(String query, boolean useLocation, double lat, double lon);
+  public native static String getTitleByUrl(String url);
 
-  public native int getResultSize();
+  public native static void query(String query, boolean useLocation, double lat, double lon);
 
-  public native ArticleInfo getArticleInfoByIndex(int index);
+  public native static  int getResultSize();
+
+  public native static ArticleInfo getArticleInfoByIndex(int index);
 
   native private static void nativeInitIndex(AssetManager am);
 
