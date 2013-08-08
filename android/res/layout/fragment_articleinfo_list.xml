@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/dark_grey"
     android:orientation="vertical" >
 
     <RelativeLayout
@@ -106,7 +107,7 @@
                 android:paddingTop="4dip"
                 android:singleLine="true"
                 android:text="@string/searching"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
+                android:textAppearance="?android:attr/textAppearanceSmallInverse" />
         </LinearLayout>
 
         <FrameLayout
@@ -126,7 +127,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="@string/nothing_found"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
+                android:textAppearance="?android:attr/textAppearanceLargeInverse" />
         </FrameLayout>
     </FrameLayout>
 

@@ -70,7 +70,6 @@ public class ArticleInfoListActivity extends FragmentActivity implements Article
     if (mTwoPane)
     {
       mArtInfoDetailFragment.setArticleInfo(info);
-      toogleListVisible();
     }
     else
     {
