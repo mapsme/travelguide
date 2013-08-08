@@ -73,6 +73,10 @@
 {
   NSString * str = [self normalizeUrl:[[request URL] absoluteString]];
   [self.webPages addObject:str];
+  if ([self isImage:str])
+    self.webView.scalesPageToFit = YES;
+  else
+    self.webView.scalesPageToFit = NO;
   if ([self.webPages count]  > 1 && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
     self.navigationItem.leftBarButtonItem =  [self getCustomButtonWithImage:@"ic_back"];
   if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
@@ -89,18 +93,6 @@
 
 -(void)onPinch:(UIPinchGestureRecognizer *)sender
 {
-//  if (m_webViewScale == 0.0)
-//    m_webViewScale = 1.0;
-//  if (m_webViewScaleOnStart == 0.0 || sender.state == UIGestureRecognizerStateBegan)
-//    m_webViewScaleOnStart = m_webViewScale;
-//
-//  m_webViewScale = min(4.0f, max(0.25f, m_webViewScaleOnStart * sender.scale));
-//
-//  [self.webView stringByEvaluatingJavaScriptFromString:
-//   [NSString stringWithFormat:
-//    @"document.getElementsByTagName('body')[0]"
-//    ".style.webkitTextSizeAdjust= '%d%%'", [self textSizeAdjustment]]];
-
   // @todo kill keyboard after search UINOTIFICATION
 }
 
@@ -124,17 +116,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     return;
   }
   else
-  {
-    NSRange r = [[self.webPages lastObject] rangeOfString:@"." options:NSBackwardsSearch];
-    if (r.length)
-    {
-      NSString * pathToPage = [[NSBundle mainBundle] pathForResource:[[self.webPages lastObject] substringToIndex:r.location]  ofType:@"html" inDirectory:DATAFOLDER];
-      NSURL * url = [NSURL fileURLWithPath:pathToPage isDirectory:NO];
-      [self.webView loadRequest:[NSURLRequest requestWithURL: url]];
-    }
-    else
-      [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[self.webPages lastObject]]]];
-  }
+    [self.webView goBack];
   if ([self.webPages count]  == 1 && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
     self.navigationItem.leftBarButtonItem = nil;
   [self.webPages removeLastObject];
@@ -176,5 +158,10 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 -(void)goToMainMenu
 {
   [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
+-(BOOL)isImage:(NSString *)pageUrl
+{
+  return   (([pageUrl rangeOfString:@".svg"].location != NSNotFound) || ([pageUrl rangeOfString:@".png"].location != NSNotFound) || ([pageUrl rangeOfString:@".jpg"].location != NSNotFound));
 }
 @end
