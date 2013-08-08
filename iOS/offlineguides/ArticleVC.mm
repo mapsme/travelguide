@@ -6,7 +6,7 @@
 #import "../../env/assert.hpp"
 
 
-#define THUMBNAILSFOLDER @"/data/thumbnails/"
+#define THUMBNAILSFOLDER @"/data/thumb/"
 
 @interface ArticleVC ()
 {
@@ -76,12 +76,17 @@
   size_t const pos = thumbnail.find_last_of(".");
   string const imageName = thumbnail.substr(0, pos);
   string const imageType = thumbnail.substr(pos + 1);
+  NSLog(@"%@ %@", [NSString stringWithUTF8String:imageName.c_str()], [NSString stringWithUTF8String:imageType.c_str()]);
   NSString * imagePath = [[NSBundle mainBundle] pathForResource:[NSString stringWithUTF8String:imageName.c_str()] ofType:[NSString stringWithUTF8String:imageType.c_str()] inDirectory:THUMBNAILSFOLDER];
 
   cell.detailTextLabel.text = [NSString stringWithUTF8String:m_storage.FormatParentName(*info).c_str()];
 
   UIImage * image = [UIImage imageWithContentsOfFile:imagePath];
-  cell.imageView.image = image;
+  UIImageView * uiview = [[UIImageView alloc] initWithImage:image];
+  [uiview setFrame:CGRectMake(0, 0, 44, 44)];
+
+  cell.accessoryView = uiview;
+//  [cell.imageView setFrame:CGRectMake(cell.imageView.frame.origin.x, cell.imageView.frame.origin.y, cell.imageView.frame.size.height, 44)];
 
   return cell;
 }
@@ -102,16 +107,7 @@
 
   GuideVC * vc = [[GuideVC alloc] init];
   if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
-  {
-    BOOL rootVC = [self.navigationController.viewControllers count] == 1 ? YES : NO;
     [self.navigationController pushViewController:vc animated:YES];
-    if (rootVC)
-      self.loadedWebPages = [[NSMutableArray alloc] init];
-    else
-      [vc clearPreviosViews];
-  }
-
-  vc.webPages = self.loadedWebPages;
   NSString * url = [NSString stringWithUTF8String:info->GetUrl().c_str()];
   [vc loadPage:url];
   [self.delegate selectHtmlPageUrl:url];

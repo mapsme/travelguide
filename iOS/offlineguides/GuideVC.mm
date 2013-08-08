@@ -37,7 +37,6 @@
   return self;
 }
 
-
 - (void)viewDidLoad
 {
   [super viewDidLoad];
@@ -50,6 +49,8 @@
   NSString * pathToPage;
   if (r.length == 0)
     pathToPage = [[NSBundle mainBundle] pathForResource:pageUrl ofType:@"html" inDirectory:DATAFOLDER];
+  else
+    pathToPage = [[NSBundle mainBundle] pathForResource:[pageUrl substringToIndex:r.location] ofType:@"html" inDirectory:DATAFOLDER];
   NSURL * url = [NSURL fileURLWithPath:pathToPage isDirectory:NO];
   [self.webView loadRequest:[NSURLRequest requestWithURL: url]];
 }
@@ -174,8 +175,6 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 
 -(void)goToMainMenu
 {
-  ArticleVC * vc = [[ArticleVC alloc] init];
-  vc.loadedWebPages = [NSMutableArray arrayWithArray:self.webPages];
-  [self.navigationController pushViewController:vc animated:YES];
+  [self.navigationController popToRootViewControllerAnimated:YES];
 }
 @end
