@@ -27,13 +27,12 @@ public class ObbPathFinder extends OnObbStateChangeListener
   @Override
   public String getPath(ArticleInfo info)
   {
-    final String obbPath = "file://" + mSm.getMountedObbPath(RAW_PATH) + "/data/" + info.getArticleId();
-    return obbPath;
+    return getRootDir() + info.getArticleId();
   }
 
   public String getRootDir()
   {
-    return "file://" + mSm.getMountedObbPath(RAW_PATH);
+    return "file://" + mSm.getMountedObbPath(RAW_PATH) + "/data/";
   }
 
   @Override

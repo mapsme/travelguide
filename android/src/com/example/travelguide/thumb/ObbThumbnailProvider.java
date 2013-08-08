@@ -35,9 +35,8 @@ public class ObbThumbnailProvider extends OnObbStateChangeListener implements Th
   @Override
   public Drawable getThumbnailByUrl(String url)
   {
-    final String pathInObb = "" + mSm.getMountedObbPath(RAW_PATH) + "/data/thumb/" + url;
-    final Drawable drawable = BitmapDrawable.createFromPath(pathInObb);
-    return drawable;
+    final String pathInObb = mSm.getMountedObbPath(RAW_PATH) + "/data/thumb/" + url;
+    return BitmapDrawable.createFromPath(pathInObb);
   }
 
 }
