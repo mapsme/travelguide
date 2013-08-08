@@ -9,7 +9,7 @@
 #include "../std/iterator.hpp"
 
 
-namespace
+namespace storage
 {
 
 template <class ToDo>
@@ -136,6 +136,8 @@ public:
 
 }
 
+using namespace storage;
+
 void StorageBuilder::ParseEntries(string const & path)
 {
   DoAddEntries doAdd(*this);
@@ -229,7 +231,7 @@ bool StorageBuilder::operator == (Storage const & s) const
 }
 
 
-void InitStorageBuilderMock(StorageBuilder & builder)
+void StorageBuilder::InitMock()
 {
   ArticleInfoBuilder i1("London");
   i1.m_url = "London.html";
@@ -237,7 +239,7 @@ void InitStorageBuilderMock(StorageBuilder & builder)
   i1.m_parentUrl = "Great_Britain.html";
   i1.m_lat = 51.50726;
   i1.m_lon = -0.12765;
-  builder.Add(i1);
+  Add(i1);
 
   ArticleInfoBuilder i2("Lancaster");
   i2.m_url = "Lancaster.html";
@@ -245,19 +247,19 @@ void InitStorageBuilderMock(StorageBuilder & builder)
   i2.m_parentUrl = "Great_Britain.html";
   i2.m_lat = 54.04839;
   i2.m_lon = -2.79904;
-  builder.Add(i2);
+  Add(i2);
 
   ArticleInfoBuilder i3("Great Britain");
   i3.m_url = "Great_Britain.html";
   i3.m_thumbnailUrl = "great_britain.jpg";
   i3.m_lat = 54.70235;
   i3.m_lon = -3.27656;
-  builder.Add(i3);
+  Add(i3);
 }
 
 StorageMock::StorageMock()
 {
   StorageBuilder builder;
-  InitStorageBuilderMock(builder);
+  builder.InitMock();
   builder.Assign(*this);
 }

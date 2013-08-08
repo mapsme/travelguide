@@ -15,6 +15,16 @@ public:
   {
   }
 
+  ArticleInfoBuilder(string const & title, string const & url, string const & thumbnail,
+                     double lat, double lon)
+    : ArticleInfo(title)
+  {
+    m_url = url;
+    m_thumbnailUrl = thumbnail;
+    m_lat = lat;
+    m_lon = lon;
+  }
+
   string m_parentUrl;
 
   void Swap(ArticleInfoBuilder & b)
@@ -55,9 +65,11 @@ public:
     map<string, size_t>::const_iterator i = m_url2info.find(url);
     return (i == m_url2info.end() ? 0 : &m_info[i->second]);
   }
+
+  /// For tests only.
+  void InitMock();
 };
 
-void InitStorageBuilderMock(StorageBuilder & builder);
 
 class StorageMock : public Storage
 {

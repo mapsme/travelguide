@@ -6,25 +6,41 @@
 
 namespace wr { class Writer; }
 namespace rd { class Reader; }
+namespace storage { class DoAddEntries; }
 
 const int EMPTY_COORD = 1000;
 
 
 class ArticleInfo
 {
-  string m_key;
   void GenerateKey();
+
+protected:
+  string m_key;
+  string m_title;
+  string m_url;
+  string m_thumbnailUrl;
+  uint32_t m_length;
+  int32_t m_parentIndex;  // NO_PARENT is the root article
+  bool m_redirect;
+
+  static const int32_t NO_PARENT = -1;
+
+  /// Need access for protected fields in Build and Storage classes.
+  friend class Storage;
+  friend class StorageBuilder;
+  friend class storage::DoAddEntries;
 
 public:
   ArticleInfo()
     : m_length(0), m_parentIndex(NO_PARENT),
-      m_lat(EMPTY_COORD), m_lon(EMPTY_COORD), m_redirect(false)
+      m_redirect(false), m_lat(EMPTY_COORD), m_lon(EMPTY_COORD)
   {
   }
 
   ArticleInfo(string const & title)
     : m_title(title), m_length(0), m_parentIndex(NO_PARENT),
-      m_lat(EMPTY_COORD), m_lon(EMPTY_COORD), m_redirect(false)
+      m_redirect(false), m_lat(EMPTY_COORD), m_lon(EMPTY_COORD)
   {
     GenerateKey();
   }
@@ -32,23 +48,17 @@ public:
   ArticleInfo(string const & title, ArticleInfo const & src, bool redirect)
     : m_title(title), m_url(src.m_url), m_thumbnailUrl(src.m_thumbnailUrl),
       m_length(src.m_length), m_parentIndex(NO_PARENT),
-      m_lat(src.m_lat), m_lon(src.m_lon), m_redirect(redirect)
+      m_redirect(redirect), m_lat(src.m_lat), m_lon(src.m_lon)
   {
     GenerateKey();
   }
 
-  static const int32_t NO_PARENT = -1;
-
-  string m_title;
-  string m_url;
-  string m_thumbnailUrl;
-  uint32_t m_length;
-  int32_t m_parentIndex;  // NO_PARENT is the root article
+  string const & GetTitle() const { return m_title; }
+  string const & GetUrl() const { return m_url; }
+  string const & GetThumbnailUrl() const { return m_thumbnailUrl; }
 
   double m_lat, m_lon;
   bool IsValidCoordinates() const;
-
-  bool m_redirect;
 
   void Write(wr::Writer & w) const;
   void Read(rd::Reader & r);
@@ -59,17 +69,6 @@ public:
   void Swap(ArticleInfo & i);
 
   bool operator == (ArticleInfo const & r) const;
-
-  class LessScore
-  {
-    double m_lat, m_lon;
-  public:
-    LessScore(double lat, double lon) : m_lat(lat), m_lon(lon) {}
-    bool operator() (ArticleInfo const & i1, ArticleInfo const & i2) const
-    {
-      return i1.Score(m_lat, m_lon) < i2.Score(m_lat, m_lon);
-    }
-  };
 
   struct LessStorage
   {
@@ -113,5 +112,5 @@ inline void swap(ArticleInfo & a1, ArticleInfo & a2)
 
 inline string ToString(ArticleInfo const & i)
 {
-  return i.m_title;
+  return i.GetTitle();
 }

@@ -8,7 +8,6 @@ class AndStorage
 {
 public:
 
-
   AndStorage()
   {
     // TODO: ZipReader from apk.
@@ -24,30 +23,28 @@ public:
   void Query(string const & query, bool useLocation, double lat, double lon)
   {
     if (useLocation)
-      m_storage.QueryArticleInfos(m_result, query, lat, lon);
+      m_storage.QueryArticleInfo(query, lat, lon);
     else
-      m_storage.QueryArticleInfos(m_result, query);
+      m_storage.QueryArticleInfo(query);
   }
 
   int GetResultSize() const
   {
-    return static_cast<int>(m_result.size());
+    return static_cast<int>(m_storage.GetResultsCount());
   }
 
   ArticleInfo const & GetArticleInfoByIndex(int index) const
   {
-    return m_result[index];
+    return m_storage.GetResult(index);
   }
 
-  string GetParentName(ArticleInfo const & info)
+  string GetParentName(ArticleInfo const & info) const
   {
-    return m_storage.GetParentName(info);
+    return m_storage.FormatParentName(info);
   }
 
 private:
-  /// @todo Replace on Storage
   Storage m_storage;
-  vector<ArticleInfo> m_result;
 };
 
 #ifdef __cplusplus
@@ -95,9 +92,9 @@ JNIEXPORT jobject JNICALL Java_com_example_travelguide_cpp_Storage_getArticleInf
   jmethodID initId = env->GetMethodID(ArtInfoClass, "<init>", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;DD)V");
 
   return env->NewObject(ArtInfoClass, initId,
-       StdString2JString(env, info.m_url),
-       StdString2JString(env, info.m_thumbnailUrl),
-       StdString2JString(env, info.m_title),
+       StdString2JString(env, info.GetUrl()),
+       StdString2JString(env, info.GetThumbnailUrl()),
+       StdString2JString(env, info.GetTitle()),
        StdString2JString(env, STORAGE.GetParentName(info)),
        info.m_lat,
        info.m_lon);

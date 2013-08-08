@@ -1,8 +1,7 @@
 #import "ArticleVC.h"
 #import "GuideVC.h"
 
-/// @todo Replace on storage.hpp
-#import "../../storage/storage_builder.hpp"
+#import "../../storage/storage.hpp"
 
 #import "../../env/assert.hpp"
 
@@ -11,9 +10,7 @@
 
 @interface ArticleVC ()
 {
-  /// @todo Replace on Storage
   Storage m_storage;
-  vector<ArticleInfo> m_infos;
 }
 
 @property (nonatomic, strong) UISearchBar * searchBar;
@@ -61,7 +58,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-  return static_cast<NSInteger>(m_infos.size());
+  return static_cast<NSInteger>(m_storage.GetResultsCount());
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -73,14 +70,15 @@
     cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
   
   ArticleInfo const * info = [self infoByIndexPath:indexPath];
-  cell.textLabel.text = [NSString stringWithUTF8String:info->m_title.c_str()];
+  cell.textLabel.text = [NSString stringWithUTF8String:info->GetTitle().c_str()];
 
-  size_t pos = info->m_thumbnailUrl.find_last_of(".");
-  string imageName = info->m_thumbnailUrl.substr(0,pos);
-  string imageType = info->m_thumbnailUrl.substr(pos+1);
+  string const & thumbnail = info->GetThumbnailUrl();
+  size_t const pos = thumbnail.find_last_of(".");
+  string const imageName = thumbnail.substr(0, pos);
+  string const imageType = thumbnail.substr(pos + 1);
   NSString * imagePath = [[NSBundle mainBundle] pathForResource:[NSString stringWithUTF8String:imageName.c_str()] ofType:[NSString stringWithUTF8String:imageType.c_str()] inDirectory:THUMBNAILSFOLDER];
 
-  cell.detailTextLabel.text = [NSString stringWithUTF8String:m_storage.GetParentName(*info).c_str()];
+  cell.detailTextLabel.text = [NSString stringWithUTF8String:m_storage.FormatParentName(*info).c_str()];
 
   UIImage * image = [UIImage imageWithContentsOfFile:imagePath];
   cell.imageView.image = image;
@@ -114,8 +112,9 @@
   }
 
   vc.webPages = self.loadedWebPages;
-  [vc loadPage:[NSString stringWithUTF8String:info->m_url.c_str()]];
-  [self.delegate selectHtmlPageUrl:[NSString stringWithUTF8String:info->m_url.c_str()]];
+  NSString * url = [NSString stringWithUTF8String:info->GetUrl().c_str()];
+  [vc loadPage:url];
+  [self.delegate selectHtmlPageUrl:url];
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
@@ -127,22 +126,20 @@
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
-  //@todo add lat and lon to QueryInfos
-  m_storage.QueryArticleInfos(m_infos, [searchText UTF8String]);
+  /// @todo add lat and lon to QueryInfos
+  m_storage.QueryArticleInfo([searchText UTF8String]);
   [self.tableView reloadData];
 }
 
 #pragma mark - Utils methods
 -(ArticleInfo const *)infoByIndexPath:(NSIndexPath *)indexPath
 {
-  size_t const index = static_cast<size_t>(indexPath.row);
-  CHECK(index < m_infos.size(), ("Index is too big"));
-  return &m_infos[index];
+  return &m_storage.GetResult(static_cast<size_t>(indexPath.row));
 }
 
 -(NSString *)getDefaultArticle
 {
-  return [NSString stringWithUTF8String:m_infos[0].m_url.c_str()];
+  return [NSString stringWithUTF8String:m_storage.GetResult(0).GetUrl().c_str()];
 }
 
 -(void)clearSearchBackGround

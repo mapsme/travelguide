@@ -29,6 +29,5 @@ LOCAL_SRC_FILES += \
 	../../storage/article_info.cpp \
 	../../storage/distance.cpp \
 	../../storage/storage.cpp \
-	../../storage/storage_builder.cpp \
 
 include $(BUILD_SHARED_LIBRARY)

@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		7722E14817B01B0700CFB817 /* article_info.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7722E14717B01B0700CFB817 /* article_info.cpp */; };
 		7722E14A17B15C3600CFB817 /* distance.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7722E14917B15C3600CFB817 /* distance.cpp */; };
-		7722E14C17B2638B00CFB817 /* storage_builder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7722E14B17B2638B00CFB817 /* storage_builder.cpp */; };
 		A3E221F317AFB4C20018AB9E /* storage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A3E221F217AFB4C20018AB9E /* storage.cpp */; };
 		A3E2220C17AFD5840018AB9E /* data in Resources */ = {isa = PBXBuildFile; fileRef = A3E2220B17AFD5840018AB9E /* data */; };
 		A3E2220F17AFD9E10018AB9E /* assert.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A3E2220E17AFD9E10018AB9E /* assert.cpp */; };
@@ -44,7 +43,6 @@
 /* Begin PBXFileReference section */
 		7722E14717B01B0700CFB817 /* article_info.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = article_info.cpp; path = ../../storage/article_info.cpp; sourceTree = "<group>"; };
 		7722E14917B15C3600CFB817 /* distance.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = distance.cpp; path = ../../storage/distance.cpp; sourceTree = "<group>"; };
-		7722E14B17B2638B00CFB817 /* storage_builder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = storage_builder.cpp; path = ../../storage/storage_builder.cpp; sourceTree = "<group>"; };
 		A3E221F217AFB4C20018AB9E /* storage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = storage.cpp; path = ../../storage/storage.cpp; sourceTree = "<group>"; };
 		A3E2220B17AFD5840018AB9E /* data */ = {isa = PBXFileReference; lastKnownFileType = folder; name = data; path = ../../data; sourceTree = "<group>"; };
 		A3E2220E17AFD9E10018AB9E /* assert.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = assert.cpp; path = ../../env/assert.cpp; sourceTree = "<group>"; };
@@ -101,7 +99,6 @@
 		A3E221ED17AFB49B0018AB9E /* storage */ = {
 			isa = PBXGroup;
 			children = (
-				7722E14B17B2638B00CFB817 /* storage_builder.cpp */,
 				7722E14917B15C3600CFB817 /* distance.cpp */,
 				7722E14717B01B0700CFB817 /* article_info.cpp */,
 				A3E221F217AFB4C20018AB9E /* storage.cpp */,
@@ -284,7 +281,6 @@
 				ED81956E17B10578004F3803 /* strings.cpp in Sources */,
 				ED81957117B10598004F3803 /* utf8proc.c in Sources */,
 				7722E14A17B15C3600CFB817 /* distance.cpp in Sources */,
-				7722E14C17B2638B00CFB817 /* storage_builder.cpp in Sources */,
 				ED893F6917B223920074E05A /* MapsWithMeAPI.m in Sources */,
 				ED893F6C17B231F20074E05A /* IPadSplitVC.m in Sources */,
 				ED4F8BAD17B2E67100ADD795 /* file_handle.cpp in Sources */,
