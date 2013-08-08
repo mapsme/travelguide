@@ -124,16 +124,22 @@ public class ArticleInfoListFragment extends ListFragment implements LoaderCallb
   public void onResume()
   {
     super.onResume();
-
-    final long currentTime = System.currentTimeMillis();
-    if (currentTime - sLastLocationRequestTime > LOCATION_UPDATE_INTERVAL)
+    if (System.currentTimeMillis() - sLastLocationRequestTime > LOCATION_UPDATE_INTERVAL)
     {
       // reqestSingleUpdate() listen for single update
       // and when get it will unsubscribe from LocationManager
-      mLocationManager.requestSingleUpdate(LocationManager.GPS_PROVIDER, this, null);
-      mLocationManager.requestSingleUpdate(LocationManager.NETWORK_PROVIDER, this, null);
-      sLastLocationRequestTime = currentTime;
+      if (mLocationManager.isProviderEnabled(LocationManager.GPS_PROVIDER))
+        mLocationManager.requestSingleUpdate(LocationManager.GPS_PROVIDER, this, null);
+      if (mLocationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER))
+        mLocationManager.requestSingleUpdate(LocationManager.NETWORK_PROVIDER, this, null);
     }
+  }
+
+  @Override
+  public void onPause()
+  {
+    super.onPause();
+    mLocationManager.removeUpdates(this);
   }
 
   @Override
@@ -314,7 +320,9 @@ public class ArticleInfoListFragment extends ListFragment implements LoaderCallb
 
   @Override
   public void onLocationChanged(Location location)
-  {}
+  {
+    sLastLocationRequestTime = System.currentTimeMillis();
+  }
 
   @Override
   public void onProviderDisabled(String provider)
