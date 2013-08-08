@@ -1,8 +1,7 @@
 #include "and_storage.hpp"
 #include "jni_util.hpp"
 
-/// @todo Replace on storage.hpp
-#include "../../storage/storage_builder.hpp"
+#include "../../storage/storage.hpp"
 
 
 class AndStorage
@@ -12,7 +11,7 @@ public:
 
   AndStorage()
   {
-    // TODO: change path
+    // TODO: ZipReader from apk.
     m_storage.Load("/storage/sdcard0/index.dat");
   }
 
