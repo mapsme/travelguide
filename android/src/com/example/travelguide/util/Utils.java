@@ -2,9 +2,11 @@ package com.example.travelguide.util;
 
 import java.io.File;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
@@ -99,6 +101,13 @@ public class Utils
   public static boolean isApiLevelAbove(int version)
   {
     return Build.VERSION.SDK_INT > version;
+  }
+
+  public static void hideKeyboard(Activity activity)
+  {
+    activity
+      .getWindow()
+      .setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
   }
 
 }

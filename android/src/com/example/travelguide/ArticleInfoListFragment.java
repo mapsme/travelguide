@@ -27,6 +27,7 @@ import android.widget.TextView;
 import com.example.travelguide.article.ArticleInfo;
 import com.example.travelguide.async.QueryResultLoader;
 import com.example.travelguide.cpp.Storage;
+import com.example.travelguide.util.Utils;
 import com.example.travelguide.widget.StorageArticleInfoAdapter;
 import com.mapswithme.maps.api.MWMPoint;
 import com.mapswithme.maps.api.MapsWithMeApi;
@@ -130,6 +131,13 @@ public class ArticleInfoListFragment extends ListFragment implements LoaderCallb
   public void onResume()
   {
     super.onResume();
+
+    checkLocation();
+    Utils.hideKeyboard(getActivity());
+  }
+
+  private void checkLocation()
+  {
     if (System.currentTimeMillis() - sLastLocationRequestTime > LOCATION_UPDATE_INTERVAL)
     {
       // reqestSingleUpdate() listen for single update
