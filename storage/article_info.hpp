@@ -56,6 +56,8 @@ public:
   string GetUrl() const { return m_url + ".html"; }
   string GetThumbnailUrl() const { return m_url + ".jpg"; }
 
+  bool IsRedirect() const { return m_redirect; }
+
   double m_lat, m_lon;
   bool IsValidCoordinates() const;
 
