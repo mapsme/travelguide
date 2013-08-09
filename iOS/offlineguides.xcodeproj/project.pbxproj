@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		7722E14817B01B0700CFB817 /* article_info.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7722E14717B01B0700CFB817 /* article_info.cpp */; };
 		7722E14A17B15C3600CFB817 /* distance.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7722E14917B15C3600CFB817 /* distance.cpp */; };
+		A3BC9CE417B4E1FD0007AFD5 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A3BC9CE317B4E1FD0007AFD5 /* Settings.bundle */; };
 		A3E221F317AFB4C20018AB9E /* storage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A3E221F217AFB4C20018AB9E /* storage.cpp */; };
 		A3E2220C17AFD5840018AB9E /* data in Resources */ = {isa = PBXBuildFile; fileRef = A3E2220B17AFD5840018AB9E /* data */; };
 		A3E2220F17AFD9E10018AB9E /* assert.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A3E2220E17AFD9E10018AB9E /* assert.cpp */; };
@@ -46,6 +47,7 @@
 /* Begin PBXFileReference section */
 		7722E14717B01B0700CFB817 /* article_info.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = article_info.cpp; path = ../../storage/article_info.cpp; sourceTree = "<group>"; };
 		7722E14917B15C3600CFB817 /* distance.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = distance.cpp; path = ../../storage/distance.cpp; sourceTree = "<group>"; };
+		A3BC9CE317B4E1FD0007AFD5 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		A3E221F217AFB4C20018AB9E /* storage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = storage.cpp; path = ../../storage/storage.cpp; sourceTree = "<group>"; };
 		A3E2220B17AFD5840018AB9E /* data */ = {isa = PBXFileReference; lastKnownFileType = folder; name = data; path = ../../data; sourceTree = "<group>"; };
 		A3E2220E17AFD9E10018AB9E /* assert.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = assert.cpp; path = ../../env/assert.cpp; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 		ED81954C17AED762004F3803 /* offlineguides */ = {
 			isa = PBXGroup;
 			children = (
+				A3BC9CE317B4E1FD0007AFD5 /* Settings.bundle */,
 				ED81956F17B10585004F3803 /* 3rdParty */,
 				A3E2220D17AFD9CC0018AB9E /* env */,
 				A3E2220B17AFD5840018AB9E /* data */,
@@ -273,6 +276,7 @@
 				ED64332517B4D14F000985FE /* bg_search@2x.png in Resources */,
 				ED64332817B4D6CB000985FE /* bg_landscape_header.png in Resources */,
 				ED64332917B4D6CB000985FE /* bg_landscape_header@2x.png in Resources */,
+				A3BC9CE417B4E1FD0007AFD5 /* Settings.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
