@@ -35,7 +35,7 @@ function openSection(section) {
   if (contentSection) {
     contentSection.className += " openSection";
   }
-  location.hash = '#' + section.id;
+  location.replace('#' + section.id);
 }
 
 function onSectionClick(event) {
