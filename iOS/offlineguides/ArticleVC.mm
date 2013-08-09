@@ -54,7 +54,6 @@
                                  green:102.f/255.f
                                   blue:102.f/255.f
                                  alpha:1.f]];
-    self.tableView.tableHeaderView = self.searchBar;
     self.searchBar.text = @"";
     [self searchBar:self.searchBar textDidChange:@""];
 
@@ -125,7 +124,10 @@
 - (void)viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
-  [self.navigationController setNavigationBarHidden:YES animated:animated];
+  [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"bg_search"] forBarMetrics:UIBarMetricsDefault];
+  [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"bg_search"] forBarMetrics:UIBarMetricsLandscapePhone];
+  [self.navigationController setNavigationBarHidden:NO animated:animated];
+  self.navigationItem.titleView = self.searchBar;
 }
 
 #pragma mark - Table view delegate

@@ -13,11 +13,12 @@
     if (self)
     {
       self.delegate = self;
-      ArticleVC * vc = [[ArticleVC alloc] initWithStyle:UITableViewStylePlain];
-      vc.delegate = self;
+      ArticleVC * articleVC = [[ArticleVC alloc] initWithStyle:UITableViewStylePlain];
+      articleVC.delegate = self;
+      UINavigationController * navVC = [[UINavigationController alloc] initWithRootViewController:articleVC];
       UINavigationController * v = [[UINavigationController alloc] initWithRootViewController:[[GuideVC alloc] init]];
       v.navigationBarHidden = NO;
-      self.viewControllers = @[vc, v];
+      self.viewControllers = @[navVC, v];
     }
     return self;
 }
@@ -30,10 +31,10 @@
 -(void)viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
-  ArticleVC * vc = (ArticleVC *)[self.viewControllers objectAtIndex:0];
+  UINavigationController * articleNavVC = [self.viewControllers objectAtIndex:0];
   UINavigationController * navVC = (UINavigationController*)[self.viewControllers objectAtIndex:1];
   GuideVC * g = (GuideVC *)navVC.visibleViewController;
-  [g loadPage:[vc getDefaultArticle]];
+  [g loadPage:[(ArticleVC *)articleNavVC.visibleViewController getDefaultArticle]];
 }
 
 -(void)selectHtmlPageUrl:(NSString *)url

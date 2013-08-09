@@ -61,8 +61,8 @@
 {
   [super viewWillAppear:animated];
   [self.navigationController setNavigationBarHidden:NO animated:NO];
-  [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"bg_header.png"] forBarMetrics:UIBarMetricsDefault];
-  [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"bg_header.png"] forBarMetrics:UIBarMetricsLandscapePhone];
+  [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"bg_header"] forBarMetrics:UIBarMetricsDefault];
+  [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"bg_header"] forBarMetrics:UIBarMetricsLandscapePhone];
 
   if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
     self.navigationItem.rightBarButtonItem =  [self getCustomButtonWithImage:@"ic_articleselection"];
@@ -190,7 +190,8 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
   if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
   {
     UISplitViewController * splitControl =  (UISplitViewController *)[[UIApplication sharedApplication] delegate].window.rootViewController;
-    return [splitControl.viewControllers objectAtIndex:0];
+    UINavigationController * navVC = [splitControl.viewControllers objectAtIndex:0];
+    return (ArticleVC *)navVC.visibleViewController;
   }
   else
     return [self.navigationController.viewControllers objectAtIndex:0];
