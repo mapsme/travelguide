@@ -41,7 +41,6 @@
   UINavigationController * navVC = (UINavigationController*)[self.viewControllers objectAtIndex:1];
   GuideVC * g = (GuideVC *)navVC.visibleViewController;
   g.navigationItem.leftBarButtonItem = nil;
-  g.webPages = [NSMutableArray arrayWithArray:@[]];
   [g loadPage:url];
   [self.pop dismissPopoverAnimated:YES];
 }

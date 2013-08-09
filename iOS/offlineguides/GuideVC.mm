@@ -10,6 +10,7 @@
 {
   float m_webViewScale;
   float m_webViewScaleOnStart;
+  size_t  m_numberOfPages;
 }
 
 @property (nonatomic, strong) UIWebView * webView;
@@ -33,7 +34,7 @@
     self.view  = self.webView;
     m_webViewScale = 1.0;
     m_webViewScaleOnStart = 0.0;
-    _webPages = [[NSMutableArray alloc] initWithObjects:nil];
+    m_numberOfPages = 0;
   }
   return self;
 }
@@ -65,7 +66,7 @@
 
   if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
     self.navigationItem.rightBarButtonItem =  [self getCustomButtonWithImage:@"ic_articleselection"];
-  if ([self.webPages count])
+  if (m_numberOfPages)
     self.navigationItem.leftBarButtonItem =  [self getCustomButtonWithImage:@"ic_back"];
   if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
     self.navigationItem.leftBarButtonItem =  [self getCustomButtonWithImage:@"ic_back"];
@@ -80,12 +81,12 @@
 {
   NSString * str = [self normalizeUrl:[[request URL] absoluteString]];
   [self updateTitle:str];
-  [self.webPages addObject:str];
+  ++m_numberOfPages;
   if ([self isImage:str])
     self.webView.scalesPageToFit = YES;
   else
     self.webView.scalesPageToFit = NO;
-  if ([self.webPages count]  > 1 && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+  if (m_numberOfPages > 1 && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
     self.navigationItem.leftBarButtonItem =  [self getCustomButtonWithImage:@"ic_back"];
   return YES;
 }
@@ -119,8 +120,8 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 
 -(void)back
 {
-  [self.webPages removeLastObject];
-  if ([self.webPages count] == 0)
+  --m_numberOfPages;
+  if (m_numberOfPages == 0)
   {
     [self.navigationController popToRootViewControllerAnimated:YES];
     return;
@@ -130,10 +131,9 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     [self.webView goBack];
     [self updateTitle:[self normalizeUrl:[[self.webView.request URL] absoluteString]]];
   }
-  if ([self.webPages count]  == 1 && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+  if (m_numberOfPages  == 1 && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
     self.navigationItem.leftBarButtonItem = nil;
-  [self.webPages removeLastObject];
-
+  --m_numberOfPages;
 }
 
 -(UIBarButtonItem *)getCustomButtonWithImage:(NSString *)name
