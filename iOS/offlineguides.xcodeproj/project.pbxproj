@@ -132,7 +132,6 @@
 		ED81953A17AED761004F3803 = {
 			isa = PBXGroup;
 			children = (
-				ED64331017B41533000985FE /* CoreLocation.framework */,
 				ED81954C17AED762004F3803 /* offlineguides */,
 				ED81954517AED762004F3803 /* Frameworks */,
 				ED81954417AED762004F3803 /* Products */,
@@ -150,6 +149,7 @@
 		ED81954517AED762004F3803 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				ED64331017B41533000985FE /* CoreLocation.framework */,
 				ED81954617AED762004F3803 /* UIKit.framework */,
 				ED81954817AED762004F3803 /* Foundation.framework */,
 				ED81954A17AED762004F3803 /* CoreGraphics.framework */,
