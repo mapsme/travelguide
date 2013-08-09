@@ -4,25 +4,25 @@
 
 - (id)initWithReuseIdentifier:(NSString *)reuseIdentifier
 {
-    self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
-    if (self)
-    {
-      _mainImage = [[UIImageView alloc] init];
-      _mainTitile = [[UILabel alloc] init];
-      _subTitile =  [[UILabel alloc] init];
-      self.mainTitile.backgroundColor = [UIColor clearColor];
-      self.mainTitile.font = [UIFont fontWithName:@"Helvetica-Regular" size:25];
-      self.subTitile.backgroundColor = [UIColor clearColor];
-      self.subTitile.font = [UIFont fontWithName:@"Helvetica-Light" size:13];
-      self.subTitile.textColor  = [UIColor colorWithRed:51.f/255.f
-                                                  green:51.f/255.f
-                                                   blue:51.f/255.f
-                                                  alpha:1.f];
-      [self.contentView addSubview:self.mainImage];
-      [self.contentView addSubview:self.mainTitile];
-      [self.contentView addSubview:self.subTitile];
-    }
-    return self;
+  self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
+  if (self)
+  {
+    _mainImage = [[UIImageView alloc] init];
+    _mainTitile = [[UILabel alloc] init];
+    _subTitile =  [[UILabel alloc] init];
+    self.mainTitile.backgroundColor = [UIColor clearColor];
+    self.mainTitile.font = [UIFont fontWithName:@"Helvetica-Regular" size:25];
+    self.subTitile.backgroundColor = [UIColor clearColor];
+    self.subTitile.font = [UIFont fontWithName:@"Helvetica-Light" size:13];
+    self.subTitile.textColor  = [UIColor colorWithRed:51.f/255.f
+                                                green:51.f/255.f
+                                                 blue:51.f/255.f
+                                                alpha:1.f];
+    [self.contentView addSubview:self.mainImage];
+    [self.contentView addSubview:self.mainTitile];
+    [self.contentView addSubview:self.subTitile];
+  }
+  return self;
 }
 
 
