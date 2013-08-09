@@ -1,5 +1,7 @@
 package com.example.travelguide;
 
+import android.app.Activity;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -143,5 +145,11 @@ public class ArticleInfoListActivity extends FragmentActivity implements Article
       mArtInfoDetailFragment.goBack();
     else
       super.onBackPressed();
+  }
+
+  public static PendingIntent createPendingIntent(Activity activity)
+  {
+    final Intent intent = new Intent(activity, ArticleInfoListActivity.class);
+    return PendingIntent.getActivity(activity, 0, intent, 0);
   }
 }

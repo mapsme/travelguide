@@ -11,6 +11,9 @@ import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
 
+import com.example.travelguide.article.ArticleInfo;
+import com.mapswithme.maps.api.MWMPoint;
+
 public class Utils
 {
   public static View hideView(View view)
@@ -108,6 +111,13 @@ public class Utils
     activity
       .getWindow()
       .setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+  }
+
+  public static MWMPoint articleInfo2MwmPoint(ArticleInfo info)
+  {
+    final String url = info.getArticleId();
+    final String id = url.substring(0, url.lastIndexOf('.'));
+    return new MWMPoint(info.getLat(), info.getLon(), info.getName(), id);
   }
 
 }

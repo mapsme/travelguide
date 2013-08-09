@@ -7,9 +7,7 @@ import static com.example.travelguide.util.Utils.showView;
 import java.util.ArrayList;
 
 import android.app.Activity;
-import android.app.PendingIntent;
 import android.content.Context;
-import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -332,19 +330,16 @@ public class ArticleInfoListFragment extends ListFragment implements LoaderCallb
     for (int i = 0; i < count; ++i)
     {
       final ArticleInfo info = Storage.getArticleInfoByIndex(i);
-      final String url = info.getArticleId();
-      final String id = url.substring(0, url.lastIndexOf('.'));
       if (info.isValidLatLon())
-        points.add(new MWMPoint(info.getLat(), info.getLon(), info.getName(), id));
+        points.add(Utils.articleInfo2MwmPoint(info));
     }
     if (points.size() < 1)
       return;
 
-    final Activity a = getActivity();
-    final Intent intent = new Intent(a, ArticleInfoListActivity.class);
-    final PendingIntent pi = PendingIntent.getActivity(a, 0, intent, 0);
     MapsWithMeApi.showPointsOnMap
-      (a, "Hello, my articles!", pi, points.toArray(new MWMPoint[points.size()]));
+      (getActivity(), "Hello, my articles!",
+       ArticleInfoListActivity.createPendingIntent(getActivity()),
+       points.toArray(new MWMPoint[points.size()]));
   }
 
   private Location getLocation()
