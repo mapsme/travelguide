@@ -2,6 +2,8 @@
 #import "GuideVC.h"
 #import "GuideCell.h"
 
+#import "MapsWithMeAPI.h"
+
 #import "../../storage/storage.hpp"
 
 #import "../../env/assert.hpp"
@@ -21,6 +23,24 @@
 @end
 
 @implementation ArticleVC
+
+- (void)onShowMap:(id)button
+{
+  size_t const count = m_storage.GetResultsCount();
+  NSMutableArray * pins = [[NSMutableArray alloc] initWithCapacity:count];
+
+  for (size_t i = 0; i < count; ++ i)
+  {
+    ArticleInfo const & article = m_storage.GetResult(i);
+    if (!article.IsRedirect() && article.IsValidCoordinates())
+    {
+      NSString * title = [NSString stringWithUTF8String:article.GetTitle().c_str()];
+      NSString * pageId = [NSString stringWithUTF8String:article.GetUrl().c_str()];
+      [pins addObject:[[MWMPin alloc] initWithLat:article.m_lat lon:article.m_lon title:title andId:pageId]];
+    }
+  }
+  [MWMApi showPins:pins];
+}
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
