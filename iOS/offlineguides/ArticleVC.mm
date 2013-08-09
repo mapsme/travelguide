@@ -195,7 +195,7 @@
 
 -(NSString *)getArticleName:(NSString *)htmlId
 {
-  ArticleInfo const * tmp =  m_storage.GetTitleFromUrl([htmlId UTF8String]);
+  ArticleInfo const * tmp =  m_storage.GetArticleInfoFromUrl([htmlId UTF8String]);
   return [NSString stringWithUTF8String:tmp->GetTitle().c_str()];
 }
 
