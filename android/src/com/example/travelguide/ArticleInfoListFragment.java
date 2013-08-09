@@ -3,6 +3,9 @@ package com.example.travelguide;
 import static com.example.travelguide.util.Utils.hideIf;
 import static com.example.travelguide.util.Utils.hideView;
 import static com.example.travelguide.util.Utils.showView;
+
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -261,6 +264,7 @@ public class ArticleInfoListFragment extends ListFragment implements LoaderCallb
     return null;
   }
 
+  @SuppressWarnings("static-access")
   @Override
   public void onLoadFinished(Loader<Storage> loader, Storage result)
   {
@@ -315,23 +319,32 @@ public class ArticleInfoListFragment extends ListFragment implements LoaderCallb
       // TODO: show about dialog
     }
     else if (v.getId() == mShowMapForAll.getId())
+      openInMwm();
+  }
+
+  private void openInMwm()
+  {
+    final int count = Storage.getResultSize();
+    if (count < 1)
+        return;
+
+    final ArrayList<MWMPoint> points = new ArrayList<MWMPoint>();
+    for (int i = 0; i < count; ++i)
     {
-      final int count = Storage.getResultSize();
-      MWMPoint points[] = new MWMPoint[count];
-
-      for (int i = 0; i < count; ++i)
-      {
-        final ArticleInfo info = Storage.getArticleInfoByIndex(i);
-        final String url = info.getArticleId();
-        final String id = url.substring(0, url.lastIndexOf('.'));
-        points[i] = new MWMPoint(info.getLat(), info.getLon(), info.getName(), id);
-      }
-
-      final Activity a = getActivity();
-      final Intent intent = new Intent(a, ArticleInfoListActivity.class);
-      final PendingIntent pi = PendingIntent.getActivity(a, 0, intent, 0);
-      MapsWithMeApi.showPointsOnMap(a, "Hello, my articles!", pi, points);
+      final ArticleInfo info = Storage.getArticleInfoByIndex(i);
+      final String url = info.getArticleId();
+      final String id = url.substring(0, url.lastIndexOf('.'));
+      if (info.isValidLatLon())
+        points.add(new MWMPoint(info.getLat(), info.getLon(), info.getName(), id));
     }
+    if (points.size() < 1)
+      return;
+
+    final Activity a = getActivity();
+    final Intent intent = new Intent(a, ArticleInfoListActivity.class);
+    final PendingIntent pi = PendingIntent.getActivity(a, 0, intent, 0);
+    MapsWithMeApi.showPointsOnMap
+      (a, "Hello, my articles!", pi, points.toArray(new MWMPoint[points.size()]));
   }
 
   private Location getLocation()

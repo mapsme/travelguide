@@ -4,6 +4,7 @@
 #include "../../storage/storage.hpp"
 
 #include "../../env/reader.hpp"
+#include "../../env/latlon.hpp"
 
 #include <android/asset_manager_jni.h>
 
@@ -146,6 +147,12 @@ JNIEXPORT jobject JNICALL Java_com_example_travelguide_cpp_Storage_getArticleInf
   (JNIEnv * env, jclass clazz, jstring url)
 {
   return NativeArticle2JavaArticle(env, STORAGE.GetArticleInfoByUrl(JString2StdString(env, url)));
+}
+
+JNIEXPORT jboolean JNICALL Java_com_example_travelguide_cpp_Storage_isValidLatLon
+  (JNIEnv * env, jclass clazz, jdouble lat, jdouble lon)
+{
+  return ll::ValidLat(lat) && ll::ValidLon(lon) ? JNI_TRUE : JNI_FALSE;
 }
 
 

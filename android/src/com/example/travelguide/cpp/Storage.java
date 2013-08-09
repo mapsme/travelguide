@@ -32,6 +32,7 @@ public class Storage
 
   public native static ArticleInfo getArticleInfoByIndex(int index);
 
-  native private static void nativeInitIndex(AssetManager am);
+  private native static void nativeInitIndex(AssetManager am);
 
+  public native static boolean isValidLatLon(double lat, double lon);
 }

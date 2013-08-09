@@ -67,8 +67,18 @@ public class ArticleInfoListActivity extends FragmentActivity implements Article
     handleIntent(getIntent());
   }
 
+  @Override
+  protected void onNewIntent(Intent intent)
+  {
+    super.onNewIntent(intent);
+    handleIntent(intent);
+  }
+
   private void handleIntent(Intent intent)
   {
+    if ((intent.getFlags() & Intent.FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY) != 0)
+      return;
+
     final MWMResponse mwmResponse = MWMResponse.extractFromIntent(this, intent);
     final MWMPoint point = mwmResponse.getPoint();
 
