@@ -159,7 +159,7 @@ public class ArticleInfoDetailFragment extends Fragment implements OnClickListen
       else
       {
         final Intent i = new Intent(getActivity(), ArticleInfoListActivity.class);
-        startActivity(i);
+        startActivity(i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
       }
     }
   }

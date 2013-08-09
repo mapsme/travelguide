@@ -115,16 +115,9 @@ public class ArticleInfoListFragment extends ListFragment implements LoaderCallb
 
     mLocationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
 
-    // Load initial data
-    final Bundle args = new Bundle(1);
-    args.putString(KEY_QUERY, "");
-    getLoaderManager().initLoader(SEARCH_LOADER, args, this).forceLoad();
-
     // Restore the previously serialized activated item position.
     if (savedInstanceState != null && savedInstanceState.containsKey(STATE_ACTIVATED_POSITION))
-    {
       setActivatedPosition(savedInstanceState.getInt(STATE_ACTIVATED_POSITION));
-    }
   }
 
   @Override
@@ -132,8 +125,9 @@ public class ArticleInfoListFragment extends ListFragment implements LoaderCallb
   {
     super.onResume();
 
-    checkLocation();
     Utils.hideKeyboard(getActivity());
+    checkLocation();
+    search(mSearchText.getText().toString());
   }
 
   private void checkLocation()
@@ -163,9 +157,7 @@ public class ArticleInfoListFragment extends ListFragment implements LoaderCallb
 
     // Activities containing this fragment must implement its callbacks.
     if (!(activity instanceof Callbacks))
-    {
       throw new IllegalStateException("Activity must implement fragment's callbacks.");
-    }
 
     mCallbacks = (Callbacks) activity;
   }
@@ -174,11 +166,11 @@ public class ArticleInfoListFragment extends ListFragment implements LoaderCallb
   public void onDetach()
   {
     super.onDetach();
-
     // Reset the active callbacks interface to the dummy implementation.
-    mCallbacks = sDummyCallbacks;
 
-    getLoaderManager().destroyLoader(SEARCH_LOADER);
+    mCallbacks = sDummyCallbacks;
+    if (getLoaderManager().hasRunningLoaders())
+      getLoaderManager().destroyLoader(SEARCH_LOADER);
   }
 
   @Override
