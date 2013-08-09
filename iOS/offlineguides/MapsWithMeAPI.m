@@ -44,7 +44,7 @@ static NSString * MWMUrlScheme = @"mapswithme://";
   return self;
 }
 
-- (id) initWithLat:(double)lat lon:(double)lon title:(NSString *)title and:(NSString *)idOrUrl
+- (id) initWithLat:(double)lat lon:(double)lon title:(NSString *)title andId:(NSString *)idOrUrl
 {
   if ((self = [super init]))
   {
@@ -127,7 +127,7 @@ static NSString * MWMUrlScheme = @"mapswithme://";
 
 + (BOOL) showLat:(double)lat lon:(double)lon title:(NSString *)title andId:(NSString *)idOrUrl
 {
-  MWMPin * pin = [[MWMPin alloc] initWithLat:lat lon:lon title:title and:idOrUrl];
+  MWMPin * pin = [[MWMPin alloc] initWithLat:lat lon:lon title:title andId:idOrUrl];
   return [MWMApi showPin:pin];
 }
 

@@ -42,7 +42,7 @@
 // [optional] passed back to the app when pin is clicked, OR, if it's a valid url,
 // it will be opened from MapsWithMe after selecting "More Details..." for the pin
 @property (nonatomic, retain) NSString * idOrUrl;
-- (id) initWithLat:(double)lat lon:(double)lon title:(NSString *)title and:(NSString *)idOrUrl;
+- (id) initWithLat:(double)lat lon:(double)lon title:(NSString *)title andId:(NSString *)idOrUrl;
 @end
 
 
