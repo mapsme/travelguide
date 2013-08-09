@@ -11,6 +11,17 @@
         android:layout_height="@dimen/search_bar"
         android:background="@color/dark_grey" >
 
+        <ImageView
+            android:id="@+id/about"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/top_bar_selector"
+            android:paddingLeft="@dimen/pad_small"
+            android:paddingRight="@dimen/pad_small"
+            android:src="@drawable/ic_info" />
+
         <TextView
             style="@android:style/TextAppearance.Medium"
             android:layout_width="wrap_content"
@@ -21,7 +32,7 @@
             android:textStyle="bold" />
 
         <ImageView
-            android:id="@+id/about"
+            android:id="@+id/showMapForAll"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
@@ -29,7 +40,7 @@
             android:background="@drawable/top_bar_selector"
             android:paddingLeft="@dimen/pad_small"
             android:paddingRight="@dimen/pad_small"
-            android:src="@drawable/ic_info" />
+            android:src="@android:drawable/ic_dialog_map" />
     </RelativeLayout>
 
     <LinearLayout

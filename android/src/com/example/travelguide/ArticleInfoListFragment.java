@@ -4,7 +4,9 @@ import static com.example.travelguide.util.Utils.hideIf;
 import static com.example.travelguide.util.Utils.hideView;
 import static com.example.travelguide.util.Utils.showView;
 import android.app.Activity;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -26,6 +28,8 @@ import com.example.travelguide.article.ArticleInfo;
 import com.example.travelguide.async.QueryResultLoader;
 import com.example.travelguide.cpp.Storage;
 import com.example.travelguide.widget.StorageArticleInfoAdapter;
+import com.mapswithme.maps.api.MWMPoint;
+import com.mapswithme.maps.api.MapsWithMeApi;
 
 /**
  * A list fragment representing a list of ArticleInfos. This fragment also
@@ -39,6 +43,7 @@ import com.example.travelguide.widget.StorageArticleInfoAdapter;
 public class ArticleInfoListFragment extends ListFragment implements LoaderCallbacks<Storage>, TextWatcher,
     OnClickListener, LocationListener
 {
+  private static final String TAG = ArticleInfoListFragment.class.getSimpleName();
 
   public interface OnListIconClickedListener
   {
@@ -69,6 +74,7 @@ public class ArticleInfoListFragment extends ListFragment implements LoaderCallb
   private View mProgressContainer;
   private View mHeader;
   private View mAbout;
+  private View mShowMapForAll;
 
   // Location
   private LocationManager mLocationManager;
@@ -218,10 +224,13 @@ public class ArticleInfoListFragment extends ListFragment implements LoaderCallb
     mProgressContainer = mRootView.findViewById(R.id.progressContainer);
     mHeader = mRootView.findViewById(R.id.header);
     mAbout = mRootView.findViewById(R.id.about);
+    mShowMapForAll = mRootView.findViewById(R.id.showMapForAll);
+
     // setup listeners
     mSearchText.addTextChangedListener(this);
     mCross.setOnClickListener(this);
     mAbout.setOnClickListener(this);
+    mShowMapForAll.setOnClickListener(this);
 
     return mRootView;
   }
@@ -271,7 +280,6 @@ public class ArticleInfoListFragment extends ListFragment implements LoaderCallb
   {
     hideView(mProgressContainer);
     showView(mListContainer);
-
   }
 
   private void search(CharSequence s)
@@ -305,6 +313,24 @@ public class ArticleInfoListFragment extends ListFragment implements LoaderCallb
     else if (v.getId() == mAbout.getId())
     {
       // TODO: show about dialog
+    }
+    else if (v.getId() == mShowMapForAll.getId())
+    {
+      final int count = Storage.getResultSize();
+      MWMPoint points[] = new MWMPoint[count];
+
+      for (int i = 0; i < count; ++i)
+      {
+        final ArticleInfo info = Storage.getArticleInfoByIndex(i);
+        final String url = info.getArticleId();
+        final String id = url.substring(0, url.lastIndexOf('.'));
+        points[i] = new MWMPoint(info.getLat(), info.getLon(), info.getName(), id);
+      }
+
+      final Activity a = getActivity();
+      final Intent intent = new Intent(a, ArticleInfoListActivity.class);
+      final PendingIntent pi = PendingIntent.getActivity(a, 0, intent, 0);
+      MapsWithMeApi.showPointsOnMap(a, "Hello, my articles!", pi, points);
     }
   }
 

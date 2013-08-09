@@ -3,8 +3,12 @@ package com.example.travelguide;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 
 import com.example.travelguide.article.ArticleInfo;
+import com.example.travelguide.cpp.Storage;
+import com.mapswithme.maps.api.MWMPoint;
+import com.mapswithme.maps.api.MWMResponse;
 
 /**
  * An activity representing a list of ArticleInfos. This activity has different
@@ -25,6 +29,7 @@ import com.example.travelguide.article.ArticleInfo;
 public class ArticleInfoListActivity extends FragmentActivity implements ArticleInfoListFragment.Callbacks,
     ArticleInfoListFragment.OnListIconClickedListener, ArticleInfoListFragment.OnFirstLoadListener
 {
+  private static final String TAG = ArticleInfoListActivity.class.getSimpleName();
 
   /**
    * Whether or not the activity is in two-pane mode, i.e. running on a tablet
@@ -57,6 +62,21 @@ public class ArticleInfoListActivity extends FragmentActivity implements Article
         .beginTransaction()
         .add(R.id.articleinfo_detail_container, mArtInfoDetailFragment)
         .commit();
+    }
+
+    handleIntent(getIntent());
+  }
+
+  private void handleIntent(Intent intent)
+  {
+    final MWMResponse mwmResponse = MWMResponse.extractFromIntent(this, intent);
+    final MWMPoint point = mwmResponse.getPoint();
+
+    if (point.getId() != null)
+    {
+      final String id = point.getId();
+      Log.d(TAG, id);
+      onItemSelected(Storage.getArticleInfoByUrl(id));
     }
   }
 
