@@ -6,4 +6,7 @@
 @property (nonatomic, strong) UILabel * subTitile;
 
 - (id)initWithReuseIdentifier:(NSString *)reuseIdentifier;
+- (void)setSelected;
+- (void)setUnselected;
+
 @end

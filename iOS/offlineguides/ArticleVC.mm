@@ -10,17 +10,20 @@
 
 
 #define THUMBNAILSFOLDER @"/data/thumb/"
+#define UN_SELECTEDCELLCOLOUR ([UIColor colorWithRed:40.f/255.f green:40.f/255.f blue:40.f/255.f alpha:1.f])
+#define SELECTEDCELLCOLOUR ([UIColor colorWithRed:28.f/255.f green:28.f/255.f blue:28.f/255.f alpha:1.f])
 
 @interface ArticleVC ()
 {
   Storage m_storage;
   CLLocationCoordinate2D m_lastLocation;
   NSDate * m_lastLocationTime;
-  int m_currentPath;
 }
 
 @property (nonatomic, strong) UISearchBar * searchBar;
 @property (nonatomic, strong) CLLocationManager * locationManager;
+@property (nonatomic, strong) NSString * currentName;
+@property (nonatomic, strong) NSString * currentSubtitle;
 @end
 
 @implementation ArticleVC
@@ -69,7 +72,7 @@
       m_storage.QueryArticleInfo(string(), self.locationManager.location.coordinate.latitude, self.locationManager.location.coordinate.longitude);
     else
       m_storage.QueryArticleInfo(string());
-    m_currentPath = 0;
+    [self setCurrentNameAndSubtitle:0];
     [self.tableView reloadData];
   }
   return self;
@@ -124,10 +127,16 @@
 
   if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
   {
-    if (m_currentPath == indexPath.row)
-      cell.contentView.backgroundColor = [UIColor colorWithRed:28.f/255.f green:28.f/255.f blue:28.f/255.f alpha:1.f];
+    if ([self.currentName isEqualToString:cell.mainTitile.text] && [self.currentSubtitle isEqualToString:cell.subTitile.text])
+    {
+      cell.contentView.backgroundColor = SELECTEDCELLCOLOUR;
+      [cell setSelected];
+    }
     else
-      cell.contentView.backgroundColor = [UIColor colorWithRed:40.f/255.f green:40.f/255.f blue:40.f/255.f alpha:1.f];
+    {
+      cell.contentView.backgroundColor = UN_SELECTEDCELLCOLOUR;
+      [cell setUnselected];
+    }
   }
 
   return (UITableViewCell *)cell;
@@ -156,7 +165,7 @@
   [self.delegate selectHtmlPageUrl:url];
   if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
   {
-    m_currentPath = indexPath.row;
+    [self setCurrentNameAndSubtitle:indexPath.row];
     [self.tableView reloadData];
   }
 }
@@ -217,6 +226,16 @@
 -(void)killKeyboard
 {
   [self.searchBar resignFirstResponder];
+}
+
+-(void)setCurrentNameAndSubtitle:(int)currentElement
+{
+  if (currentElement < m_storage.GetResultsCount())
+  {
+    ArticleInfo const & info = m_storage.GetResult(static_cast<size_t>(currentElement));
+    self.currentName = [NSString stringWithUTF8String:info.GetTitle().c_str()];
+    self.currentSubtitle = [NSString stringWithUTF8String:m_storage.FormatParentName(info).c_str()];
+  }
 }
 
 @end

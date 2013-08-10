@@ -1,5 +1,9 @@
 #import "GuideCell.h"
 
+@interface GuideCell()
+@property (strong, nonatomic) UIView * selectedCellView;
+@end
+
 @implementation GuideCell
 
 - (id)initWithReuseIdentifier:(NSString *)reuseIdentifier
@@ -30,6 +34,13 @@
                                                 green:51.f/255.f
                                                  blue:51.f/255.f
                                                 alpha:1.f];
+    _selectedCellView = [[UIView alloc] initWithFrame:CGRectZero];
+    self.selectedCellView.backgroundColor = [UIColor colorWithRed:253.f/255.f
+                                                            green:241.f/255.f
+                                                             blue:43.f/255.f
+                                                            alpha:1.f];
+    self.selectedCellView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+    [self addSubview:self.selectedCellView];
     [self.contentView addSubview:self.mainImage];
     [self.contentView addSubview:self.mainTitile];
     [self.contentView addSubview:self.subTitile];
@@ -50,6 +61,21 @@
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
+}
+
+- (void)setSelected
+{
+  [self setSelectedViewPosition];
+}
+
+- (void)setUnselected
+{
+  [self.selectedCellView setFrame:CGRectZero];
+}
+
+-(void) setSelectedViewPosition
+{
+  [self.selectedCellView setFrame:CGRectMake(self.frame.size.width - 5, 0, 5, self.frame.size.height)];
 }
 
 @end
