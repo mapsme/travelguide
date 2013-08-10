@@ -2,8 +2,9 @@
 
 @interface GuideVC : UIViewController <UIWebViewDelegate, UIGestureRecognizerDelegate>
 
--(void)loadPage:(NSString *)pageUrl;
+@property (nonatomic, assign) int numberOfPages;
 
+-(void)loadPage:(NSString *)pageUrl;
 -(void)clearPreviosViews;
 
 @end

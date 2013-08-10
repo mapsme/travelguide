@@ -3,6 +3,7 @@
 #import "MapsWithMeAPI.h"
 #import "AppDelegate.h"
 #import "../../std/algorithm.hpp"
+#import "../../std/array.hpp"
 
 #define DATAFOLDER @"/data/"
 
@@ -10,7 +11,6 @@
 {
   float m_webViewScale;
   float m_webViewScaleOnStart;
-  size_t  m_numberOfPages;
 }
 
 @property (nonatomic, strong) UIWebView * webView;
@@ -34,14 +34,9 @@
     self.view  = self.webView;
     m_webViewScale = 1.0;
     m_webViewScaleOnStart = 0.0;
-    m_numberOfPages = 0;
+    self.numberOfPages = 0;
   }
   return self;
-}
-
-- (void)viewDidLoad
-{
-  [super viewDidLoad];
 }
 
 -(void)loadPage:(NSString *)pageUrl
@@ -66,7 +61,7 @@
 
   if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
     self.navigationItem.rightBarButtonItem =  [self getCustomButtonWithImage:@"ic_articleselection"];
-  if (m_numberOfPages)
+  if (self.numberOfPages)
     self.navigationItem.leftBarButtonItem =  [self getCustomButtonWithImage:@"ic_back"];
   if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
     self.navigationItem.leftBarButtonItem =  [self getCustomButtonWithImage:@"ic_back"];
@@ -80,13 +75,18 @@
  navigationType:(UIWebViewNavigationType)navigationType
 {
   NSString * str = [self normalizeUrl:[[request URL] absoluteString]];
+  if ([self isWebPage:str] && [[UIApplication sharedApplication] canOpenURL:[request URL]])
+  {
+    [[UIApplication sharedApplication] openURL:[request URL]];
+    return NO;
+  }
   [self updateTitle:str];
-  ++m_numberOfPages;
+  ++self.numberOfPages;
   if ([self isImage:str])
     self.webView.scalesPageToFit = YES;
   else
     self.webView.scalesPageToFit = NO;
-  if (m_numberOfPages > 1 && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+  if (self.numberOfPages > 1 && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
     self.navigationItem.leftBarButtonItem =  [self getCustomButtonWithImage:@"ic_back"];
   return YES;
 }
@@ -103,7 +103,8 @@
   if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
   {
     UISplitViewController * splitControl =  (UISplitViewController *)[[UIApplication sharedApplication] delegate].window.rootViewController;
-    [[splitControl.viewControllers objectAtIndex:0] killKeyboard];
+    ArticleVC * v = (ArticleVC *)((UINavigationController *)[splitControl.viewControllers objectAtIndex:0]).visibleViewController;
+    [v killKeyboard];
   }
 }
 
@@ -120,9 +121,10 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 
 -(void)back
 {
-  --m_numberOfPages;
-  if (m_numberOfPages == 0)
+  --self.numberOfPages;
+  if (self.numberOfPages <= 0)
   {
+    self.numberOfPages = 0;
     [self.navigationController popToRootViewControllerAnimated:YES];
     return;
   }
@@ -131,9 +133,9 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     [self.webView goBack];
     [self updateTitle:[self normalizeUrl:[[self.webView.request URL] absoluteString]]];
   }
-  if (m_numberOfPages  == 1 && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+  if (self.numberOfPages  <= 1 && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
     self.navigationItem.leftBarButtonItem = nil;
-  --m_numberOfPages;
+  --self.numberOfPages;
 }
 
 -(UIBarButtonItem *)getCustomButtonWithImage:(NSString *)name
@@ -175,7 +177,35 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 
 -(BOOL)isImage:(NSString *)pageUrl
 {
-  return (([pageUrl rangeOfString:@".svg"].location != NSNotFound) || ([pageUrl rangeOfString:@".png"].location != NSNotFound) || ([pageUrl rangeOfString:@".jpg"].location != NSNotFound));
+  static NSString  * const arr [] =
+  {
+    @".svg",
+    @".png",
+    @".jpg"
+  };
+  for (size_t i = 0; i < ArraySize(arr); ++i)
+  {
+    NSRange r = [pageUrl rangeOfString:arr[i]];
+    if (r.location != NSNotFound)
+      return YES;
+  }
+  return NO;
+}
+
+-(BOOL)isWebPage:(NSString *)str
+{
+  static NSString  * const arr [] =
+  {
+    @"www",
+    @"http",
+  };
+  for (size_t i = 0; i < ArraySize(arr); ++i)
+  {
+    NSRange r = [str rangeOfString:arr[i]];
+    if (r.location == 0)
+      return YES;
+  }
+  return NO;
 }
 
 -(void)updateTitle:(NSString *)url
