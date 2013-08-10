@@ -31,19 +31,16 @@
 -(void)viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
-  UINavigationController * articleNavVC = [self.viewControllers objectAtIndex:0];
-  UINavigationController * navVC = (UINavigationController*)[self.viewControllers objectAtIndex:1];
-  GuideVC * g = (GuideVC *)navVC.visibleViewController;
-  [g loadPage:[(ArticleVC *)articleNavVC.visibleViewController getDefaultArticle]];
+  [[self getGuideVC] loadPage:[[self getArticleVC] getDefaultArticle]];
 }
 
 -(void)selectHtmlPageUrl:(NSString *)url
 {
-  UINavigationController * navVC = (UINavigationController*)[self.viewControllers objectAtIndex:1];
-  GuideVC * g = (GuideVC *)navVC.visibleViewController;
+  GuideVC * g = [self getGuideVC];
   g.navigationItem.leftBarButtonItem = nil;
   g.numberOfPages = 0;
   [g loadPage:url];
+  [[self getArticleVC] killKeyboard];
   [self.pop dismissPopoverAnimated:YES];
 }
 
@@ -69,6 +66,18 @@
   UINavigationController * navVC = (UINavigationController*)[self.viewControllers objectAtIndex:1];
   [navVC.topViewController.navigationItem setRightBarButtonItem:nil animated:YES];
   self.pop = nil;
+}
+
+-(ArticleVC *)getArticleVC
+{
+  UINavigationController * articleNavVC = [self.viewControllers objectAtIndex:0];
+  return (ArticleVC *)articleNavVC.visibleViewController;
+}
+
+-(GuideVC *)getGuideVC
+{
+  UINavigationController * GuideNavVC = (UINavigationController*)[self.viewControllers objectAtIndex:1];
+  return (GuideVC *)GuideNavVC.visibleViewController;
 }
 
 @end
