@@ -14,7 +14,19 @@
     self.mainTitile.font = [UIFont fontWithName:@"Helvetica-Regular" size:25];
     self.subTitile.backgroundColor = [UIColor clearColor];
     self.subTitile.font = [UIFont fontWithName:@"Helvetica-Light" size:13];
-    self.subTitile.textColor  = [UIColor colorWithRed:51.f/255.f
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+    {
+      self.mainTitile.textColor  = [UIColor colorWithRed:1.f
+                                                  green:1.f
+                                                   blue:1.f
+                                                  alpha:1.f];
+      self.subTitile.textColor  = [UIColor colorWithRed:1.f
+                                                  green:1.f
+                                                   blue:1.f
+                                                  alpha:1.f];
+    }
+    else
+      self.subTitile.textColor  = [UIColor colorWithRed:51.f/255.f
                                                 green:51.f/255.f
                                                  blue:51.f/255.f
                                                 alpha:1.f];

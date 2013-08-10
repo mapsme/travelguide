@@ -16,6 +16,7 @@
   Storage m_storage;
   CLLocationCoordinate2D m_lastLocation;
   NSDate * m_lastLocationTime;
+  int m_currentPath;
 }
 
 @property (nonatomic, strong) UISearchBar * searchBar;
@@ -68,6 +69,7 @@
       m_storage.QueryArticleInfo(string(), self.locationManager.location.coordinate.latitude, self.locationManager.location.coordinate.longitude);
     else
       m_storage.QueryArticleInfo(string());
+    m_currentPath = 0;
     [self.tableView reloadData];
   }
   return self;
@@ -77,6 +79,8 @@
 {
   [super viewDidLoad];
   [self.searchBar sizeToFit];
+  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+    self.tableView.backgroundColor = [UIColor colorWithRed:51.f/255.f green:51.f/255.f blue:51.f/255.f alpha:1.f];
 }
 
 #pragma mark - Table view data source
@@ -118,6 +122,14 @@
   UIImage * image = [UIImage imageWithContentsOfFile:imagePath];
   cell.mainImage.image = image;
 
+  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+  {
+    if (m_currentPath == indexPath.row)
+      cell.contentView.backgroundColor = [UIColor colorWithRed:28.f/255.f green:28.f/255.f blue:28.f/255.f alpha:1.f];
+    else
+      cell.contentView.backgroundColor = [UIColor colorWithRed:40.f/255.f green:40.f/255.f blue:40.f/255.f alpha:1.f];
+  }
+
   return (UITableViewCell *)cell;
 }
 
@@ -134,16 +146,19 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  // @todo Show details guide info
   [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
   ArticleInfo const * info = [self infoByIndexPath:indexPath];
-
   GuideVC * vc = [[GuideVC alloc] init];
   if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
     [self.navigationController pushViewController:vc animated:YES];
   NSString * url = [NSString stringWithUTF8String:info->GetUrl().c_str()];
   [vc loadPage:url];
   [self.delegate selectHtmlPageUrl:url];
+  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+  {
+    m_currentPath = indexPath.row;
+    [self.tableView reloadData];
+  }
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
