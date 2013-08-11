@@ -2,6 +2,8 @@
 
 @interface GuideCell()
 @property (strong, nonatomic) UIView * selectedCellView;
+@property (strong, nonatomic) UIView * topSeparator;
+@property (strong, nonatomic) UIView * bottomSeparator;
 @end
 
 @implementation GuideCell
@@ -28,6 +30,18 @@
                                                   green:1.f
                                                    blue:1.f
                                                   alpha:1.f];
+      _topSeparator = [[UIView alloc] initWithFrame:CGRectZero];
+      self.topSeparator.backgroundColor = [UIColor colorWithRed:50.f/255.f
+                                                          green:50.f/255.f
+                                                           blue:50.f/255.f
+                                                          alpha:1.f];
+      _bottomSeparator =[[UIView alloc] initWithFrame:CGRectZero];
+      self.bottomSeparator.backgroundColor = [UIColor colorWithRed:27.f/255.f
+                                                             green:27.f/255.f
+                                                              blue:27.f/255.f
+                                                             alpha:1.f];
+      [self.contentView addSubview:self.topSeparator];
+      [self.contentView addSubview:self.bottomSeparator];
     }
     else
       self.subTitile.textColor  = [UIColor colorWithRed:51.f/255.f
@@ -56,6 +70,11 @@
   [self.mainImage setFrame:CGRectMake(6, 6, 50, 50)];
   [self.mainTitile setFrame:CGRectMake(padding, 8, self.frame.size.width - padding, 25)];
   [self.subTitile setFrame:CGRectMake(padding, 30, self.frame.size.width - padding, 22)];
+  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+  {
+    [self.topSeparator setFrame:CGRectMake(0, 0, self.frame.size.width, 1)];
+    [self.bottomSeparator setFrame:CGRectMake(0, self.frame.size.height - 1, self.frame.size.width, 1)];
+  }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

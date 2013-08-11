@@ -83,7 +83,10 @@
   [super viewDidLoad];
   [self.searchBar sizeToFit];
   if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+  {
     self.tableView.backgroundColor = [UIColor colorWithRed:51.f/255.f green:51.f/255.f blue:51.f/255.f alpha:1.f];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+  }
 }
 
 #pragma mark - Table view data source
