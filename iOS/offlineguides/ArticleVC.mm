@@ -163,11 +163,6 @@
   NSString * url = [NSString stringWithUTF8String:info->GetUrl().c_str()];
   [vc loadPage:url];
   [self.delegate selectHtmlPageUrl:url];
-  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-  {
-    [self setCurrentNameAndSubtitle:indexPath.row];
-    [self.tableView reloadData];
-  }
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
@@ -219,8 +214,15 @@
 
 -(NSString *)getArticleName:(NSString *)htmlId
 {
-  ArticleInfo const * tmp =  m_storage.GetArticleInfoFromUrl([htmlId UTF8String]);
-  return [NSString stringWithUTF8String:tmp->GetTitle().c_str()];
+  ArticleInfo const * articleInfo =  m_storage.GetArticleInfoFromUrl([htmlId UTF8String]);
+  //update articles table when go back
+  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+  {
+    self.currentName = [NSString stringWithUTF8String:articleInfo->GetTitle().c_str()];
+    self.currentSubtitle = [NSString stringWithUTF8String:m_storage.FormatParentName(*articleInfo).c_str()];
+    [self.tableView reloadData];
+  }
+  return [NSString stringWithUTF8String:articleInfo->GetTitle().c_str()];
 }
 
 -(void)killKeyboard
