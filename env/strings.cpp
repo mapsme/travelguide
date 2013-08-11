@@ -5,9 +5,16 @@
 
 #include "../3rdparty/utf8proc/utf8proc.h"
 
+#include <boost/algorithm/string.hpp>
+
 
 namespace str
 {
+
+void Trim(string & s)
+{
+  boost::trim(s);
+}
 
 string MakeNormalizeAndLowerUtf8(string const & s)
 {

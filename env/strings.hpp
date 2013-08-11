@@ -14,6 +14,8 @@ template <class T> string ToString(T const & t)
   return ss.str();
 }
 
+void Trim(string & s);
+
 string MakeNormalizeAndLowerUtf8(string const & s);
 
 template <class IterT>

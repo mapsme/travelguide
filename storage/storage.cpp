@@ -42,7 +42,10 @@ void Storage::QueryArticleInfo(string const & prefix, double lat, double lon)
 {
   m_lastQuery.clear();
 
-  if (prefix.empty())
+  string query = prefix;
+  str::Trim(query);
+
+  if (query.empty())
   {
     size_t const count = m_info.size();
     m_lastQuery.reserve(count);
@@ -57,7 +60,7 @@ void Storage::QueryArticleInfo(string const & prefix, double lat, double lon)
     // find range of articles by input query
     typedef vector<ArticleInfo>::iterator IterT;
     pair<IterT, IterT> range = equal_range(m_info.begin(), m_info.end(),
-                                           str::MakeNormalizeAndLowerUtf8(prefix),
+                                           str::MakeNormalizeAndLowerUtf8(query),
                                            ArticleInfo::LessPrefix());
 
     // filter duplicating redirects
