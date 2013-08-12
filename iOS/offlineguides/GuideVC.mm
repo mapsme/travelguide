@@ -69,10 +69,11 @@
     self.navigationItem.leftBarButtonItem =  [self getCustomButtonWithImage:@"ic_back"];
   if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
     self.navigationItem.leftBarButtonItem =  [self getCustomButtonWithImage:@"ic_back"];
-  self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObject:[UIColor colorWithRed:253.f/255.f
-                                                                                                                   green:241.f/255.f
-                                                                                                                    blue:43.f/255.f
-                                                                                                                   alpha:1.f] forKey:UITextAttributeTextColor];
+  self.navigationController.navigationBar.titleTextAttributes = @{UITextAttributeTextColor : [UIColor colorWithRed:253.f/255.f
+                                                                                                             green:241.f/255.f
+                                                                                                              blue:43.f/255.f
+                                                                                                             alpha:1.f],
+                                                                  UITextAttributeTextShadowColor: [UIColor clearColor]};
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request
