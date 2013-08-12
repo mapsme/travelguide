@@ -107,13 +107,6 @@
   [self stopAndHideIndicator];
 }
 
-- (unsigned int)textSizeAdjustment
-{
-  if (m_webViewScale == 0.0)
-    m_webViewScale = 1.0;
-  return static_cast<unsigned int>(100 * m_webViewScale);
-}
-
 -(void)onPinch:(UIPanGestureRecognizer *)sender
 {
   if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
