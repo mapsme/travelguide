@@ -35,7 +35,7 @@ function openSection(section) {
   if (contentSection) {
     contentSection.className += " openSection";
   }
-  location.replace('#' + section.id);
+  window.history.replaceState({},"", window.location.href.split("#")[0] + '#' + section.id);
 }
 
 function onSectionClick(event) {

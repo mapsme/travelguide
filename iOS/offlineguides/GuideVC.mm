@@ -69,10 +69,11 @@
     self.navigationItem.leftBarButtonItem =  [self getCustomButtonWithImage:@"ic_back"];
   if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
     self.navigationItem.leftBarButtonItem =  [self getCustomButtonWithImage:@"ic_back"];
-  self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObject:[UIColor colorWithRed:253.f/255.f
-                                                                                                                   green:241.f/255.f
-                                                                                                                    blue:43.f/255.f
-                                                                                                                   alpha:1.f] forKey:UITextAttributeTextColor];
+  self.navigationController.navigationBar.titleTextAttributes = @{UITextAttributeTextColor : [UIColor colorWithRed:253.f/255.f
+                                                                                                             green:241.f/255.f
+                                                                                                              blue:43.f/255.f
+                                                                                                             alpha:1.f],
+                                                                  UITextAttributeTextShadowColor: [UIColor clearColor]};
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request
@@ -104,13 +105,6 @@
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
   [self stopAndHideIndicator];
-}
-
-- (unsigned int)textSizeAdjustment
-{
-  if (m_webViewScale == 0.0)
-    m_webViewScale = 1.0;
-  return static_cast<unsigned int>(100 * m_webViewScale);
 }
 
 -(void)onPinch:(UIPanGestureRecognizer *)sender
@@ -226,7 +220,9 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 -(void)updateTitle:(NSString *)url
 {
   NSRange r = [url rangeOfString:@"." options:NSBackwardsSearch];
-  if (r.length && [[url substringFromIndex:r.location + 1] isEqualToString:@"html"])
+  if (r.location + 4 >= [url length])
+    return;
+  if (r.length && [[url substringWithRange:NSRange{r.location + 1, 4}] isEqualToString:@"html"])
     self.navigationItem.title = [[self getArticleController] getArticleName:[url substringToIndex:r.location]];
 }
 
