@@ -38,7 +38,7 @@ public:
   }
 
   /// Format parent's name like: father > grand father > ...
-  string FormatParentName(ArticleInfo const & info) const;
+  string FormatParentName(ArticleInfo const & info, int maxDepth = 2) const;
 
   /// Find article by url.
   ArticleInfo const * GetArticleInfoFromUrl(string const & url) const;

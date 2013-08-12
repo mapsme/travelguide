@@ -88,12 +88,13 @@ void Storage::QueryArticleInfo(string const & prefix, double lat, double lon)
   sort(m_lastQuery.begin(), m_lastQuery.end(), LessScore(*this, lat, lon));
 }
 
-string Storage::FormatParentName(ArticleInfo const & info) const
+string Storage::FormatParentName(ArticleInfo const & info, int maxDepth) const
 {
   string res;
 
   ArticleInfo const * p = &info;
-  while (p->m_parentIndex != ArticleInfo::NO_PARENT)
+  int depth = 0;
+  while (depth++ < maxDepth && p->m_parentIndex != ArticleInfo::NO_PARENT)
   {
     p = &m_info[p->m_parentIndex];
     if (!res.empty())
