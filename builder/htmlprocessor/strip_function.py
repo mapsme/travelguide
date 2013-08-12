@@ -20,6 +20,9 @@ def cleanUp(soup):
   [s.decompose() for s in content.findAll("button", {"class": "languageSelector"})]
   [s.decompose() for s in content.findAll("a", {"class": "section_anchors"})]
   [s.decompose() for s in content.findAll("div", {"id": "mw-mf-language-section"})]
+  # cut off geo coords as we process them separately in original files
+  [s.decompose() for s in content.findAll("div", {"id": "geoCoord"})]
+
 
   # delete empty sections
   sections = content.findAll("div", {"class": "section"})
