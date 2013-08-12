@@ -14,6 +14,7 @@ const int EMPTY_COORD = 1000;
 class ArticleInfo
 {
   void GenerateKey();
+  static string Title2Key(string const & s);
 
 protected:
   string m_key;
@@ -52,6 +53,8 @@ public:
     GenerateKey();
   }
 
+  static string Prefix2Key(string const & s);
+
   string const & GetTitle() const { return m_title; }
   string GetUrl() const { return m_url + ".html"; }
   string GetThumbnailUrl() const { return m_url + ".jpg"; }
@@ -70,6 +73,9 @@ public:
   void Swap(ArticleInfo & i);
 
   bool operator == (ArticleInfo const & r) const;
+
+  /// @param[in] query should be simplified, lower case, utf8 string (matching by m_key).
+  bool PrefixMatchExcept1stToken(string const & query) const;
 
   struct LessStorage
   {

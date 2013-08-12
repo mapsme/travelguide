@@ -6,10 +6,30 @@
 
 #include "../std/vector.hpp"
 #include "../std/noncopyable.hpp"
+#include "../std/map.hpp"
 
 
 class Storage : noncopyable
 {
+  string const & GetUrl(size_t ind) const { return m_info[ind].m_url; }
+  bool IsRedirect(size_t ind) const { return m_info[ind].m_redirect; }
+
+  class ResultsAccumulator
+  {
+    Storage const & m_storage;
+
+    typedef map<string, size_t> MapT;
+    MapT m_map;
+
+  public:
+    ResultsAccumulator(Storage & storage) : m_storage(storage) {}
+
+    void Add(size_t ind);
+    bool IsExist(size_t ind) const;
+
+    void GetResults(vector<size_t> & out, double lat, double lon) const;
+  };
+
 public:
   void Load(rd::Reader & reader);
   void Load(string const & path);

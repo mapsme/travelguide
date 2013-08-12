@@ -11,6 +11,22 @@
 #include "../std/array.hpp"
 
 
+TEST(ArticleInfo, PrefixMatch)
+{
+  ArticleInfo i("   'Loch Lomond' and \"The Trossachs\"    (National-Park)");
+
+  EXPECT_FALSE(i.PrefixMatchExcept1stToken("loch"));
+  EXPECT_TRUE(i.PrefixMatchExcept1stToken("lom"));
+  EXPECT_FALSE(i.PrefixMatchExcept1stToken("and"));
+  EXPECT_FALSE(i.PrefixMatchExcept1stToken("the"));
+  EXPECT_TRUE(i.PrefixMatchExcept1stToken("trossachs"));
+  EXPECT_TRUE(i.PrefixMatchExcept1stToken("national"));
+  EXPECT_TRUE(i.PrefixMatchExcept1stToken("park"));
+  EXPECT_FALSE(i.PrefixMatchExcept1stToken("parke"));
+
+  EXPECT_TRUE(i.PrefixMatchExcept1stToken("the trossachs national park"));
+}
+
 namespace
 {
 

@@ -6,16 +6,52 @@
 #include "../env/reader.hpp"
 #include "../env/latlon.hpp"
 #include "../env/assert.hpp"
+#include "../env/logging.hpp"
 
 #include "../std/iterator.hpp"
 #include "../std/algorithm.hpp"
 #include "../std/cmath.hpp"
 #include "../std/static_assert.hpp"
+#include "../std/array.hpp"
 
+
+namespace
+{
+  class AppendString
+  {
+    string & m_str;
+  public:
+    AppendString(string & str) : m_str(str) {}
+    void operator() (string const & s) const
+    {
+      m_str = m_str + s + ' ';
+    }
+  };
+}
+
+string ArticleInfo::Title2Key(string const & s)
+{
+  string res;
+  str::Tokenize(str::MakeNormalizeAndLowerUtf8(s), " ()'\"-&\t", AppendString(res));
+  return res;
+}
+
+string ArticleInfo::Prefix2Key(string const & s)
+{
+  string res = Title2Key(s);
+
+  if (!res.empty())
+  {
+    if (s[s.size()-1] != ' ')
+      res.erase(res.size()-1, 1);
+  }
+
+  return res;
+}
 
 void ArticleInfo::GenerateKey()
 {
-  m_key = str::MakeNormalizeAndLowerUtf8(m_title);
+  m_key = Title2Key(m_title);
 }
 
 bool ArticleInfo::IsValidCoordinates() const
@@ -125,4 +161,43 @@ bool ArticleInfo::operator == (ArticleInfo const & r) const
           m_parentIndex == r.m_parentIndex &&
           EqualCoord(m_lat, r.m_lat) &&
           EqualCoord(m_lon, r.m_lon));
+}
+
+namespace
+{
+
+bool IsStopWord(string const & s, size_t pos, string const & query)
+{
+  static char const * arr[] = { "by ", "of ", "on ", "in ", "upon ", "and ", "the " };
+  for (size_t i = 0; i < ArraySize(arr); ++i)
+  {
+    size_t const len = strlen(arr[i]);
+    if (query.size() < len &&
+        len + pos <= s.size() &&
+        s.compare(pos, len, arr[i]) == 0)
+    {
+      return true;
+    }
+  }
+  return false;
+}
+
+}
+
+bool ArticleInfo::PrefixMatchExcept1stToken(string const & query) const
+{
+  size_t i = 0;
+  while (i < m_key.size())
+  {
+    i = m_key.find(query, i);
+    if (i == string::npos)
+      return false;
+
+    if (i != 0 && m_key[i-1] == ' ' && !IsStopWord(m_key, i, query))
+      return true;
+
+    ++i;
+  }
+
+  return false;
 }

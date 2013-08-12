@@ -6,7 +6,6 @@
 
 #include "../std/algorithm.hpp"
 #include "../std/utility.hpp"
-#include "../std/map.hpp"
 #include "../std/iterator.hpp"
 
 
@@ -38,54 +37,74 @@ void Storage::Load(string const & path)
   Load(reader);
 }
 
+void Storage::ResultsAccumulator::Add(size_t ind)
+{
+  pair<MapT::iterator, bool> res = m_map.insert(make_pair(m_storage.GetUrl(ind), ind));
+
+  // replace redirect index with origin index
+  if (!res.second && m_storage.IsRedirect(res.first->second) && !m_storage.IsRedirect(ind))
+    res.first->second = ind;
+}
+
+bool Storage::ResultsAccumulator::IsExist(size_t ind) const
+{
+  return (m_map.find(m_storage.GetUrl(ind)) != m_map.end());
+}
+
+void Storage::ResultsAccumulator::GetResults(vector<size_t> & out, double lat, double lon) const
+{
+  size_t const count = out.size();
+  out.reserve(count + m_map.size());
+
+  for (MapT::const_iterator i = m_map.begin(); i != m_map.end(); ++i)
+    out.push_back(i->second);
+
+  vector<size_t>::iterator iStart = out.begin();
+  advance(iStart, count);
+  sort(iStart, out.end(), LessScore(m_storage, lat, lon));
+}
+
 void Storage::QueryArticleInfo(string const & prefix, double lat, double lon)
 {
   m_lastQuery.clear();
 
-  string query = prefix;
-  str::Trim(query);
-
+  string query = ArticleInfo::Prefix2Key(prefix);
   if (query.empty())
   {
     size_t const count = m_info.size();
     m_lastQuery.reserve(count);
 
-    // add all articles except redirects
+    // Add all articles except redirects
     for (size_t i = 0; i < count; ++i)
       if (!m_info[i].m_redirect)
         m_lastQuery.push_back(i);
+
+    sort(m_lastQuery.begin(), m_lastQuery.end(), LessScore(*this, lat, lon));
   }
   else
   {
-    // find range of articles by input query
+    // Find and add range of articles by matchin input query.
     typedef vector<ArticleInfo>::iterator IterT;
-    pair<IterT, IterT> range = equal_range(m_info.begin(), m_info.end(),
-                                           str::MakeNormalizeAndLowerUtf8(query),
+    pair<IterT, IterT> range = equal_range(m_info.begin(), m_info.end(), query,
                                            ArticleInfo::LessPrefix());
 
-    // filter duplicating redirects
-    map<string, size_t> theMap;
-    typedef map<string, size_t>::iterator MapIterT;
+    ResultsAccumulator acc1(*this);
     while (range.first != range.second)
     {
-      size_t const ind = distance(m_info.begin(), range.first);
-      pair<MapIterT, bool> res = theMap.insert(make_pair(range.first->m_url, ind));
-
-      // replace redirect index with origin index
-      if (!res.second && m_info[res.first->second].m_redirect && !m_info[ind].m_redirect)
-        res.first->second = ind;
-
+      acc1.Add(distance(m_info.begin(), range.first));
       ++range.first;
     }
+    acc1.GetResults(m_lastQuery, lat, lon);
 
-    // assign results
-    m_lastQuery.reserve(theMap.size());
-    for (MapIterT i = theMap.begin(); i != theMap.end(); ++i)
-      m_lastQuery.push_back(i->second);
+    // Process all articles by matching 2nd, 3rd, ... tokens
+    ResultsAccumulator acc2(*this);
+    for (size_t i = 0; i < m_info.size(); ++i)
+    {
+      if (m_info[i].PrefixMatchExcept1stToken(query) && !acc1.IsExist(i))
+        acc2.Add(i);
+    }
+    acc2.GetResults(m_lastQuery, lat, lon);
   }
-
-  // sort according to score
-  sort(m_lastQuery.begin(), m_lastQuery.end(), LessScore(*this, lat, lon));
 }
 
 string Storage::FormatParentName(ArticleInfo const & info, int maxDepth) const
