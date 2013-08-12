@@ -22,7 +22,10 @@
 
 .articleImage {
   width: 100%;
-  height: auto;
+  height: 256px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .breadcrumbs_wrapper {
