@@ -42,7 +42,9 @@ bool EncodeTitle(string & s)
   if (i != string::npos)
   {
     s = s.substr(i+1);
-    return !s.empty();
+
+    if (s.empty())
+      return false;
   }
 
   replace(s.begin(), s.end(), '_', ' ');
