@@ -1411,6 +1411,7 @@ IMG.tex, .image IMG, .thumb IMG
 	margin: 5px 10px 0;
 	text-align: center;
 	width: auto !important;
+	display: inline-block;
 }
 .thumb .noresize
 {
