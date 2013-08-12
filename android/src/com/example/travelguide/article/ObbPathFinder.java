@@ -1,18 +1,16 @@
 package com.example.travelguide.article;
 
 import android.content.Context;
-import android.os.Environment;
 import android.os.storage.OnObbStateChangeListener;
 import android.os.storage.StorageManager;
 import android.util.Log;
+
+import com.example.travelguide.util.Expansion;
 
 public class ObbPathFinder extends OnObbStateChangeListener
                            implements ArticlePathFinder
 {
   private final static String TAG = "TravelObb";
-
-  // TODO: dynamically detect path
-  public final String RAW_PATH = Environment.getExternalStorageDirectory() + "/data.obb";
 
   private final Context mContext;
   private final StorageManager mSm;
@@ -21,7 +19,7 @@ public class ObbPathFinder extends OnObbStateChangeListener
   {
     mContext = context;
     mSm = (StorageManager) mContext.getSystemService(Context.STORAGE_SERVICE);
-    mSm.mountObb(RAW_PATH, null, this);
+    mSm.mountObb(Expansion.getPath(), null, this);
   }
 
   @Override
@@ -32,7 +30,7 @@ public class ObbPathFinder extends OnObbStateChangeListener
 
   public String getRootDir()
   {
-    return "file://" + mSm.getMountedObbPath(RAW_PATH) + "/data/";
+    return "file://" + mSm.getMountedObbPath(Expansion.getPath()) + "/data/";
   }
 
   @Override

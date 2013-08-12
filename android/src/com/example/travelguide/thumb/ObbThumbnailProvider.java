@@ -3,17 +3,16 @@ package com.example.travelguide.thumb;
 import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.os.Environment;
 import android.os.storage.OnObbStateChangeListener;
 import android.os.storage.StorageManager;
 import android.util.Log;
+
+import com.example.travelguide.util.Expansion;
 
 public class ObbThumbnailProvider extends OnObbStateChangeListener implements ThumbnailsProvider
 {
 
   private final static String TAG = "TravelObb";
-
-  public final String RAW_PATH = Environment.getExternalStorageDirectory() + "/data.obb";
 
   private final Context mContext;
   private final StorageManager mSm;
@@ -22,7 +21,7 @@ public class ObbThumbnailProvider extends OnObbStateChangeListener implements Th
   {
     mContext = context;
     mSm = (StorageManager) mContext.getSystemService(Context.STORAGE_SERVICE);
-    mSm.mountObb(RAW_PATH, null, this);
+    mSm.mountObb(Expansion.getPath(), null, this);
   }
 
   @Override
@@ -35,7 +34,7 @@ public class ObbThumbnailProvider extends OnObbStateChangeListener implements Th
   @Override
   public Drawable getThumbnailByUrl(String url)
   {
-    final String pathInObb = mSm.getMountedObbPath(RAW_PATH) + "/data/thumb/" + url;
+    final String pathInObb = mSm.getMountedObbPath(Expansion.getPath()) + "/data/thumb/" + url;
     return BitmapDrawable.createFromPath(pathInObb);
   }
 

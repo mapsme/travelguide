@@ -14,13 +14,13 @@ import android.webkit.WebSettings.LayoutAlgorithm;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
-
 import com.example.travelguide.ArticleInfoListFragment.OnListIconClickedListener;
 import com.example.travelguide.article.ArticleInfo;
 import com.example.travelguide.article.ArticlePathFinder;
 import com.example.travelguide.article.ObbPathFinder;
 import com.example.travelguide.cpp.Storage;
 import com.example.travelguide.util.Utils;
+import com.susanin.travelguide.R;
 
 /**
  * A fragment representing a single ArticleInfo detail screen. This fragment is
