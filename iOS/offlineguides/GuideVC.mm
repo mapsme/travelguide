@@ -226,7 +226,9 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 -(void)updateTitle:(NSString *)url
 {
   NSRange r = [url rangeOfString:@"." options:NSBackwardsSearch];
-  if (r.length && [[url substringFromIndex:r.location + 1] isEqualToString:@"html"])
+  if (r.location + 4 >= [url length])
+    return;
+  if (r.length && [[url substringWithRange:NSRange{r.location + 1, 4}] isEqualToString:@"html"])
     self.navigationItem.title = [[self getArticleController] getArticleName:[url substringToIndex:r.location]];
 }
 
