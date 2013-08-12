@@ -3,7 +3,11 @@ import sys
 import os
 import urllib
 import shutil
-from bs4 import BeautifulSoup
+try:
+    from bs4 import BeautifulSoup
+except ImportError:
+    import BeautifulSoup
+
 
 reload(sys)
 sys.setdefaultencoding('utf-8')

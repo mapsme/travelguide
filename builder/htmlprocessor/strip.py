@@ -4,7 +4,10 @@ import os
 import urllib
 import shutil
 import unicodedata
-from bs4 import BeautifulSoup
+try:
+    from bs4 import BeautifulSoup
+except ImportError:
+    import BeautifulSoup
 
 reload(sys)
 sys.setdefaultencoding('utf-8')
@@ -54,34 +57,39 @@ def insertBreadcrumb(soup, articleTitle, parentTitle, parentLink, grandParentTit
     soup.body.insert(0, bcWrapper)
 
 
-def transformStringWithEncoding(str):
-    return urllib.unquote(str.decode("latin-1").encode("utf-8"))
+def transformStringWithEncoding(string):
+    return urllib.unquote(string.decode("latin-1").encode("utf-8"))
 
+def sanitizeFileName(s):
+    # unquote %20 and like that
+    s = urllib.unquote(str(s))
 
-def transformString(s):
-    unquoted = urllib.unquote(str(s))
+    # remove punctuation
     for i in u"\"',/\\@#$%^&*()!~`«»":
-        unquoted = unquoted.replace(i, "_")
-    return unicode(unquoted.strip("_"))
+        s = s.replace(i, "_")
+    s = s.strip("_")
+
+    # normalize unicode to NFKD (form with modifiers separated)
+    s = unicodedata.normalize("NFKD", s)
+
+    # drop modifiers from string (no diacritics)
+    s = u"".join(x for x in s if not unicodedata.category(x).startswith("M"))
+
+    # lowercase
+    s = s.lower()
+    return s
 
 
-def formatToNFKD(s):
-    return unicodedata.normalize("NFKD", transformString(s))
-
-
-def unicodeNormalize(s):
-    return (u"".join(x for x in formatToNFKD(s) if not unicodedata.category(x).startswith("M"))).lower()
-
-
-def imageExist(fileName):
+def imageSanitizedPath(fileName):
+    """
+    return path to image file if it's in dataset
+    """
     global imageFiles
     global imageSet
-    unquotedName = unicodeNormalize(fileName)
+    unquotedName = sanitizeFileName(fileName)
     if unquotedName in imageFiles:
         imageSet.add(unquotedName)
-        return True
-
-    return False
+        return 'images/' + unquotedName
 
 
 def rewriteImages(soup):
@@ -93,15 +101,17 @@ def rewriteImages(soup):
         del imgElement["srcset"]
 
         index = -1
-        srcPath = imgElement["src"]
-        splitedSrc = srcPath.split("/")
-        if imageExist(splitedSrc[-1]):
-            imgElement['src'] = "images/" + unicodeNormalize(splitedSrc[-1])
-        elif imageExist(splitedSrc[-2]):
-            imgElement['src'] = "images/" + unicodeNormalize(splitedSrc[-2])
-        else:
-            print "Image strip = " + unicodeNormalize(splitedSrc[-2])
-            [s.decompose() for s in imgElement.fetchParents("div", {"class": ["thumb tright", "thumbinner", "image"]})]
+        splitSrc = imgElement["src"].split("/")
+        splitSrc.reserse()
+        # checking just two last elements (preview name, real name)
+        for fileName in splitSrc[:2]:
+            fileName = imageSanitizedPath(fileName)
+            if fileName:
+                imgElement['src'] = fileName
+                break
+            else:
+                print "Stripping image", imgElement["src"]
+                [s.decompose() for s in imgElement.fetchParents("div", {"class": ["thumb tright", "thumbinner", "image"]})]
 
 
 def rewriteCrossLinks(soup):
@@ -139,27 +149,32 @@ def writeHtml(content, fileName):
 def fixTitle(title):
     return title.split('/')[-1].replace('_', ' ')
 
-#
 if len(sys.argv) < 9:
     print "Usage: " + sys.argv[0] + " <directory with html articles> <images directory> <article set info file> <redirect info file> <geocoords file> <output directory> <threadIndex> <cpu core count>"
     exit(1)
 
 inDir = sys.argv[1]
+
 imagesSrcDir = sys.argv[2]
-imageFiles = dict([(unicodeNormalize(file), file) for file in os.listdir(imagesSrcDir)])
-idMapping = dict([(unicode(i.split("\t")[1]), unicode(i.split("\t")[0])) for i in open(sys.argv[3])])
+imageFiles = dict([(sanitizeFileName(file), file) for file in os.listdir(imagesSrcDir)])
+
+idMappingFile = sys.argv[3]
+idMapping = dict([(unicode(i.split("\t")[1]), unicode(i.split("\t")[0])) for i in open(idMappingFile)])
+
 # pageId => [parentId, parentTitle, grandParentId, grandParentTitle], ids and titles can be "NULL"
 ancestors = dict([(i.split("\t")[0], i.strip().split("\t")[4:8]) for i in open(sys.argv[3])])
+
 redirectMapping = dict([(unicode(line.split("\t")[1]), unicode(line.split("\t")[3].strip())) for line in open(sys.argv[4])])
+
 coords = dict([(line.split("\t")[0], (line.split("\t")[1], line.split("\t")[2])) for line in open(sys.argv[5])])
-pageIdToTitle = {}
-for key, value in idMapping.iteritems():
-    if value in coords:
-        pageIdToTitle[value] = fixTitle(str(key))
+
+pageIdToTitle = {v:fixTitle(str(k)) for k, v in idMapping.iteritems()}
+
 outDir = sys.argv[6]
 threadIndex = int(sys.argv[7])
 coreCount = int(sys.argv[8])
 files = [urllib.unquote(file) for file in idMapping.values()]
+
 thisFiles = files[threadIndex * len(files) / coreCount: (threadIndex + 1) * len(files) / coreCount]
 imageSet = set()
 
