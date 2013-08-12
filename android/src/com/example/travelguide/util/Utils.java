@@ -1,6 +1,9 @@
 package com.example.travelguide.util;
 
 import java.io.File;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 
 import android.app.Activity;
 import android.content.Context;
@@ -118,6 +121,30 @@ public class Utils
     final String url = info.getArticleId();
     final String id = url.substring(0, url.lastIndexOf('.'));
     return new MWMPoint(info.getLat(), info.getLon(), info.getName(), id);
+  }
+
+
+  private final static NumberFormat df = DecimalFormat.getInstance(); // frequently used, so we dont recreate
+  static
+  {
+    df.setMinimumFractionDigits(0);
+    df.setMaximumFractionDigits(2);
+    df.setRoundingMode(RoundingMode.DOWN);
+  }
+
+  public static String formatDataSize(long bytes)
+  {
+    if (bytes < 0)
+      return "";
+    final String[] suffixes = {"B", "KB", "MB", "GB", "TB", "EB"};
+    final int powerOf1024 = (int) log1024(bytes);
+    final double shortValue = bytes/Math.pow(1024, powerOf1024);
+    return df.format(shortValue) + suffixes[powerOf1024];
+  }
+
+  public static double log1024(double value)
+  {
+    return Math.log(value)/Math.log(1024);
   }
 
 }

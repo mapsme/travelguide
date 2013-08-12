@@ -7,9 +7,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.os.Messenger;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
@@ -17,6 +14,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.travelguide.expansion.ExpansionService;
+import com.example.travelguide.util.Utils;
 import com.google.android.vending.expansion.downloader.DownloadProgressInfo;
 import com.google.android.vending.expansion.downloader.DownloaderClientMarshaller;
 import com.google.android.vending.expansion.downloader.DownloaderServiceMarshaller;
@@ -27,7 +25,7 @@ import com.google.android.vending.expansion.downloader.IStub;
 import com.susanin.travelguide.R;
 
 public class ExpansionActivity extends Activity
-                               implements IDownloaderClient, OnCheckedChangeListener, OnClickListener
+                               implements IDownloaderClient, OnCheckedChangeListener
 {
 
 
@@ -37,10 +35,10 @@ public class ExpansionActivity extends Activity
   private ProgressBar mProgressBar;
   private TextView mDownloadState;
   private CheckBox mMobNetworkDownload;
-  private Button mPauseResume;
 
-  // TODO: should be binded to state
-  private boolean mIsDownloading;
+  private TextView mSpeed;
+  private TextView mTotal;
+
 
   @Override
   protected void onCreate(Bundle savedInstanceState)
@@ -61,10 +59,7 @@ public class ExpansionActivity extends Activity
         if (startResult == DownloaderClientMarshaller.NO_DOWNLOAD_REQUIRED)
           forwardToApp(); // START!
         else
-        {
-          // Set up progress and more
           setUpForDownloading();
-        }
       }
       catch (final NameNotFoundException e)
       {
@@ -95,12 +90,12 @@ public class ExpansionActivity extends Activity
 
     mProgressBar = (ProgressBar) findViewById(R.id.downloadProgress);
     mDownloadState = (TextView) findViewById(R.id.downloadState);
-    // TODO: save this preference
+
     mMobNetworkDownload = (CheckBox) findViewById(R.id.mobNetDownload);
     mMobNetworkDownload.setOnCheckedChangeListener(this);
 
-    mPauseResume = (Button) findViewById(R.id.pauseResume);
-    mPauseResume.setOnClickListener(this);
+    mSpeed = (TextView) findViewById(R.id.downloadSpeed);
+    mTotal = (TextView) findViewById(R.id.downloadTotal);
   }
 
   private void forwardToApp()
@@ -158,21 +153,36 @@ public class ExpansionActivity extends Activity
         forwardToApp();
         return;
     }
-    // TODO: add more cases
   }
 
   @Override
   public void onDownloadProgress(DownloadProgressInfo progress)
   {
-    // TODO Auto-generated method stub
-    final int currentProgressInPercent = (int) (100*progress.mOverallProgress/DATA_FILE.fileSize);
+    final int currentProgressInPercent =
+        (int) (mProgressBar.getMax()*progress.mOverallProgress/(float)progress.mOverallTotal);
+
+    String downloadSpeed = "";
+    if (progress.mCurrentSpeed > 0)
+      downloadSpeed = Utils.formatDataSize(Math.round(progress.mCurrentSpeed*1024))+ "/S";
+
+    final String progressStr = Utils.formatDataSize(progress.mOverallProgress) + "/"
+                               + Utils.formatDataSize(progress.mOverallTotal);
+
+    mSpeed.setText(downloadSpeed);
+    mTotal.setText(progressStr);
     mProgressBar.setProgress(currentProgressInPercent);
   }
 
   private void setMobileNetworkDownloadEnabled(boolean enabled)
   {
     if (mRemoteService != null)
-      mRemoteService.setDownloadFlags(enabled ? IDownloaderService.FLAGS_DOWNLOAD_OVER_CELLULAR: 0);
+      if (enabled)
+      {
+      mRemoteService.setDownloadFlags(IDownloaderService.FLAGS_DOWNLOAD_OVER_CELLULAR);
+      mRemoteService.requestContinueDownload();
+      }
+      else
+        mRemoteService.setDownloadFlags(0);
   }
 
   @Override
@@ -181,20 +191,4 @@ public class ExpansionActivity extends Activity
     if (buttonView == mMobNetworkDownload)
       setMobileNetworkDownloadEnabled(isChecked);
   }
-
-  @Override
-  public void onClick(View target)
-  {
-    if (target.getId() == R.id.pauseResume)
-      pauseResumeDownload();
-  }
-
-  private void pauseResumeDownload()
-  {
-    if (mRemoteService != null)
-    {
-      // TODO: track state and manage it
-    }
-  }
-
 }

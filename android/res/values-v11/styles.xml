@@ -7,5 +7,7 @@
     <style name="AppBaseTheme" parent="android:Theme.Holo.Light.NoActionBar">
         <!-- API 11 theme customizations can go here. -->
     </style>
+    
+    <style name="HorizontalProgress" parent="@android:style/Widget.Holo.ProgressBar.Horizontal"/>
 
 </resources>

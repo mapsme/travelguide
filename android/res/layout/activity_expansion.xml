@@ -11,11 +11,27 @@
 
     <ProgressBar
         android:id="@+id/downloadProgress"
-        style="@android:style/Widget.ProgressBar.Horizontal"
+        style="@style/HorizontalProgress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:max="100" />
+
+    <TextView
+        android:id="@+id/downloadSpeed"
+        style="@android:style/TextAppearance.Small.Inverse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/downloadProgress" />
+
+    <TextView
+        android:id="@+id/downloadTotal"
+        style="@android:style/TextAppearance.Small.Inverse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/downloadProgress" />
 
     <TextView
         android:id="@+id/downloadState"
@@ -23,15 +39,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/downloadProgress"
-        android:text="Downloading ... "
         android:textColor="@color/yellow" />
-
-    <Button
-        android:id="@+id/pauseResume"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/downloadProgress"
-        android:text="Pause/Resume" />
 
     <CheckBox
         android:id="@+id/mobNetDownload"
@@ -40,6 +48,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:checked="false"
-        android:text="Use mobile network" />
+        android:text="@string/use_mobile_network" />
 
 </RelativeLayout>
