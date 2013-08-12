@@ -8,5 +8,7 @@
     <dimen name="pad_mid">8dp</dimen>
     <dimen name="pad_small">4dp</dimen>
     <dimen name="thumb_sep">3dp</dimen>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
 
 </resources>
