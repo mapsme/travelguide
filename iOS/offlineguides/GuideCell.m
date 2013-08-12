@@ -94,7 +94,7 @@
 
 -(void) setSelectedViewPosition
 {
-  [self.selectedCellView setFrame:CGRectMake(self.frame.size.width - 5, 0, 5, self.frame.size.height)];
+  [self.selectedCellView setFrame:CGRectMake(0, 0, 3, self.frame.size.height)];
 }
 
 @end
