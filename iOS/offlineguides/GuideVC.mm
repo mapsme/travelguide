@@ -6,6 +6,7 @@
 #import "../../std/array.hpp"
 
 #define DATAFOLDER @"/data/"
+#define INDECATORBORDER 100
 
 @interface GuideVC ()
 {
@@ -15,6 +16,7 @@
 
 @property (nonatomic, strong) UIWebView * webView;
 @property (nonatomic, strong) NSString * m_guide;
+@property (nonatomic, strong) UIActivityIndicatorView * indicator;
 
 @end
 
@@ -35,6 +37,8 @@
     m_webViewScale = 1.0;
     m_webViewScaleOnStart = 0.0;
     self.numberOfPages = 0;
+    _indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    [self.webView addSubview:self.indicator];
   }
   return self;
 }
@@ -80,6 +84,7 @@
     [[UIApplication sharedApplication] openURL:[request URL]];
     return NO;
   }
+  [self performSelector:@selector(addActivityIndicator) withObject:nil afterDelay:0.5];
   [self updateTitle:str];
   ++self.numberOfPages;
   if ([self isImage:str])
@@ -89,6 +94,16 @@
   if (self.numberOfPages > 1 && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
     self.navigationItem.leftBarButtonItem =  [self getCustomButtonWithImage:@"ic_back"];
   return YES;
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+  [self stopAndHideIndicator];
+}
+
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
+{
+  [self stopAndHideIndicator];
 }
 
 - (unsigned int)textSizeAdjustment
@@ -225,5 +240,22 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
   }
   else
     return [self.navigationController.viewControllers objectAtIndex:0];
+}
+
+-(void)addActivityIndicator
+{
+  CGRect wvf = self.webView.frame;
+  [self.indicator setFrame:CGRectMake((wvf.size.width - INDECATORBORDER) / 2, (wvf.size.height - INDECATORBORDER) / 2, INDECATORBORDER, INDECATORBORDER)];
+  [self.indicator startAnimating];
+}
+
+-(void)stopAndHideIndicator
+{
+  [NSObject cancelPreviousPerformRequestsWithTarget:self];
+  if ([self.indicator isAnimating])
+  {
+    [self.indicator stopAnimating];
+    self.indicator.frame = CGRectZero;
+  }
 }
 @end
