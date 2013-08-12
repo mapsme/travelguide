@@ -27,7 +27,7 @@ void ProcessEntriesFile(string const & path, ToDo & toDo)
       continue;
 
     entries.clear();
-    str::Tokenize(str, "\t ", back_inserter(entries));
+    str::Tokenize(str, "\t ", MakeBackInserter(entries));
 
     toDo(entries);
   }

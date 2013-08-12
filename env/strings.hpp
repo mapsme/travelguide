@@ -18,8 +18,8 @@ void Trim(string & s);
 
 string MakeNormalizeAndLowerUtf8(string const & s);
 
-template <class IterT>
-IterT Tokenize(string const & s, char const * delims, IterT out)
+template <class ToDo>
+void Tokenize(string const & s, char const * delims, ToDo toDo)
 {
   size_t i = 0;
   while (i < s.size())
@@ -29,14 +29,12 @@ IterT Tokenize(string const & s, char const * delims, IterT out)
       j = s.size();
     if (j > i)
     {
-      *out++ = s.substr(i, j-i);
+      toDo(s.substr(i, j-i));
       i = j+1;
     }
     else
       ++i;
   }
-
-  return out;
 }
 
 }

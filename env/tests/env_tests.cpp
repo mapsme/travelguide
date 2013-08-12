@@ -8,6 +8,7 @@
 #include "../../std/algorithm.hpp"
 #include "../../std/vector.hpp"
 #include "../../std/array.hpp"
+#include "../../std/iterator.hpp"
 
 
 /// @note Do not edit formatting here (SRC() test):
@@ -86,7 +87,7 @@ TEST(Env, Tokenizer)
   string out[] = { "aaa", "bbb", "ccc" };
 
   vector<string> v;
-  str::Tokenize(in, " ,\t?", back_inserter(v));
+  str::Tokenize(in, " ,\t?", MakeBackInserter(v));
 
   EXPECT_TRUE(equal(out, out + ArraySize(out), v.begin()));
 }
