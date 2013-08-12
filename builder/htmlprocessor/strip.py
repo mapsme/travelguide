@@ -103,16 +103,16 @@ def rewriteImages(soup):
 
         index = -1
         splitSrc = imgElement["src"].split("/")
-        splitSrc.reserse()
+        splitSrc.reverse()
         # checking just two last elements (preview name, real name)
         for fileName in splitSrc[:2]:
             fileName = imageSanitizedPath(fileName)
             if fileName:
-                imgElement['src'] = fileName
+                imgElement["src"] = fileName
                 break
-            else:
-                print "Stripping image", imgElement["src"]
-                [s.decompose() for s in imgElement.fetchParents("div", {"class": ["thumb tright", "thumbinner", "image"]})]
+        else:
+            print "Stripping image", imgElement["src"]
+            [s.decompose() for s in imgElement.fetchParents("div", {"class": ["thumb tright", "thumbinner", "image"]})]
 
 
 def rewriteCrossLinks(soup):
@@ -162,6 +162,8 @@ imageFiles = dict([(sanitizeFileName(file), file) for file in os.listdir(imagesS
 idMappingFile = sys.argv[3]
 idMapping = dict([(unicode(i.split("\t")[1]), unicode(i.split("\t")[0])) for i in open(idMappingFile)])
 
+articleImages = dict([(i.split("\t")[0], i.strip().split("\t")[3]) for i in open(sys.argv[3])])
+
 # pageId => [parentId, parentTitle, grandParentId, grandParentTitle], ids and titles can be "NULL"
 ancestors = dict([(i.split("\t")[0], i.strip().split("\t")[4:8]) for i in open(sys.argv[3])])
 
@@ -209,9 +211,17 @@ for file in thisFiles:
 
     writeHtml(soup, file)
 
-imagesDstDir = os.path.join(outDir, "images")
+imagesDstDir = os.path.join(outDir, "images_fullsize")
 if not os.path.exists(imagesDstDir):
     os.makedirs(imagesDstDir)
 
 for image in imageSet:
     shutil.copy2(os.path.join(imagesSrcDir, imageFiles[image]), os.path.join(imagesDstDir, image))
+
+thumbsDstDir = os.path.join(outDir, "thumb_fullsize")
+if not os.path.exists(thumbsDstDir):
+    os.makedirs(thumbsDstDir)
+
+for k, v in articleImages.iteritems():
+    if k in thisFiles and sanitizeFileName(v) in imageFiles:
+        shutil.copy2(os.path.join(imagesSrcDir, imageFiles[sanitizeFileName(v)]), os.path.join(thumbsDstDir, k + ".jpg"))
