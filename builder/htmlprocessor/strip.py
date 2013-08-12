@@ -30,7 +30,7 @@ def insertArticleTitle(soup, articleTitle):
 
 
 def insertArticleImage(soup, imagePath):
-    imgTag = BeautifulSoup().new_tag("img", src=imagePath)
+    imgTag = BeautifulSoup().new_tag("img", style="background-image: url('%s')" % imagePath, id="articleImage")
     imgTag["class"] = "articleImage"
     soup.body.insert(0, imgTag)
 
@@ -59,6 +59,7 @@ def insertBreadcrumb(soup, articleTitle, parentTitle, parentLink, grandParentTit
 
 def transformStringWithEncoding(string):
     return urllib.unquote(string.decode("latin-1").encode("utf-8"))
+
 
 def sanitizeFileName(s):
     # unquote %20 and like that
@@ -168,7 +169,7 @@ redirectMapping = dict([(unicode(line.split("\t")[1]), unicode(line.split("\t")[
 
 coords = dict([(line.split("\t")[0], (line.split("\t")[1], line.split("\t")[2])) for line in open(sys.argv[5])])
 
-pageIdToTitle = {v:fixTitle(str(k)) for k, v in idMapping.iteritems()}
+pageIdToTitle = {v: fixTitle(str(k)) for k, v in idMapping.iteritems()}
 
 outDir = sys.argv[6]
 threadIndex = int(sys.argv[7])
@@ -178,8 +179,6 @@ files = [urllib.unquote(file) for file in idMapping.values()]
 thisFiles = files[threadIndex * len(files) / coreCount: (threadIndex + 1) * len(files) / coreCount]
 imageSet = set()
 
-# preload coords
-
 if not os.path.exists(outDir):
     os.makedirs(outDir)
 
@@ -188,21 +187,25 @@ for file in thisFiles:
     soup = cleanUp(soup)
     rewriteImages(soup)
     rewriteCrossLinks(soup)
-    # insert article "header" - image with breadcrumbs and map link
-    if file in coords:
-        articleTitle = pageIdToTitle[file]
 
+    articleTitle = pageIdToTitle[file]
+
+    if file in coords:
         insertMapLink(soup, coords[file][0], coords[file][1], articleTitle, file)
 
-        insertArticleTitle(soup, articleTitle)
+    insertArticleTitle(soup, articleTitle)
 
-        parentTitle = fixTitle(ancestors[file][1]) if ancestors[file][1] != "NULL" else False
-        parentLink = ancestors[file][0] + ".html" if ancestors[file][0] != "NULL" else False
-        grandParentTitle = fixTitle(ancestors[file][3]) if ancestors[file][3] != "NULL" else False
-        grandParentLink = ancestors[file][2] + ".html" if ancestors[file][2] != "NULL" else False
-        insertBreadcrumb(soup, articleTitle, parentTitle, parentLink, grandParentTitle, grandParentLink)
+    parentTitle = fixTitle(ancestors[file][1]) if ancestors[file][1] != "NULL" else False
+    parentLink = ancestors[file][0] + ".html" if ancestors[file][0] != "NULL" else False
+    grandParentTitle = fixTitle(ancestors[file][3]) if ancestors[file][3] != "NULL" else False
+    grandParentLink = ancestors[file][2] + ".html" if ancestors[file][2] != "NULL" else False
+    insertBreadcrumb(soup, articleTitle, parentTitle, parentLink, grandParentTitle, grandParentLink)
 
-        insertArticleImage(soup, "header_images/" + file + ".jpg")
+    articleImage = imageSanitizedPath(articleImages[file])
+    if articleImage:
+        insertArticleImage(soup, articleImage)
+    else:
+        print "article image not found:", articleImages[file]
 
     writeHtml(soup, file)
 
