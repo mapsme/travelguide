@@ -40,6 +40,13 @@
                                                              green:27.f/255.f
                                                               blue:27.f/255.f
                                                              alpha:1.f];
+
+      UIView * bgColorView = [[UIView alloc] init];
+      bgColorView.backgroundColor = [UIColor colorWithRed:253.f/255.f
+                                                    green:241.f/255.f
+                                                     blue:43.f/255.f
+                                                    alpha:1.f];
+      self.selectedBackgroundView = bgColorView;
       [self.contentView addSubview:self.topSeparator];
       [self.contentView addSubview:self.bottomSeparator];
     }
