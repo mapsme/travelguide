@@ -1,6 +1,5 @@
 package com.example.travelguide;
 
-import static com.example.travelguide.util.Expansion.DATA_FILE;
 import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.Intent;
@@ -14,6 +13,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.travelguide.expansion.ExpansionService;
+import com.example.travelguide.util.Expansion;
 import com.example.travelguide.util.Utils;
 import com.google.android.vending.expansion.downloader.DownloadProgressInfo;
 import com.google.android.vending.expansion.downloader.DownloaderClientMarshaller;
@@ -109,10 +109,7 @@ public class ExpansionActivity extends Activity
 
   private boolean expansionFilesDelivered()
   {
-    final String fileName = Helpers.getExpansionAPKFileName(this, DATA_FILE.isMain, DATA_FILE.versionCode);
-    if (!Helpers.doesFileExist(this, fileName, DATA_FILE.fileSize, false))
-      return false;
-    return true;
+    return Expansion.findFirstObbFile(getPackageName()) != null;
   }
 
   private PendingIntent createNotificationIntent()
