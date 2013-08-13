@@ -1,5 +1,6 @@
 #import "AppDelegate.h"
 #import "ArticleVC.h"
+#import "GuideVC.h"
 #import "IPadSplitVC.h"
 #import "MapsWithMeAPI.h"
 
@@ -21,13 +22,35 @@
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation
 {
-  if ([MWMApi isMapsWithMeUrl:url])
+  if ([sourceApplication rangeOfString:@"com.mapswithme."].length != 0)
   {
     MWMPin * pin = [MWMApi pinFromUrl:url];
     if (pin)
     {
-      // @TODO Show corresponding article
-      NSLog(@"@TODO Show article %@", pin.idOrUrl);
+      if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+      {
+        UISplitViewController * spVC = (UISplitViewController *)self.window.rootViewController;
+        UINavigationController * navVC = (UINavigationController *)([spVC.viewControllers objectAtIndex:1]);
+        GuideVC * guide = ((GuideVC *)navVC.topViewController);
+        if ([[guide getCurrentUrl] rangeOfString:pin.idOrUrl].length != 0)
+          return YES;
+        guide.numberOfPages = 0;
+        [guide loadPage:pin.idOrUrl];
+        guide.navigationItem.leftBarButtonItem = nil;
+      }
+      else
+      {
+        UINavigationController * navVC = (UINavigationController *)self.window.rootViewController;
+        if ([navVC.topViewController isKindOfClass:[GuideVC class]])
+        {
+          GuideVC * guide = ((GuideVC *)navVC.topViewController);
+          if ([[guide getCurrentUrl] rangeOfString:pin.idOrUrl].length != 0)
+            return YES;
+          else
+            [navVC popToRootViewControllerAnimated:NO];
+        }
+        [(ArticleVC *)navVC.topViewController loadGuideAndPushToNavigationController:pin.idOrUrl];
+      }
     }
     return YES;
   }

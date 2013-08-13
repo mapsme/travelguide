@@ -15,7 +15,6 @@
 }
 
 @property (nonatomic, strong) UIWebView * webView;
-@property (nonatomic, strong) NSString * m_guide;
 @property (nonatomic, strong) UIActivityIndicatorView * indicator;
 
 @end
@@ -45,7 +44,6 @@
 
 -(void)loadPage:(NSString *)pageUrl
 {
-  self.m_guide = [pageUrl copy];
   NSRange r = [pageUrl rangeOfString:@"." options:NSBackwardsSearch];
   NSString * pathToPage;
   if (r.length == 0)
@@ -80,6 +78,8 @@
  navigationType:(UIWebViewNavigationType)navigationType
 {
   NSString * str = [self normalizeUrl:[[request URL] absoluteString]];
+  if ([self openMwmUrl:str])
+    return NO;
   if ([self isWebPage:str] && [[UIApplication sharedApplication] canOpenURL:[request URL]])
   {
     [[UIApplication sharedApplication] openURL:[request URL]];
@@ -217,6 +217,18 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
   return NO;
 }
 
+-(BOOL)openMwmUrl:(NSString *)str
+{
+  NSRange r = [str rangeOfString:@"mapswithme" options:NSBackwardsSearch];
+  if (r.location == NSNotFound)
+    return NO;
+  if ([MWMApi isApiSupported])
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
+  else
+    [MWMApi showMapsWithMeIsNotInstalledDialog];
+  return YES;
+}
+
 -(void)updateTitle:(NSString *)url
 {
   NSRange r = [url rangeOfString:@"." options:NSBackwardsSearch];
@@ -253,5 +265,10 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     [self.indicator stopAnimating];
     self.indicator.frame = CGRectZero;
   }
+}
+
+-(NSString *)getCurrentUrl
+{
+  return [self.webView.request.URL absoluteString];
 }
 @end
