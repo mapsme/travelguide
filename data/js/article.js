@@ -52,6 +52,18 @@ function onPageLoaded() {
   [].forEach.call(sections, function(section) {
     addListener(section, 'click', onSectionClick);
   });
+
+  var img = new Image();
+  img.onload = function() {
+    if (document.getElementById('articleImage').offsetWidth > this.width ) {
+      var rad = document.getElementById('articleImage').offsetWidth / this.width;
+      document.getElementById('articleImage').style.webkitFilter = "blur(" + rad + "px)";
+      rad *= 2;
+      document.getElementById('articleImage').style.margin = "-" + rad + "px -" + rad + "px -" + rad + "px -" + rad + "px";
+    };
+  }
+  img.src = document.getElementById('articleImage').style.backgroundImage.replace(/url\((['"])?(.*?)\1\)/gi, '$2').split(',')[0];
+
 }
 
 window.onload = onPageLoaded;
