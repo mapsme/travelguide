@@ -9,7 +9,7 @@
 @property (nonatomic, assign) id <ArticleDelegate> delegate;
 //uses on start of application
 -(NSString *)getDefaultArticle;
--(NSString *)getArticleName:(NSString *)htmlId;
+-(NSString *)updateView:(NSString *)htmlId;
 -(void)killKeyboard;
 -(void)loadGuideAndPushToNavigationController:(NSString *)url;
 @end
