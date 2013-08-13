@@ -71,7 +71,7 @@ def cleanUp(soup):
 
 def changeImgSrcAttr(soup):
     # Use s attribute instead of src for images
-    for imgElement in soup.findAll("img"):
+    for imgElement in soup.select('img[src]'):
         imgElement["s"] = imgElement["src"]
         del imgElement["src"]
 
