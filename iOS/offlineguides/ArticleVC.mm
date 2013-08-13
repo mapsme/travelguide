@@ -247,4 +247,9 @@
   [vc loadPage:url];
 }
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+  return YES;
+}
+
 @end
