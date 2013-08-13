@@ -5,6 +5,7 @@
     <color name="grey">#666666</color>
     <color name="thumb_sep">#FDF12B</color>
     <color name="yellow">#FDF12B</color>
+    <color name="yellow_trans">#E5FDF12B</color>
     <color name="list_back">#282828</color>
     <color name="active_listitem">#1C1C1C</color>
 

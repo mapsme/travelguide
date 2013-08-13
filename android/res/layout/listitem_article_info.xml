@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/listitem_size"
-    android:background="@color/list_back"
+    android:background="@drawable/list_item_selector"
     android:baselineAligned="false"
     android:gravity="center_vertical"
     android:orientation="horizontal" >
@@ -33,15 +33,18 @@
             style="@android:style/TextAppearance.Medium.Inverse"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
             android:paddingLeft="@dimen/pad_mid"
-            android:textStyle="bold" />
+            />
 
         <TextView
             android:id="@+id/parent"
             style="@android:style/TextAppearance.Small.Inverse"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="@dimen/pad_mid" />
+            android:fontFamily="sans-serif-light"
+            android:paddingLeft="@dimen/pad_mid"
+            android:textColor="@android:color/white" />
     </LinearLayout>
 
 </LinearLayout>
