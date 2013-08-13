@@ -167,7 +167,7 @@ public class ExpansionActivity extends Activity
 
     String downloadSpeed = "";
     if (progress.mCurrentSpeed > 0)
-      downloadSpeed = Utils.formatDataSize(Math.round(progress.mCurrentSpeed*1024))+ "/S";
+      downloadSpeed = Utils.formatDataSize(Math.round(progress.mCurrentSpeed*1024))+ "/s";
 
     final String progressStr = Utils.formatDataSize(progress.mOverallProgress) + "/"
                                + Utils.formatDataSize(progress.mOverallTotal);
