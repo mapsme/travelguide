@@ -7,9 +7,9 @@ import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.os.Messenger;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -25,20 +25,21 @@ import com.google.android.vending.expansion.downloader.IStub;
 import com.susanin.travelguide.R;
 
 public class ExpansionActivity extends Activity
-                               implements IDownloaderClient, OnCheckedChangeListener
+                               implements IDownloaderClient, OnClickListener
 {
 
 
   private IStub mDownloaderClientStub;
   private IDownloaderService mRemoteService;
+  private int mState = -1;
 
   private ProgressBar mProgressBar;
   private TextView mDownloadState;
-  private CheckBox mMobNetworkDownload;
 
   private TextView mSpeed;
   private TextView mTotal;
 
+  private Button mResumePauseRetry;
 
   @Override
   protected void onCreate(Bundle savedInstanceState)
@@ -46,26 +47,28 @@ public class ExpansionActivity extends Activity
     super.onCreate(savedInstanceState);
 
     if (expansionFilesDelivered())
-      forwardToApp(); // START!
+      forwardToApp();
     else
+      startDownloading();
+  }
+
+  private void startDownloading()
+  {
+    try
     {
-       try
-      {
-        final int startResult = DownloaderClientMarshaller
-           .startDownloadServiceIfRequired(getApplicationContext(),
-                                           createNotificationIntent(),
-                                           ExpansionService.class);
+      final int startResult = DownloaderClientMarshaller
+         .startDownloadServiceIfRequired(getApplicationContext(),
+                                         createNotificationIntent(),
+                                         ExpansionService.class);
 
-        if (startResult == DownloaderClientMarshaller.NO_DOWNLOAD_REQUIRED)
-          forwardToApp(); // START!
-        else
-          setUpForDownloading();
-      }
-      catch (final NameNotFoundException e)
-      {
-        throw new RuntimeException(e); // TODO This should not happen
-      }
-
+      if (startResult == DownloaderClientMarshaller.NO_DOWNLOAD_REQUIRED)
+        forwardToApp(); // START!
+      else
+        setUpForDownloading();
+    }
+    catch (final NameNotFoundException e)
+    {
+      throw new IllegalStateException(e); // This should not happen
     }
   }
 
@@ -91,11 +94,10 @@ public class ExpansionActivity extends Activity
     mProgressBar = (ProgressBar) findViewById(R.id.downloadProgress);
     mDownloadState = (TextView) findViewById(R.id.downloadState);
 
-    mMobNetworkDownload = (CheckBox) findViewById(R.id.mobNetDownload);
-    mMobNetworkDownload.setOnCheckedChangeListener(this);
-
     mSpeed = (TextView) findViewById(R.id.downloadSpeed);
     mTotal = (TextView) findViewById(R.id.downloadTotal);
+
+    mResumePauseRetry = (Button)findViewById(R.id.resumePauseRetry);
   }
 
   private void forwardToApp()
@@ -146,13 +148,15 @@ public class ExpansionActivity extends Activity
   public void onDownloadStateChanged(int newState)
   {
     mDownloadState.setText(Helpers.getDownloaderStringResourceIDFromState(newState));
-
-    switch (newState)
+    mState = newState;
+    switch (mState)
     {
       case IDownloaderClient.STATE_COMPLETED:
         forwardToApp();
         return;
     }
+
+    setUpResumePauseRetry(newState);
   }
 
   @Override
@@ -177,18 +181,73 @@ public class ExpansionActivity extends Activity
   {
     if (mRemoteService != null)
       if (enabled)
-      {
-      mRemoteService.setDownloadFlags(IDownloaderService.FLAGS_DOWNLOAD_OVER_CELLULAR);
-      mRemoteService.requestContinueDownload();
-      }
+        mRemoteService.setDownloadFlags(IDownloaderService.FLAGS_DOWNLOAD_OVER_CELLULAR);
       else
         mRemoteService.setDownloadFlags(0);
   }
 
-  @Override
-  public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
+  private boolean isPaused(int state)
   {
-    if (buttonView == mMobNetworkDownload)
-      setMobileNetworkDownloadEnabled(isChecked);
+    return state >= STATE_PAUSED_NETWORK_UNAVAILABLE && state <= STATE_PAUSED_SDCARD_UNAVAILABLE;
   }
+
+  private boolean isFailed(int state)
+  {
+    return state >= STATE_FAILED_UNLICENSED && state <= STATE_FAILED;
+  }
+
+  private boolean isActive(int state)
+  {
+    return state >= STATE_IDLE && state <= STATE_DOWNLOADING;
+  }
+
+  private boolean needCellularPermission(int state)
+  {
+    return state >= STATE_PAUSED_WIFI_DISABLED_NEED_CELLULAR_PERMISSION
+        && state <= STATE_PAUSED_NEED_CELLULAR_PERMISSION;
+  }
+
+  private void setUpResumePauseRetry(int state)
+  {
+    if (isPaused(state))
+    {
+      if (needCellularPermission(state))
+        mResumePauseRetry.setText(R.string.use_mobile_net);
+      else
+        mResumePauseRetry.setText(R.string.resume);
+    }
+    else if (isFailed(state))
+      mResumePauseRetry.setText(R.string.retry);
+    else if (isActive(state))
+      mResumePauseRetry.setText(R.string.pause);
+    else
+    {
+      Utils.hideView(mResumePauseRetry);
+      mResumePauseRetry.setOnClickListener(null);
+      return;
+    }
+    Utils.showView(mResumePauseRetry);
+    mResumePauseRetry.setOnClickListener(this);
+  }
+
+  @Override
+  public void onClick(View v)
+  {
+    if (R.id.resumePauseRetry == v.getId())
+    {
+      if (isActive(mState))
+        mRemoteService.requestPauseDownload();
+      else if (isFailed(mState))
+        startDownloading();
+      else if (isPaused(mState))
+      {
+        if (needCellularPermission(mState))
+          setMobileNetworkDownloadEnabled(true);
+        mRemoteService.requestContinueDownload();
+      }
+      else
+        throw new IllegalStateException("Must not be here.");
+    }
+  }
+
 }

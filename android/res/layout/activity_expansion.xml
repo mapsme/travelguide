@@ -41,13 +41,11 @@
         android:layout_above="@+id/downloadProgress"
         android:textColor="@color/yellow" />
 
-    <CheckBox
-        android:id="@+id/mobNetDownload"
-        style="@android:style/TextAppearance.Medium.Inverse"
+    <Button
+        android:id="@+id/resumePauseRetry"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:checked="false"
-        android:text="@string/use_mobile_network" />
+        android:visibility="gone" />
 
 </RelativeLayout>
