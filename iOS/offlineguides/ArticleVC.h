@@ -11,4 +11,5 @@
 -(NSString *)getDefaultArticle;
 -(NSString *)getArticleName:(NSString *)htmlId;
 -(void)killKeyboard;
+-(void)loadGuideAndPushToNavigationController:(NSString *)url;
 @end
