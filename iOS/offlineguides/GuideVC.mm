@@ -15,7 +15,6 @@
 }
 
 @property (nonatomic, strong) UIWebView * webView;
-@property (nonatomic, strong) UIActivityIndicatorView * indicator;
 
 @end
 
@@ -35,9 +34,6 @@
     self.view  = self.webView;
     m_webViewScale = 1.0;
     m_webViewScaleOnStart = 0.0;
-    self.numberOfPages = 0;
-    _indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    [self.webView addSubview:self.indicator];
   }
   return self;
 }
@@ -62,11 +58,10 @@
   [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"bg_header"] forBarMetrics:UIBarMetricsLandscapePhone];
 
   if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+  {
     self.navigationItem.rightBarButtonItem =  [self getCustomButtonWithImage:@"ic_articleselection"];
-  if (self.numberOfPages)
     self.navigationItem.leftBarButtonItem =  [self getCustomButtonWithImage:@"ic_back"];
-  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
-    self.navigationItem.leftBarButtonItem =  [self getCustomButtonWithImage:@"ic_back"];
+  }
   self.navigationController.navigationBar.titleTextAttributes = @{UITextAttributeTextColor : [UIColor colorWithRed:253.f/255.f
                                                                                                              green:241.f/255.f
                                                                                                               blue:43.f/255.f
@@ -86,26 +81,23 @@
     [[UIApplication sharedApplication] openURL:[request URL]];
     return NO;
   }
-  [self performSelector:@selector(addActivityIndicator) withObject:nil afterDelay:0.5];
   [self updateArticleView:str];
-  ++self.numberOfPages;
   if ([self isImage:str])
     self.webView.scalesPageToFit = YES;
   else
     self.webView.scalesPageToFit = NO;
-  if (self.numberOfPages > 1 && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-    self.navigationItem.leftBarButtonItem =  [self getCustomButtonWithImage:@"ic_back"];
   return YES;
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
-  [self stopAndHideIndicator];
-}
-
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
-{
-  [self stopAndHideIndicator];
+  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+  {
+    if ([self.webView canGoBack])
+      self.navigationItem.leftBarButtonItem =  [self getCustomButtonWithImage:@"ic_back"];
+    else
+      self.navigationItem.leftBarButtonItem =  nil;
+  }
 }
 
 -(void)onPinch:(UIPanGestureRecognizer *)sender
@@ -131,21 +123,20 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 
 -(void)back
 {
-  --self.numberOfPages;
-  if (self.numberOfPages <= 0)
-  {
-    self.numberOfPages = 0;
-    [self.navigationController popToRootViewControllerAnimated:YES];
-    return;
-  }
-  else
-  {
-    [self.webView goBack];
-    [self updateArticleView:[self normalizeUrl:[[self.webView.request URL] absoluteString]]];
-  }
-  if (self.numberOfPages  <= 1 && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-    self.navigationItem.leftBarButtonItem = nil;
-  --self.numberOfPages;
+ if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+ {
+   if ([self.webView canGoBack])
+     [self.webView goBack];
+   else
+     [self.navigationController popViewControllerAnimated:YES];
+   return;
+ }
+ else
+ {
+   [self.webView goBack];
+   if (![self.webView canGoBack])
+     self.navigationItem.leftBarButtonItem = nil;
+ }
 }
 
 -(UIBarButtonItem *)getCustomButtonWithImage:(NSString *)name
@@ -252,23 +243,6 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
   }
   else
     return [self.navigationController.viewControllers objectAtIndex:0];
-}
-
--(void)addActivityIndicator
-{
-  CGRect wvf = self.webView.frame;
-  [self.indicator setFrame:CGRectMake((wvf.size.width - INDECATORBORDER) / 2, (wvf.size.height - INDECATORBORDER) / 2, INDECATORBORDER, INDECATORBORDER)];
-  [self.indicator startAnimating];
-}
-
--(void)stopAndHideIndicator
-{
-  [NSObject cancelPreviousPerformRequestsWithTarget:self];
-  if ([self.indicator isAnimating])
-  {
-    [self.indicator stopAnimating];
-    self.indicator.frame = CGRectZero;
-  }
 }
 
 -(NSString *)getCurrentUrl

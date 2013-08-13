@@ -29,14 +29,15 @@
     {
       if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
       {
-        UISplitViewController * spVC = (UISplitViewController *)self.window.rootViewController;
+        IPadSplitVC * spVC = (IPadSplitVC *)self.window.rootViewController;
         UINavigationController * navVC = (UINavigationController *)([spVC.viewControllers objectAtIndex:1]);
         GuideVC * guide = ((GuideVC *)navVC.topViewController);
         if ([[guide getCurrentUrl] rangeOfString:pin.idOrUrl].length != 0)
           return YES;
-        guide.numberOfPages = 0;
-        [guide loadPage:pin.idOrUrl];
-        guide.navigationItem.leftBarButtonItem = nil;
+        GuideVC * g = [[GuideVC alloc] init];
+        [g loadPage:pin.idOrUrl];
+        g.navigationItem.leftBarButtonItem = nil;
+        [spVC replaceGuide:g];
       }
       else
       {

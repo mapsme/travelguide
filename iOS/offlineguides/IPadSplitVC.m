@@ -31,10 +31,11 @@
 
 -(void)selectHtmlPageUrl:(NSString *)url
 {
-  GuideVC * g = [self getGuideVC];
+  GuideVC * g = [[GuideVC alloc] init];
+
   g.navigationItem.leftBarButtonItem = nil;
-  g.numberOfPages = 0;
   [g loadPage:url];
+  [self replaceGuide:g];
   [[self getArticleVC] killKeyboard];
   [self.pop dismissPopoverAnimated:YES];
 }
@@ -73,6 +74,12 @@
 {
   UINavigationController * GuideNavVC = (UINavigationController*)[self.viewControllers objectAtIndex:1];
   return (GuideVC *)GuideNavVC.visibleViewController;
+}
+
+-(void)replaceGuide:(GuideVC *)guide
+{
+  UINavigationController * GuideNavVC = (UINavigationController*)[self.viewControllers objectAtIndex:1];
+  GuideNavVC.viewControllers = @[guide];
 }
 
 @end
