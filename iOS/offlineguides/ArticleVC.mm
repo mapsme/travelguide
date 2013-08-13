@@ -160,11 +160,9 @@
 {
   [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
   ArticleInfo const * info = [self infoByIndexPath:indexPath];
-  GuideVC * vc = [[GuideVC alloc] init];
-  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
-    [self.navigationController pushViewController:vc animated:YES];
   NSString * url = [NSString stringWithUTF8String:info->GetUrl().c_str()];
-  [vc loadPage:url];
+  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+    [self loadGuideAndPushToNavigationController:url];
   [self.delegate selectHtmlPageUrl:url];
 }
 
@@ -217,7 +215,7 @@
 
 -(NSString *)getArticleName:(NSString *)htmlId
 {
-  ArticleInfo const * articleInfo =  m_storage.GetArticleInfoFromUrl([htmlId UTF8String]);
+  ArticleInfo const * articleInfo = m_storage.GetArticleInfoFromUrl([htmlId UTF8String]);
   //update articles table when go back
   if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
   {
@@ -241,6 +239,13 @@
     self.currentName = [NSString stringWithUTF8String:info.GetTitle().c_str()];
     self.currentSubtitle = [NSString stringWithUTF8String:m_storage.FormatParentName(info).c_str()];
   }
+}
+
+-(void)loadGuideAndPushToNavigationController:(NSString *)url
+{
+  GuideVC * vc = [[GuideVC alloc] init];
+  [self.navigationController pushViewController:vc animated:YES];
+  [vc loadPage:url];
 }
 
 @end

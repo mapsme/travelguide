@@ -78,8 +78,8 @@ static NSString * MWMUrlScheme = @"mapswithme://";
 
 + (MWMPin *) pinFromUrl:(NSURL *)url
 {
-  if (![MWMApi isMapsWithMeUrl:url])
-    return nil;
+//  if (![MWMApi isMapsWithMeUrl:url])
+//    return nil;
 
   MWMPin * pin = nil;
   if ([url.host isEqualToString:@"pin"])
@@ -179,13 +179,13 @@ static NSString * MWMUrlScheme = @"mapswithme://";
     {
       for (NSString * scheme in [dict objectForKey:@"CFBundleURLSchemes"])
       {
-        if ([scheme rangeOfString:@"mapswithme" options:NSCaseInsensitiveSearch].location != NSNotFound)
-          return scheme;
+        //we use only one scheme that uses mapswithme api
+        return scheme;
       }
     }
   }
-  NSLog(@"WARNING: No com.mapswithme.maps url schemes are added in the Info.plist file. Please add them if you want API users to come back to your app.");
-  return nil;
+  NSLog(@"WARNING: No url schemes are added in the Info.plist file that supports MWM api. Please add them if you want API users to come back to your app.");
+  return @"guideswithme://";
 }
 
 // HTML page for users who didn't install MapsWithMe

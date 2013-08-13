@@ -6,5 +6,6 @@
 
 -(void)loadPage:(NSString *)pageUrl;
 -(void)clearPreviosViews;
+-(NSString *)getCurrentUrl;
 
 @end

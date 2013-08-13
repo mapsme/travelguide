@@ -19,6 +19,7 @@
       UINavigationController * v = [[UINavigationController alloc] initWithRootViewController:[[GuideVC alloc] init]];
       v.navigationBarHidden = NO;
       self.viewControllers = @[navVC, v];
+      [[self getGuideVC] loadPage:[[self getArticleVC] getDefaultArticle]];
     }
     return self;
 }
@@ -26,7 +27,6 @@
 -(void)viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
-  [[self getGuideVC] loadPage:[[self getArticleVC] getDefaultArticle]];
 }
 
 -(void)selectHtmlPageUrl:(NSString *)url
