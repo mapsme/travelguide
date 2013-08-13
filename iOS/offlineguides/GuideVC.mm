@@ -15,7 +15,6 @@
 }
 
 @property (nonatomic, strong) UIWebView * webView;
-@property (nonatomic, strong) UIActivityIndicatorView * indicator;
 
 @end
 
@@ -35,8 +34,6 @@
     self.view  = self.webView;
     m_webViewScale = 1.0;
     m_webViewScaleOnStart = 0.0;
-    _indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    [self.webView addSubview:self.indicator];
   }
   return self;
 }
@@ -84,7 +81,6 @@
     [[UIApplication sharedApplication] openURL:[request URL]];
     return NO;
   }
-  [self performSelector:@selector(addActivityIndicator) withObject:nil afterDelay:0.5];
   [self updateArticleView:str];
   if ([self isImage:str])
     self.webView.scalesPageToFit = YES;
@@ -102,12 +98,6 @@
     else
       self.navigationItem.leftBarButtonItem =  nil;
   }
-  [self stopAndHideIndicator];
-}
-
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
-{
-  [self stopAndHideIndicator];
 }
 
 -(void)onPinch:(UIPanGestureRecognizer *)sender
@@ -253,23 +243,6 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
   }
   else
     return [self.navigationController.viewControllers objectAtIndex:0];
-}
-
--(void)addActivityIndicator
-{
-  CGRect wvf = self.webView.frame;
-  [self.indicator setFrame:CGRectMake((wvf.size.width - INDECATORBORDER) / 2, (wvf.size.height - INDECATORBORDER) / 2, INDECATORBORDER, INDECATORBORDER)];
-  [self.indicator startAnimating];
-}
-
--(void)stopAndHideIndicator
-{
-  [NSObject cancelPreviousPerformRequestsWithTarget:self];
-  if ([self.indicator isAnimating])
-  {
-    [self.indicator stopAnimating];
-    self.indicator.frame = CGRectZero;
-  }
 }
 
 -(NSString *)getCurrentUrl
