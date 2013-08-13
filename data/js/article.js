@@ -1,3 +1,14 @@
+function restoreImgSrcAttr() {
+  var elements = document.getElementsByTagName('img');
+  for (var i = 0; i < elements.length; ++i) {
+    var element = elements[i];
+    var src = element.getAttribute('s');
+    if (src != undefined) {
+      element.setAttribute('src', src);
+    }
+  }
+}
+
 function addListener(element, eventName, handler) {
   if (element.addEventListener) {
     element.addEventListener(eventName, handler, false);
@@ -48,6 +59,8 @@ function onSectionClick(event) {
 
 
 function onPageLoaded() {
+  restoreImgSrcAttr();
+
   var sections = document.getElementsByClassName("section_heading");
   [].forEach.call(sections, function(section) {
     addListener(section, 'click', onSectionClick);
