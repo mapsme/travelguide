@@ -1,5 +1,6 @@
 package com.example.travelguide;
 
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -9,17 +10,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.webkit.URLUtil;
 import android.webkit.WebSettings;
 import android.webkit.WebSettings.LayoutAlgorithm;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
+
 import com.example.travelguide.ArticleInfoListFragment.OnListIconClickedListener;
 import com.example.travelguide.article.ArticleInfo;
 import com.example.travelguide.article.ArticlePathFinder;
 import com.example.travelguide.article.ObbPathFinder;
 import com.example.travelguide.cpp.Storage;
 import com.example.travelguide.util.Utils;
+import com.mapswithme.maps.api.MWMPoint;
+import com.mapswithme.maps.api.MapsWithMeApi;
 import com.susanin.travelguide.R;
 
 /**
@@ -126,7 +131,7 @@ public class ArticleInfoDetailFragment extends Fragment implements OnClickListen
       Utils.fadeOut(getActivity(), mWebView);
       Utils.fadeIn(getActivity() ,mProgressContainer);
 
-      if (!Utils.isExternalUrl(url) && url.endsWith(".html"))
+      if (URLUtil.isFileUrl(url) && url.endsWith(".html"))
       {
         final String strippedUrl = url.substring(url.lastIndexOf('/') + 1, url.lastIndexOf('.'));
         mTitle.setText(Storage.getArticleInfoByUrl(strippedUrl).getName());
@@ -136,7 +141,7 @@ public class ArticleInfoDetailFragment extends Fragment implements OnClickListen
     @Override
     public boolean shouldOverrideUrlLoading(WebView view, String url)
     {
-      if (Utils.isExternalUrl(url))
+      if (URLUtil.isNetworkUrl(url))
       {
         final Intent i = new Intent(Intent.ACTION_VIEW);
         i.setData(Uri.parse(url));
@@ -145,6 +150,22 @@ public class ArticleInfoDetailFragment extends Fragment implements OnClickListen
 
         return true;
       }
+      else if (url.startsWith("mapswithme://"))
+      {
+        final Uri uri = Uri.parse(url);
+        final String latlon = uri.getQueryParameter("ll");
+        final double lat = Double.parseDouble(latlon.split(",")[0]);
+        final double lon = Double.parseDouble(latlon.split(",")[1]);
+        final String name = uri.getQueryParameter("n");
+        final String id = uri.getQueryParameter("id");
+
+        final PendingIntent pi = ArticleInfoListActivity.createPendingIntent(getActivity());
+        final MWMPoint point = new MWMPoint(lat, lon, name, id);
+        MapsWithMeApi.showPointsOnMap(getActivity(), name, pi, point);
+
+        return true;
+      }
+
       return super.shouldOverrideUrlLoading(view, url);
     }
   }
