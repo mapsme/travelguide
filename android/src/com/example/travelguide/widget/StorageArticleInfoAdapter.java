@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.travelguide.R;
+import com.susanin.travelguide.R;
 import com.example.travelguide.article.ArticleInfo;
 import com.example.travelguide.cpp.Storage;
 import com.example.travelguide.thumb.ObbThumbnailProvider;

@@ -6,11 +6,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
-
 import com.example.travelguide.article.ArticleInfo;
 import com.example.travelguide.cpp.Storage;
 import com.mapswithme.maps.api.MWMPoint;
 import com.mapswithme.maps.api.MWMResponse;
+import com.susanin.travelguide.R;
 
 /**
  * An activity representing a list of ArticleInfos. This activity has different

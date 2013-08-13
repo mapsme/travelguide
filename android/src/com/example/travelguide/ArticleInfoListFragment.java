@@ -3,9 +3,7 @@ package com.example.travelguide;
 import static com.example.travelguide.util.Utils.hideIf;
 import static com.example.travelguide.util.Utils.hideView;
 import static com.example.travelguide.util.Utils.showView;
-
 import java.util.ArrayList;
-
 import android.app.Activity;
 import android.content.Context;
 import android.location.Location;
@@ -24,7 +22,6 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import com.example.travelguide.article.ArticleInfo;
 import com.example.travelguide.async.QueryResultLoader;
 import com.example.travelguide.cpp.Storage;
@@ -32,6 +29,7 @@ import com.example.travelguide.util.Utils;
 import com.example.travelguide.widget.StorageArticleInfoAdapter;
 import com.mapswithme.maps.api.MWMPoint;
 import com.mapswithme.maps.api.MapsWithMeApi;
+import com.susanin.travelguide.R;
 
 /**
  * A list fragment representing a list of ArticleInfos. This fragment also
