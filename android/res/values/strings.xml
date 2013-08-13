@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">UK GuideWithMe</string>
+    <string name="app_name">UK Guide With Me</string>
     <string name="title_articleinfo_detail">ArticleInfo Detail</string>
     <string name="loading">Loading ...</string>
     <string name="searching">Searching ...</string>
