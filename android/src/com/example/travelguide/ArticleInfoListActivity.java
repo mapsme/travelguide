@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+
 import com.example.travelguide.article.ArticleInfo;
 import com.example.travelguide.cpp.Storage;
 import com.mapswithme.maps.api.MWMPoint;
@@ -28,8 +29,10 @@ import com.susanin.travelguide.R;
  * {@link ArticleInfoListFragment.Callbacks} interface to listen for item
  * selections.
  */
-public class ArticleInfoListActivity extends FragmentActivity implements ArticleInfoListFragment.Callbacks,
-    ArticleInfoListFragment.OnListIconClickedListener, ArticleInfoListFragment.OnFirstLoadListener
+public class ArticleInfoListActivity extends FragmentActivity
+                                     implements ArticleInfoListFragment.Callbacks,
+                                       ArticleInfoListFragment.OnListIconClickedListener,
+                                       ArticleInfoListFragment.OnFirstLoadListener
 {
   private static final String TAG = ArticleInfoListActivity.class.getSimpleName();
 
@@ -48,11 +51,14 @@ public class ArticleInfoListActivity extends FragmentActivity implements Article
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_articleinfo_list);
 
+
+    mArtInfoListFragment = (ArticleInfoListFragment) getSupportFragmentManager()
+        .findFragmentById(R.id.articleinfo_list);
+
     if (findViewById(R.id.articleinfo_detail_container) != null)
     {
       mTwoPane = true;
 
-      mArtInfoListFragment = (ArticleInfoListFragment) getSupportFragmentManager().findFragmentById(R.id.articleinfo_list);
       mArtInfoListFragment.setActivateOnItemClick(true);
       mArtInfoListFragment.setOnFirstLoadListener(this);
       mArtInfoListFragment.setHeaderVisible(false);
@@ -88,7 +94,9 @@ public class ArticleInfoListActivity extends FragmentActivity implements Article
     {
       final String id = point.getId();
       Log.d(TAG, id);
-      onItemSelected(Storage.getArticleInfoByUrl(id));
+//      final Storage storage = new Storage(getAssets());
+//      storage.create();
+      onItemSelected(Storage.get(this).getArticleInfoByUrl(id));
     }
   }
 

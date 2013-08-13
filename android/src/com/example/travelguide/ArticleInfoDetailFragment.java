@@ -14,6 +14,7 @@ import android.webkit.WebSettings.LayoutAlgorithm;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
+
 import com.example.travelguide.ArticleInfoListFragment.OnListIconClickedListener;
 import com.example.travelguide.article.ArticleInfo;
 import com.example.travelguide.article.ArticlePathFinder;
@@ -27,7 +28,8 @@ import com.susanin.travelguide.R;
  * either contained in a {@link ArticleInfoListActivity} in two-pane mode (on
  * tablets) or a {@link ArticleInfoDetailActivity} on handsets.
  */
-public class ArticleInfoDetailFragment extends Fragment implements OnClickListener
+public class ArticleInfoDetailFragment extends Fragment
+                                       implements OnClickListener
 {
 
   public static final String ARTICLE_INFO = "article_info";
@@ -41,6 +43,7 @@ public class ArticleInfoDetailFragment extends Fragment implements OnClickListen
   private View mProgressContainer;
 
   private ArticlePathFinder mFinder;
+//  private Storage mStorage;
 
   private OnListIconClickedListener mIconClickedListener;
 
@@ -129,7 +132,7 @@ public class ArticleInfoDetailFragment extends Fragment implements OnClickListen
       if (!Utils.isExternalUrl(url) && url.endsWith(".html"))
       {
         final String strippedUrl = url.substring(url.lastIndexOf('/') + 1, url.lastIndexOf('.'));
-        mTitle.setText(Storage.getArticleInfoByUrl(strippedUrl).getName());
+        mTitle.setText(getStorage().getArticleInfoByUrl(strippedUrl).getName());
       }
     }
 
@@ -177,6 +180,11 @@ public class ArticleInfoDetailFragment extends Fragment implements OnClickListen
   public void goBack()
   {
     mWebView.goBack();
+  }
+
+  public Storage getStorage()
+  {
+    return Storage.get(getActivity());
   }
 
 }

@@ -9,11 +9,19 @@ extern "C" {
 #endif
 /*
  * Class:     com_example_travelguide_cpp_Storage
- * Method:    getTitleByUrl
- * Signature: (Ljava/lang/String;)Ljava/lang/String;
+ * Method:    nativeCreate
+ * Signature: (Ljava/lang/Object;)V
+ */
+JNIEXPORT void JNICALL Java_com_example_travelguide_cpp_Storage_nativeInit
+  (JNIEnv *, jobject, jobject);
+
+/*
+ * Class:     com_example_travelguide_cpp_Storage
+ * Method:    getArticleInfoByUrl
+ * Signature: (Ljava/lang/String;)Lcom/example/travelguide/article/ArticleInfo;
  */
 JNIEXPORT jobject JNICALL Java_com_example_travelguide_cpp_Storage_getArticleInfoByUrl
-  (JNIEnv *, jclass, jstring);
+  (JNIEnv *, jobject, jstring);
 
 /*
  * Class:     com_example_travelguide_cpp_Storage
@@ -21,7 +29,7 @@ JNIEXPORT jobject JNICALL Java_com_example_travelguide_cpp_Storage_getArticleInf
  * Signature: (Ljava/lang/String;ZDD)V
  */
 JNIEXPORT void JNICALL Java_com_example_travelguide_cpp_Storage_query
-  (JNIEnv *, jclass, jstring, jboolean, jdouble, jdouble);
+  (JNIEnv *, jobject, jstring, jboolean, jdouble, jdouble);
 
 /*
  * Class:     com_example_travelguide_cpp_Storage
@@ -29,7 +37,7 @@ JNIEXPORT void JNICALL Java_com_example_travelguide_cpp_Storage_query
  * Signature: ()I
  */
 JNIEXPORT jint JNICALL Java_com_example_travelguide_cpp_Storage_getResultSize
-  (JNIEnv *, jclass);
+  (JNIEnv *, jobject);
 
 /*
  * Class:     com_example_travelguide_cpp_Storage
@@ -37,15 +45,15 @@ JNIEXPORT jint JNICALL Java_com_example_travelguide_cpp_Storage_getResultSize
  * Signature: (I)Lcom/example/travelguide/article/ArticleInfo;
  */
 JNIEXPORT jobject JNICALL Java_com_example_travelguide_cpp_Storage_getArticleInfoByIndex
-  (JNIEnv *, jclass, jint);
+  (JNIEnv *, jobject, jint);
 
 /*
  * Class:     com_example_travelguide_cpp_Storage
- * Method:    nativeInitIndex
- * Signature: (Ljava/lang/Object;)V
+ * Method:    isValidLatLon
+ * Signature: (DD)Z
  */
-JNIEXPORT void JNICALL Java_com_example_travelguide_cpp_Storage_nativeInitIndex
-  (JNIEnv *, jclass, jobject);
+JNIEXPORT jboolean JNICALL Java_com_example_travelguide_cpp_Storage_isValidLatLon
+  (JNIEnv *, jclass, jdouble, jdouble);
 
 #ifdef __cplusplus
 }

@@ -8,7 +8,6 @@
 
 #include <android/asset_manager_jni.h>
 
-
 class AndStorage
 {
   class AssetReader : public rd::Reader
@@ -33,16 +32,15 @@ class AndStorage
   };
 
 public:
+
+  AndStorage()
+    : m_isInited(false) {}
+
   void Init(JNIEnv * env, jobject manager)
   {
     AssetReader reader("index.dat", AAssetManager_fromJava(env, manager));
     m_storage.Load(reader);
-  }
-
-  static AndStorage & Instance()
-  {
-    static AndStorage storage;
-    return storage;
+    m_isInited = true;
   }
 
   void Query(string const & query, bool useLocation, double lat, double lon)
@@ -73,8 +71,14 @@ public:
     return m_storage.GetArticleInfoFromUrl(url);
   }
 
+  bool IsInited()
+  {
+    return m_isInited;
+  }
+
 private:
   Storage m_storage;
+  bool m_isInited;
 };
 
 #ifdef __cplusplus
@@ -82,31 +86,13 @@ extern "C"
 {
 #endif
 
-// TODO: *problem
-//#define DECLARE_FN(retType, suffix)
+AndStorage m_andStorage;
+#define STORAGE m_andStorage
 
-#define STORAGE AndStorage::Instance()
-
-/*
- * Class:     com_example_travelguide_cpp_Storage
- * Method:    query
- * Signature: (Ljava/lang/String;DD)V
- */
-JNIEXPORT void JNICALL Java_com_example_travelguide_cpp_Storage_query(JNIEnv * env, jclass clazz, jstring query,
-    jboolean useLocation, jdouble lat, jdouble lon)
+void InitStorage(JNIEnv * env, jobject jAssetManager)
 {
-  STORAGE.Query(JString2StdString(env, query), useLocation, lat, lon);
-}
-
-/*
- * Class:     com_example_travelguide_cpp_Storage
- * Method:    getResultSize
- * Signature: ()I
- */
-JNIEXPORT jint JNICALL Java_com_example_travelguide_cpp_Storage_getResultSize
-  (JNIEnv * env, jclass clazz)
-{
-  return STORAGE.GetResultSize();
+  if (!STORAGE.IsInited())
+    m_andStorage.Init(env, jAssetManager);
 }
 
 jobject NativeArticle2JavaArticle(JNIEnv * env, ArticleInfo const * p)
@@ -128,23 +114,39 @@ jobject NativeArticle2JavaArticle(JNIEnv * env, ArticleInfo const * p)
 
 /*
  * Class:     com_example_travelguide_cpp_Storage
+ * Method:    query
+ * Signature: (Ljava/lang/String;DD)V
+ */
+JNIEXPORT void JNICALL Java_com_example_travelguide_cpp_Storage_query(JNIEnv * env, jobject thiz, jstring query,
+    jboolean useLocation, jdouble lat, jdouble lon)
+{
+  STORAGE.Query(JString2StdString(env, query), useLocation, lat, lon);
+}
+
+/*
+ * Class:     com_example_travelguide_cpp_Storage
+ * Method:    getResultSize
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_com_example_travelguide_cpp_Storage_getResultSize
+  (JNIEnv * env, jobject thiz)
+{
+  return STORAGE.GetResultSize();
+}
+
+/*
+ * Class:     com_example_travelguide_cpp_Storage
  * Method:    getArticleInfoByIndex
  * Signature: (I)Lcom/example/travelguide/article/ArticleInfo;
  */
 JNIEXPORT jobject JNICALL Java_com_example_travelguide_cpp_Storage_getArticleInfoByIndex
-  (JNIEnv * env, jclass clazz, jint index)
+  (JNIEnv * env, jobject thiz, jint index)
 {
   return NativeArticle2JavaArticle(env, &STORAGE.GetArticleInfoByIndex(index));
 }
 
-JNIEXPORT void JNICALL Java_com_example_travelguide_cpp_Storage_nativeInitIndex
-  (JNIEnv * env, jclass clazz, jobject assetManager)
-{
-  STORAGE.Init(env, assetManager);
-}
-
 JNIEXPORT jobject JNICALL Java_com_example_travelguide_cpp_Storage_getArticleInfoByUrl
-  (JNIEnv * env, jclass clazz, jstring url)
+  (JNIEnv * env, jobject thiz, jstring url)
 {
   return NativeArticle2JavaArticle(env, STORAGE.GetArticleInfoByUrl(JString2StdString(env, url)));
 }
@@ -155,6 +157,16 @@ JNIEXPORT jboolean JNICALL Java_com_example_travelguide_cpp_Storage_isValidLatLo
   return ll::ValidLat(lat) && ll::ValidLon(lon) ? JNI_TRUE : JNI_FALSE;
 }
 
+/*
+ * Class:     com_example_travelguide_cpp_Storage
+ * Method:    nativeCreate
+ * Signature: (Ljava/lang/Object;)V
+ */
+JNIEXPORT void JNICALL Java_com_example_travelguide_cpp_Storage_nativeInit
+  (JNIEnv * env, jobject thiz, jobject jAssetManager)
+{
+  InitStorage(env, jAssetManager);
+}
 
 #ifdef __cplusplus
 }

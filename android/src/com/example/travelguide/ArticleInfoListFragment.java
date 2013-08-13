@@ -3,7 +3,9 @@ package com.example.travelguide;
 import static com.example.travelguide.util.Utils.hideIf;
 import static com.example.travelguide.util.Utils.hideView;
 import static com.example.travelguide.util.Utils.showView;
+
 import java.util.ArrayList;
+
 import android.app.Activity;
 import android.content.Context;
 import android.location.Location;
@@ -22,6 +24,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import com.example.travelguide.article.ArticleInfo;
 import com.example.travelguide.async.QueryResultLoader;
 import com.example.travelguide.cpp.Storage;
@@ -40,10 +43,10 @@ import com.susanin.travelguide.R;
  * Activities containing this fragment MUST implement the {@link Callbacks}
  * interface.
  */
-public class ArticleInfoListFragment extends ListFragment implements LoaderCallbacks<Storage>, TextWatcher,
-    OnClickListener, LocationListener
+public class ArticleInfoListFragment extends ListFragment
+                                     implements LoaderCallbacks<Storage>, TextWatcher,
+                                       OnClickListener, LocationListener
 {
-  private static final String TAG = ArticleInfoListFragment.class.getSimpleName();
 
   public interface OnListIconClickedListener
   {
@@ -63,7 +66,6 @@ public class ArticleInfoListFragment extends ListFragment implements LoaderCallb
   {
     mOnFirstLoad = listener;
   }
-
   // !First load
 
   private View mRootView;
@@ -81,6 +83,8 @@ public class ArticleInfoListFragment extends ListFragment implements LoaderCallb
   private static long sLastLocationRequestTime = 0;
   private final static long LOCATION_UPDATE_INTERVAL = 30 * 60 * 1000;
   // !Location
+
+//  private Storage mStorage;
 
   private static final String STATE_ACTIVATED_POSITION = "activated_position";
 
@@ -126,7 +130,15 @@ public class ArticleInfoListFragment extends ListFragment implements LoaderCallb
 
     Utils.hideKeyboard(getActivity());
     checkLocation();
+
     search(mSearchText.getText().toString());
+  }
+
+  @Override
+  public void onPause()
+  {
+    super.onPause();
+    mLocationManager.removeUpdates(this);
   }
 
   private void checkLocation()
@@ -142,12 +154,7 @@ public class ArticleInfoListFragment extends ListFragment implements LoaderCallb
     }
   }
 
-  @Override
-  public void onPause()
-  {
-    super.onPause();
-    mLocationManager.removeUpdates(this);
-  }
+
 
   @Override
   public void onAttach(Activity activity)
@@ -253,14 +260,13 @@ public class ArticleInfoListFragment extends ListFragment implements LoaderCallb
 
       final Location loc = getLocation();
       if (loc != null)
-        return new QueryResultLoader(getActivity(), query, loc.getLatitude(), loc.getLongitude());
+        return new QueryResultLoader(getActivity(), getStorage(), query, loc.getLatitude(), loc.getLongitude());
       else
-        return new QueryResultLoader(getActivity(), query);
+        return new QueryResultLoader(getActivity(), getStorage(), query);
     }
     return null;
   }
 
-  @SuppressWarnings("static-access")
   @Override
   public void onLoadFinished(Loader<Storage> loader, Storage result)
   {
@@ -320,14 +326,14 @@ public class ArticleInfoListFragment extends ListFragment implements LoaderCallb
 
   private void openInMwm()
   {
-    final int count = Storage.getResultSize();
+    final int count = getStorage().getResultSize();
     if (count < 1)
         return;
 
     final ArrayList<MWMPoint> points = new ArrayList<MWMPoint>();
     for (int i = 0; i < count; ++i)
     {
-      final ArticleInfo info = Storage.getArticleInfoByIndex(i);
+      final ArticleInfo info = getStorage().getArticleInfoByIndex(i);
       if (info.isValidLatLon())
         points.add(Utils.articleInfo2MwmPoint(info));
     }
@@ -367,5 +373,10 @@ public class ArticleInfoListFragment extends ListFragment implements LoaderCallb
   @Override
   public void onStatusChanged(String provider, int status, Bundle extras)
   {}
+
+  public Storage getStorage()
+  {
+    return Storage.get(getActivity());
+  }
 
 }

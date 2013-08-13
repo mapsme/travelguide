@@ -7,32 +7,48 @@ import com.example.travelguide.article.ArticleInfo;
 
 public class Storage
 {
+  private static  volatile Storage sInstance;
+
+  public static Storage get(Context context)
+  {
+    if (sInstance == null)
+      synchronized (Storage.class)
+      {
+        if (sInstance == null)
+        {
+          sInstance = new Storage(context.getAssets());
+          sInstance.init();
+        }
+      }
+    return sInstance;
+  }
+
+  // We need to store this reference
+  // in order to prevent garbage collection
+  // see asset_manager_jni.h
+  private final AssetManager mAssetManager;
+
+  private Storage(AssetManager assetManager)
+  {
+    mAssetManager = assetManager;
+  }
+
+  private void init()
+  {
+    nativeInit(mAssetManager);
+  }
+
+  private native void nativeInit(Object jAssetManager);
+
+  public native ArticleInfo getArticleInfoByUrl(String url);
+  public native void        query(String query, boolean useLocation, double lat, double lon);
+  public native int         getResultSize();
+  public native ArticleInfo getArticleInfoByIndex(int index);
+
+  public native static boolean isValidLatLon(double lat, double lon);
 
   static
   {
     System.loadLibrary("tguide");
   }
-
-  private static boolean sIsAssetsInited = false;
-  public static void initAssets(Context context)
-  {
-    if (sIsAssetsInited)
-      return;
-
-    final AssetManager am = context.getAssets();
-    nativeInitIndex(am);
-    sIsAssetsInited = true;
-  }
-
-  public native static ArticleInfo getArticleInfoByUrl(String url);
-
-  public native static void query(String query, boolean useLocation, double lat, double lon);
-
-  public native static  int getResultSize();
-
-  public native static ArticleInfo getArticleInfoByIndex(int index);
-
-  private native static void nativeInitIndex(AssetManager am);
-
-  public native static boolean isValidLatLon(double lat, double lon);
 }
