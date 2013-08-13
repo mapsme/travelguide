@@ -83,7 +83,7 @@
 		ED64332317B4D14F000985FE /* bg_search@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_search@2x.png"; sourceTree = "<group>"; };
 		ED64332617B4D6CA000985FE /* bg_landscape_header.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_landscape_header.png; sourceTree = "<group>"; };
 		ED64332717B4D6CB000985FE /* bg_landscape_header@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_landscape_header@2x.png"; sourceTree = "<group>"; };
-		ED81954317AED762004F3803 /* offlineguides.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = offlineguides.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		ED81954317AED762004F3803 /* GuideWithMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GuideWithMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED81954617AED762004F3803 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		ED81954817AED762004F3803 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		ED81954A17AED762004F3803 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -172,7 +172,7 @@
 		ED81954417AED762004F3803 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				ED81954317AED762004F3803 /* offlineguides.app */,
+				ED81954317AED762004F3803 /* GuideWithMe.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -282,7 +282,7 @@
 			);
 			name = offlineguides;
 			productName = offlineguides;
-			productReference = ED81954317AED762004F3803 /* offlineguides.app */;
+			productReference = ED81954317AED762004F3803 /* GuideWithMe.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -423,6 +423,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LLVM_LTO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = GuideWithMe;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -461,6 +462,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LLVM_LTO = YES;
+				PRODUCT_NAME = GuideWithMe;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -475,7 +477,7 @@
 				GCC_PREFIX_HEADER = "offlineguides/offlineguides-Prefix.pch";
 				HEADER_SEARCH_PATHS = ../3rdparty/boost;
 				INFOPLIST_FILE = "offlineguides/offlineguides-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = GuideWithMe;
 				USER_HEADER_SEARCH_PATHS = ../3rdparty/boost;
 				WRAPPER_EXTENSION = app;
 			};
@@ -488,7 +490,7 @@
 				GCC_PREFIX_HEADER = "offlineguides/offlineguides-Prefix.pch";
 				HEADER_SEARCH_PATHS = ../3rdparty/boost;
 				INFOPLIST_FILE = "offlineguides/offlineguides-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = GuideWithMe;
 				USER_HEADER_SEARCH_PATHS = ../3rdparty/boost;
 				WRAPPER_EXTENSION = app;
 			};
