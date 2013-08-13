@@ -6,27 +6,9 @@ import android.os.Environment;
 
 public class Expansion
 {
-  public static final String PACKAGE = "com.susanin.travelguide";
-
-  public static final XAPKFile DATA_FILE = new XAPKFile(true, 1, 251904055);
-
-  public static class XAPKFile
+  public static String getPath(String packageName)
   {
-    public final boolean isMain;
-    public final int versionCode;
-    public final long fileSize;
-
-    public XAPKFile(boolean isMain, int versionCode, long fileSizeInBytes)
-    {
-      this.isMain = isMain;
-      this.versionCode = versionCode;
-      this.fileSize = fileSizeInBytes;
-    }
-  }
-
-  public static String getPath()
-  {
-    return Expansion.getMainObbPath(String.valueOf(DATA_FILE.versionCode), PACKAGE);
+    return findFirstObbFile(packageName);
   }
 
   public static String getMainObbFileName(String version, String packageName)
@@ -49,6 +31,21 @@ public class Expansion
     final String mainObbPath = getObbLocation(packageName) + File.separator
                                + getMainObbFileName(version, packageName);
     return mainObbPath;
+  }
+
+  public static String findFirstObbFile(String packageName)
+  {
+    final File obbDir = new File(getObbLocation(packageName));
+    if (obbDir.list() == null)
+      return null;
+
+    for (final String filePath : obbDir.list())
+    {
+      if (filePath.endsWith(".obb"))
+        return obbDir.getAbsolutePath() + File.separator + filePath;
+    }
+
+    return null;
   }
 
   private Expansion() {}

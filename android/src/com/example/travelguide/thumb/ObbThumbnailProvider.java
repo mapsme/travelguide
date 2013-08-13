@@ -35,7 +35,7 @@ public class ObbThumbnailProvider extends OnObbStateChangeListener implements Th
   {
     mContext = context;
     mSm = (StorageManager) mContext.getSystemService(Context.STORAGE_SERVICE);
-    mSm.mountObb(Expansion.getPath(), null, this);
+    mSm.mountObb(Expansion.getPath(mContext.getPackageName()), null, this);
   }
 
   public ObbThumbnailProvider(Context context, MountStateChangedListener listener)
@@ -57,7 +57,7 @@ public class ObbThumbnailProvider extends OnObbStateChangeListener implements Th
   @Override
   public Drawable getThumbnailByUrl(String url)
   {
-    final String pathInObb = mSm.getMountedObbPath(Expansion.getPath()) + "/data/thumb/" + url;
+    final String pathInObb = mSm.getMountedObbPath(Expansion.getPath(mContext.getPackageName())) + "/data/thumb/" + url;
     return BitmapDrawable.createFromPath(pathInObb);
   }
 

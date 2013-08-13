@@ -19,7 +19,7 @@ public class ObbPathFinder extends OnObbStateChangeListener
   {
     mContext = context;
     mSm = (StorageManager) mContext.getSystemService(Context.STORAGE_SERVICE);
-    mSm.mountObb(Expansion.getPath(), null, this);
+    mSm.mountObb(Expansion.getPath(mContext.getPackageName()), null, this);
   }
 
   @Override
@@ -30,7 +30,7 @@ public class ObbPathFinder extends OnObbStateChangeListener
 
   public String getRootDir()
   {
-    return "file://" + mSm.getMountedObbPath(Expansion.getPath()) + "/data/";
+    return "file://" + mSm.getMountedObbPath(Expansion.getPath(mContext.getPackageName())) + "/data/";
   }
 
   @Override
