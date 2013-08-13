@@ -100,7 +100,7 @@ jobject NativeArticle2JavaArticle(JNIEnv * env, ArticleInfo const * p)
   if (p == 0)
     return 0;
 
-  jclass ArtInfoClass = env->FindClass("com/example/travelguide/article/ArticleInfo");
+  jclass ArtInfoClass = env->FindClass("com/guidewithme/article/ArticleInfo");
   jmethodID initId = env->GetMethodID(ArtInfoClass, "<init>", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;DD)V");
 
   return env->NewObject(ArtInfoClass, initId,
@@ -113,56 +113,56 @@ jobject NativeArticle2JavaArticle(JNIEnv * env, ArticleInfo const * p)
 }
 
 /*
- * Class:     com_example_travelguide_cpp_Storage
+ * Class:     com_guidewithme_cpp_Storage
  * Method:    query
  * Signature: (Ljava/lang/String;DD)V
  */
-JNIEXPORT void JNICALL Java_com_example_travelguide_cpp_Storage_query(JNIEnv * env, jobject thiz, jstring query,
+JNIEXPORT void JNICALL Java_com_guidewithme_cpp_Storage_query(JNIEnv * env, jobject thiz, jstring query,
     jboolean useLocation, jdouble lat, jdouble lon)
 {
   STORAGE.Query(JString2StdString(env, query), useLocation, lat, lon);
 }
 
 /*
- * Class:     com_example_travelguide_cpp_Storage
+ * Class:     com_guidewithme_cpp_Storage
  * Method:    getResultSize
  * Signature: ()I
  */
-JNIEXPORT jint JNICALL Java_com_example_travelguide_cpp_Storage_getResultSize
+JNIEXPORT jint JNICALL Java_com_guidewithme_cpp_Storage_getResultSize
   (JNIEnv * env, jobject thiz)
 {
   return STORAGE.GetResultSize();
 }
 
 /*
- * Class:     com_example_travelguide_cpp_Storage
+ * Class:     com_guidewithme_cpp_Storage
  * Method:    getArticleInfoByIndex
  * Signature: (I)Lcom/example/travelguide/article/ArticleInfo;
  */
-JNIEXPORT jobject JNICALL Java_com_example_travelguide_cpp_Storage_getArticleInfoByIndex
+JNIEXPORT jobject JNICALL Java_com_guidewithme_cpp_Storage_getArticleInfoByIndex
   (JNIEnv * env, jobject thiz, jint index)
 {
   return NativeArticle2JavaArticle(env, &STORAGE.GetArticleInfoByIndex(index));
 }
 
-JNIEXPORT jobject JNICALL Java_com_example_travelguide_cpp_Storage_getArticleInfoByUrl
+JNIEXPORT jobject JNICALL Java_com_guidewithme_cpp_Storage_getArticleInfoByUrl
   (JNIEnv * env, jobject thiz, jstring url)
 {
   return NativeArticle2JavaArticle(env, STORAGE.GetArticleInfoByUrl(JString2StdString(env, url)));
 }
 
-JNIEXPORT jboolean JNICALL Java_com_example_travelguide_cpp_Storage_isValidLatLon
+JNIEXPORT jboolean JNICALL Java_com_guidewithme_cpp_Storage_isValidLatLon
   (JNIEnv * env, jclass clazz, jdouble lat, jdouble lon)
 {
   return ll::ValidLat(lat) && ll::ValidLon(lon) ? JNI_TRUE : JNI_FALSE;
 }
 
 /*
- * Class:     com_example_travelguide_cpp_Storage
+ * Class:     com_guidewithme_cpp_Storage
  * Method:    nativeCreate
  * Signature: (Ljava/lang/Object;)V
  */
-JNIEXPORT void JNICALL Java_com_example_travelguide_cpp_Storage_nativeInit
+JNIEXPORT void JNICALL Java_com_guidewithme_cpp_Storage_nativeInit
   (JNIEnv * env, jobject thiz, jobject jAssetManager)
 {
   InitStorage(env, jAssetManager);

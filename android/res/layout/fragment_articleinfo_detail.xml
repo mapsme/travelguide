@@ -36,7 +36,7 @@
         android:layout_gravity="center"
         android:layout_weight="1" >
 
-        <com.example.travelguide.webkit.TgWebView
+        <com.guidewithme.webkit.TgWebView
             android:id="@+id/webView"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />

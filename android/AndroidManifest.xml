@@ -30,18 +30,18 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/ic_app"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.example.travelguide.ArticleInfoListActivity"
+            android:name="com.guidewithme.ArticleInfoListActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:launchMode="singleTop"
             android:windowSoftInputMode="adjustResize" >
         </activity>
         <activity
-            android:name="com.example.travelguide.ArticleInfoDetailActivity"
+            android:name="com.guidewithme.ArticleInfoDetailActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_articleinfo_detail"
             android:parentActivityName=".ArticleInfoListActivity" >
@@ -50,7 +50,7 @@
                 android:value=".ArticleInfoListActivity" />
         </activity>
         <activity
-            android:name="com.example.travelguide.ExpansionActivity"
+            android:name="com.guidewithme.ExpansionActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:noHistory="true" >
@@ -61,9 +61,9 @@
             </intent-filter>
         </activity>
 
-        <service android:name="com.example.travelguide.expansion.ExpansionService" />
+        <service android:name="com.guidewithme.expansion.ExpansionService" />
 
-        <receiver android:name="com.example.travelguide.expansion.DownloadBroadcastReceiver" />
+        <receiver android:name="com.guidewithme.expansion.DownloadBroadcastReceiver" />
     </application>
 
 </manifest>

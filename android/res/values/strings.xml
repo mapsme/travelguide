@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">GuidesWithMe</string>
+    <string name="app_name">UK GuideWithMe</string>
     <string name="title_articleinfo_detail">ArticleInfo Detail</string>
     <string name="loading">Loading ...</string>
     <string name="searching">Searching ...</string>
@@ -9,6 +9,7 @@
     <string name="resume">Resume</string>
     <string name="pause">Pause</string>
     <string name="retry">Retry</string>
+    <string name="about">About</string>
     <string name="use_mobile_net">Downoload via mobile network</string>
 
 </resources>
