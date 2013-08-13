@@ -209,6 +209,9 @@ for file in thisFiles:
     else:
         print "article image not found:", articleImages[file]
 
+    # Change src tag of images to s tag.
+    soup = changeImgSrcAttr(soup)
+
     writeHtml(soup, file)
 
 imagesDstDir = os.path.join(outDir, "images_fullsize")

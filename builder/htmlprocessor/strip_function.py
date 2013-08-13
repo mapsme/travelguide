@@ -69,6 +69,14 @@ def cleanUp(soup):
 
     return content
 
+def changeImgSrcAttr(soup):
+    # Use s attribute instead of src for images
+    for imgElement in soup.findAll("img"):
+        imgElement["s"] = imgElement["src"]
+        del imgElement["src"]
+
+    return soup
+
 if __name__ == '__main__':
     if len(sys.argv) < 2:
         print "Usage: " + sys.argv[0] + " <inFile> [outFile]"
@@ -77,6 +85,7 @@ if __name__ == '__main__':
     file = sys.argv[1]
     soup = BeautifulSoup(open(file))
     soup = cleanUp(soup)
+    soup = changeImgSrcAttr(soup)
     file = sys.stdout
     if len(sys.argv) > 2:
         file = open(sys.argv[2], 'w')
