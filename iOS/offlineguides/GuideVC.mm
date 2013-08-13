@@ -229,7 +229,14 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     if (r.location + 4 >= [url length])
       return;
     if (r.length && [[url substringWithRange:NSRange{r.location + 1, 4}] isEqualToString:@"html"])
-      [[self getArticleController] updateView:[url substringToIndex:r.location]];
+    {
+      NSString * htmlId = [url substringToIndex:r.location];
+      NSRange z = [htmlId rangeOfString:@"/" options:NSBackwardsSearch];
+      if (r.length)
+        [[self getArticleController] updateView:[htmlId substringFromIndex:z.location + 1]];
+      else
+        [[self getArticleController] updateView:[htmlId substringToIndex:z.location]];
+    }
   }
 }
 
