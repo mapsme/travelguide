@@ -216,7 +216,6 @@
 -(NSString *)updateView:(NSString *)htmlId
 {
   ArticleInfo const * articleInfo = m_storage.GetArticleInfoFromUrl([htmlId UTF8String]);
-  //update articles table when go back
   if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
   {
     self.currentName = [NSString stringWithUTF8String:articleInfo->GetTitle().c_str()];
