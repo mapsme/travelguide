@@ -1,8 +1,8 @@
-package com.example.travelguide.article;
+package com.guidewithme.article;
 
 import java.io.Serializable;
 
-import com.example.travelguide.cpp.Storage;
+import com.guidewithme.cpp.Storage;
 
 @SuppressWarnings("serial")
 public class ArticleInfo implements Serializable

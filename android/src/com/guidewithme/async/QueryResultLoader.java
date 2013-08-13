@@ -1,9 +1,9 @@
-package com.example.travelguide.async;
+package com.guidewithme.async;
 
 import android.content.Context;
 import android.support.v4.content.AsyncTaskLoader;
 
-import com.example.travelguide.cpp.Storage;
+import com.guidewithme.cpp.Storage;
 
 public class QueryResultLoader extends AsyncTaskLoader<Storage>
 {

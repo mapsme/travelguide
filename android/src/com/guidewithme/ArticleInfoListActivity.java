@@ -1,4 +1,4 @@
-package com.example.travelguide;
+package com.guidewithme;
 
 import android.app.Activity;
 import android.app.PendingIntent;
@@ -7,8 +7,8 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 
-import com.example.travelguide.article.ArticleInfo;
-import com.example.travelguide.cpp.Storage;
+import com.guidewithme.article.ArticleInfo;
+import com.guidewithme.cpp.Storage;
 import com.mapswithme.maps.api.MWMPoint;
 import com.mapswithme.maps.api.MWMResponse;
 import com.susanin.travelguide.R;

@@ -1,11 +1,11 @@
-package com.example.travelguide.article;
+package com.guidewithme.article;
 
 import android.content.Context;
 import android.os.storage.OnObbStateChangeListener;
 import android.os.storage.StorageManager;
 import android.util.Log;
 
-import com.example.travelguide.util.Expansion;
+import com.guidewithme.util.Expansion;
 
 public class ObbPathFinder extends OnObbStateChangeListener
                            implements ArticlePathFinder

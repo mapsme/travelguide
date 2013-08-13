@@ -1,4 +1,4 @@
-package com.example.travelguide;
+package com.guidewithme;
 
 import android.app.Activity;
 import android.app.PendingIntent;
@@ -12,9 +12,6 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.example.travelguide.expansion.ExpansionService;
-import com.example.travelguide.util.Expansion;
-import com.example.travelguide.util.Utils;
 import com.google.android.vending.expansion.downloader.DownloadProgressInfo;
 import com.google.android.vending.expansion.downloader.DownloaderClientMarshaller;
 import com.google.android.vending.expansion.downloader.DownloaderServiceMarshaller;
@@ -22,6 +19,9 @@ import com.google.android.vending.expansion.downloader.Helpers;
 import com.google.android.vending.expansion.downloader.IDownloaderClient;
 import com.google.android.vending.expansion.downloader.IDownloaderService;
 import com.google.android.vending.expansion.downloader.IStub;
+import com.guidewithme.expansion.ExpansionService;
+import com.guidewithme.util.Expansion;
+import com.guidewithme.util.Utils;
 import com.susanin.travelguide.R;
 
 public class ExpansionActivity extends Activity

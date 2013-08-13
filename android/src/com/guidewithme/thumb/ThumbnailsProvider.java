@@ -1,4 +1,4 @@
-package com.example.travelguide.thumb;
+package com.guidewithme.thumb;
 
 import android.graphics.drawable.Drawable;
 

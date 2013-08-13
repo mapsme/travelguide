@@ -1,4 +1,4 @@
-package com.example.travelguide;
+package com.guidewithme;
 
 import android.app.PendingIntent;
 import android.content.Intent;
@@ -17,12 +17,12 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
 
-import com.example.travelguide.ArticleInfoListFragment.OnListIconClickedListener;
-import com.example.travelguide.article.ArticleInfo;
-import com.example.travelguide.article.ArticlePathFinder;
-import com.example.travelguide.article.ObbPathFinder;
-import com.example.travelguide.cpp.Storage;
-import com.example.travelguide.util.Utils;
+import com.guidewithme.ArticleInfoListFragment.OnListIconClickedListener;
+import com.guidewithme.article.ArticleInfo;
+import com.guidewithme.article.ArticlePathFinder;
+import com.guidewithme.article.ObbPathFinder;
+import com.guidewithme.cpp.Storage;
+import com.guidewithme.util.Utils;
 import com.mapswithme.maps.api.MWMPoint;
 import com.mapswithme.maps.api.MapsWithMeApi;
 import com.susanin.travelguide.R;

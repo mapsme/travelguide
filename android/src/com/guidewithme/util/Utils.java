@@ -1,4 +1,4 @@
-package com.example.travelguide.util;
+package com.guidewithme.util;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,7 +16,7 @@ import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
 
-import com.example.travelguide.article.ArticleInfo;
+import com.guidewithme.article.ArticleInfo;
 import com.mapswithme.maps.api.MWMPoint;
 
 public class Utils

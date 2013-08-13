@@ -1,4 +1,4 @@
-package com.example.travelguide;
+package com.guidewithme;
 
 import android.content.Intent;
 import android.os.Bundle;

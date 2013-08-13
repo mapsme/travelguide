@@ -20,7 +20,7 @@
 
     <fragment
         android:id="@+id/articleinfo_list"
-        android:name="com.example.travelguide.ArticleInfoListFragment"
+        android:name="com.guidewithme.ArticleInfoListFragment"
         android:layout_width="@dimen/searchPanelWidth"
         android:layout_height="match_parent"
         tools:layout="@android:layout/list_content" />

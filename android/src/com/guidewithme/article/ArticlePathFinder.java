@@ -1,4 +1,4 @@
-package com.example.travelguide.article;
+package com.guidewithme.article;
 
 public interface ArticlePathFinder
 {

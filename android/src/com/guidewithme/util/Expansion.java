@@ -1,4 +1,4 @@
-package com.example.travelguide.util;
+package com.guidewithme.util;
 
 import java.io.File;
 

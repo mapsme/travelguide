@@ -1,6 +1,6 @@
-package com.example.travelguide.thumb;
+package com.guidewithme.thumb;
 
-import static com.example.travelguide.util.Utils.notNull;
+import static com.guidewithme.util.Utils.notNull;
 import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -8,7 +8,7 @@ import android.os.storage.OnObbStateChangeListener;
 import android.os.storage.StorageManager;
 import android.util.Log;
 
-import com.example.travelguide.util.Expansion;
+import com.guidewithme.util.Expansion;
 
 public class ObbThumbnailProvider extends OnObbStateChangeListener implements ThumbnailsProvider
 {

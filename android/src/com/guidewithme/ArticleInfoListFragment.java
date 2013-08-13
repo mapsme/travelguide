@@ -1,8 +1,8 @@
-package com.example.travelguide;
+package com.guidewithme;
 
-import static com.example.travelguide.util.Utils.hideIf;
-import static com.example.travelguide.util.Utils.hideView;
-import static com.example.travelguide.util.Utils.showView;
+import static com.guidewithme.util.Utils.hideIf;
+import static com.guidewithme.util.Utils.hideView;
+import static com.guidewithme.util.Utils.showView;
 
 import java.util.ArrayList;
 
@@ -26,11 +26,11 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.travelguide.article.ArticleInfo;
-import com.example.travelguide.async.QueryResultLoader;
-import com.example.travelguide.cpp.Storage;
-import com.example.travelguide.util.Utils;
-import com.example.travelguide.widget.StorageArticleInfoAdapter;
+import com.guidewithme.article.ArticleInfo;
+import com.guidewithme.async.QueryResultLoader;
+import com.guidewithme.cpp.Storage;
+import com.guidewithme.util.Utils;
+import com.guidewithme.widget.StorageArticleInfoAdapter;
 import com.mapswithme.maps.api.MWMPoint;
 import com.mapswithme.maps.api.MapsWithMeApi;
 import com.susanin.travelguide.R;

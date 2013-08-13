@@ -1,4 +1,4 @@
-package com.example.travelguide.webkit;
+package com.guidewithme.webkit;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -8,7 +8,7 @@ import android.util.AttributeSet;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 
-import com.example.travelguide.util.Utils;
+import com.guidewithme.util.Utils;
 
 @SuppressLint({ "SetJavaScriptEnabled", "NewApi" })
 public class TgWebView extends WebView

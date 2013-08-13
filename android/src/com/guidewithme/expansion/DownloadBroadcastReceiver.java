@@ -1,4 +1,4 @@
-package com.example.travelguide.expansion;
+package com.guidewithme.expansion;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

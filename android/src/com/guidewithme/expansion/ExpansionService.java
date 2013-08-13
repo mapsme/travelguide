@@ -1,4 +1,4 @@
-package com.example.travelguide.expansion;
+package com.guidewithme.expansion;
 
 import com.google.android.vending.expansion.downloader.impl.DownloaderService;
 

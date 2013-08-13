@@ -1,4 +1,4 @@
-package com.example.travelguide.widget;
+package com.guidewithme.widget;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,10 +8,10 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.travelguide.article.ArticleInfo;
-import com.example.travelguide.cpp.Storage;
-import com.example.travelguide.thumb.ObbThumbnailProvider;
-import com.example.travelguide.thumb.ThumbnailsProvider;
+import com.guidewithme.article.ArticleInfo;
+import com.guidewithme.cpp.Storage;
+import com.guidewithme.thumb.ObbThumbnailProvider;
+import com.guidewithme.thumb.ThumbnailsProvider;
 import com.susanin.travelguide.R;
 
 public class StorageArticleInfoAdapter extends BaseAdapter

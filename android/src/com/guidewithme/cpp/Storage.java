@@ -1,9 +1,9 @@
-package com.example.travelguide.cpp;
+package com.guidewithme.cpp;
 
 import android.content.Context;
 import android.content.res.AssetManager;
 
-import com.example.travelguide.article.ArticleInfo;
+import com.guidewithme.article.ArticleInfo;
 
 public class Storage
 {
