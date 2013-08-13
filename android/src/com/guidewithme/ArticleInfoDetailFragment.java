@@ -22,10 +22,9 @@ import com.guidewithme.article.ArticleInfo;
 import com.guidewithme.article.ArticlePathFinder;
 import com.guidewithme.article.ObbPathFinder;
 import com.guidewithme.cpp.Storage;
-import com.guidewithme.util.Utils;
-import com.mapswithme.maps.api.MWMPoint;
-import com.mapswithme.maps.api.MapsWithMeApi;
 import com.guidewithme.uk.R;
+import com.guidewithme.util.Utils;
+import com.mapswithme.maps.api.MapsWithMeApi;
 
 /**
  * A fragment representing a single ArticleInfo detail screen. This fragment is
@@ -131,7 +130,7 @@ public class ArticleInfoDetailFragment extends Fragment
     {
       super.onPageStarted(view, url, favicon);
       Utils.fadeOut(getActivity(), mWebView);
-      Utils.fadeIn(getActivity() ,mProgressContainer);
+      Utils.fadeIn(getActivity(), mProgressContainer);
 
       if (URLUtil.isFileUrl(url) && url.endsWith(".html"))
       {
@@ -154,16 +153,11 @@ public class ArticleInfoDetailFragment extends Fragment
       }
       else if (url.startsWith("mapswithme://"))
       {
-        final Uri uri = Uri.parse(url);
-        final String latlon = uri.getQueryParameter("ll");
-        final double lat = Double.parseDouble(latlon.split(",")[0]);
-        final double lon = Double.parseDouble(latlon.split(",")[1]);
-        final String name = uri.getQueryParameter("n");
-        final String id = uri.getQueryParameter("id");
-
         final PendingIntent pi = ArticleInfoListActivity.createPendingIntent(getActivity());
-        final MWMPoint point = new MWMPoint(lat, lon, name, id);
-        MapsWithMeApi.showPointsOnMap(getActivity(), name, pi, point);
+
+        // TODO: Decided to use 11 as default scale, but MapsWithMe has bug with scales,
+        // so do pass 13 as a compromise.
+        MapsWithMeApi.showMapsWithMeUrl(getActivity(), pi, 13, url);
 
         return true;
       }

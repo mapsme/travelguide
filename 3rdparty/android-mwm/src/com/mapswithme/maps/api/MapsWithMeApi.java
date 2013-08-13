@@ -99,6 +99,18 @@ public final class MapsWithMeApi
     showPointsOnMap(caller, title, -1, pendingIntent, points);
   }
 
+  public static void showMapsWithMeUrl(Activity caller, PendingIntent pendingIntent, double zoomLevel, String url)
+  {
+    final Uri uri = Uri.parse(url);
+    final String latlon[] = uri.getQueryParameter("ll").split(",");
+    final double lat = Double.parseDouble(latlon[0]);
+    final double lon = Double.parseDouble(latlon[1]);
+    final String name = uri.getQueryParameter("n");
+    final String id = uri.getQueryParameter("id");
+
+    showPointsOnMap(caller, name, zoomLevel, pendingIntent, new MWMPoint(lat, lon, name, id));
+  }
+
   /**
    *  Detects if any version (Lite, Pro) of MapsWithMe, which supports
    *  API calls are installed on the device.

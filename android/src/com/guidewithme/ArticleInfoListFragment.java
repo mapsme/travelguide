@@ -352,7 +352,7 @@ public class ArticleInfoListFragment extends ListFragment
       return;
 
     MapsWithMeApi.showPointsOnMap
-      (getActivity(), "Hello, my articles!",
+      (getActivity(), getString(R.string.mwm_pins),
        ArticleInfoListActivity.createPendingIntent(getActivity()),
        points.toArray(new MWMPoint[points.size()]));
   }
