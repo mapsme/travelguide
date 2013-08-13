@@ -35,7 +35,7 @@ public class ObbThumbnailProvider extends OnObbStateChangeListener implements Th
   {
     mContext = context;
     mSm = (StorageManager) mContext.getSystemService(Context.STORAGE_SERVICE);
-    mSm.mountObb(Expansion.getPath(mContext.getPackageName()), null, this);
+    mSm.mountObb(Expansion.getPath(mContext.getPackageName()), Expansion.KEY, this);
   }
 
   public ObbThumbnailProvider(Context context, MountStateChangedListener listener)

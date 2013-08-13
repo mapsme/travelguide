@@ -12,7 +12,7 @@ import com.guidewithme.article.ArticleInfo;
 import com.guidewithme.cpp.Storage;
 import com.guidewithme.thumb.ObbThumbnailProvider;
 import com.guidewithme.thumb.ThumbnailsProvider;
-import com.susanin.travelguide.R;
+import com.guidewithme.uk.R;
 
 public class StorageArticleInfoAdapter extends BaseAdapter
                                        implements ObbThumbnailProvider.MountStateChangedListener

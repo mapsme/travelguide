@@ -6,6 +6,8 @@ import android.os.Environment;
 
 public class Expansion
 {
+  public static final String KEY = null;
+
   public static String getPath(String packageName)
   {
     return findFirstObbFile(packageName);
