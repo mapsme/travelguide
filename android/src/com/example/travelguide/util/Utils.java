@@ -147,4 +147,9 @@ public class Utils
     return Math.log(value)/Math.log(1024);
   }
 
+  public static boolean notNull(Object o)
+  {
+    return o != null;
+  }
+
 }
