@@ -3,7 +3,7 @@ gen/
 .settings/
 resbuilder/
 spoon-output/
-assets/
+assets/index.dat
 obj/
 armeabi/
 mips/

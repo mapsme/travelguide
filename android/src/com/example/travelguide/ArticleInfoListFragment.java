@@ -7,6 +7,7 @@ import static com.example.travelguide.util.Utils.showView;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.location.Location;
 import android.location.LocationListener;
@@ -317,11 +318,21 @@ public class ArticleInfoListFragment extends ListFragment
     if (v.getId() == mCross.getId())
       mSearchText.setText(""); // clean up text field
     else if (v.getId() == mAbout.getId())
-    {
-      // TODO: show about dialog
-    }
+      showLicense();
     else if (v.getId() == mShowMapForAll.getId())
       openInMwm();
+  }
+
+  private void showLicense()
+  {
+    final AlertDialog ad =
+    new AlertDialog.Builder(getActivity())
+       .setTitle(R.string.about)
+       .setMessage(Utils.getLicenseText(getActivity()))
+       .setCancelable(true)
+       .create();
+    ad.setCanceledOnTouchOutside(true);
+    ad.show();
   }
 
   private void openInMwm()
