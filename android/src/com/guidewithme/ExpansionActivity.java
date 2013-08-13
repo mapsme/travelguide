@@ -22,7 +22,7 @@ import com.google.android.vending.expansion.downloader.IStub;
 import com.guidewithme.expansion.ExpansionService;
 import com.guidewithme.util.Expansion;
 import com.guidewithme.util.Utils;
-import com.susanin.travelguide.R;
+import com.guidewithme.uk.R;
 
 public class ExpansionActivity extends Activity
                                implements IDownloaderClient, OnClickListener

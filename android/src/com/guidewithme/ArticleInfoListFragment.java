@@ -33,7 +33,7 @@ import com.guidewithme.util.Utils;
 import com.guidewithme.widget.StorageArticleInfoAdapter;
 import com.mapswithme.maps.api.MWMPoint;
 import com.mapswithme.maps.api.MapsWithMeApi;
-import com.susanin.travelguide.R;
+import com.guidewithme.uk.R;
 
 /**
  * A list fragment representing a list of ArticleInfos. This fragment also

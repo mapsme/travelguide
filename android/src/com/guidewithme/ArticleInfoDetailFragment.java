@@ -25,7 +25,7 @@ import com.guidewithme.cpp.Storage;
 import com.guidewithme.util.Utils;
 import com.mapswithme.maps.api.MWMPoint;
 import com.mapswithme.maps.api.MapsWithMeApi;
-import com.susanin.travelguide.R;
+import com.guidewithme.uk.R;
 
 /**
  * A fragment representing a single ArticleInfo detail screen. This fragment is

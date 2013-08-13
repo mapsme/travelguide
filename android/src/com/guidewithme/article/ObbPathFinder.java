@@ -19,7 +19,7 @@ public class ObbPathFinder extends OnObbStateChangeListener
   {
     mContext = context;
     mSm = (StorageManager) mContext.getSystemService(Context.STORAGE_SERVICE);
-    mSm.mountObb(Expansion.getPath(mContext.getPackageName()), null, this);
+    mSm.mountObb(Expansion.getPath(mContext.getPackageName()), Expansion.KEY, this);
   }
 
   @Override
