@@ -72,6 +72,7 @@
                                                                                                               blue:43.f/255.f
                                                                                                              alpha:1.f],
                                                                   UITextAttributeTextShadowColor: [UIColor clearColor]};
+  self.navigationItem.title = @"UK GuideWithMe";
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request
@@ -86,7 +87,7 @@
     return NO;
   }
   [self performSelector:@selector(addActivityIndicator) withObject:nil afterDelay:0.5];
-  [self updateTitle:str];
+  [self updateArticleView:str];
   ++self.numberOfPages;
   if ([self isImage:str])
     self.webView.scalesPageToFit = YES;
@@ -140,7 +141,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
   else
   {
     [self.webView goBack];
-    [self updateTitle:[self normalizeUrl:[[self.webView.request URL] absoluteString]]];
+    [self updateArticleView:[self normalizeUrl:[[self.webView.request URL] absoluteString]]];
   }
   if (self.numberOfPages  <= 1 && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
     self.navigationItem.leftBarButtonItem = nil;
@@ -229,13 +230,16 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
   return YES;
 }
 
--(void)updateTitle:(NSString *)url
+-(void)updateArticleView:(NSString *)url
 {
-  NSRange r = [url rangeOfString:@"." options:NSBackwardsSearch];
-  if (r.location + 4 >= [url length])
-    return;
-  if (r.length && [[url substringWithRange:NSRange{r.location + 1, 4}] isEqualToString:@"html"])
-    self.navigationItem.title = [[self getArticleController] getArticleName:[url substringToIndex:r.location]];
+  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+  {
+    NSRange r = [url rangeOfString:@"." options:NSBackwardsSearch];
+    if (r.location + 4 >= [url length])
+      return;
+    if (r.length && [[url substringWithRange:NSRange{r.location + 1, 4}] isEqualToString:@"html"])
+      [[self getArticleController] updateView:[url substringToIndex:r.location]];
+  }
 }
 
 -(ArticleVC *)getArticleController

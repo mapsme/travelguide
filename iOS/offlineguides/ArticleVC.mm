@@ -213,7 +213,7 @@
   return isValid;
 }
 
--(NSString *)getArticleName:(NSString *)htmlId
+-(NSString *)updateView:(NSString *)htmlId
 {
   ArticleInfo const * articleInfo = m_storage.GetArticleInfoFromUrl([htmlId UTF8String]);
   //update articles table when go back
