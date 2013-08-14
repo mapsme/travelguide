@@ -1,6 +1,8 @@
 package com.guidewithme;
 
+import static com.guidewithme.util.Utils.notNull;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -111,8 +113,15 @@ public class ArticleInfoDetailFragment extends Fragment
     public void onPageFinished(WebView view, String url)
     {
       super.onPageFinished(view, url);
-      Utils.fadeOut(getActivity(), mProgressContainer);
-      Utils.fadeIn(getActivity(), mWebView);
+
+      // Fix java.lang.NullPointerException at:
+      // android.view.animation.AnimationUtils.loadAnimation(AnimationUtils.java:71)
+      final Context context = getActivity();
+      if (notNull(context))
+      {
+        Utils.fadeOut(context, mProgressContainer);
+        Utils.fadeIn(context, mWebView);
+      }
 
       // If picture enable zoom, else disable
       final WebSettings ws = mWebView.getSettings();
@@ -129,8 +138,15 @@ public class ArticleInfoDetailFragment extends Fragment
     public void onPageStarted(WebView view, String url, Bitmap favicon)
     {
       super.onPageStarted(view, url, favicon);
-      Utils.fadeOut(getActivity(), mWebView);
-      Utils.fadeIn(getActivity(), mProgressContainer);
+
+      // Fix java.lang.NullPointerException at:
+      // android.view.animation.AnimationUtils.loadAnimation(AnimationUtils.java:71)
+      final Context context = getActivity();
+      if (notNull(context))
+      {
+        Utils.fadeOut(context, mWebView);
+        Utils.fadeIn(context, mProgressContainer);
+      }
 
       if (URLUtil.isFileUrl(url) && url.endsWith(".html"))
       {
