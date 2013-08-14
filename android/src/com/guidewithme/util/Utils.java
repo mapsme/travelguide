@@ -1,11 +1,9 @@
 package com.guidewithme.util;
 
 import java.io.File;
-import java.io.IOException;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
-import java.util.Scanner;
 
 import android.app.Activity;
 import android.content.Context;
@@ -152,20 +150,6 @@ public class Utils
   public static boolean notNull(Object o)
   {
     return o != null;
-  }
-
-  public static String getLicenseText(Context context)
-  {
-    try
-    {
-      final Scanner sc =  new Scanner(context.getAssets().open("license.txt")).useDelimiter("\\A");
-      return sc.hasNext() ? sc.next() : null;
-    }
-    catch (final IOException e)
-    {
-      e.printStackTrace();
-    }
-    return null;
   }
 
 }

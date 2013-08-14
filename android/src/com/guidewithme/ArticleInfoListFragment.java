@@ -23,17 +23,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.guidewithme.article.ArticleInfo;
 import com.guidewithme.async.QueryResultLoader;
 import com.guidewithme.cpp.Storage;
+import com.guidewithme.uk.R;
 import com.guidewithme.util.Utils;
 import com.guidewithme.widget.StorageArticleInfoAdapter;
 import com.mapswithme.maps.api.MWMPoint;
 import com.mapswithme.maps.api.MapsWithMeApi;
-import com.guidewithme.uk.R;
 
 /**
  * A list fragment representing a list of ArticleInfos. This fragment also
@@ -325,13 +326,16 @@ public class ArticleInfoListFragment extends ListFragment
 
   private void showLicense()
   {
+    final WebView wb = new WebView(getActivity());
+    wb.loadUrl("file:///android_asset/license.html");
+
     final AlertDialog ad =
     new AlertDialog.Builder(getActivity())
        .setTitle(R.string.about)
-       .setMessage(Utils.getLicenseText(getActivity()))
        .setCancelable(true)
        .create();
     ad.setCanceledOnTouchOutside(true);
+    ad.setView(wb);
     ad.show();
   }
 
@@ -352,7 +356,7 @@ public class ArticleInfoListFragment extends ListFragment
       return;
 
     MapsWithMeApi.showPointsOnMap
-      (getActivity(), getString(R.string.mwm_pins),
+      (getActivity(), getString(R.string.app_name),
        ArticleInfoListActivity.createPendingIntent(getActivity()),
        points.toArray(new MWMPoint[points.size()]));
   }
