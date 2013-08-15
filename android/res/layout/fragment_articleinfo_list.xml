@@ -40,7 +40,7 @@
             android:background="@drawable/top_bar_selector"
             android:paddingLeft="@dimen/pad_small"
             android:paddingRight="@dimen/pad_small"
-            android:src="@android:drawable/ic_dialog_map" />
+            android:src="@drawable/ic_showonmap" />
     </RelativeLayout>
 
     <LinearLayout
