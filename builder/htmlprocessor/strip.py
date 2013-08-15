@@ -12,7 +12,7 @@ except ImportError:
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
-from strip_function import cleanUp
+from strip_function import *
 
 
 def insertMapLink(soup, lat, lon, title, pageId):
@@ -90,6 +90,8 @@ def imageSanitizedPath(fileName):
     unquotedName = sanitizeFileName(fileName)
     if unquotedName in imageFiles:
         imageSet.add(unquotedName)
+        if unquotedName[-4:] == ".svg":
+            unquotedName = unquotedName[:-4] + ".png"
         return 'images/' + unquotedName
 
 
