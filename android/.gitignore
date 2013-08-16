@@ -1,5 +1,6 @@
 bin/
 gen/
+build/
 .settings/
 resbuilder/
 spoon-output/
