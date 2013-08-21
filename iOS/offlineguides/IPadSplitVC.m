@@ -32,8 +32,6 @@
 -(void)selectHtmlPageUrl:(NSString *)url
 {
   GuideVC * g = [[GuideVC alloc] init];
-
-  g.navigationItem.leftBarButtonItem = nil;
   [g loadPage:url];
   [self replaceGuide:g];
   [[self getArticleVC] killKeyboard];
@@ -79,6 +77,10 @@
 -(void)replaceGuide:(GuideVC *)guide
 {
   UINavigationController * GuideNavVC = (UINavigationController*)[self.viewControllers objectAtIndex:1];
+
+  guide.navigationItem.leftBarButtonItem = nil;
+  guide.navigationItem.rightBarButtonItem = GuideNavVC.topViewController.navigationItem.rightBarButtonItem;
+  GuideNavVC.topViewController.navigationItem.rightBarButtonItem = nil;
   GuideNavVC.viewControllers = @[guide];
 }
 
