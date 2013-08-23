@@ -179,9 +179,9 @@
     m_storage.QueryArticleInfo([searchText UTF8String], self.locationManager.location.coordinate.latitude, self.locationManager.location.coordinate.longitude);
   else
     m_storage.QueryArticleInfo([searchText UTF8String]);
-  if ([searchText length])
-    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
   [self.tableView reloadData];
+  if (m_storage.GetResultsCount() && [self.tableView numberOfRowsInSection:0])
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
 }
 
 #pragma mark - Utils methods
