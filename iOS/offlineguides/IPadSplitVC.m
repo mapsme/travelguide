@@ -42,14 +42,12 @@
 
 - (void)splitViewController:(UISplitViewController *)splitController willHideViewController:(UIViewController *)viewController withBarButtonItem:(UIBarButtonItem *)barButtonItem forPopoverController:(UIPopoverController *)popoverController
 {
-  UIImage * backButton = [UIImage imageNamed:@"ic_articleselection"];
-
+  UIImage * guideButtonImage = [UIImage imageNamed:@"ic_articleselection"];
   UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
-  [button setImage:backButton forState:UIControlStateNormal];
-  button.frame = CGRectMake(0, 0, backButton.size.width, backButton.size.height);
-  [button addTarget:barButtonItem.target action:barButtonItem.action forControlEvents:UIControlEventTouchUpInside];
+  [button setImage:guideButtonImage forState:UIControlStateNormal];
+  button.frame = CGRectMake(0, 0, guideButtonImage.size.width, guideButtonImage.size.height);
+  [button addTarget:self action:@selector(showPopover) forControlEvents:UIControlEventTouchUpInside];
   barButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
-
   UINavigationController * navVC = (UINavigationController*)[self.viewControllers objectAtIndex:1];
   [navVC.topViewController.navigationItem setRightBarButtonItem:barButtonItem animated:YES];
   self.pop = popoverController;
@@ -87,6 +85,12 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
   return YES;
+}
+
+-(void)showPopover
+{
+  UINavigationController * GuideNavVC = (UINavigationController*)[self.viewControllers objectAtIndex:1];
+  [self.pop presentPopoverFromBarButtonItem:GuideNavVC.topViewController.navigationItem.rightBarButtonItem permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
 }
 
 @end
