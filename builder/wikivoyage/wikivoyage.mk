@@ -54,8 +54,15 @@ download_images: image_url.txt image_url_desktop.txt
 	wget --wait=0.2 --random-wait --no-clobber --directory-prefix=images --input-file=image_url_desktop.txt || true
 	touch download_images
 
-rename_articles:
+rename_articles_mobile:
 	for f in articles/*; do mv $$f $$(echo $$f | sed 's/wiki.curid=//g'); done
+	touch rename_articles_mobile
+
+rename_articles_desktop:
+	for f in articles_desktop/*; do mv $$f $$(echo $$f | sed 's/wiki.curid=//g'); done
+	touch rename_articles_desktop
+
+rename_articles: rename_articles_mobile rename_articles_desktop
 	touch rename_articles
 
 countries.txt: load_sql_dumps
