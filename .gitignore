@@ -11,3 +11,9 @@ data/images/
 data/thumb/
 data/index.dat
 data/header_images/
+builder/wikivoyage/*.redirect.txt
+builder/wikivoyage/*.info.txt
+builder/wikivoyage/*.sql.gz
+builder/wikivoyage/images
+builder/wikivoyage/articles
+builder/wikivoyage/articles_desktop

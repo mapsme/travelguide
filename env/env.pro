@@ -5,6 +5,8 @@ CONFIG -= app_bundle
 
 INCLUDEPATH += ../3rdparty/boost ../3rdparty/googletest/include
 
+include(../defines.pri)
+
 HEADERS += \
   assert.hpp \
   condition.hpp \
