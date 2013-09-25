@@ -32,19 +32,37 @@ article_page_id.txt: load_sql_dumps
 article_page_url.txt: article_page_id.txt
 	cat article_page_id.txt | sed "s@^@$(HTML_ARTICLE_PREFIX)@" > article_page_url.txt
 
+article_page_url_desktop.txt: article_page_url.txt
+	cat article_page_url.txt | sed 's/[.]m[.]/./' > article_page_url_desktop.txt
+
 download_articles: article_page_url.txt
 	wget --wait=0.2 --random-wait --no-clobber --directory-prefix=articles --input-file=article_page_url.txt || true
 	touch download_articles
 
+download_articles_desktop: article_page_url_desktop.txt
+	wget --wait=0.2 --random-wait --no-clobber --directory-prefix=articles_desktop --input-file=article_page_url_desktop.txt || true
+	touch download_articles_desktop
+
 image_url.txt: download_articles
 	grep --only-matching --no-filename --mmap '<img[^/]*src=\"[^">]*"' -r articles/ | sed 's/<img.*src="//g' | sed 's/"$$//g' | sed 's:/thumb\(/.*\)/[0-9][0-9]*px-.*$$:\1:' | sed 's@^//@http://@' | sort -u > image_url.txt
 
-download_images: image_url.txt
+image_url_desktop.txt: download_articles_desktop
+	grep --only-matching --no-filename --mmap '<img[^/]*src=\"[^">]*"' -r articles_desktop/ | sed 's/<img.*src="//g' | sed 's/"$$//g' | sed 's:/thumb\(/.*\)/[0-9][0-9]*px-.*$$:\1:' | sed 's@^//@http://@' | sort -u > image_url_desktop.txt
+
+download_images: image_url.txt image_url_desktop.txt
 	wget --wait=0.2 --random-wait --no-clobber --directory-prefix=images --input-file=image_url.txt || true
+	wget --wait=0.2 --random-wait --no-clobber --directory-prefix=images --input-file=image_url_desktop.txt || true
 	touch download_images
 
-rename_articles:
+rename_articles_mobile:
 	for f in articles/*; do mv $$f $$(echo $$f | sed 's/wiki.curid=//g'); done
+	touch rename_articles_mobile
+
+rename_articles_desktop:
+	for f in articles_desktop/*; do mv $$f $$(echo $$f | sed 's/wiki.curid=//g'); done
+	touch rename_articles_desktop
+
+rename_articles: rename_articles_mobile rename_articles_desktop
 	touch rename_articles
 
 countries.txt: load_sql_dumps
