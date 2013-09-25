@@ -12,7 +12,7 @@ DUMP_FILES = page.sql.gz redirect.sql.gz category.sql.gz page_props.sql.gz image
 
 
 .PHONY: all
-all: download_images rename_articles countries.txt geocodes.txt
+all: download_images rename_articles countries.txt geocodes.txt process_html
 
 .PHONY: clean
 clean:
@@ -81,3 +81,7 @@ geocodes_todo.txt: geocodes_todo_all.txt geocodes_from_html.txt
 
 geocodes.txt: geocodes_from_html.txt geocodes_todo.txt
 	cp geocodes_from_html.txt geocodes.txt
+
+process_html: countries.txt
+	cat countries_to_generate.txt | while read country; do mkdir -p $$country; ../htmlprocessor/processor.sh articles/ images/ $$country.info.txt $$country.redirect.txt geocodes.txt $$country; done
+	touch process_html

@@ -5,10 +5,12 @@ build-*
 build/
 .gradle/
 .gradle*
+*.pyc
 
 project.xcworkspace
 xcuserdata
 
+*.gz
 data/*.html
 data/images/
 data/thumb/

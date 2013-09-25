@@ -217,17 +217,38 @@ for file in thisFiles:
 
     writeHtml(soup, file)
 
-imagesDstDir = os.path.join(outDir, "images_fullsize")
+imagesDstDir = os.path.join(outDir, "images")
 if not os.path.exists(imagesDstDir):
     os.makedirs(imagesDstDir)
 
-for image in imageSet:
-    shutil.copy2(os.path.join(imagesSrcDir, imageFiles[image]), os.path.join(imagesDstDir, image))
+IMAGES_COMMANDS = {
+    "jpg": "convert \"%(infile)s\" -auto-orient -quality 53 -strip -thumbnail '1536x1536>' \"%(outfile)s\"",
+    "png": "convert \"%(infile)s\" -auto-orient -quality 99 -strip -thumbnail '4000x3000>' \"PNG8:%(outfile)s\""
+}
+IMAGES_COMMANDS["peg"] = IMAGES_COMMANDS["jpg"]
+IMAGES_COMMANDS["gif"] = IMAGES_COMMANDS["png"]
+IMAGES_COMMANDS["svg"] = IMAGES_COMMANDS["png"]
 
-thumbsDstDir = os.path.join(outDir, "thumb_fullsize")
+
+for image in imageSet:
+    image_as_png = image.replace('.svg', '.png')
+    os.system(IMAGES_COMMANDS[image[-3:].lower()] % {"infile": os.path.join(imagesSrcDir, imageFiles[image]),
+                                            "outfile": os.path.join(imagesDstDir, image_as_png)})
+
+THUMB_COMMANDS = {
+    "png": "convert \"%(infile)s\" -auto-orient -quality 53 -thumbnail '256x256>' %(outfile)s",
+    "jpg": "convert  -define jpeg:size=400x280 \"%(infile)s\" -auto-orient -quality 53 -thumbnail '500x280>' -strip -liquid-rescale '256x256!>' %(outfile)s"
+}
+THUMB_COMMANDS["peg"] = THUMB_COMMANDS["jpg"]
+THUMB_COMMANDS["gif"] = THUMB_COMMANDS["png"]
+THUMB_COMMANDS["svg"] = THUMB_COMMANDS["png"]
+
+thumbsDstDir = os.path.join(outDir, "thumb")
 if not os.path.exists(thumbsDstDir):
     os.makedirs(thumbsDstDir)
 
 for k, v in articleImages.iteritems():
-    if k in thisFiles and sanitizeFileName(v) in imageFiles:
-        shutil.copy2(os.path.join(imagesSrcDir, imageFiles[sanitizeFileName(v)]), os.path.join(thumbsDstDir, k + ".jpg"))
+    sanitized_name = sanitizeFileName(v)
+    if k in thisFiles and sanitized_name in imageFiles:
+        os.system( THUMB_COMMANDS[sanitized_name[-3:].lower()] % {"infile": os.path.join(imagesSrcDir, imageFiles[sanitized_name]),
+                                                         "outfile": os.path.join(thumbsDstDir, k + ".jpg")})
