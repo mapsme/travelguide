@@ -83,5 +83,13 @@ geocodes.txt: geocodes_from_html.txt geocodes_todo.txt
 	cp geocodes_from_html.txt geocodes.txt
 
 process_html: countries.txt
-	cat countries_to_generate.txt | while read country; do mkdir -p $$country; ../htmlprocessor/processor.sh articles/ images/ $$country.info.txt $$country.redirect.txt geocodes.txt $$country; done
+	cat countries_to_generate.txt | while read country; do mkdir -p $$country/content/data; ../htmlprocessor/processor.sh articles/ images/ $$country.info.txt $$country.redirect.txt geocodes.txt $$country/content/data; done
 	touch process_html
+
+genindex: geocodes.txt countries.txt
+	cat countries_to_generate.txt | while read country; do ../genindex/genindex $$country.info.txt $$country.redirect.txt geocodes.txt $$country/index.dat; done
+	touch genindex
+
+make_obb: process_html
+	cat countries_to_generate.txt | while read country; do ../../tools/jobb -d $$country/content -o $$country/main.1.com.guidewithme.`echo $$country|tr '[:upper:]' '[:lower:]'`.obb -pn com.guidewithme.`echo $$country|tr '[:upper:]' '[:lower:]'` -pv 1; done
+	touch make_obb
