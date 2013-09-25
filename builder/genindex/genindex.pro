@@ -5,6 +5,7 @@ CONFIG -= app_bundle
 
 INCLUDEPATH += ../../3rdparty/boost
 
+include (../../defines.pri)
 
 SOURCES += \
   main.cpp \
