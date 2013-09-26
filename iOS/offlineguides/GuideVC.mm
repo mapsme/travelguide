@@ -13,9 +13,7 @@
   float m_webViewScale;
   float m_webViewScaleOnStart;
 }
-
 @property (nonatomic, strong) UIWebView * webView;
-
 @end
 
 @implementation GuideVC
@@ -62,20 +60,22 @@
     self.navigationItem.rightBarButtonItem =  [self getCustomButtonWithImage:@"ic_articleselection"];
     self.navigationItem.leftBarButtonItem =  [self getCustomButtonWithImage:@"ic_back"];
   }
-  self.navigationController.navigationBar.titleTextAttributes = @{UITextAttributeTextColor : [UIColor colorWithRed:253.f/255.f
-                                                                                                             green:241.f/255.f
-                                                                                                              blue:43.f/255.f
-                                                                                                             alpha:1.f],
-                                                                  UITextAttributeTextShadowColor: [UIColor clearColor]};
+  self.navigationController.navigationBar.titleTextAttributes =
+  @{
+    UITextAttributeTextColor       : [UIColor colorWithRed:253.f/255.f green:241.f/255.f blue:43.f/255.f alpha:1.f],
+    UITextAttributeTextShadowColor : [UIColor clearColor]
+  };
   self.navigationItem.title = @"UK GuideWithMe";
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request
  navigationType:(UIWebViewNavigationType)navigationType
 {
-  NSString * str = [self normalizeUrl:[[request URL] absoluteString]];
-  if ([self openMwmUrl:str])
+  // MWM API urls will be opened in openMwmUrl method
+  if ([self openMwmUrl:request.URL.absoluteString])
     return NO;
+
+  NSString * str = [self normalizeUrl:[[request URL] absoluteString]];
   if ([self isWebPage:str] && [[UIApplication sharedApplication] canOpenURL:[request URL]])
   {
     [[UIApplication sharedApplication] openURL:[request URL]];
@@ -94,9 +94,9 @@
   if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
   {
     if ([self.webView canGoBack])
-      self.navigationItem.leftBarButtonItem =  [self getCustomButtonWithImage:@"ic_back"];
+      self.navigationItem.leftBarButtonItem = [self getCustomButtonWithImage:@"ic_back"];
     else
-      self.navigationItem.leftBarButtonItem =  nil;
+      self.navigationItem.leftBarButtonItem = nil;
   }
 }
 
@@ -184,36 +184,35 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     @".png",
     @".jpg"
   };
+
   for (size_t i = 0; i < ArraySize(arr); ++i)
-  {
-    NSRange r = [pageUrl rangeOfString:arr[i]];
-    if (r.location != NSNotFound)
+    if (NSNotFound != [pageUrl rangeOfString:arr[i]].location)
       return YES;
-  }
+
   return NO;
 }
 
 -(BOOL)isWebPage:(NSString *)str
 {
-  static NSString  * const arr [] =
+  static NSString * const arr [] =
   {
     @"www",
     @"http",
   };
+
   for (size_t i = 0; i < ArraySize(arr); ++i)
-  {
-    NSRange r = [str rangeOfString:arr[i]];
-    if (r.location == 0)
+    if (0 == [str rangeOfString:arr[i]].location)
       return YES;
-  }
+
   return NO;
 }
 
 -(BOOL)openMwmUrl:(NSString *)str
 {
-  NSRange r = [str rangeOfString:@"mapswithme" options:NSBackwardsSearch];
-  if (r.location == NSNotFound)
+  // Looking for mapswithme://... urls
+  if (0 != [str rangeOfString:@"mapswithme" options:NSCaseInsensitiveSearch].location)
     return NO;
+
   if ([MWMApi isApiSupported])
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
   else
