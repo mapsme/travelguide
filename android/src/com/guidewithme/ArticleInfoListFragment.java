@@ -30,7 +30,7 @@ import android.widget.TextView;
 import com.guidewithme.article.ArticleInfo;
 import com.guidewithme.async.QueryResultLoader;
 import com.guidewithme.cpp.Storage;
-import com.guidewithme.uk.R;
+import com.guidewithme.R;
 import com.guidewithme.util.Utils;
 import com.guidewithme.widget.StorageArticleInfoAdapter;
 import com.mapswithme.maps.api.MWMPoint;

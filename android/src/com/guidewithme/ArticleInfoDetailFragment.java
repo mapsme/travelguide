@@ -24,7 +24,7 @@ import com.guidewithme.article.ArticleInfo;
 import com.guidewithme.article.ArticlePathFinder;
 import com.guidewithme.article.ObbPathFinder;
 import com.guidewithme.cpp.Storage;
-import com.guidewithme.uk.R;
+import com.guidewithme.R;
 import com.guidewithme.util.Utils;
 import com.mapswithme.maps.api.MapsWithMeApi;
 

@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
 import android.view.MenuItem;
-import com.guidewithme.uk.R;
+import com.guidewithme.R;
 
 /**
  * An activity representing a single ArticleInfo detail screen. This activity is
