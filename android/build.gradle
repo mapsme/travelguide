@@ -1,15 +1,16 @@
 buildscript {
   repositories { mavenCentral() }
 
-  dependencies { classpath 'com.android.tools.build:gradle:0.5.+' }
+  dependencies { classpath 'com.android.tools.build:gradle:0.5.7' }
 }
 
 // need it for :clean
 apply plugin:'base'
 
 task ndkBuild(type:Exec) {
-  // TODO: add NDK_DEBUG=1
-  commandLine 'ndk-build', '-j', Runtime.runtime.availableProcessors(), 'V=1'
+  clParts = (['ndk-build', '-j', Runtime.runtime.availableProcessors() + 1] + GWMndkFlags.split(' ')).flatten()
+  println(clParts.join(" "))
+  commandLine clParts
 }
 
 task ndkBuildClean(type:Exec) {
@@ -39,26 +40,10 @@ dependencies {
   compile project(':3rdparty:expansion_downloader')
 }
 
-def getVersionName() {
-  propVersionName
-}
-
-def getVersionCode() {
-  propVersionCode
-}
-
-def getPackageName() {
-  propPackageName
-}
-
-def getBaseName() {
-  propApkName + '_' + getVersionName()
-}
-
 android {
   compileSdkVersion 18
   buildToolsVersion "18.0.1"
-  project.archivesBaseName = getBaseName()
+  project.archivesBaseName = GWMapk
 
   signingConfigs {
 
@@ -72,20 +57,25 @@ android {
 
   buildTypes {
 
-    debug { jniDebugBuild true }
+    debug {
+      jniDebugBuild true
+      packageNameSuffix ".debug"
+    }
 
-    release { signingConfig signingConfigs.guidewithme }
+    release {
+      signingConfig signingConfigs.guidewithme
+    }
   }
 
   defaultConfig {
-    versionCode getVersionCode()
-    versionName getVersionName()
+    versionCode = GWMvc
+    versionName = GWMvn
+    packageName = GWMpn
     minSdkVersion 9
     targetSdkVersion 18
   }
 
   sourceSets {
-
     main {
       manifest.srcFile 'AndroidManifest.xml'
       java.srcDirs = ['src']
@@ -96,16 +86,22 @@ android {
       assets.srcDirs = ['assets']
     }
 
-    // Move the tests to tests/java, tests/res, etc...
     instrumentTest.setRoot('tests')
-
-    // Move the build types to build-types/<type>
-    // For instance, build-types/debug/java, build-types/debug/AndroidManifest.xml, ...
-    // This moves them out of them default location under src/<type>/... which would
-    // conflict with src/ being used by the main source set.
-    // Adding new build types or product flavors should be accompanied
-    // by a similar customization.
     debug.setRoot('build-types/debug')
     release.setRoot('build-types/release')
+  }
+}
+
+// replace app name
+android.applicationVariants.all { variant ->
+  variant.mergeResources.doLast {
+      File valuesFile = file("${buildDir}/res/all/${variant.dirName}/values/values.xml")
+      println "Replacing app name in " + valuesFile
+      println "App name = " + GWMappName
+
+      String content = valuesFile.getText('UTF-8')
+      content = content.replaceAll(/\(app_name\)/, GWMappName)
+      valuesFile.write(content, 'UTF-8')
+
   }
 }
