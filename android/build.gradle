@@ -42,7 +42,7 @@ dependencies {
 
 android {
   compileSdkVersion 18
-  buildToolsVersion "18.0.1"
+  buildToolsVersion "18.1.0"
   project.archivesBaseName = GWMapk
 
   signingConfigs {
