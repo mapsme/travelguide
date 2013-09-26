@@ -31,6 +31,7 @@
 #define MAPSWITHME_API_VERSION 1
 
 static NSString * MWMUrlScheme = @"mapswithme://";
+static BOOL openUrlOnBalloonClick = NO;
 
 @implementation MWMPin
 
@@ -69,6 +70,16 @@ static NSString * MWMUrlScheme = @"mapswithme://";
 
 
 @implementation MWMApi
+
+// Escape special chars with percent encoding
++ (NSString *) percentEncode:(NSString *)str
+{
+  CFStringRef cfStr = (CFStringRef)str;
+  CFStringRef cfEncodedStr = CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, cfStr, NULL, CFSTR("&?/:="), kCFStringEncodingUTF8);
+  NSString * encodedStr = [[(NSString *)cfEncodedStr retain] autorelease];
+  CFRelease(cfEncodedStr);
+  return encodedStr;
+}
 
 + (BOOL) isMapsWithMeUrl:(NSURL *)url
 {
@@ -148,11 +159,11 @@ static NSString * MWMUrlScheme = @"mapswithme://";
 
   NSString * appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
   NSMutableString * str = [[NSMutableString alloc] initWithFormat:@"%@map?v=%d&appname=%@&", MWMUrlScheme, MAPSWITHME_API_VERSION,
-                           [appName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+                           [MWMApi percentEncode:appName]];
 
   NSString * backUrlScheme = [MWMApi detectBackUrlScheme];
   if (backUrlScheme)
-    [str appendFormat:@"backurl=%@&", [backUrlScheme stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    [str appendFormat:@"backurl=%@&", [MWMApi percentEncode:backUrlScheme]];
 
   for (MWMPin * point in pins)
   {
@@ -160,11 +171,14 @@ static NSString * MWMUrlScheme = @"mapswithme://";
     @autoreleasepool
     {
       if (point.title)
-        [str appendFormat:@"n=%@&", [point.title stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        [str appendFormat:@"n=%@&", [MWMApi percentEncode:point.title]];
       if (point.idOrUrl)
-        [str appendFormat:@"id=%@&", [point.idOrUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        [str appendFormat:@"id=%@&", [MWMApi percentEncode:point.idOrUrl]];
     }
   }
+
+  if (openUrlOnBalloonClick)
+    [str appendString:@"&balloonAction=openUrlOnBalloonClick"];
 
   NSURL * url = [[NSURL alloc] initWithString:str];
   BOOL const result = [[UIApplication sharedApplication] openURL:url];
@@ -179,13 +193,13 @@ static NSString * MWMUrlScheme = @"mapswithme://";
     {
       for (NSString * scheme in [dict objectForKey:@"CFBundleURLSchemes"])
       {
-        //we use only one scheme that uses mapswithme api
+        // We use the first scheme in this list, you can change this behavior if needed
         return scheme;
       }
     }
   }
-  NSLog(@"WARNING: No url schemes are added in the Info.plist file that supports MWM api. Please add them if you want API users to come back to your app.");
-  return @"guideswithme://";
+  NSLog(@"WARNING: No com.mapswithme.maps url schemes are added in the Info.plist file. Please add them if you want API users to come back to your app.");
+  return nil;
 }
 
 // HTML page for users who didn't install MapsWithMe
@@ -232,6 +246,11 @@ static NSString * mapsWithMeIsNotInstalledPage =
   navController.navigationBar.topItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Close" style:UIBarButtonItemStyleDone target:navController action:@selector(onCloseButtonClicked:)];
 
   [[[UIApplication sharedApplication] delegate].window.rootViewController presentModalViewController:navController animated:YES];
+}
+
++(void) setOpenUrlOnBalloonClick:(BOOL)value
+{
+  openUrlOnBalloonClick = value;
 }
 
 @end
