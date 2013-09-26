@@ -213,8 +213,11 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
   if (0 != [str rangeOfString:@"mapswithme" options:NSCaseInsensitiveSearch].location)
     return NO;
 
+  NSString * newUrl = [str stringByAppendingFormat:@"&backurl=%@&appname=%@",
+                       [MWMApi detectBackUrlScheme],
+                       [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"]];
   if ([MWMApi isApiSupported])
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:newUrl]];
   else
     [MWMApi showMapsWithMeIsNotInstalledDialog];
   return YES;
