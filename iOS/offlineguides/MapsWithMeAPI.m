@@ -74,11 +74,12 @@ static BOOL openUrlOnBalloonClick = NO;
 // Escape special chars with percent encoding
 + (NSString *) percentEncode:(NSString *)str
 {
-  CFStringRef cfStr = (CFStringRef)str;
-  CFStringRef cfEncodedStr = CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, cfStr, NULL, CFSTR("&?/:="), kCFStringEncodingUTF8);
-  NSString * encodedStr = [[(NSString *)cfEncodedStr retain] autorelease];
-  CFRelease(cfEncodedStr);
-  return encodedStr;
+  CFStringRef cfEncodedStr = CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
+                                                                     (__bridge CFStringRef)str,
+                                                                     NULL,
+                                                                     CFSTR("&?/:="),
+                                                                     kCFStringEncodingUTF8);
+  return (NSString *)CFBridgingRelease(cfEncodedStr);
 }
 
 + (BOOL) isMapsWithMeUrl:(NSURL *)url
@@ -89,9 +90,6 @@ static BOOL openUrlOnBalloonClick = NO;
 
 + (MWMPin *) pinFromUrl:(NSURL *)url
 {
-//  if (![MWMApi isMapsWithMeUrl:url])
-//    return nil;
-
   MWMPin * pin = nil;
   if ([url.host isEqualToString:@"pin"])
   {
