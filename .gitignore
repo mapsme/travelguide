@@ -2,6 +2,9 @@
 *.pro.user
 *~
 build-*
+build/
+.gradle/
+.gradle*
 
 project.xcworkspace
 xcuserdata

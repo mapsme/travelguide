@@ -1,0 +1,107 @@
+buildscript {
+  repositories { mavenCentral() }
+
+  dependencies { classpath 'com.android.tools.build:gradle:0.5.7' }
+}
+
+// need it for :clean
+apply plugin:'base'
+
+task ndkBuild(type:Exec) {
+  clParts = (['ndk-build', '-j', Runtime.runtime.availableProcessors() + 1] + GWMndkFlags.split(' ')).flatten()
+  println(clParts.join(" "))
+  commandLine clParts
+}
+
+task ndkBuildClean(type:Exec) {
+  commandLine 'ndk-build','clean'
+}
+
+task copyNativeLibs(type: Copy, dependsOn: 'ndkBuild') {
+  from(new File('libs')) { include '**/*.so' }
+  into new File(buildDir, 'native-libs')
+}
+
+tasks.withType(Compile) { compileTask -> compileTask.dependsOn ndkBuild }
+tasks.withType(Compile) { compileTask -> compileTask.dependsOn copyNativeLibs }
+
+clean.dependsOn 'cleanCopyNativeLibs'
+clean.dependsOn 'ndkBuildClean'
+
+tasks.withType(com.android.build.gradle.tasks.PackageApplication) { pkgTask ->
+  pkgTask.jniDir new File(buildDir, 'native-libs')
+}
+
+apply plugin: 'android'
+
+dependencies {
+  compile fileTree(dir: 'libs', include: '*.jar')
+  compile project(':android-mwm')
+  compile project(':3rdparty:expansion_downloader')
+}
+
+android {
+  compileSdkVersion 18
+  buildToolsVersion "18.1.0"
+  project.archivesBaseName = GWMapk
+
+  signingConfigs {
+
+    guidewithme {
+      storeFile file("debug.keystore")
+      storePassword "android"
+      keyAlias "androiddebugkey"
+      keyPassword "android"
+    }
+  }
+
+  buildTypes {
+
+    debug {
+      jniDebugBuild true
+      packageNameSuffix ".debug"
+    }
+
+    release {
+      signingConfig signingConfigs.guidewithme
+    }
+  }
+
+  defaultConfig {
+    versionCode = GWMvc
+    versionName = GWMvn
+    packageName = GWMpn
+    minSdkVersion 9
+    targetSdkVersion 18
+  }
+
+  sourceSets {
+    main {
+      manifest.srcFile 'AndroidManifest.xml'
+      java.srcDirs = ['src']
+      resources.srcDirs = ['src']
+      aidl.srcDirs = ['src']
+      renderscript.srcDirs = ['src']
+      res.srcDirs = ['res']
+      assets.srcDirs = ['assets']
+    }
+
+    instrumentTest.setRoot('tests')
+    debug.setRoot('build-types/debug')
+    release.setRoot('build-types/release')
+  }
+}
+
+// replace app name
+android.applicationVariants.all { variant ->
+  variant.mergeResources.doLast {
+      File valuesFile = file("${buildDir}/res/all/${variant.dirName}/values/values.xml")
+      println "Replacing app name in " + valuesFile
+      println "App name = " + GWMappName
+
+      String content = valuesFile.getText('UTF-8')
+      content = content.replaceAll(/\(app_name\)/, GWMappName)
+      valuesFile.write(content, 'UTF-8')
+
+  }
+}

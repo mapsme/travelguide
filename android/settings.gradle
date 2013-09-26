@@ -1,0 +1,4 @@
+include ':3rdparty:play_licensing'
+include ':3rdparty:expansion_downloader'
+include ':android-mwm'
+project(':android-mwm').projectDir = new File(settingsDir, '../3rdparty/android-mwm')

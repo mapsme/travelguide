@@ -11,7 +11,7 @@ import com.guidewithme.article.ArticleInfo;
 import com.guidewithme.cpp.Storage;
 import com.mapswithme.maps.api.MWMPoint;
 import com.mapswithme.maps.api.MWMResponse;
-import com.guidewithme.uk.R;
+import com.guidewithme.R;
 
 /**
  * An activity representing a list of ArticleInfos. This activity has different
