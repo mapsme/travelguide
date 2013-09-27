@@ -90,6 +90,7 @@
     self.tableView.backgroundColor = [UIColor colorWithRed:51.f/255.f green:51.f/255.f blue:51.f/255.f alpha:1.f];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
   }
+  self.navigationItem.titleView = self.searchBar;
 }
 
 #pragma mark - Table view data source
@@ -154,7 +155,6 @@
   [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"bg_search"] forBarMetrics:UIBarMetricsDefault];
   [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"bg_search"] forBarMetrics:UIBarMetricsLandscapePhone];
   [self.navigationController setNavigationBarHidden:NO animated:animated];
-  self.navigationItem.titleView = self.searchBar;
 }
 
 #pragma mark - Table view delegate
