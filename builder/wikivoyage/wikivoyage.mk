@@ -93,3 +93,7 @@ genindex: geocodes.txt countries.txt
 make_obb: process_html
 	cat countries_to_generate.txt | while read country; do ../../tools/jobb -d $$country/content -o $$country/main.1.com.guidewithme.`echo $$country|tr '[:upper:]' '[:lower:]'`.obb -pn com.guidewithme.`echo $$country|tr '[:upper:]' '[:lower:]'` -pv 1; done
 	touch make_obb
+
+make_apk: genindex
+	bash makeapk.sh
+	touch make_apk
