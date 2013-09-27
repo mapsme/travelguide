@@ -29,7 +29,7 @@
 
 @implementation ArticleVC
 
-- (void)onShowMap:(id)button
+- (void)onMapButtonClicked
 {
   size_t const count = m_storage.GetResultsCount();
   NSMutableArray * pins = [[NSMutableArray alloc] initWithCapacity:count];
@@ -37,8 +37,9 @@
   for (size_t i = 0; i < count; ++ i)
   {
     ArticleInfo const & article = m_storage.GetResult(i);
-    double lat, lon;
-    if (!article.IsRedirect() && article.GetLatLon(lat, lon))
+	double lat, lon;
+    // Do not check for redirects as they don't contain valid coordinates
+    if (/*!article.IsRedirect() && */article.GetLatLon(lat, lon))
     {
       NSString * title = [NSString stringWithUTF8String:article.GetTitle().c_str()];
       NSString * pageId = [NSString stringWithUTF8String:article.GetUrl().c_str()];
@@ -91,6 +92,13 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
   }
   self.navigationItem.titleView = self.searchBar;
+  UIBarButtonItem * btn = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Map", nil) style:UIBarButtonItemStyleDone target:self action:@selector(onMapButtonClicked)];
+  [btn setTitleTextAttributes: @{
+                                 UITextAttributeTextColor : [UIColor colorWithRed:253.f/255.f green:241.f/255.f blue:43.f/255.f alpha:1.f],
+                                  UITextAttributeTextShadowColor : [UIColor clearColor]
+                                }
+                     forState:UIControlStateNormal];
+  self.navigationItem.rightBarButtonItem = btn;
 }
 
 #pragma mark - Table view data source
