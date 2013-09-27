@@ -243,7 +243,11 @@ static NSString * mapsWithMeIsNotInstalledPage =
   MWMNavigationController * navController = [[MWMNavigationController alloc] initWithRootViewController:webController];
   navController.navigationBar.topItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Close" style:UIBarButtonItemStyleDone target:navController action:@selector(onCloseButtonClicked:)];
 
-  [[[UIApplication sharedApplication] delegate].window.rootViewController presentModalViewController:navController animated:YES];
+  UIViewController * rootVC = [UIApplication sharedApplication].delegate.window.rootViewController;
+  // This check below is needed to avoid crash in Guides on Close button, and to display this dialog on top of all windows
+  if ([rootVC isKindOfClass:UISplitViewController.class])
+    rootVC = [((UISplitViewController *)rootVC).viewControllers objectAtIndex:0];
+  [rootVC presentModalViewController:navController animated:YES];
 }
 
 +(void) setOpenUrlOnBalloonClick:(BOOL)value
