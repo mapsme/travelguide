@@ -16,7 +16,8 @@ from strip_function import *
 
 
 def insertMapLink(soup, lat, lon, title, pageId):
-    hrefLink = "mapswithme://map?v=1&ll=%s,%s&n=%s&id=%s&backurl=guideswithme&appname=Guide%%20With%%20Me" % (lat, lon, urllib.quote(title), pageId)
+    # backurl and appname are automatically added in iOS code
+    hrefLink = "mapswithme://map?v=1&ll=%s,%s&n=%s&id=%s" % (lat, lon, urllib.quote(title), pageId)
     mapTag = BeautifulSoup().new_tag("a", href=hrefLink)
     mapTag["class"] = "geolink"
     soup.body.insert(0, mapTag)

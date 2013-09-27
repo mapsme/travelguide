@@ -66,5 +66,9 @@
 + (BOOL) showPins:(NSArray *)pins;
 //
 + (void) showMapsWithMeIsNotInstalledDialog;
+// Set value = YES if you want to open pin URL on balloon click, default value is NO
++(void) setOpenUrlOnBalloonClick:(BOOL)value;
+
++ (NSString *) detectBackUrlScheme;
 
 @end

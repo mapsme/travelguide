@@ -471,6 +471,7 @@
 		ED81956117AED762004F3803 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "offlineguides/offlineguides-Prefix.pch";
 				HEADER_SEARCH_PATHS = ../3rdparty/boost;
@@ -484,6 +485,7 @@
 		ED81956217AED762004F3803 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "offlineguides/offlineguides-Prefix.pch";
 				HEADER_SEARCH_PATHS = ../3rdparty/boost;
@@ -538,6 +540,7 @@
 		FA46C17917BB60A400350937 /* Production */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "offlineguides/offlineguides-Prefix.pch";
 				HEADER_SEARCH_PATHS = ../3rdparty/boost;
