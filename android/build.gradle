@@ -105,3 +105,7 @@ android.applicationVariants.all { variant ->
 
   }
 }
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '1.7'
+}
