@@ -210,6 +210,14 @@ void StorageBuilder::Save(string const & path)
   }
 }
 
+void StorageBuilder::Load(string const & path)
+{
+  Storage s;
+  s.Load(path);
+
+  m_info.assign(s.m_info.begin(), s.m_info.end());
+}
+
 void StorageBuilder::Assign(Storage & storage)
 {
   ProcessArticles();

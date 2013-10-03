@@ -9,7 +9,11 @@
 class ArticleInfoBuilder : public ArticleInfo
 {
 public:
-  ArticleInfoBuilder(string const & title) : ArticleInfo(title)
+  explicit ArticleInfoBuilder(string const & title) : ArticleInfo(title)
+  {
+  }
+
+  ArticleInfoBuilder(ArticleInfo const & info) : ArticleInfo(info)
   {
   }
 
@@ -76,6 +80,7 @@ public:
   void Add(ArticleInfoBuilder const & info);
 
   void Save(string const & path);
+  void Load(string const & path);
 
   void Assign(Storage & storage);
 
@@ -86,6 +91,9 @@ public:
     map<string, size_t>::const_iterator i = m_url2info.find(url);
     return (i == m_url2info.end() ? 0 : &m_info[i->second]);
   }
+
+  size_t GetSize() const { return m_info.size(); }
+  ArticleInfoBuilder const & GetArticle(size_t i) const { return m_info[i]; }
 
   /// For tests only.
   void InitMock();
