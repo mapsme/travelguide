@@ -188,34 +188,37 @@ if not os.path.exists(outDir):
     os.makedirs(outDir)
 
 for file in thisFiles:
-    soup = BeautifulSoup(open(os.path.join(inDir, file)))
-    soup = cleanUp(soup)
-    rewriteImages(soup)
-    rewriteCrossLinks(soup)
+    try:
+        soup = BeautifulSoup(open(os.path.join(inDir, file)))
+        soup = cleanUp(soup)
+        rewriteImages(soup)
+        rewriteCrossLinks(soup)
 
-    articleTitle = pageIdToTitle[file]
+        articleTitle = pageIdToTitle[file]
 
-    if file in coords:
-        insertMapLink(soup, coords[file][0], coords[file][1], articleTitle, file)
+        if file in coords:
+            insertMapLink(soup, coords[file][0], coords[file][1], articleTitle, file)
 
-    insertArticleTitle(soup, articleTitle)
+        insertArticleTitle(soup, articleTitle)
 
-    parentTitle = fixTitle(ancestors[file][1]) if ancestors[file][1] != "NULL" else False
-    parentLink = ancestors[file][0] + ".html" if ancestors[file][0] != "NULL" else False
-    grandParentTitle = fixTitle(ancestors[file][3]) if ancestors[file][3] != "NULL" else False
-    grandParentLink = ancestors[file][2] + ".html" if ancestors[file][2] != "NULL" else False
-    insertBreadcrumb(soup, articleTitle, parentTitle, parentLink, grandParentTitle, grandParentLink)
+        parentTitle = fixTitle(ancestors[file][1]) if ancestors[file][1] != "NULL" else False
+        parentLink = ancestors[file][0] + ".html" if ancestors[file][0] != "NULL" else False
+        grandParentTitle = fixTitle(ancestors[file][3]) if ancestors[file][3] != "NULL" else False
+        grandParentLink = ancestors[file][2] + ".html" if ancestors[file][2] != "NULL" else False
+        insertBreadcrumb(soup, articleTitle, parentTitle, parentLink, grandParentTitle, grandParentLink)
 
-    articleImage = imageSanitizedPath(articleImages[file])
-    if articleImage:
-        insertArticleImage(soup, articleImage)
-    else:
-        print "article image not found:", articleImages[file]
+        articleImage = imageSanitizedPath(articleImages[file])
+        if articleImage:
+            insertArticleImage(soup, articleImage)
+        else:
+            print "article image not found:", articleImages[file]
 
-    # Change src tag of images to s tag.
-    soup = changeImgSrcAttr(soup)
+        # Change src tag of images to s tag.
+        soup = changeImgSrcAttr(soup)
 
-    writeHtml(soup, file)
+        writeHtml(soup, file)
+    except IOError:
+        print "Couldn't file file", file, "for", idMappingFile
 
 imagesDstDir = os.path.join(outDir, "images")
 if not os.path.exists(imagesDstDir):
