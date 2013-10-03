@@ -22,3 +22,4 @@ builder/wikivoyage/*.sql.gz
 builder/wikivoyage/images
 builder/wikivoyage/articles
 builder/wikivoyage/articles_desktop
+builder/wikivoyage/Countries
