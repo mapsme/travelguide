@@ -9,7 +9,7 @@
 #include "../std/iterator.hpp"
 
 
-namespace storage
+namespace
 {
 
 template <class ToDo>
@@ -66,11 +66,7 @@ public:
       return;
 
     ArticleInfoBuilder builder(title);
-    builder.m_url = entries[0];
-    builder.m_length = atoi(entries[2].c_str());
-    CHECK(builder.m_length != 0, (entries[2]));
-    builder.m_parentUrl = entries[4];
-
+    builder.SetParams(entries);
     m_storage.Add(builder);
   }
 };
@@ -125,10 +121,7 @@ public:
       double const lon = ToDouble(entries[2]);
 
       if (ll::ValidLat(lat) && ll::ValidLon(lon))
-      {
-        p->m_lat = lat;
-        p->m_lon = lon;
-      }
+        p->SetLatLon(lat, lon);
       else
         LOG(WARNING, ("Bad Lat, Lon:", entries[1], entries[2]));
     }
@@ -137,7 +130,13 @@ public:
 
 }
 
-using namespace storage;
+void ArticleInfoBuilder::SetParams(vector<string> const & entries)
+{
+  m_url = entries[0];
+  m_length = atoi(entries[2].c_str());
+  CHECK(m_length != 0, (entries[2]));
+  m_parentUrl = entries[4];
+}
 
 void StorageBuilder::ParseEntries(string const & path)
 {
@@ -162,8 +161,7 @@ void StorageBuilder::ParseGeocodes(string const & path)
     {
       ArticleInfoBuilder const * p = GetArticle(m_info[i].m_url);
       CHECK(p, ());
-      m_info[i].m_lat = p->m_lat;
-      m_info[i].m_lon = p->m_lon;
+      m_info[i].SetLatLon(p->m_lat, p->m_lon);
     }
   }
 }

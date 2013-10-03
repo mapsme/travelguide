@@ -9,20 +9,38 @@
 class ArticleInfoBuilder : public ArticleInfo
 {
 public:
-  ArticleInfoBuilder(string const & title) : ArticleInfo(title) {}
+  ArticleInfoBuilder(string const & title) : ArticleInfo(title)
+  {
+  }
+
   ArticleInfoBuilder(string const & title, ArticleInfoBuilder const & src, bool redirect)
     : ArticleInfo(title, src, redirect), m_parentUrl(src.m_parentUrl)
   {
   }
 
-  ArticleInfoBuilder(string const & title, string const & url,
-                     double lat, double lon)
-    : ArticleInfo(title)
+  void SetParams(vector<string> const & entries);
+  void SetLatLon(double lat, double lon)
   {
-    m_url = url;
     m_lat = lat;
     m_lon = lon;
   }
+
+  /// @name Used for tests.
+  //@{
+  ArticleInfoBuilder(string const & title, string const & url, double lat, double lon)
+    : ArticleInfo(title)
+  {
+    m_url = url;
+    SetLatLon(lat, lon);
+  }
+
+  ArticleInfoBuilder(string const & title, double lat, double lon, uint32_t length)
+    : ArticleInfo(title)
+  {
+    m_length = length;
+    SetLatLon(lat, lon);
+  }
+  //@}
 
   string m_parentUrl;
 
@@ -31,6 +49,10 @@ public:
     m_parentUrl.swap(b.m_parentUrl);
     ArticleInfo::Swap(b);
   }
+
+  string const & Title() const { return m_title; }
+  double Lat() const { return m_lat; }
+  double Lon() const { return m_lon; }
 };
 
 inline void swap(ArticleInfoBuilder & b1, ArticleInfoBuilder & b2)
