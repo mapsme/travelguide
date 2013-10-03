@@ -193,5 +193,16 @@ TEST(Storage, StorageBuilderRW)
 TEST(Distance, Smoke)
 {
   // Equator length from wiki.
-  EXPECT_TRUE(fabs(earth::Distance(0, 0, 0, 180) / 1000.0 - 40075 / 2.0) < 1.0);
+  EXPECT_TRUE(fabs(earth::GetDistance(0, 0, 0, 180) / 1000.0 - 40075 / 2.0) < 1.0);
+}
+
+TEST(Distance, OffsetPoint)
+{
+  double lat1 = 66.666;
+  double lon1 = 66.666;
+  double lat2, lon2;
+  double dist = 66666.666;
+  earth::GetOffset(lat1, lon1, 0.666, dist, lat2, lon2);
+
+  EXPECT_TRUE(fabs(earth::GetDistance(lat1, lon1, lat2, lon2) - dist) < 1.0E-6);
 }
