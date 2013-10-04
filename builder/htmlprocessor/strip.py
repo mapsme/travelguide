@@ -226,7 +226,7 @@ if not os.path.exists(imagesDstDir):
 
 IMAGES_COMMANDS = {
     "jpg": "convert \"%(infile)s\" -auto-orient -quality 53 -strip -thumbnail '1536x1536>' \"%(outfile)s\"",
-    "png": "convert \"%(infile)s\" -auto-orient -quality 99 -strip -thumbnail '4000x3000>' \"PNG8:%(outfile)s\""
+    "png": "convert \"%(infile)s\" -auto-orient -quality 99 -strip -thumbnail '1536x1536>' \"PNG8:%(outfile)s\""
 }
 IMAGES_COMMANDS["peg"] = IMAGES_COMMANDS["jpg"]
 IMAGES_COMMANDS["gif"] = IMAGES_COMMANDS["png"]
