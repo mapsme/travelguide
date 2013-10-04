@@ -67,6 +67,7 @@ rename_articles: rename_articles_mobile rename_articles_desktop
 
 countries.txt: load_sql_dumps
 	$$BIN/generate_article_info.sh
+	touch countries.txt
 
 geocodes_from_html.txt: download_articles
 	grep '<span id="geodata" class="geo">[-0-9.]*; [-0-9.]*</span>' -R articles/ --only-matching | sed 's@articles//@@' | sed 's@:<span id=.geodata. class=.geo.>@	@' | sed 's@; @	@' | sed 's@</span>@@' | sort -u -b -k1 > geocodes_from_html.txt
@@ -81,6 +82,7 @@ geocodes_todo.txt: geocodes_todo_all.txt geocodes_from_html.txt
 
 geocodes.txt: geocodes_from_html.txt geocodes_todo.txt
 	cp geocodes_from_html.txt geocodes.txt
+	touch geocodes.txt
 
 process_html: countries.txt
 	cat countries_to_generate.txt | while read country; do mkdir -p Countries/$$country/content/data; ../htmlprocessor/processor.sh articles/ images/ $$country.info.txt $$country.redirect.txt geocodes.txt Countries/$$country/content/data; done
@@ -91,7 +93,7 @@ genindex: geocodes.txt countries.txt
 	touch genindex
 
 make_obb: process_html
-	cat countries_to_generate.txt | while read country; do ../../tools/jobb -d Countries/$$country/content -o Countries/$$country/main.1.com.guidewithme.`echo $$country|tr '[:upper:]' '[:lower:]'`.obb -pn com.guidewithme.`echo $$country|tr '[:upper:]' '[:lower:]'` -pv 1; done
+	cat countries_to_generate.txt | while read country; do cp ../../data/* Countries/$$country/content/data;  ../../tools/jobb -d Countries/$$country/content -o Countries/$$country/main.1.com.guidewithme.`echo $$country|tr '[:upper:]' '[:lower:]'`.obb -pn com.guidewithme.`echo $$country|tr '[:upper:]' '[:lower:]'` -pv 1; done
 	touch make_obb
 
 make_apk: genindex
