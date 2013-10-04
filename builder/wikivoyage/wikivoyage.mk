@@ -12,11 +12,12 @@ DUMP_FILES = page.sql.gz redirect.sql.gz category.sql.gz page_props.sql.gz image
 
 
 .PHONY: all
-all: download_images rename_articles countries.txt geocodes.txt process_html
+all: download_images rename_articles countries.txt geocodes.txt process_html make_obb make_apk
 
 .PHONY: clean
 clean:
 	rm *.sql.gz || true
+	rm -r Countries
 
 $(DUMP_FILES):
 	wget $(DUMP_URL_PREFIX)"-"$@ -O $@
