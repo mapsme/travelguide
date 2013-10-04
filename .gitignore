@@ -5,10 +5,12 @@ build-*
 build/
 .gradle/
 .gradle*
+*.pyc
 
 project.xcworkspace
 xcuserdata
 
+*.gz
 data/*.html
 data/images/
 data/thumb/
@@ -20,3 +22,4 @@ builder/wikivoyage/*.sql.gz
 builder/wikivoyage/images
 builder/wikivoyage/articles
 builder/wikivoyage/articles_desktop
+builder/wikivoyage/Countries
