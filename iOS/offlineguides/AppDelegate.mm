@@ -14,6 +14,7 @@
   else
     self.window.rootViewController = [[IPadSplitVC alloc] init];
   [self.window makeKeyAndVisible];
+  [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
   return YES;
 }
 
