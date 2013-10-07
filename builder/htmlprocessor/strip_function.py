@@ -20,7 +20,6 @@ def cleanUp(soup):
     [s.decompose() for s in content(['noscript'])]
 
     [s.decompose() for s in content.findAll("a", {"id": "mw-mf-last-modified"})]
-    [s.decompose() for s in content.findAll("span", {"class": "mw-editsection"})]
     [s.decompose() for s in content.findAll("a", {"class": "edit-page"})]
     [s.decompose() for s in content.findAll("table", {"class": "articleState"})]
     [s.decompose() for s in content.findAll("button", {"class": "languageSelector"})]

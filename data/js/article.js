@@ -37,16 +37,16 @@ function closeSection(section) {
 }
 
 function openSection(section) {
-  var sections = document.getElementsByClassName("section_heading");
+  var sections = document.getElementsByTagName("h2");
   [].forEach.call(sections, function(sectionToClose) {
     closeSection(sectionToClose);
   });
-  section.className += " openSection";
+  section.className += "openSection";
   var contentSection = next(section);
   if (contentSection) {
-    contentSection.className += " openSection";
+    contentSection.className += "openSection";
   }
-  location.replace('#' + section.id);
+  location.replace('#' + section.children[0].id);
   window.history.replaceState({},"", window.location.href.split("#")[0] + '#' + section.id);
 }
 
@@ -62,7 +62,7 @@ function onSectionClick(event) {
 function onPageLoaded() {
   restoreImgSrcAttr();
 
-  var sections = document.getElementsByClassName("section_heading");
+  var sections = document.getElementsByTagName("h2");
   [].forEach.call(sections, function(section) {
     addListener(section, 'click', onSectionClick);
   });
@@ -76,7 +76,10 @@ function onPageLoaded() {
       document.getElementById('articleImage').style.margin = "-" + rad + "px -" + rad + "px -" + rad + "px -" + rad + "px";
     };
   }
-  img.src = document.getElementById('articleImage').style.backgroundImage.replace(/url\((['"])?(.*?)\1\)/gi, '$2').split(',')[0];
+  var imgElement = document.getElementById('articleImage');
+  // Avoid exceptions during debugging, when articles can be without any images
+  if (imgElement)
+    img.src = imgElement.style.backgroundImage.replace(/url\((['"])?(.*?)\1\)/gi, '$2').split(',')[0];
 
 }
 

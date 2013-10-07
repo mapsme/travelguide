@@ -1001,7 +1001,7 @@ BLOCKQUOTE:after
 {
 	width: 100%;
 }
-.client-js .section_heading
+.client-js H2
 {
 	position: relative;
 	background: no-repeat left 1.1em;
@@ -1012,7 +1012,11 @@ BLOCKQUOTE:after
 	padding-left: 24px;
 	cursor: pointer;
 }
-.client-js .section_heading.openSection
+.client-js H2
+{
+  border-bottom: 1px solid #E2E3E4;
+}
+.client-js H2.openSection
 {
 	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABsAAAAQCAYAAADnEwSWAAAAc0lEQVQ4ja3QSw2AQBCD4V8CUpC0AhGBBKTgYDhAAiGQ3Xbm0NM8vqREBEqACViBWb41oA0IYFdBFwoHzEAy6EKLAzpQu2ZNBS3osSOBNuSAKUgF05AClkCjYBk0ApZCPfALS0E/4Im9aiyBXuBdY+XzXg7oYrvAm9NaKAAAAABJRU5ErkJggg==);
 	padding-right: 45px;
@@ -1045,11 +1049,11 @@ BLOCKQUOTE:after
 {
 	border-bottom: none;
 }
-.page-loading .section_anchors, .page-loading .content_block, .client-js .content_block
+.page-loading .section_anchors, .page-loading .content_block, .client-js .content_block, h2 + div
 {
 	display: none;
 }
-.page-loading .section_anchors.openSection, .page-loading .content_block.openSection, .client-js .content_block.openSection
+.page-loading .section_anchors.openSection, .page-loading .content_block.openSection, .client-js .content_block.openSection, div.openSection
 {
 	display: block;
 }
