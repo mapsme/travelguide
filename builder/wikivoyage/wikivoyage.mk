@@ -68,7 +68,9 @@ rename_articles: rename_articles_mobile rename_articles_desktop
 
 countries.txt: load_sql_dumps
 	$$BIN/generate_article_info.sh
-	touch countries.txt
+
+clean_up_countries: countries.txt
+	$$BIN/clean_up_countries.sh
 
 geocodes_from_html.txt: download_articles
 	grep '<span id="geodata" class="geo">[-0-9.]*; [-0-9.]*</span>' -R articles/ --only-matching | sed 's@articles//@@' | sed 's@:<span id=.geodata. class=.geo.>@	@' | sed 's@; @	@' | sed 's@</span>@@' | sort -u -b -k1 > geocodes_from_html.txt
@@ -85,11 +87,11 @@ geocodes.txt: geocodes_from_html.txt geocodes_todo.txt
 	cp geocodes_from_html.txt geocodes.txt
 	touch geocodes.txt
 
-process_html: countries.txt
+process_html: clean_up_countries
 	cat countries_to_generate.txt | while read country; do mkdir -p Countries/$$country/content/data; ../htmlprocessor/processor.sh articles/ images/ $$country.info.txt $$country.redirect.txt geocodes.txt Countries/$$country/content/data; done
 	touch process_html
 
-genindex: geocodes.txt countries.txt
+genindex: geocodes.txt clean_up_countries
 	cat countries_to_generate.txt | while read country; do ../genindex/genindex $$country.info.txt $$country.redirect.txt geocodes.txt Countries/$$country/index.dat; done
 	touch genindex
 
