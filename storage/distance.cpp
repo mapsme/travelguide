@@ -7,7 +7,7 @@
 namespace earth
 {
 
-double PI = atan(1.0) * 4.0;
+double const PI = atan(1.0) * 4.0;
 
 double Degree2Rad(double deg)
 {

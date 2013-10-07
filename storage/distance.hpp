@@ -4,7 +4,7 @@ namespace earth
 {
 
 inline double RadiusM() { return 6378000; }
-extern double PI;
+extern double const PI;
 
 /// @name Distance
 /// @param[in] lat1, lat2, lon1, lon2 - in degrees.
