@@ -179,7 +179,7 @@ public class ArticleInfoListActivity extends FragmentActivity
       .commit();
 
     if (mShadow != null)
-    Utils.fadeIn(this, mShadow);
+      Utils.fadeIn(this, mShadow);
   }
 
   @Override
