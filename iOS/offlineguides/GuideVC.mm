@@ -5,7 +5,6 @@
 #import "../../std/algorithm.hpp"
 #import "../../std/array.hpp"
 
-#define DATAFOLDER @"/data/"
 #define INDECATORBORDER 100
 
 @interface GuideVC ()
@@ -40,10 +39,11 @@
 {
   NSRange r = [pageUrl rangeOfString:@"." options:NSBackwardsSearch];
   NSString * pathToPage;
+  NSString * dataFolder = [(AppDelegate *)[[UIApplication sharedApplication] delegate] getDataFolderNameWithSlashes];
   if (r.length == 0)
-    pathToPage = [[NSBundle mainBundle] pathForResource:pageUrl ofType:@"html" inDirectory:DATAFOLDER];
+    pathToPage = [[NSBundle mainBundle] pathForResource:pageUrl ofType:@"html" inDirectory:dataFolder];
   else
-    pathToPage = [[NSBundle mainBundle] pathForResource:[pageUrl substringToIndex:r.location] ofType:@"html" inDirectory:DATAFOLDER];
+    pathToPage = [[NSBundle mainBundle] pathForResource:[pageUrl substringToIndex:r.location] ofType:@"html" inDirectory:dataFolder];
   NSURL * url = [NSURL fileURLWithPath:pathToPage isDirectory:NO];
   [self.webView loadRequest:[NSURLRequest requestWithURL: url]];
 }
@@ -157,7 +157,9 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 
 -(NSString *)normalizeUrl:(NSString *)url
 {
-  if ([url rangeOfString:@"offlineguides.app//data/"].location != NSNotFound)
+  NSString * dataDir = [(AppDelegate *)[[UIApplication sharedApplication] delegate] getDataFolderNameWithSlashes];
+  NSString * path = [NSString stringWithFormat:@"offlineguides.app/%@", dataDir];
+  if ([url rangeOfString:path].location != NSNotFound)
   {
     NSRange r = [url rangeOfString:@"/" options:NSBackwardsSearch];
     NSString * s = [url substringFromIndex:r.location + 1];

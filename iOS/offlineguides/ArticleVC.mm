@@ -1,6 +1,7 @@
 #import "ArticleVC.h"
 #import "GuideVC.h"
 #import "GuideCell.h"
+#import "AppDelegate.h"
 
 #import "MapsWithMeAPI.h"
 
@@ -61,7 +62,8 @@
     self.searchBar.text = @"";
     [self searchBar:self.searchBar textDidChange:@""];
 
-    NSString * path = [[NSBundle mainBundle] pathForResource:@"index" ofType:@"dat" inDirectory:@"/data/"];
+    NSString * dataDir = [(AppDelegate *)[[UIApplication sharedApplication] delegate] getDataFolderNameWithSlashes];
+    NSString * path = [[NSBundle mainBundle] pathForResource:@"index" ofType:@"dat" inDirectory:dataDir];
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
     self.locationManager.distanceFilter = 100;
