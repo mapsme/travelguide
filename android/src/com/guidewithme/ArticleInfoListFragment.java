@@ -62,7 +62,7 @@ public class ArticleInfoListFragment extends ListFragment
   }
 
   private OnFirstLoadListener mOnFirstLoad;
-  private boolean mFirstLoad = true;
+  private static boolean mFirstLoad = true;
 
   public void setOnFirstLoadListener(OnFirstLoadListener listener)
   {
@@ -217,7 +217,6 @@ public class ArticleInfoListFragment extends ListFragment
     {
       getListView().setItemChecked(position, true);
     }
-
     mActivatedPosition = position;
   }
 

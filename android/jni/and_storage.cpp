@@ -103,13 +103,17 @@ jobject NativeArticle2JavaArticle(JNIEnv * env, ArticleInfo const * p)
   jclass ArtInfoClass = env->FindClass("com/guidewithme/article/ArticleInfo");
   jmethodID initId = env->GetMethodID(ArtInfoClass, "<init>", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;DD)V");
 
+  double lat = -1000;
+  double lon = -1000;
+  p->GetLatLon(lat, lon);
+
   return env->NewObject(ArtInfoClass, initId,
        StdString2JString(env, p->GetUrl()),
        StdString2JString(env, p->GetThumbnailUrl()),
        StdString2JString(env, p->GetTitle()),
        StdString2JString(env, STORAGE.GetParentName(*p)),
-       p->m_lat,
-       p->m_lon);
+       lat,
+       lon);
 }
 
 /*
