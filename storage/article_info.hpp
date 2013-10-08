@@ -64,6 +64,17 @@ public:
   void Write(wr::Writer & w) const;
   void Read(rd::Reader & r);
 
+  bool GetLatLon(double & lat, double & lon) const
+  {
+    if (IsValidCoordinates())
+    {
+      lat = m_lat;
+      lon = m_lon;
+      return true;
+    }
+    return false;
+  }
+
   /// Calculate score for info. Less is better.
   double Score(double currLat, double currLon) const;
 
