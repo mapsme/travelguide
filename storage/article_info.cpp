@@ -113,7 +113,7 @@ void ArticleInfo::Read(rd::Reader & r)
 namespace
 {
 double const DISTANCE_TRASHOLD = 2.0E5;         // 200 km
-double const METERS_PER_LETTER_FACTOR = 10.0;
+double const METERS_PER_LETTER_FACTOR = 1.0;
 }
 
 double ArticleInfo::Score(double currLat, double currLon) const
@@ -123,14 +123,14 @@ double ArticleInfo::Score(double currLat, double currLon) const
 
   if (IsValidCoordinates() && currLat != EMPTY_COORD && currLon != EMPTY_COORD)
   {
-    dist = earth::Distance(m_lat, m_lon, currLat, currLon);
+    dist = earth::GetDistance(m_lat, m_lon, currLat, currLon);
     if (dist > DISTANCE_TRASHOLD)
       dist = inf;
   }
   else
     dist = inf;
 
-  return (dist - METERS_PER_LETTER_FACTOR * m_length);
+  return (dist - METERS_PER_LETTER_FACTOR * sqrt(m_length));
 }
 
 void ArticleInfo::Swap(ArticleInfo & i)

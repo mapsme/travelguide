@@ -6,7 +6,6 @@
 
 namespace wr { class Writer; }
 namespace rd { class Reader; }
-namespace storage { class DoAddEntries; }
 
 const int EMPTY_COORD = 1000;
 
@@ -23,13 +22,13 @@ protected:
   uint32_t m_length;
   int32_t m_parentIndex;  // NO_PARENT is the root article
   bool m_redirect;
+  double m_lat, m_lon;
 
   static const int32_t NO_PARENT = -1;
 
   /// Need access for protected fields in Build and Storage classes.
   friend class Storage;
   friend class StorageBuilder;
-  friend class storage::DoAddEntries;
 
 public:
   ArticleInfo()
@@ -60,8 +59,6 @@ public:
   string GetThumbnailUrl() const { return m_url + ".jpg"; }
 
   bool IsRedirect() const { return m_redirect; }
-
-  double m_lat, m_lon;
   bool IsValidCoordinates() const;
 
   void Write(wr::Writer & w) const;
