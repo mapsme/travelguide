@@ -59,4 +59,20 @@
   return NO;
 }
 
+-(NSString *)getDataFolderName
+{
+  NSString * bundleRoot = [[NSBundle mainBundle] bundlePath];
+  NSArray * files = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:bundleRoot error:nil];
+  for (NSString * s in files)
+    if ([s hasPrefix:@"data"])
+      return s;
+  return @"";
+}
+
+-(NSString *)getDataFolderNameWithSlashes
+{
+  NSString * dataPath = [self getDataFolderName];
+  return [NSString stringWithFormat:@"/%@/", dataPath];
+}
+
 @end

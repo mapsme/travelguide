@@ -5,7 +5,6 @@
 #import "../../std/algorithm.hpp"
 #import "../../std/array.hpp"
 
-#define DATAFOLDER @"/data/"
 #define INDECATORBORDER 100
 
 @interface GuideVC ()
@@ -40,12 +39,19 @@
 {
   NSRange r = [pageUrl rangeOfString:@"." options:NSBackwardsSearch];
   NSString * pathToPage;
+  NSString * dataFolder = [(AppDelegate *)[UIApplication sharedApplication].delegate getDataFolderNameWithSlashes];
   if (r.length == 0)
-    pathToPage = [[NSBundle mainBundle] pathForResource:pageUrl ofType:@"html" inDirectory:DATAFOLDER];
+    pathToPage = [[NSBundle mainBundle] pathForResource:pageUrl ofType:@"html" inDirectory:dataFolder];
   else
-    pathToPage = [[NSBundle mainBundle] pathForResource:[pageUrl substringToIndex:r.location] ofType:@"html" inDirectory:DATAFOLDER];
-  NSURL * url = [NSURL fileURLWithPath:pathToPage isDirectory:NO];
-  [self.webView loadRequest:[NSURLRequest requestWithURL: url]];
+    pathToPage = [[NSBundle mainBundle] pathForResource:[pageUrl substringToIndex:r.location] ofType:@"html" inDirectory:dataFolder];
+  //pathToPage can be equal to nil, because file with url pageUrl doesn't exist. Probably some one forgot to add it to the project or generator of articles is broken, or the problem sits between the chair and the computer.
+  if (pathToPage)
+  {
+    NSURL * url = [NSURL fileURLWithPath:pathToPage isDirectory:NO];
+    [self.webView loadRequest:[NSURLRequest requestWithURL: url]];
+  }
+  else
+    NSLog(@"Congratulations! We've crashed! Because this file doesn't exist %@", pageUrl);
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -157,7 +163,9 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 
 -(NSString *)normalizeUrl:(NSString *)url
 {
-  if ([url rangeOfString:@"offlineguides.app//data/"].location != NSNotFound)
+  NSString * dataDir = [(AppDelegate *)[[UIApplication sharedApplication] delegate] getDataFolderNameWithSlashes];
+  NSString * path = [NSString stringWithFormat:@".app/%@", dataDir];
+  if ([url rangeOfString:path].location != NSNotFound)
   {
     NSRange r = [url rangeOfString:@"/" options:NSBackwardsSearch];
     NSString * s = [url substringFromIndex:r.location + 1];
@@ -227,17 +235,17 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 {
   if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
   {
-    NSRange r = [url rangeOfString:@"." options:NSBackwardsSearch];
-    if (r.location + 4 >= [url length])
+    NSRange dotLocation = [url rangeOfString:@"." options:NSBackwardsSearch];
+    if (dotLocation.location + 4 >= [url length])
       return;
-    if (r.length && [[url substringWithRange:NSRange{r.location + 1, 4}] isEqualToString:@"html"])
+    if (dotLocation.length && [[url substringWithRange:NSRange{dotLocation.location + 1, 4}] isEqualToString:@"html"])
     {
-      NSString * htmlId = [url substringToIndex:r.location];
-      NSRange z = [htmlId rangeOfString:@"/" options:NSBackwardsSearch];
-      if (r.length)
-        [[self getArticleController] updateView:[htmlId substringFromIndex:z.location + 1]];
+      NSString * htmlId = [url substringToIndex:dotLocation.location];
+      NSRange slashLocation = [htmlId rangeOfString:@"/" options:NSBackwardsSearch];
+      if (slashLocation.length)
+        [[self getArticleController] updateView:[htmlId substringFromIndex:slashLocation.location + 1]];
       else
-        [[self getArticleController] updateView:[htmlId substringToIndex:z.location]];
+        [[self getArticleController] updateView:htmlId];
     }
   }
 }
