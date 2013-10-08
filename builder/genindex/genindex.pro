@@ -1,7 +1,7 @@
 TEMPLATE = app
 TARGET = genindex
 CONFIG += console warn_on
-CONFIG -= app_bundle
+CONFIG -= app_bundle qt
 
 INCLUDEPATH += ../../3rdparty/boost
 
