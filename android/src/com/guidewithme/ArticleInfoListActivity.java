@@ -6,12 +6,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
 
 import com.guidewithme.article.ArticleInfo;
 import com.guidewithme.cpp.Storage;
+import com.guidewithme.util.Utils;
 import com.mapswithme.maps.api.MWMPoint;
 import com.mapswithme.maps.api.MWMResponse;
-import com.guidewithme.R;
 
 /**
  * An activity representing a list of ArticleInfos. This activity has different
@@ -45,6 +47,8 @@ public class ArticleInfoListActivity extends FragmentActivity
   private ArticleInfoListFragment mArtInfoListFragment;
   private ArticleInfoDetailFragment mArtInfoDetailFragment;
 
+  private View mShadow;
+
   @Override
   protected void onCreate(Bundle savedInstanceState)
   {
@@ -59,6 +63,17 @@ public class ArticleInfoListActivity extends FragmentActivity
     {
       mTwoPane = true;
 
+      mShadow = findViewById(R.id.shadow);
+      if (mShadow != null)
+        mShadow.setOnClickListener(new OnClickListener()
+        {
+          @Override
+          public void onClick(View v)
+          {
+            toogleListVisible();
+          }
+        });
+
       mArtInfoListFragment.setActivateOnItemClick(true);
       mArtInfoListFragment.setOnFirstLoadListener(this);
       mArtInfoListFragment.setHeaderVisible(false);
@@ -70,9 +85,24 @@ public class ArticleInfoListActivity extends FragmentActivity
         .beginTransaction()
         .add(R.id.articleinfo_detail_container, mArtInfoDetailFragment)
         .commit();
+
+      if (savedInstanceState != null && savedInstanceState.containsKey(LIST_VISIBLE))
+        if (savedInstanceState.getBoolean(LIST_VISIBLE, true))
+          showList();
+        else
+          hideList();
+
     }
 
     handleIntent(getIntent());
+  }
+
+  private static final String LIST_VISIBLE = ".list_visible";
+  @Override
+  protected void onSaveInstanceState(Bundle outState)
+  {
+    super.onSaveInstanceState(outState);
+    outState.putBoolean(LIST_VISIBLE, mArtInfoListFragment.isVisible());
   }
 
   @Override
@@ -94,22 +124,18 @@ public class ArticleInfoListActivity extends FragmentActivity
     {
       final String id = point.getId();
       Log.d(TAG, id);
-//      final Storage storage = new Storage(getAssets());
-//      storage.create();
       onItemSelected(Storage.get(this).getArticleInfoByUrl(id));
     }
   }
 
-  /**
-   * Callback method from {@link ArticleInfoListFragment.Callbacks} indicating
-   * that the item with the given ID was selected.
-   */
   @Override
   public void onItemSelected(ArticleInfo info)
   {
     if (mTwoPane)
     {
       mArtInfoDetailFragment.setArticleInfo(info);
+      if (mShadow != null)
+        hideList();
     }
     else
     {
@@ -128,16 +154,32 @@ public class ArticleInfoListActivity extends FragmentActivity
   public void toogleListVisible()
   {
     if (mArtInfoListFragment.isVisible())
-      getSupportFragmentManager()
-        .beginTransaction()
-        .hide(mArtInfoListFragment)
-        .commit();
+      hideList();
     else
-      getSupportFragmentManager()
-        .beginTransaction()
-        .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
-        .show(mArtInfoListFragment)
-        .commit();
+      showList();
+  }
+
+  private void hideList()
+  {
+    getSupportFragmentManager()
+      .beginTransaction()
+      .hide(mArtInfoListFragment)
+      .commit();
+
+   if (mShadow != null)
+     Utils.fadeOut(this, mShadow);
+  }
+
+  private void showList()
+  {
+    getSupportFragmentManager()
+      .beginTransaction()
+      .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+      .show(mArtInfoListFragment)
+      .commit();
+
+    if (mShadow != null)
+    Utils.fadeIn(this, mShadow);
   }
 
   @Override

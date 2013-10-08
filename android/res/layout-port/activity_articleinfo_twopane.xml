@@ -1,0 +1,29 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:baselineAligned="false"
+    android:orientation="horizontal"
+    android:showDividers="middle"
+    tools:context=".ArticleInfoListActivity" >
+
+    <FrameLayout
+        android:id="@+id/articleinfo_detail_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <View
+        android:id="@+id/shadow"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#c0000000" />
+
+    <fragment
+        android:id="@+id/articleinfo_list"
+        android:name="com.guidewithme.ArticleInfoListFragment"
+        android:layout_width="@dimen/searchPanelWidth"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        tools:layout="@android:layout/list_content" />
+
+</RelativeLayout>

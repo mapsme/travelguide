@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -39,7 +40,7 @@ public class ArticleInfoDetailFragment extends Fragment
 
   public static final String ARTICLE_INFO = "article_info";
 
-  private ArticleInfo mItem;
+  private static ArticleInfo mItem;
 
   private View mRootView;
   private WebView mWebView;
@@ -65,10 +66,20 @@ public class ArticleInfoDetailFragment extends Fragment
     super.onCreate(savedInstanceState);
 
     final Bundle args = getArguments();
+
     if (args != null && args.containsKey(ARTICLE_INFO))
       mItem = (ArticleInfo) args.getSerializable(ARTICLE_INFO);
+    else if (savedInstanceState != null && savedInstanceState.containsKey(ARTICLE_INFO))
+      mItem = (ArticleInfo) savedInstanceState.getSerializable(ARTICLE_INFO);
 
     mFinder = new ObbPathFinder(getActivity().getApplicationContext());
+  }
+
+  @Override
+  public void onSaveInstanceState(Bundle outState)
+  {
+    super.onSaveInstanceState(outState);
+    outState.putSerializable(ARTICLE_INFO, mItem);
   }
 
   public void setArticleInfo(ArticleInfo info)
