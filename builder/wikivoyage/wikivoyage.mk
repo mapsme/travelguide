@@ -97,8 +97,9 @@ genindex: geocodes.txt clean_up_countries
 
 make_obb: process_html
 	cat countries_to_generate.txt | while read country; do cp -r ../../data/* Countries/$$country/content/data;  ../../tools/jobb -d Countries/$$country/content -o Countries/$$country/main.1.com.guidewithme.`echo $$country|tr '[:upper:]' '[:lower:]'`.obb -pn com.guidewithme.`echo $$country|tr '[:upper:]' '[:lower:]'` -pv 1; done
-	touch make_obb
 
 make_apk: genindex
 	bash makeapk.sh
-	touch make_apk
+
+make_android: make_obb make_apk
+	echo "Please collect .apk and .obb files from Countries/ directory."

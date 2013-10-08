@@ -12,7 +12,7 @@ do
 	ARTICLE=$(echo "$LINE" | cut -f1)
 	if [ -f "articles/$ARTICLE" ]
 	then
-	    echo "${ARTICLE}" >> $REGION.info.txt.tmp
+	    echo "${LINE}" >> $REGION.info.txt.tmp
 	else
 	    echo "Article $ARTICLE not found for $REGION"
 	fi
