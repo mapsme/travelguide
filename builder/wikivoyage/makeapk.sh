@@ -25,7 +25,7 @@ cat countries_to_generate.txt | while read country; do
 
     pushd ../../android/
     ./gradlew "-PGWMpn=$PACKAGE" "-PGWMapk=Guide With Me $country" \
-	      "-PGWMappName=Guide With Me $TITLE" clean assembleRelease
+	      "-PGWMappName=$TITLE Guide With Me" clean assembleRelease
     popd
 
     cp  ../../android/build/apk/* Countries/$country/
