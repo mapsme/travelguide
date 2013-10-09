@@ -10,7 +10,7 @@ public class Expansion
 
   public static String getPath(String packageName)
   {
-    return findFirstObbFile(packageName);
+    return findPackageObbFile(packageName);
   }
 
   public static String getMainObbFileName(String version, String packageName)
@@ -35,18 +35,24 @@ public class Expansion
     return mainObbPath;
   }
 
-  public static String findFirstObbFile(String packageName)
+  public static String findPackageObbFile(String packageName)
   {
-    final File obbDir = new File(getObbLocation(packageName));
-    if (obbDir.list() == null)
-      return null;
-
-    for (final String filePath : obbDir.list())
+    final String[] pathsToLook = { getObbLocation(packageName),
+                                   // For development purpose - obbs can be in MWM folder, if MWM is installed too
+                                   Environment.getExternalStorageDirectory() + File.separator + "MapsWithMe",
+                                   // For user-testing, to directly download obb to the device by http link
+                                   Environment.getExternalStorageDirectory() + File.separator + Environment.DIRECTORY_DOWNLOADS };
+    for (final String pathToLook : pathsToLook)
     {
-      if (filePath.endsWith(".obb"))
-        return obbDir.getAbsolutePath() + File.separator + filePath;
+      final File obbDir = new File(pathToLook);
+      if (!obbDir.exists())
+        continue;
+      final String[] filesInDir = obbDir.list();
+      for (final String fileName : filesInDir)
+        if (fileName.endsWith(packageName + ".obb"))
+          return obbDir.getAbsolutePath() + File.separator + fileName;
     }
-
+    // obb was not found :(
     return null;
   }
 
