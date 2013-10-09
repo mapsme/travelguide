@@ -109,7 +109,7 @@ public class ExpansionActivity extends Activity
 
   private boolean expansionFilesDelivered()
   {
-    return Expansion.findFirstObbFile(getPackageName()) != null;
+    return Expansion.findPackageObbFile(getPackageName()) != null;
   }
 
   private PendingIntent createNotificationIntent()
