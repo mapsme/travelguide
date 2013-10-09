@@ -10,8 +10,22 @@ cat countries_to_generate.txt | while read country; do
     rm  ../../android/build/apk/* || true
     rm Countries/$country/*.apk || true
 
+    # make packages lower case and dot-separated
+    PACKAGE="com.guidewithme."$(echo "$country" | tr '[:upper:]' '[:lower:]' | \
+	     sed 's/_/\./g')
+
+    # hack for UK
+    if [[ "$PACKAGE" == *united.kingdom ]]
+    then
+       PACKAGE=com.guidewithme.uk
+    fi
+
+    # remove underscores from title
+    TITLE=$(echo "$country" | sed 's/_/ /g')
+
     pushd ../../android/
-    ./gradlew "-PGWMpn=com.guidewithme.`echo $country|tr '[:upper:]' '[:lower:]'`" "-PGWMapk=Guide With Me $country"  "-PGWMappName=Guide With Me $country" clean assembleRelease
+    ./gradlew "-PGWMpn=$PACKAGE" "-PGWMapk=Guide With Me $country" \
+	      "-PGWMappName=Guide With Me $TITLE" clean assembleRelease
     popd
 
     cp  ../../android/build/apk/* Countries/$country/
