@@ -27,6 +27,10 @@ def cleanUp(soup):
     [s.decompose() for s in content.findAll("div", {"id": "mw-mf-language-section"})]
     # cut off geo coords as we process them separately in original files
     [s.decompose() for s in content.findAll("div", {"id": "geoCoord"})]
+    # cut frames, osm
+    [s.decompose() for s in content.findAll("div", {"class" : "osm" })]
+    [s.decompose() for s in content.findAll("iframe")]
+
     # cut off missing images (looks like text File:Image.JPG on pages)
     for s in content.findAll("div", {"class": "thumb"}):
         if (not s.find("img")):
