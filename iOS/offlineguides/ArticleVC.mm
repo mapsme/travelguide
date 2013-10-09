@@ -41,7 +41,9 @@
     {
       NSString * title = [NSString stringWithUTF8String:article.GetTitle().c_str()];
       NSString * pageId = [NSString stringWithUTF8String:article.GetUrl().c_str()];
-      [pins addObject:[[MWMPin alloc] initWithLat:article.m_lat lon:article.m_lon title:title andId:pageId]];
+      double lat, lon;
+      article.GetLatLon(lat, lon);
+      [pins addObject:[[MWMPin alloc] initWithLat:lat lon:lon title:title andId:pageId]];
     }
   }
   [MWMApi showPins:pins];
