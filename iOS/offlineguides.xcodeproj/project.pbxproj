@@ -13,6 +13,8 @@
 		A3E221F317AFB4C20018AB9E /* storage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A3E221F217AFB4C20018AB9E /* storage.cpp */; };
 		A3E2220F17AFD9E10018AB9E /* assert.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A3E2220E17AFD9E10018AB9E /* assert.cpp */; };
 		A3E2221117AFDA0A0018AB9E /* source_address.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A3E2221017AFDA0A0018AB9E /* source_address.cpp */; };
+		ED29530C1806B92600311E19 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ED81955217AED762004F3803 /* main.m */; };
+		ED29530D1806C48C00311E19 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED64331017B41533000985FE /* CoreLocation.framework */; };
 		ED4F8B9E17B2A52200ADD795 /* bg_header.png in Resources */ = {isa = PBXBuildFile; fileRef = ED4F8B9C17B2A52200ADD795 /* bg_header.png */; };
 		ED4F8B9F17B2A52200ADD795 /* bg_header@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED4F8B9D17B2A52200ADD795 /* bg_header@2x.png */; };
 		ED4F8BA417B2C97300ADD795 /* ic_articleselection.png in Resources */ = {isa = PBXBuildFile; fileRef = ED4F8BA017B2C97300ADD795 /* ic_articleselection.png */; };
@@ -31,7 +33,6 @@
 		ED81954717AED762004F3803 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED81954617AED762004F3803 /* UIKit.framework */; };
 		ED81954917AED762004F3803 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED81954817AED762004F3803 /* Foundation.framework */; };
 		ED81954B17AED762004F3803 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED81954A17AED762004F3803 /* CoreGraphics.framework */; };
-		ED81955117AED762004F3803 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = ED81954F17AED762004F3803 /* InfoPlist.strings */; };
 		ED81955317AED762004F3803 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ED81955217AED762004F3803 /* main.m */; };
 		ED81955717AED762004F3803 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = ED81955617AED762004F3803 /* AppDelegate.mm */; };
 		ED81956517AEE129004F3803 /* ArticleVC.mm in Sources */ = {isa = PBXBuildFile; fileRef = ED81956417AEE129004F3803 /* ArticleVC.mm */; };
@@ -58,6 +59,49 @@
 		ED9AB9FF18054B9300E4F635 /* css in Resources */ = {isa = PBXBuildFile; fileRef = ED9AB9FE18054B9300E4F635 /* css */; };
 		ED9ABA0118054B9E00E4F635 /* js in Resources */ = {isa = PBXBuildFile; fileRef = ED9ABA0018054B9E00E4F635 /* js */; };
 		ED9ABA0318054D2500E4F635 /* data-UK in Resources */ = {isa = PBXBuildFile; fileRef = ED9ABA0218054D2500E4F635 /* data-UK */; };
+		ED9ABA091805671D00E4F635 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED81954817AED762004F3803 /* Foundation.framework */; };
+		ED9ABA0A1805671D00E4F635 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED81954A17AED762004F3803 /* CoreGraphics.framework */; };
+		ED9ABA0B1805671D00E4F635 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED81954617AED762004F3803 /* UIKit.framework */; };
+		ED9ABA411805678000E4F635 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED81F52B17BA2C3F00361D6D /* Default-568h@2x.png */; };
+		ED9ABA421805678000E4F635 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED81F52917BA2C3C00361D6D /* Default@2x.png */; };
+		ED9ABA431805678000E4F635 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = ED81F52717BA2C3900361D6D /* Default.png */; };
+		ED9ABA441805678000E4F635 /* Default-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ED81F52517BA2C0800361D6D /* Default-Landscape@2x~ipad.png */; };
+		ED9ABA451805678000E4F635 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ED81F52317BA2C0400361D6D /* Default-Landscape~ipad.png */; };
+		ED9ABA461805678000E4F635 /* Default-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ED81F52117BA2C0000361D6D /* Default-Portrait@2x~ipad.png */; };
+		ED9ABA471805678000E4F635 /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ED81F51F17BA2BFD00361D6D /* Default-Portrait~ipad.png */; };
+		ED9ABA481805678000E4F635 /* Default-Portrait-1024~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = EDBD0D0017FDC3440007776B /* Default-Portrait-1024~ipad.png */; };
+		ED9ABA491805678000E4F635 /* Default-Portrait-1024@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = EDBD0CFE17FDC3440007776B /* Default-Portrait-1024@2x~ipad.png */; };
+		ED9ABA4A1805678000E4F635 /* Default-Landscape-1024~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = EDBD0D0117FDC3440007776B /* Default-Landscape-1024~ipad.png */; };
+		ED9ABA4B1805678000E4F635 /* Default-Landscape-1024@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = EDBD0CFF17FDC3440007776B /* Default-Landscape-1024@2x~ipad.png */; };
+		ED9ABA4C1805678000E4F635 /* bg_landscape_header.png in Resources */ = {isa = PBXBuildFile; fileRef = ED64332617B4D6CA000985FE /* bg_landscape_header.png */; };
+		ED9ABA4D1805678000E4F635 /* bg_landscape_header@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED64332717B4D6CB000985FE /* bg_landscape_header@2x.png */; };
+		ED9ABA4E1805678000E4F635 /* ic_articleselection.png in Resources */ = {isa = PBXBuildFile; fileRef = ED4F8BA017B2C97300ADD795 /* ic_articleselection.png */; };
+		ED9ABA4F1805678000E4F635 /* ic_back.png in Resources */ = {isa = PBXBuildFile; fileRef = ED4F8BA117B2C97300ADD795 /* ic_back.png */; };
+		ED9ABA501805678000E4F635 /* ic_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED4F8BA217B2C97300ADD795 /* ic_back@2x.png */; };
+		ED9ABA511805678000E4F635 /* ic_articleselection@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED4F8BA317B2C97300ADD795 /* ic_articleselection@2x.png */; };
+		ED9ABA521805678000E4F635 /* bg_header.png in Resources */ = {isa = PBXBuildFile; fileRef = ED4F8B9C17B2A52200ADD795 /* bg_header.png */; };
+		ED9ABA531805678000E4F635 /* bg_header@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED4F8B9D17B2A52200ADD795 /* bg_header@2x.png */; };
+		ED9ABA541805678000E4F635 /* bg_search.png in Resources */ = {isa = PBXBuildFile; fileRef = ED64332217B4D14F000985FE /* bg_search.png */; };
+		ED9ABA551805678000E4F635 /* bg_search@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED64332317B4D14F000985FE /* bg_search@2x.png */; };
+		ED9ABA56180567B600E4F635 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = ED81955617AED762004F3803 /* AppDelegate.mm */; };
+		ED9ABA57180567B600E4F635 /* ArticleVC.mm in Sources */ = {isa = PBXBuildFile; fileRef = ED81956417AEE129004F3803 /* ArticleVC.mm */; };
+		ED9ABA58180567B600E4F635 /* IPadSplitVC.m in Sources */ = {isa = PBXBuildFile; fileRef = ED893F6B17B231F20074E05A /* IPadSplitVC.m */; };
+		ED9ABA59180567B600E4F635 /* GuideVC.mm in Sources */ = {isa = PBXBuildFile; fileRef = ED81956917AEF6B6004F3803 /* GuideVC.mm */; };
+		ED9ABA5A180567B600E4F635 /* GuideCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ED64330E17B3F673000985FE /* GuideCell.m */; };
+		ED9ABA5B180567BA00E4F635 /* css in Resources */ = {isa = PBXBuildFile; fileRef = ED9AB9FE18054B9300E4F635 /* css */; };
+		ED9ABA5C180567BA00E4F635 /* js in Resources */ = {isa = PBXBuildFile; fileRef = ED9ABA0018054B9E00E4F635 /* js */; };
+		ED9ABA5D180567D300E4F635 /* MapsWithMeAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = ED893F6817B223920074E05A /* MapsWithMeAPI.m */; };
+		ED9ABA5E180567D300E4F635 /* utf8proc.c in Sources */ = {isa = PBXBuildFile; fileRef = ED81957017B10598004F3803 /* utf8proc.c */; };
+		ED9ABA5F180567D300E4F635 /* logging.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED4F8BB017B2E6B700ADD795 /* logging.cpp */; };
+		ED9ABA60180567D300E4F635 /* posix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED4F8BAE17B2E69600ADD795 /* posix.cpp */; };
+		ED9ABA61180567D300E4F635 /* file_handle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED4F8BAC17B2E67100ADD795 /* file_handle.cpp */; };
+		ED9ABA62180567D300E4F635 /* strings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED81956D17B10578004F3803 /* strings.cpp */; };
+		ED9ABA63180567D300E4F635 /* source_address.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A3E2221017AFDA0A0018AB9E /* source_address.cpp */; };
+		ED9ABA64180567D300E4F635 /* assert.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A3E2220E17AFD9E10018AB9E /* assert.cpp */; };
+		ED9ABA65180567D300E4F635 /* distance.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7722E14917B15C3600CFB817 /* distance.cpp */; };
+		ED9ABA66180567D300E4F635 /* article_info.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7722E14717B01B0700CFB817 /* article_info.cpp */; };
+		ED9ABA67180567D300E4F635 /* storage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A3E221F217AFB4C20018AB9E /* storage.cpp */; };
+		ED9ABA69180569A700E4F635 /* data-hawaii in Resources */ = {isa = PBXBuildFile; fileRef = ED9ABA68180569A700E4F635 /* data-hawaii */; };
 		EDBD0D0217FDC3440007776B /* Default-Portrait-1024@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = EDBD0CFE17FDC3440007776B /* Default-Portrait-1024@2x~ipad.png */; };
 		EDBD0D0317FDC3440007776B /* Default-Landscape-1024@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = EDBD0CFF17FDC3440007776B /* Default-Landscape-1024@2x~ipad.png */; };
 		EDBD0D0417FDC3440007776B /* Default-Portrait-1024~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = EDBD0D0017FDC3440007776B /* Default-Portrait-1024~ipad.png */; };
@@ -92,12 +136,11 @@
 		ED64332317B4D14F000985FE /* bg_search@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bg_search@2x.png"; path = "offlineguides/bg_search@2x.png"; sourceTree = "<group>"; };
 		ED64332617B4D6CA000985FE /* bg_landscape_header.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bg_landscape_header.png; path = offlineguides/bg_landscape_header.png; sourceTree = "<group>"; };
 		ED64332717B4D6CB000985FE /* bg_landscape_header@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bg_landscape_header@2x.png"; path = "offlineguides/bg_landscape_header@2x.png"; sourceTree = "<group>"; };
-		ED81954317AED762004F3803 /* GuideWithMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GuideWithMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		ED81954317AED762004F3803 /* UK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UK.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED81954617AED762004F3803 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		ED81954817AED762004F3803 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		ED81954A17AED762004F3803 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		ED81954E17AED762004F3803 /* offlineguides-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "offlineguides-Info.plist"; sourceTree = "<group>"; };
-		ED81955017AED762004F3803 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		ED81954E17AED762004F3803 /* offlineguides-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "offlineguides-Info.plist"; path = "offlineguides/offlineguides-Info.plist"; sourceTree = "<group>"; };
 		ED81955217AED762004F3803 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		ED81955417AED762004F3803 /* offlineguides-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "offlineguides-Prefix.pch"; sourceTree = "<group>"; };
 		ED81955517AED762004F3803 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -130,6 +173,8 @@
 		ED9AB9FE18054B9300E4F635 /* css */ = {isa = PBXFileReference; lastKnownFileType = folder; name = css; path = ../../data/css; sourceTree = "<group>"; };
 		ED9ABA0018054B9E00E4F635 /* js */ = {isa = PBXFileReference; lastKnownFileType = folder; name = js; path = ../../data/js; sourceTree = "<group>"; };
 		ED9ABA0218054D2500E4F635 /* data-UK */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "data-UK"; path = "../data/data-UK"; sourceTree = "<group>"; };
+		ED9ABA081805671D00E4F635 /* Hawaii.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hawaii.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		ED9ABA68180569A700E4F635 /* data-hawaii */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "data-hawaii"; path = "../data/data-hawaii"; sourceTree = "<group>"; };
 		EDBD0CFE17FDC3440007776B /* Default-Portrait-1024@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait-1024@2x~ipad.png"; sourceTree = "<group>"; };
 		EDBD0CFF17FDC3440007776B /* Default-Landscape-1024@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape-1024@2x~ipad.png"; sourceTree = "<group>"; };
 		EDBD0D0017FDC3440007776B /* Default-Portrait-1024~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait-1024~ipad.png"; sourceTree = "<group>"; };
@@ -150,6 +195,17 @@
 				ED81954717AED762004F3803 /* UIKit.framework in Frameworks */,
 				ED81954917AED762004F3803 /* Foundation.framework in Frameworks */,
 				ED81954B17AED762004F3803 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ED9ABA051805671D00E4F635 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ED29530D1806C48C00311E19 /* CoreLocation.framework in Frameworks */,
+				ED9ABA0A1805671D00E4F635 /* CoreGraphics.framework in Frameworks */,
+				ED9ABA0B1805671D00E4F635 /* UIKit.framework in Frameworks */,
+				ED9ABA091805671D00E4F635 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -182,6 +238,7 @@
 		ED81953A17AED761004F3803 = {
 			isa = PBXGroup;
 			children = (
+				ED81954E17AED762004F3803 /* offlineguides-Info.plist */,
 				ED81F53517BA65A800361D6D /* Resources */,
 				ED81954C17AED762004F3803 /* offlineguides */,
 				ED81954517AED762004F3803 /* Frameworks */,
@@ -192,7 +249,8 @@
 		ED81954417AED762004F3803 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				ED81954317AED762004F3803 /* GuideWithMe.app */,
+				ED81954317AED762004F3803 /* UK.app */,
+				ED9ABA081805671D00E4F635 /* Hawaii.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -235,8 +293,6 @@
 		ED81954D17AED762004F3803 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				ED81954E17AED762004F3803 /* offlineguides-Info.plist */,
-				ED81954F17AED762004F3803 /* InfoPlist.strings */,
 				ED81955217AED762004F3803 /* main.m */,
 				ED81955417AED762004F3803 /* offlineguides-Prefix.pch */,
 			);
@@ -256,6 +312,8 @@
 		ED81F53517BA65A800361D6D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				ED9ABA68180569A700E4F635 /* data-hawaii */,
+				ED9ABA6B1806B51500E4F635 /* icons-hawaii */,
 				ED9ABA0218054D2500E4F635 /* data-UK */,
 				ED9AB9FD18054AFC00E4F635 /* icons-UK */,
 				ED81F52B17BA2C3F00361D6D /* Default-568h@2x.png */,
@@ -303,6 +361,13 @@
 			name = "icons-UK";
 			sourceTree = "<group>";
 		};
+		ED9ABA6B1806B51500E4F635 /* icons-hawaii */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "icons-hawaii";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -320,7 +385,24 @@
 			);
 			name = offlineguides;
 			productName = offlineguides;
-			productReference = ED81954317AED762004F3803 /* GuideWithMe.app */;
+			productReference = ED81954317AED762004F3803 /* UK.app */;
+			productType = "com.apple.product-type.application";
+		};
+		ED9ABA071805671D00E4F635 /* hawaii */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ED9ABA391805671D00E4F635 /* Build configuration list for PBXNativeTarget "hawaii" */;
+			buildPhases = (
+				ED9ABA041805671D00E4F635 /* Sources */,
+				ED9ABA051805671D00E4F635 /* Frameworks */,
+				ED9ABA061805671D00E4F635 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = hawaii;
+			productName = hawaii;
+			productReference = ED9ABA081805671D00E4F635 /* Hawaii.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -329,7 +411,7 @@
 		ED81953B17AED761004F3803 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0460;
+				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = offlineguides;
 			};
 			buildConfigurationList = ED81953E17AED761004F3803 /* Build configuration list for PBXProject "offlineguides" */;
@@ -338,6 +420,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = ED81953A17AED761004F3803;
 			productRefGroup = ED81954417AED762004F3803 /* Products */;
@@ -345,6 +428,7 @@
 			projectRoot = "";
 			targets = (
 				ED81954217AED762004F3803 /* offlineguides */,
+				ED9ABA071805671D00E4F635 /* hawaii */,
 			);
 		};
 /* End PBXProject section */
@@ -354,7 +438,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ED81955117AED762004F3803 /* InfoPlist.strings in Resources */,
 				ED4F8B9E17B2A52200ADD795 /* bg_header.png in Resources */,
 				ED4F8B9F17B2A52200ADD795 /* bg_header@2x.png in Resources */,
 				EDBD0D0B17FDC4A90007776B /* 76.png in Resources */,
@@ -396,6 +479,37 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		ED9ABA061805671D00E4F635 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ED9ABA5C180567BA00E4F635 /* js in Resources */,
+				ED9ABA4D1805678000E4F635 /* bg_landscape_header@2x.png in Resources */,
+				ED9ABA521805678000E4F635 /* bg_header.png in Resources */,
+				ED9ABA451805678000E4F635 /* Default-Landscape~ipad.png in Resources */,
+				ED9ABA421805678000E4F635 /* Default@2x.png in Resources */,
+				ED9ABA511805678000E4F635 /* ic_articleselection@2x.png in Resources */,
+				ED9ABA551805678000E4F635 /* bg_search@2x.png in Resources */,
+				ED9ABA481805678000E4F635 /* Default-Portrait-1024~ipad.png in Resources */,
+				ED9ABA4C1805678000E4F635 /* bg_landscape_header.png in Resources */,
+				ED9ABA461805678000E4F635 /* Default-Portrait@2x~ipad.png in Resources */,
+				ED9ABA541805678000E4F635 /* bg_search.png in Resources */,
+				ED9ABA5B180567BA00E4F635 /* css in Resources */,
+				ED9ABA491805678000E4F635 /* Default-Portrait-1024@2x~ipad.png in Resources */,
+				ED9ABA501805678000E4F635 /* ic_back@2x.png in Resources */,
+				ED9ABA471805678000E4F635 /* Default-Portrait~ipad.png in Resources */,
+				ED9ABA411805678000E4F635 /* Default-568h@2x.png in Resources */,
+				ED9ABA431805678000E4F635 /* Default.png in Resources */,
+				ED9ABA69180569A700E4F635 /* data-hawaii in Resources */,
+				ED9ABA441805678000E4F635 /* Default-Landscape@2x~ipad.png in Resources */,
+				ED9ABA531805678000E4F635 /* bg_header@2x.png in Resources */,
+				ED9ABA4F1805678000E4F635 /* ic_back.png in Resources */,
+				ED9ABA4B1805678000E4F635 /* Default-Landscape-1024@2x~ipad.png in Resources */,
+				ED9ABA4A1805678000E4F635 /* Default-Landscape-1024~ipad.png in Resources */,
+				ED9ABA4E1805678000E4F635 /* ic_articleselection.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -423,24 +537,37 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-/* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		ED81954F17AED762004F3803 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				ED81955017AED762004F3803 /* en */,
+		ED9ABA041805671D00E4F635 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ED9ABA66180567D300E4F635 /* article_info.cpp in Sources */,
+				ED9ABA67180567D300E4F635 /* storage.cpp in Sources */,
+				ED9ABA5D180567D300E4F635 /* MapsWithMeAPI.m in Sources */,
+				ED9ABA65180567D300E4F635 /* distance.cpp in Sources */,
+				ED9ABA5A180567B600E4F635 /* GuideCell.m in Sources */,
+				ED9ABA62180567D300E4F635 /* strings.cpp in Sources */,
+				ED9ABA56180567B600E4F635 /* AppDelegate.mm in Sources */,
+				ED9ABA57180567B600E4F635 /* ArticleVC.mm in Sources */,
+				ED9ABA58180567B600E4F635 /* IPadSplitVC.m in Sources */,
+				ED9ABA5E180567D300E4F635 /* utf8proc.c in Sources */,
+				ED9ABA60180567D300E4F635 /* posix.cpp in Sources */,
+				ED9ABA64180567D300E4F635 /* assert.cpp in Sources */,
+				ED29530C1806B92600311E19 /* main.m in Sources */,
+				ED9ABA5F180567D300E4F635 /* logging.cpp in Sources */,
+				ED9ABA59180567B600E4F635 /* GuideVC.mm in Sources */,
+				ED9ABA61180567D300E4F635 /* file_handle.cpp in Sources */,
+				ED9ABA63180567D300E4F635 /* source_address.cpp in Sources */,
 			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
+			runOnlyForDeploymentPostprocessing = 0;
 		};
-/* End PBXVariantGroup section */
+/* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
 		ED81955E17AED762004F3803 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
@@ -449,11 +576,14 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_RECEIVER_WEAK = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1.1;
+				CURRENT_PROJECT_VERSION = 1.2;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_FAST_MATH = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "offlineguides/offlineguides-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					IPHONE,
 					"DEBUG=1",
@@ -468,11 +598,13 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_PARAMETER = NO;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "offlineguides/offlineguides-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = GuideWithMe;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = ../3rdparty/boost;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -480,7 +612,7 @@
 		ED81955F17AED762004F3803 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
@@ -489,10 +621,13 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_RECEIVER_WEAK = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
-				CURRENT_PROJECT_VERSION = 1.1;
+				CURRENT_PROJECT_VERSION = 1.2;
 				GCC_FAST_MATH = YES;
 				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "offlineguides/offlineguides-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					IPHONE,
 					"NS_BLOCK_ASSERTIONS=1",
@@ -507,10 +642,12 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_PARAMETER = NO;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "offlineguides/offlineguides-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = GuideWithMe;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = ../3rdparty/boost;
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -519,35 +656,86 @@
 		ED81956117AED762004F3803 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "offlineguides/offlineguides-Prefix.pch";
-				HEADER_SEARCH_PATHS = ../3rdparty/boost;
-				INFOPLIST_FILE = "offlineguides/offlineguides-Info.plist";
-				PRODUCT_NAME = GuideWithMe;
-				USER_HEADER_SEARCH_PATHS = ../3rdparty/boost;
-				WRAPPER_EXTENSION = app;
+				BUNDLE_ID = com.guidewithme.uk;
+				PRODUCT_NAME = UK;
+				URL_SCHEME = "guidewithme-uk";
 			};
 			name = Debug;
 		};
 		ED81956217AED762004F3803 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				BUNDLE_ID = com.guidewithme.uk;
+				PRODUCT_NAME = UK;
+				URL_SCHEME = "guidewithme-uk";
+			};
+			name = Release;
+		};
+		ED9ABA3A1805671D00E4F635 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_ID = com.guidewithme.hawaii;
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "offlineguides/offlineguides-Prefix.pch";
-				HEADER_SEARCH_PATHS = ../3rdparty/boost;
-				INFOPLIST_FILE = "offlineguides/offlineguides-Info.plist";
-				PRODUCT_NAME = GuideWithMe;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				PRODUCT_NAME = Hawaii;
+				URL_SCHEME = "guidewithme-hawaii";
+				USER_HEADER_SEARCH_PATHS = ../3rdparty/boost;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		ED9ABA3B1805671D00E4F635 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_ID = com.guidewithme.hawaii;
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "offlineguides/offlineguides-Prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				PRODUCT_NAME = Hawaii;
+				URL_SCHEME = "guidewithme-hawaii";
 				USER_HEADER_SEARCH_PATHS = ../3rdparty/boost;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
 		};
+		ED9ABA3C1805671D00E4F635 /* Production */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_ID = com.guidewithme.hawaii;
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "offlineguides/offlineguides-Prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				PRODUCT_NAME = Hawaii;
+				URL_SCHEME = "guidewithme-hawaii";
+				USER_HEADER_SEARCH_PATHS = ../3rdparty/boost;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Production;
+		};
 		FA46C17817BB60A400350937 /* Production */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
@@ -558,9 +746,11 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
-				CURRENT_PROJECT_VERSION = 1.1;
+				CURRENT_PROJECT_VERSION = 1.2;
 				GCC_FAST_MATH = YES;
 				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "offlineguides/offlineguides-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					IPHONE,
 					"NS_BLOCK_ASSERTIONS=1",
@@ -575,11 +765,13 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_PARAMETER = NO;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "offlineguides/offlineguides-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = GuideWithMe;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = ../3rdparty/boost;
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -588,14 +780,9 @@
 		FA46C17917BB60A400350937 /* Production */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "offlineguides/offlineguides-Prefix.pch";
-				HEADER_SEARCH_PATHS = ../3rdparty/boost;
-				INFOPLIST_FILE = "offlineguides/offlineguides-Info.plist";
-				PRODUCT_NAME = GuideWithMe;
-				USER_HEADER_SEARCH_PATHS = ../3rdparty/boost;
-				WRAPPER_EXTENSION = app;
+				BUNDLE_ID = com.guidewithme.uk;
+				PRODUCT_NAME = UK;
+				URL_SCHEME = "guidewithme-uk";
 			};
 			name = Production;
 		};
@@ -618,6 +805,16 @@
 				ED81956117AED762004F3803 /* Debug */,
 				ED81956217AED762004F3803 /* Release */,
 				FA46C17917BB60A400350937 /* Production */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ED9ABA391805671D00E4F635 /* Build configuration list for PBXNativeTarget "hawaii" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ED9ABA3A1805671D00E4F635 /* Debug */,
+				ED9ABA3B1805671D00E4F635 /* Release */,
+				ED9ABA3C1805671D00E4F635 /* Production */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
