@@ -37,12 +37,11 @@
   for (size_t i = 0; i < count; ++ i)
   {
     ArticleInfo const & article = m_storage.GetResult(i);
-    if (!article.IsRedirect() && article.IsValidCoordinates())
+    double lat, lon;
+    if (!article.IsRedirect() && article.GetLatLon(lat, lon))
     {
       NSString * title = [NSString stringWithUTF8String:article.GetTitle().c_str()];
       NSString * pageId = [NSString stringWithUTF8String:article.GetUrl().c_str()];
-      double lat, lon;
-      article.GetLatLon(lat, lon);
       [pins addObject:[[MWMPin alloc] initWithLat:lat lon:lon title:title andId:pageId]];
     }
   }
