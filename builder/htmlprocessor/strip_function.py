@@ -27,18 +27,22 @@ def cleanUp(soup):
     [s.decompose() for s in content.findAll("div", {"id": "mw-mf-language-section"})]
     # cut off geo coords as we process them separately in original files
     [s.decompose() for s in content.findAll("div", {"id": "geoCoord"})]
+    # cut frames, osm
+    [s.decompose() for s in content.findAll("div", {"class" : "osm" })]
+    [s.decompose() for s in content.findAll("iframe")]
+
     # cut off missing images (looks like text File:Image.JPG on pages)
     for s in content.findAll("div", {"class": "thumb"}):
         if (not s.find("img")):
             s.decompose()
 
     # delete empty sections
-    sections = content.findAll("div", {"class": "section"})
+    sections = content.findAll("h2")
     for section in sections:
-        hasText = 0
-        for string in section.div.stripped_strings:
-            hasText += 1
-        if not hasText:
+        content_div = section.findNextSibling("div")
+        if not content_div.text.strip():
+            print section.text, " : is empty"
+            content_div.decompose()
             section.decompose()
 
     # Wrap content with our own header and body, and restore original div structure for css
