@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>UIViewControllerBasedStatusBarAppearance</key>
-	<false/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
@@ -25,6 +23,10 @@
 		<dict>
 			<key>CFBundleIconFiles</key>
 			<array>
+				<string>GWM40x40</string>
+				<string>GWM-Small</string>
+				<string>GWM60x60</string>
+				<string>GWM</string>
 				<string>80</string>
 				<string>120</string>
 				<string>29.png</string>
@@ -46,6 +48,12 @@
 		<dict>
 			<key>CFBundleIconFiles</key>
 			<array>
+				<string>GWM29x29</string>
+				<string>GWM40x40</string>
+				<string>GWM-Small-50</string>
+				<string>GWM76x76</string>
+				<string>GWM-72</string>
+				<string>GWM</string>
 				<string>40</string>
 				<string>80</string>
 				<string>152</string>
@@ -386,5 +394,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
 </dict>
 </plist>
