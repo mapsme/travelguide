@@ -30,6 +30,11 @@ LOCAL_SRC_FILES += \
 	../../storage/distance.cpp \
 	../../storage/storage.cpp \
 
+LOCAL_CFLAGS += -fvisibility=hidden
+LOCAL_CPPFLAGS += -fvisibility-inlines-hidden
+
 LOCAL_LDLIBS += -landroid
+
+LOCAL_LDLIBS += -Wl,--gc-sections
 
 include $(BUILD_SHARED_LIBRARY)
