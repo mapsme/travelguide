@@ -371,6 +371,49 @@
 		ED9D36111806FC4500ADBEF1 /* bg_search.png in Resources */ = {isa = PBXBuildFile; fileRef = ED64332217B4D14F000985FE /* bg_search.png */; };
 		ED9D36121806FC4500ADBEF1 /* bg_search@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED64332317B4D14F000985FE /* bg_search@2x.png */; };
 		ED9D36131806FC4C00ADBEF1 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A3BC9CE317B4E1FD0007AFD5 /* Settings.bundle */; };
+		ED9D36191806FF3500ADBEF1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED81954817AED762004F3803 /* Foundation.framework */; };
+		ED9D361A1806FF3500ADBEF1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED81954A17AED762004F3803 /* CoreGraphics.framework */; };
+		ED9D361B1806FF3500ADBEF1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED81954617AED762004F3803 /* UIKit.framework */; };
+		ED9D36511806FF6B00ADBEF1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ED81955217AED762004F3803 /* main.m */; };
+		ED9D36521806FF6B00ADBEF1 /* MapsWithMeAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = ED893F6817B223920074E05A /* MapsWithMeAPI.m */; };
+		ED9D36531806FF6B00ADBEF1 /* utf8proc.c in Sources */ = {isa = PBXBuildFile; fileRef = ED81957017B10598004F3803 /* utf8proc.c */; };
+		ED9D36541806FF6B00ADBEF1 /* logging.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED4F8BB017B2E6B700ADD795 /* logging.cpp */; };
+		ED9D36551806FF6B00ADBEF1 /* posix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED4F8BAE17B2E69600ADD795 /* posix.cpp */; };
+		ED9D36561806FF6B00ADBEF1 /* file_handle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED4F8BAC17B2E67100ADD795 /* file_handle.cpp */; };
+		ED9D36571806FF6B00ADBEF1 /* strings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED81956D17B10578004F3803 /* strings.cpp */; };
+		ED9D36581806FF6B00ADBEF1 /* source_address.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A3E2221017AFDA0A0018AB9E /* source_address.cpp */; };
+		ED9D36591806FF6B00ADBEF1 /* assert.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A3E2220E17AFD9E10018AB9E /* assert.cpp */; };
+		ED9D365A1806FF6B00ADBEF1 /* distance.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7722E14917B15C3600CFB817 /* distance.cpp */; };
+		ED9D365B1806FF6B00ADBEF1 /* article_info.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7722E14717B01B0700CFB817 /* article_info.cpp */; };
+		ED9D365C1806FF6B00ADBEF1 /* storage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A3E221F217AFB4C20018AB9E /* storage.cpp */; };
+		ED9D365D1806FF6B00ADBEF1 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = ED81955617AED762004F3803 /* AppDelegate.mm */; };
+		ED9D365E1806FF6B00ADBEF1 /* ArticleVC.mm in Sources */ = {isa = PBXBuildFile; fileRef = ED81956417AEE129004F3803 /* ArticleVC.mm */; };
+		ED9D365F1806FF6B00ADBEF1 /* IPadSplitVC.m in Sources */ = {isa = PBXBuildFile; fileRef = ED893F6B17B231F20074E05A /* IPadSplitVC.m */; };
+		ED9D36601806FF6B00ADBEF1 /* GuideVC.mm in Sources */ = {isa = PBXBuildFile; fileRef = ED81956917AEF6B6004F3803 /* GuideVC.mm */; };
+		ED9D36611806FF6B00ADBEF1 /* GuideCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ED64330E17B3F673000985FE /* GuideCell.m */; };
+		ED9D36621806FF7000ADBEF1 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A3BC9CE317B4E1FD0007AFD5 /* Settings.bundle */; };
+		ED9D36631806FF7500ADBEF1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED64331017B41533000985FE /* CoreLocation.framework */; };
+		ED9D36641806FF8F00ADBEF1 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED81F52B17BA2C3F00361D6D /* Default-568h@2x.png */; };
+		ED9D36651806FF8F00ADBEF1 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED81F52917BA2C3C00361D6D /* Default@2x.png */; };
+		ED9D36661806FF8F00ADBEF1 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = ED81F52717BA2C3900361D6D /* Default.png */; };
+		ED9D36671806FF8F00ADBEF1 /* Default-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ED81F52517BA2C0800361D6D /* Default-Landscape@2x~ipad.png */; };
+		ED9D36681806FF8F00ADBEF1 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ED81F52317BA2C0400361D6D /* Default-Landscape~ipad.png */; };
+		ED9D36691806FF8F00ADBEF1 /* Default-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ED81F52117BA2C0000361D6D /* Default-Portrait@2x~ipad.png */; };
+		ED9D366A1806FF8F00ADBEF1 /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ED81F51F17BA2BFD00361D6D /* Default-Portrait~ipad.png */; };
+		ED9D366B1806FF8F00ADBEF1 /* Default-Portrait-1024~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = EDBD0D0017FDC3440007776B /* Default-Portrait-1024~ipad.png */; };
+		ED9D366C1806FF8F00ADBEF1 /* Default-Portrait-1024@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = EDBD0CFE17FDC3440007776B /* Default-Portrait-1024@2x~ipad.png */; };
+		ED9D366D1806FF8F00ADBEF1 /* Default-Landscape-1024~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = EDBD0D0117FDC3440007776B /* Default-Landscape-1024~ipad.png */; };
+		ED9D366E1806FF8F00ADBEF1 /* Default-Landscape-1024@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = EDBD0CFF17FDC3440007776B /* Default-Landscape-1024@2x~ipad.png */; };
+		ED9D366F1806FF8F00ADBEF1 /* bg_landscape_header.png in Resources */ = {isa = PBXBuildFile; fileRef = ED64332617B4D6CA000985FE /* bg_landscape_header.png */; };
+		ED9D36701806FF8F00ADBEF1 /* bg_landscape_header@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED64332717B4D6CB000985FE /* bg_landscape_header@2x.png */; };
+		ED9D36711806FF8F00ADBEF1 /* ic_articleselection.png in Resources */ = {isa = PBXBuildFile; fileRef = ED4F8BA017B2C97300ADD795 /* ic_articleselection.png */; };
+		ED9D36721806FF8F00ADBEF1 /* ic_back.png in Resources */ = {isa = PBXBuildFile; fileRef = ED4F8BA117B2C97300ADD795 /* ic_back.png */; };
+		ED9D36731806FF8F00ADBEF1 /* ic_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED4F8BA217B2C97300ADD795 /* ic_back@2x.png */; };
+		ED9D36741806FF8F00ADBEF1 /* ic_articleselection@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED4F8BA317B2C97300ADD795 /* ic_articleselection@2x.png */; };
+		ED9D36751806FF8F00ADBEF1 /* bg_header.png in Resources */ = {isa = PBXBuildFile; fileRef = ED4F8B9C17B2A52200ADD795 /* bg_header.png */; };
+		ED9D36761806FF8F00ADBEF1 /* bg_header@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED4F8B9D17B2A52200ADD795 /* bg_header@2x.png */; };
+		ED9D36771806FF8F00ADBEF1 /* bg_search.png in Resources */ = {isa = PBXBuildFile; fileRef = ED64332217B4D14F000985FE /* bg_search.png */; };
+		ED9D36781806FF8F00ADBEF1 /* bg_search@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED64332317B4D14F000985FE /* bg_search@2x.png */; };
 		EDBD0D0217FDC3440007776B /* Default-Portrait-1024@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = EDBD0CFE17FDC3440007776B /* Default-Portrait-1024@2x~ipad.png */; };
 		EDBD0D0317FDC3440007776B /* Default-Landscape-1024@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = EDBD0CFF17FDC3440007776B /* Default-Landscape-1024@2x~ipad.png */; };
 		EDBD0D0417FDC3440007776B /* Default-Portrait-1024~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = EDBD0D0017FDC3440007776B /* Default-Portrait-1024~ipad.png */; };
@@ -453,6 +496,7 @@
 		ED9D34E81806F97700ADBEF1 /* Greece.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Greece.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED9D354E1806FADF00ADBEF1 /* Italy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Italy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED9D35B31806FBD300ADBEF1 /* Japan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Japan.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		ED9D36181806FF3500ADBEF1 /* Russia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Russia.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDBD0CFE17FDC3440007776B /* Default-Portrait-1024@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait-1024@2x~ipad.png"; sourceTree = "<group>"; };
 		EDBD0CFF17FDC3440007776B /* Default-Landscape-1024@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape-1024@2x~ipad.png"; sourceTree = "<group>"; };
 		EDBD0D0017FDC3440007776B /* Default-Portrait-1024~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait-1024~ipad.png"; sourceTree = "<group>"; };
@@ -548,6 +592,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		ED9D36151806FF3500ADBEF1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ED9D36631806FF7500ADBEF1 /* CoreLocation.framework in Frameworks */,
+				ED9D361A1806FF3500ADBEF1 /* CoreGraphics.framework in Frameworks */,
+				ED9D361B1806FF3500ADBEF1 /* UIKit.framework in Frameworks */,
+				ED9D36191806FF3500ADBEF1 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -596,6 +651,7 @@
 				ED9D34E81806F97700ADBEF1 /* Greece.app */,
 				ED9D354E1806FADF00ADBEF1 /* Italy.app */,
 				ED9D35B31806FBD300ADBEF1 /* Japan.app */,
+				ED9D36181806FF3500ADBEF1 /* Russia.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -855,6 +911,23 @@
 			productReference = ED9D35B31806FBD300ADBEF1 /* Japan.app */;
 			productType = "com.apple.product-type.application";
 		};
+		ED9D36171806FF3500ADBEF1 /* russia */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ED9D36491806FF3600ADBEF1 /* Build configuration list for PBXNativeTarget "russia" */;
+			buildPhases = (
+				ED9D36141806FF3500ADBEF1 /* Sources */,
+				ED9D36151806FF3500ADBEF1 /* Frameworks */,
+				ED9D36161806FF3500ADBEF1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = russia;
+			productName = russia;
+			productReference = ED9D36181806FF3500ADBEF1 /* Russia.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -885,6 +958,7 @@
 				ED9D34E71806F97700ADBEF1 /* greece */,
 				ED9D354D1806FADF00ADBEF1 /* italy */,
 				ED9D35B21806FBD300ADBEF1 /* japan */,
+				ED9D36171806FF3500ADBEF1 /* russia */,
 			);
 		};
 /* End PBXProject section */
@@ -1146,6 +1220,35 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		ED9D36161806FF3500ADBEF1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ED9D366E1806FF8F00ADBEF1 /* Default-Landscape-1024@2x~ipad.png in Resources */,
+				ED9D366F1806FF8F00ADBEF1 /* bg_landscape_header.png in Resources */,
+				ED9D36761806FF8F00ADBEF1 /* bg_header@2x.png in Resources */,
+				ED9D36681806FF8F00ADBEF1 /* Default-Landscape~ipad.png in Resources */,
+				ED9D36671806FF8F00ADBEF1 /* Default-Landscape@2x~ipad.png in Resources */,
+				ED9D36651806FF8F00ADBEF1 /* Default@2x.png in Resources */,
+				ED9D36771806FF8F00ADBEF1 /* bg_search.png in Resources */,
+				ED9D366D1806FF8F00ADBEF1 /* Default-Landscape-1024~ipad.png in Resources */,
+				ED9D36691806FF8F00ADBEF1 /* Default-Portrait@2x~ipad.png in Resources */,
+				ED9D36621806FF7000ADBEF1 /* Settings.bundle in Resources */,
+				ED9D36711806FF8F00ADBEF1 /* ic_articleselection.png in Resources */,
+				ED9D36731806FF8F00ADBEF1 /* ic_back@2x.png in Resources */,
+				ED9D36741806FF8F00ADBEF1 /* ic_articleselection@2x.png in Resources */,
+				ED9D36781806FF8F00ADBEF1 /* bg_search@2x.png in Resources */,
+				ED9D36641806FF8F00ADBEF1 /* Default-568h@2x.png in Resources */,
+				ED9D36721806FF8F00ADBEF1 /* ic_back.png in Resources */,
+				ED9D36661806FF8F00ADBEF1 /* Default.png in Resources */,
+				ED9D366C1806FF8F00ADBEF1 /* Default-Portrait-1024@2x~ipad.png in Resources */,
+				ED9D36751806FF8F00ADBEF1 /* bg_header.png in Resources */,
+				ED9D366B1806FF8F00ADBEF1 /* Default-Portrait-1024~ipad.png in Resources */,
+				ED9D36701806FF8F00ADBEF1 /* bg_landscape_header@2x.png in Resources */,
+				ED9D366A1806FF8F00ADBEF1 /* Default-Portrait~ipad.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1338,6 +1441,30 @@
 				ED9D35F71806FC3000ADBEF1 /* storage.cpp in Sources */,
 				ED9D35F21806FC3000ADBEF1 /* strings.cpp in Sources */,
 				ED9D35EF1806FC3000ADBEF1 /* logging.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ED9D36141806FF3500ADBEF1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ED9D36511806FF6B00ADBEF1 /* main.m in Sources */,
+				ED9D36581806FF6B00ADBEF1 /* source_address.cpp in Sources */,
+				ED9D36521806FF6B00ADBEF1 /* MapsWithMeAPI.m in Sources */,
+				ED9D36551806FF6B00ADBEF1 /* posix.cpp in Sources */,
+				ED9D365F1806FF6B00ADBEF1 /* IPadSplitVC.m in Sources */,
+				ED9D36561806FF6B00ADBEF1 /* file_handle.cpp in Sources */,
+				ED9D36531806FF6B00ADBEF1 /* utf8proc.c in Sources */,
+				ED9D365D1806FF6B00ADBEF1 /* AppDelegate.mm in Sources */,
+				ED9D365E1806FF6B00ADBEF1 /* ArticleVC.mm in Sources */,
+				ED9D36611806FF6B00ADBEF1 /* GuideCell.m in Sources */,
+				ED9D36601806FF6B00ADBEF1 /* GuideVC.mm in Sources */,
+				ED9D365B1806FF6B00ADBEF1 /* article_info.cpp in Sources */,
+				ED9D365A1806FF6B00ADBEF1 /* distance.cpp in Sources */,
+				ED9D36591806FF6B00ADBEF1 /* assert.cpp in Sources */,
+				ED9D365C1806FF6B00ADBEF1 /* storage.cpp in Sources */,
+				ED9D36571806FF6B00ADBEF1 /* strings.cpp in Sources */,
+				ED9D36541806FF6B00ADBEF1 /* logging.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1698,6 +1825,36 @@
 			};
 			name = Production;
 		};
+		ED9D364A1806FF3600ADBEF1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_ID = com.guidewithme.japan;
+				PRODUCT_NAME = Russia;
+				URL_SCHEME = "guidewithme-russia";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		ED9D364B1806FF3600ADBEF1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_ID = com.guidewithme.japan;
+				PRODUCT_NAME = Russia;
+				URL_SCHEME = "guidewithme-russia";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		ED9D364C1806FF3600ADBEF1 /* Production */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_ID = com.guidewithme.japan;
+				PRODUCT_NAME = Russia;
+				URL_SCHEME = "guidewithme-russia";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Production;
+		};
 		FA46C17817BB60A400350937 /* Production */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1837,6 +1994,15 @@
 				ED9D35E51806FBD400ADBEF1 /* Debug */,
 				ED9D35E61806FBD400ADBEF1 /* Release */,
 				ED9D35E71806FBD400ADBEF1 /* Production */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		ED9D36491806FF3600ADBEF1 /* Build configuration list for PBXNativeTarget "russia" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ED9D364A1806FF3600ADBEF1 /* Debug */,
+				ED9D364B1806FF3600ADBEF1 /* Release */,
+				ED9D364C1806FF3600ADBEF1 /* Production */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
