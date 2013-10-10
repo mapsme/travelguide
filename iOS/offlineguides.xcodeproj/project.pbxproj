@@ -500,6 +500,48 @@
 		ED9D37401807024700ADBEF1 /* bg_header@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED4F8B9D17B2A52200ADD795 /* bg_header@2x.png */; };
 		ED9D37411807024700ADBEF1 /* bg_search.png in Resources */ = {isa = PBXBuildFile; fileRef = ED64332217B4D14F000985FE /* bg_search.png */; };
 		ED9D37421807024700ADBEF1 /* bg_search@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED64332317B4D14F000985FE /* bg_search@2x.png */; };
+		ED9D3748180703FA00ADBEF1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED81954817AED762004F3803 /* Foundation.framework */; };
+		ED9D3749180703FA00ADBEF1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED81954A17AED762004F3803 /* CoreGraphics.framework */; };
+		ED9D374A180703FB00ADBEF1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED81954617AED762004F3803 /* UIKit.framework */; };
+		ED9D37801807040C00ADBEF1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED64331017B41533000985FE /* CoreLocation.framework */; };
+		ED9D37811807041700ADBEF1 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = ED81955617AED762004F3803 /* AppDelegate.mm */; };
+		ED9D37821807041700ADBEF1 /* ArticleVC.mm in Sources */ = {isa = PBXBuildFile; fileRef = ED81956417AEE129004F3803 /* ArticleVC.mm */; };
+		ED9D37831807041700ADBEF1 /* IPadSplitVC.m in Sources */ = {isa = PBXBuildFile; fileRef = ED893F6B17B231F20074E05A /* IPadSplitVC.m */; };
+		ED9D37841807041700ADBEF1 /* GuideVC.mm in Sources */ = {isa = PBXBuildFile; fileRef = ED81956917AEF6B6004F3803 /* GuideVC.mm */; };
+		ED9D37851807041700ADBEF1 /* GuideCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ED64330E17B3F673000985FE /* GuideCell.m */; };
+		ED9D37861807042200ADBEF1 /* distance.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7722E14917B15C3600CFB817 /* distance.cpp */; };
+		ED9D37871807042200ADBEF1 /* article_info.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7722E14717B01B0700CFB817 /* article_info.cpp */; };
+		ED9D37881807042200ADBEF1 /* storage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A3E221F217AFB4C20018AB9E /* storage.cpp */; };
+		ED9D37891807042600ADBEF1 /* logging.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED4F8BB017B2E6B700ADD795 /* logging.cpp */; };
+		ED9D378A1807042600ADBEF1 /* posix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED4F8BAE17B2E69600ADD795 /* posix.cpp */; };
+		ED9D378B1807042600ADBEF1 /* file_handle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED4F8BAC17B2E67100ADD795 /* file_handle.cpp */; };
+		ED9D378C1807042600ADBEF1 /* strings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED81956D17B10578004F3803 /* strings.cpp */; };
+		ED9D378D1807042600ADBEF1 /* source_address.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A3E2221017AFDA0A0018AB9E /* source_address.cpp */; };
+		ED9D378E1807042600ADBEF1 /* assert.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A3E2220E17AFD9E10018AB9E /* assert.cpp */; };
+		ED9D378F1807042C00ADBEF1 /* MapsWithMeAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = ED893F6817B223920074E05A /* MapsWithMeAPI.m */; };
+		ED9D37901807042C00ADBEF1 /* utf8proc.c in Sources */ = {isa = PBXBuildFile; fileRef = ED81957017B10598004F3803 /* utf8proc.c */; };
+		ED9D37911807042F00ADBEF1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ED81955217AED762004F3803 /* main.m */; };
+		ED9D37921807043500ADBEF1 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED81F52B17BA2C3F00361D6D /* Default-568h@2x.png */; };
+		ED9D37931807043500ADBEF1 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED81F52917BA2C3C00361D6D /* Default@2x.png */; };
+		ED9D37941807043500ADBEF1 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = ED81F52717BA2C3900361D6D /* Default.png */; };
+		ED9D37951807043500ADBEF1 /* Default-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ED81F52517BA2C0800361D6D /* Default-Landscape@2x~ipad.png */; };
+		ED9D37961807043500ADBEF1 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ED81F52317BA2C0400361D6D /* Default-Landscape~ipad.png */; };
+		ED9D37971807043500ADBEF1 /* Default-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ED81F52117BA2C0000361D6D /* Default-Portrait@2x~ipad.png */; };
+		ED9D37981807043500ADBEF1 /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ED81F51F17BA2BFD00361D6D /* Default-Portrait~ipad.png */; };
+		ED9D37991807043500ADBEF1 /* Default-Portrait-1024~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = EDBD0D0017FDC3440007776B /* Default-Portrait-1024~ipad.png */; };
+		ED9D379A1807043500ADBEF1 /* Default-Portrait-1024@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = EDBD0CFE17FDC3440007776B /* Default-Portrait-1024@2x~ipad.png */; };
+		ED9D379B1807043500ADBEF1 /* Default-Landscape-1024~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = EDBD0D0117FDC3440007776B /* Default-Landscape-1024~ipad.png */; };
+		ED9D379C1807043500ADBEF1 /* Default-Landscape-1024@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = EDBD0CFF17FDC3440007776B /* Default-Landscape-1024@2x~ipad.png */; };
+		ED9D379D1807043500ADBEF1 /* bg_landscape_header.png in Resources */ = {isa = PBXBuildFile; fileRef = ED64332617B4D6CA000985FE /* bg_landscape_header.png */; };
+		ED9D379E1807043500ADBEF1 /* bg_landscape_header@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED64332717B4D6CB000985FE /* bg_landscape_header@2x.png */; };
+		ED9D379F1807043500ADBEF1 /* ic_articleselection.png in Resources */ = {isa = PBXBuildFile; fileRef = ED4F8BA017B2C97300ADD795 /* ic_articleselection.png */; };
+		ED9D37A01807043500ADBEF1 /* ic_back.png in Resources */ = {isa = PBXBuildFile; fileRef = ED4F8BA117B2C97300ADD795 /* ic_back.png */; };
+		ED9D37A11807043500ADBEF1 /* ic_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED4F8BA217B2C97300ADD795 /* ic_back@2x.png */; };
+		ED9D37A21807043500ADBEF1 /* ic_articleselection@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED4F8BA317B2C97300ADD795 /* ic_articleselection@2x.png */; };
+		ED9D37A31807043500ADBEF1 /* bg_header.png in Resources */ = {isa = PBXBuildFile; fileRef = ED4F8B9C17B2A52200ADD795 /* bg_header.png */; };
+		ED9D37A41807043500ADBEF1 /* bg_header@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED4F8B9D17B2A52200ADD795 /* bg_header@2x.png */; };
+		ED9D37A51807043500ADBEF1 /* bg_search.png in Resources */ = {isa = PBXBuildFile; fileRef = ED64332217B4D14F000985FE /* bg_search.png */; };
+		ED9D37A61807043500ADBEF1 /* bg_search@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED64332317B4D14F000985FE /* bg_search@2x.png */; };
 		EDBD0D0217FDC3440007776B /* Default-Portrait-1024@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = EDBD0CFE17FDC3440007776B /* Default-Portrait-1024@2x~ipad.png */; };
 		EDBD0D0317FDC3440007776B /* Default-Landscape-1024@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = EDBD0CFF17FDC3440007776B /* Default-Landscape-1024@2x~ipad.png */; };
 		EDBD0D0417FDC3440007776B /* Default-Portrait-1024~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = EDBD0D0017FDC3440007776B /* Default-Portrait-1024~ipad.png */; };
@@ -585,6 +627,7 @@
 		ED9D36181806FF3500ADBEF1 /* Russia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Russia.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED9D367D180700EE00ADBEF1 /* Spain.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Spain.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED9D36E2180701FD00ADBEF1 /* Switzerland.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Switzerland.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		ED9D3747180703FA00ADBEF1 /* Turkey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Turkey.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDBD0CFE17FDC3440007776B /* Default-Portrait-1024@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait-1024@2x~ipad.png"; sourceTree = "<group>"; };
 		EDBD0CFF17FDC3440007776B /* Default-Landscape-1024@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape-1024@2x~ipad.png"; sourceTree = "<group>"; };
 		EDBD0D0017FDC3440007776B /* Default-Portrait-1024~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait-1024~ipad.png"; sourceTree = "<group>"; };
@@ -713,6 +756,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		ED9D3744180703FA00ADBEF1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ED9D37801807040C00ADBEF1 /* CoreLocation.framework in Frameworks */,
+				ED9D3749180703FA00ADBEF1 /* CoreGraphics.framework in Frameworks */,
+				ED9D374A180703FB00ADBEF1 /* UIKit.framework in Frameworks */,
+				ED9D3748180703FA00ADBEF1 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -764,6 +818,7 @@
 				ED9D36181806FF3500ADBEF1 /* Russia.app */,
 				ED9D367D180700EE00ADBEF1 /* Spain.app */,
 				ED9D36E2180701FD00ADBEF1 /* Switzerland.app */,
+				ED9D3747180703FA00ADBEF1 /* Turkey.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1074,6 +1129,23 @@
 			productReference = ED9D36E2180701FD00ADBEF1 /* Switzerland.app */;
 			productType = "com.apple.product-type.application";
 		};
+		ED9D3746180703FA00ADBEF1 /* turkey */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ED9D3778180703FC00ADBEF1 /* Build configuration list for PBXNativeTarget "turkey" */;
+			buildPhases = (
+				ED9D3743180703FA00ADBEF1 /* Sources */,
+				ED9D3744180703FA00ADBEF1 /* Frameworks */,
+				ED9D3745180703FA00ADBEF1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = turkey;
+			productName = turkey;
+			productReference = ED9D3747180703FA00ADBEF1 /* Turkey.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -1107,6 +1179,7 @@
 				ED9D36171806FF3500ADBEF1 /* russia */,
 				ED9D367C180700EE00ADBEF1 /* spain */,
 				ED9D36E1180701FD00ADBEF1 /* switzerland */,
+				ED9D3746180703FA00ADBEF1 /* turkey */,
 			);
 		};
 /* End PBXProject section */
@@ -1455,6 +1528,34 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		ED9D3745180703FA00ADBEF1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ED9D37A01807043500ADBEF1 /* ic_back.png in Resources */,
+				ED9D379C1807043500ADBEF1 /* Default-Landscape-1024@2x~ipad.png in Resources */,
+				ED9D37A21807043500ADBEF1 /* ic_articleselection@2x.png in Resources */,
+				ED9D37A41807043500ADBEF1 /* bg_header@2x.png in Resources */,
+				ED9D379F1807043500ADBEF1 /* ic_articleselection.png in Resources */,
+				ED9D379D1807043500ADBEF1 /* bg_landscape_header.png in Resources */,
+				ED9D379E1807043500ADBEF1 /* bg_landscape_header@2x.png in Resources */,
+				ED9D37991807043500ADBEF1 /* Default-Portrait-1024~ipad.png in Resources */,
+				ED9D37971807043500ADBEF1 /* Default-Portrait@2x~ipad.png in Resources */,
+				ED9D37A11807043500ADBEF1 /* ic_back@2x.png in Resources */,
+				ED9D37A51807043500ADBEF1 /* bg_search.png in Resources */,
+				ED9D37A61807043500ADBEF1 /* bg_search@2x.png in Resources */,
+				ED9D37A31807043500ADBEF1 /* bg_header.png in Resources */,
+				ED9D37931807043500ADBEF1 /* Default@2x.png in Resources */,
+				ED9D379B1807043500ADBEF1 /* Default-Landscape-1024~ipad.png in Resources */,
+				ED9D37941807043500ADBEF1 /* Default.png in Resources */,
+				ED9D37981807043500ADBEF1 /* Default-Portrait~ipad.png in Resources */,
+				ED9D37921807043500ADBEF1 /* Default-568h@2x.png in Resources */,
+				ED9D379A1807043500ADBEF1 /* Default-Portrait-1024@2x~ipad.png in Resources */,
+				ED9D37951807043500ADBEF1 /* Default-Landscape@2x~ipad.png in Resources */,
+				ED9D37961807043500ADBEF1 /* Default-Landscape~ipad.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1719,6 +1820,30 @@
 				ED9D37221807022300ADBEF1 /* strings.cpp in Sources */,
 				ED9D37251807022A00ADBEF1 /* AppDelegate.mm in Sources */,
 				ED9D371F1807022300ADBEF1 /* logging.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ED9D3743180703FA00ADBEF1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ED9D37811807041700ADBEF1 /* AppDelegate.mm in Sources */,
+				ED9D37881807042200ADBEF1 /* storage.cpp in Sources */,
+				ED9D378F1807042C00ADBEF1 /* MapsWithMeAPI.m in Sources */,
+				ED9D378C1807042600ADBEF1 /* strings.cpp in Sources */,
+				ED9D37841807041700ADBEF1 /* GuideVC.mm in Sources */,
+				ED9D37831807041700ADBEF1 /* IPadSplitVC.m in Sources */,
+				ED9D37901807042C00ADBEF1 /* utf8proc.c in Sources */,
+				ED9D37821807041700ADBEF1 /* ArticleVC.mm in Sources */,
+				ED9D37861807042200ADBEF1 /* distance.cpp in Sources */,
+				ED9D37871807042200ADBEF1 /* article_info.cpp in Sources */,
+				ED9D378A1807042600ADBEF1 /* posix.cpp in Sources */,
+				ED9D378E1807042600ADBEF1 /* assert.cpp in Sources */,
+				ED9D37911807042F00ADBEF1 /* main.m in Sources */,
+				ED9D37891807042600ADBEF1 /* logging.cpp in Sources */,
+				ED9D37851807041700ADBEF1 /* GuideCell.m in Sources */,
+				ED9D378B1807042600ADBEF1 /* file_handle.cpp in Sources */,
+				ED9D378D1807042600ADBEF1 /* source_address.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2169,6 +2294,36 @@
 			};
 			name = Production;
 		};
+		ED9D3779180703FC00ADBEF1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_ID = com.guidewithme.turkey;
+				PRODUCT_NAME = Turkey;
+				URL_SCHEME = "guidewithme-turkey";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		ED9D377A180703FC00ADBEF1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_ID = com.guidewithme.turkey;
+				PRODUCT_NAME = Turkey;
+				URL_SCHEME = "guidewithme-turkey";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		ED9D377B180703FC00ADBEF1 /* Production */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_ID = com.guidewithme.turkey;
+				PRODUCT_NAME = Turkey;
+				URL_SCHEME = "guidewithme-turkey";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Production;
+		};
 		FA46C17817BB60A400350937 /* Production */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2335,6 +2490,15 @@
 				ED9D3714180701FE00ADBEF1 /* Debug */,
 				ED9D3715180701FE00ADBEF1 /* Release */,
 				ED9D3716180701FE00ADBEF1 /* Production */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		ED9D3778180703FC00ADBEF1 /* Build configuration list for PBXNativeTarget "turkey" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ED9D3779180703FC00ADBEF1 /* Debug */,
+				ED9D377A180703FC00ADBEF1 /* Release */,
+				ED9D377B180703FC00ADBEF1 /* Production */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
