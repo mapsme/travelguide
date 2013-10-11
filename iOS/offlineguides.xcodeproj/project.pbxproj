@@ -284,6 +284,7 @@
 		ED95A05F1807EAFA005FAA93 /* GWM60x60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED95A04D1807EAFA005FAA93 /* GWM60x60@2x.png */; };
 		ED95A0601807EAFA005FAA93 /* GWM76x76.png in Resources */ = {isa = PBXBuildFile; fileRef = ED95A04E1807EAFA005FAA93 /* GWM76x76.png */; };
 		ED95A0611807EAFA005FAA93 /* GWM76x76@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED95A04F1807EAFA005FAA93 /* GWM76x76@2x.png */; };
+		ED95A0641807EDAB005FAA93 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A3BC9CE317B4E1FD0007AFD5 /* Settings.bundle */; };
 		ED9ABA091805671D00E4F635 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED81954817AED762004F3803 /* Foundation.framework */; };
 		ED9ABA0A1805671D00E4F635 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED81954A17AED762004F3803 /* CoreGraphics.framework */; };
 		ED9ABA0B1805671D00E4F635 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED81954617AED762004F3803 /* UIKit.framework */; };
@@ -2488,6 +2489,7 @@
 				ED959FEB1807EAD1005FAA93 /* GWM76x76.png in Resources */,
 				ED9D37A11807043500ADBEF1 /* ic_back@2x.png in Resources */,
 				ED959FE81807EAD1005FAA93 /* GWM40x40@2x.png in Resources */,
+				ED95A0641807EDAB005FAA93 /* Settings.bundle in Resources */,
 				ED9D37A51807043500ADBEF1 /* bg_search.png in Resources */,
 				ED9D37A61807043500ADBEF1 /* bg_search@2x.png in Resources */,
 				ED959FE41807EAD1005FAA93 /* GWM@2x.png in Resources */,
