@@ -3209,7 +3209,7 @@
 		ED9D364A1806FF3600ADBEF1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_ID = com.guidewithme.japan;
+				BUNDLE_ID = com.guidewithme.russia;
 				PRODUCT_NAME = Russia;
 				URL_SCHEME = "guidewithme-russia";
 				WRAPPER_EXTENSION = app;
@@ -3219,7 +3219,7 @@
 		ED9D364B1806FF3600ADBEF1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_ID = com.guidewithme.japan;
+				BUNDLE_ID = com.guidewithme.russia;
 				PRODUCT_NAME = Russia;
 				URL_SCHEME = "guidewithme-russia";
 				WRAPPER_EXTENSION = app;
@@ -3229,7 +3229,7 @@
 		ED9D364C1806FF3600ADBEF1 /* Production */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_ID = com.guidewithme.japan;
+				BUNDLE_ID = com.guidewithme.russia;
 				PRODUCT_NAME = Russia;
 				URL_SCHEME = "guidewithme-russia";
 				WRAPPER_EXTENSION = app;
