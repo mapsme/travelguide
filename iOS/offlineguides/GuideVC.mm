@@ -71,7 +71,7 @@
     UITextAttributeTextColor       : [UIColor colorWithRed:253.f/255.f green:241.f/255.f blue:43.f/255.f alpha:1.f],
     UITextAttributeTextShadowColor : [UIColor clearColor]
   };
-  self.navigationItem.title = @"UK GuideWithMe";
+  self.navigationItem.title = [self getAppName];
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request
@@ -222,8 +222,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     return NO;
 
   NSString * newUrl = [str stringByAppendingFormat:@"&backurl=%@&appname=%@",
-                       [MWMApi detectBackUrlScheme],
-                       [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"]];
+                       [MWMApi detectBackUrlScheme], @"GuideWithMe"];
   if ([MWMApi isApiSupported])
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:newUrl]];
   else
@@ -270,6 +269,11 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
   return YES;
+}
+
+-(NSString *)getAppName
+{
+  return [NSString stringWithFormat:@"%@ %@", [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"], @"GuideWithMe"];
 }
 
 @end
