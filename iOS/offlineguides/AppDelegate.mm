@@ -64,7 +64,7 @@
   NSString * bundleRoot = [[NSBundle mainBundle] bundlePath];
   NSArray * files = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:bundleRoot error:nil];
   for (NSString * s in files)
-    if ([s hasPrefix:@"data-"])
+    if ([s hasPrefix:@"data"])
       return s;
   return @"";
 }
