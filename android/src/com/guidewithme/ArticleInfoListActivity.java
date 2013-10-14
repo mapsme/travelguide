@@ -170,7 +170,7 @@ public class ArticleInfoListActivity extends FragmentActivity
      Utils.fadeOut(this, mShadow);
 
    // we dont need keyboard when there is no list
-   Utils.hideKeyboard(getParent());
+   Utils.hideKeyboard(this);
   }
 
   private void showList()
