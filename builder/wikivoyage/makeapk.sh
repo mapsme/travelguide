@@ -4,8 +4,19 @@ set -e -u
 
 cat countries_to_generate.txt | while read country; do
 
+    # copy index
     rm ../../android/assets/index.dat || echo "No previous index found."
     cp -f Countries/$country/index.dat ../../android/assets/
+
+    # copy resources
+    toCopy=(drawable-ldpi drawable-mdpi drawable-hdpi \
+	    drawable-xhdpi drawable-xxhdpi)
+
+    for resDir in ${toCopy[*]}
+    do
+	cp -f ../../android/icons/$country/$resDir/* ../../android/res/$resDir
+	echo "Copied $resDir for $country"
+    done
 
     rm  ../../android/build/apk/* || true
     rm Countries/$country/*.apk || true
