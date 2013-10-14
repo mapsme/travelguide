@@ -8,6 +8,7 @@ import java.text.NumberFormat;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
@@ -150,6 +151,13 @@ public class Utils
   public static boolean notNull(Object o)
   {
     return o != null;
+  }
+
+
+  public static boolean isAnchorUrl(String string)
+  {
+    return !TextUtils.isEmpty(string)
+        && string.contains("#");
   }
 
 }
