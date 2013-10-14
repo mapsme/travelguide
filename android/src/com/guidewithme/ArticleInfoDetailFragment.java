@@ -128,7 +128,7 @@ public class ArticleInfoDetailFragment extends Fragment
       // Fix java.lang.NullPointerException at:
       // android.view.animation.AnimationUtils.loadAnimation(AnimationUtils.java:71)
       final Context context = getActivity();
-      if (notNull(context))
+      if (shouldAnimate(url, context))
       {
         Utils.fadeOut(context, mProgressContainer);
         Utils.fadeIn(context, mWebView);
@@ -153,7 +153,7 @@ public class ArticleInfoDetailFragment extends Fragment
       // Fix java.lang.NullPointerException at:
       // android.view.animation.AnimationUtils.loadAnimation(AnimationUtils.java:71)
       final Context context = getActivity();
-      if (notNull(context))
+      if (shouldAnimate(url, context))
       {
         Utils.fadeOut(context, mWebView);
         Utils.fadeIn(context, mProgressContainer);
@@ -164,6 +164,11 @@ public class ArticleInfoDetailFragment extends Fragment
         final String strippedUrl = url.substring(url.lastIndexOf('/') + 1, url.lastIndexOf('.'));
         mTitle.setText(getStorage().getArticleInfoByUrl(strippedUrl).getName());
       }
+    }
+
+    private boolean shouldAnimate(String url, final Context context)
+    {
+      return notNull(context) && !Utils.isAnchorUrl(url);
     }
 
     @Override
