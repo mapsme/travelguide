@@ -4,15 +4,26 @@ set -e -u
 
 cat countries_to_generate.txt | while read country; do
 
+    # copy index
     rm ../../android/assets/index.dat || echo "No previous index found."
     cp -f Countries/$country/index.dat ../../android/assets/
+
+    # copy resources
+    toCopy=(drawable-ldpi drawable-mdpi drawable-hdpi \
+        drawable-xhdpi drawable-xxhdpi)
+
+    for resDir in ${toCopy[*]}
+    do
+        cp -f ../../android/icons/$country/$resDir/* ../../android/res/$resDir
+        echo "Copied $resDir for $country"
+    done
 
     rm  ../../android/build/apk/* || true
     rm Countries/$country/*.apk || true
 
     # make packages lower case and dot-separated
     PACKAGE="com.guidewithme."$(echo "$country" | tr '[:upper:]' '[:lower:]' | \
-	     sed 's/_/\./g')
+        sed 's/_/\./g')
 
     # hack for UK
     if [[ "$PACKAGE" == *united.kingdom ]]
@@ -25,7 +36,7 @@ cat countries_to_generate.txt | while read country; do
 
     pushd ../../android/
     ./gradlew "-PGWMpn=$PACKAGE" "-PGWMapk=Guide With Me $country" \
-	      "-PGWMappName=$TITLE Guide With Me" clean assembleRelease
+        "-PGWMappName=$TITLE Guide With Me" clean assembleRelease
     popd
 
     cp  ../../android/build/apk/* Countries/$country/
