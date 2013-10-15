@@ -1763,9 +1763,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		ED31540F1806E77F000BBA7B /* california */ = {
+		ED31540F1806E77F000BBA7B /* California */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = ED3154471806E780000BBA7B /* Build configuration list for PBXNativeTarget "california" */;
+			buildConfigurationList = ED3154471806E780000BBA7B /* Build configuration list for PBXNativeTarget "California" */;
 			buildPhases = (
 				ED31540C1806E77F000BBA7B /* Sources */,
 				ED31540D1806E77F000BBA7B /* Frameworks */,
@@ -1775,14 +1775,14 @@
 			);
 			dependencies = (
 			);
-			name = california;
+			name = California;
 			productName = california;
 			productReference = ED3154101806E77F000BBA7B /* California.app */;
 			productType = "com.apple.product-type.application";
 		};
-		ED81954217AED762004F3803 /* offlineguides */ = {
+		ED81954217AED762004F3803 /* UK */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = ED81956017AED762004F3803 /* Build configuration list for PBXNativeTarget "offlineguides" */;
+			buildConfigurationList = ED81956017AED762004F3803 /* Build configuration list for PBXNativeTarget "UK" */;
 			buildPhases = (
 				ED81953F17AED762004F3803 /* Sources */,
 				ED81954017AED762004F3803 /* Frameworks */,
@@ -1792,14 +1792,14 @@
 			);
 			dependencies = (
 			);
-			name = offlineguides;
+			name = UK;
 			productName = offlineguides;
 			productReference = ED81954317AED762004F3803 /* UK.app */;
 			productType = "com.apple.product-type.application";
 		};
-		ED9ABA071805671D00E4F635 /* hawaii */ = {
+		ED9ABA071805671D00E4F635 /* Hawaii */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = ED9ABA391805671D00E4F635 /* Build configuration list for PBXNativeTarget "hawaii" */;
+			buildConfigurationList = ED9ABA391805671D00E4F635 /* Build configuration list for PBXNativeTarget "Hawaii" */;
 			buildPhases = (
 				ED9ABA041805671D00E4F635 /* Sources */,
 				ED9ABA051805671D00E4F635 /* Frameworks */,
@@ -1809,14 +1809,14 @@
 			);
 			dependencies = (
 			);
-			name = hawaii;
+			name = Hawaii;
 			productName = hawaii;
 			productReference = ED9ABA081805671D00E4F635 /* Hawaii.app */;
 			productType = "com.apple.product-type.application";
 		};
-		ED9D33BC1806F32600ADBEF1 /* france */ = {
+		ED9D33BC1806F32600ADBEF1 /* France */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = ED9D33F41806F32700ADBEF1 /* Build configuration list for PBXNativeTarget "france" */;
+			buildConfigurationList = ED9D33F41806F32700ADBEF1 /* Build configuration list for PBXNativeTarget "France" */;
 			buildPhases = (
 				ED9D33B91806F32600ADBEF1 /* Sources */,
 				ED9D33BA1806F32600ADBEF1 /* Frameworks */,
@@ -1826,14 +1826,14 @@
 			);
 			dependencies = (
 			);
-			name = france;
+			name = France;
 			productName = france;
 			productReference = ED9D33BD1806F32600ADBEF1 /* France.app */;
 			productType = "com.apple.product-type.application";
 		};
-		ED9D34831806F7F500ADBEF1 /* germany */ = {
+		ED9D34831806F7F500ADBEF1 /* Germany */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = ED9D34B51806F7F600ADBEF1 /* Build configuration list for PBXNativeTarget "germany" */;
+			buildConfigurationList = ED9D34B51806F7F600ADBEF1 /* Build configuration list for PBXNativeTarget "Germany" */;
 			buildPhases = (
 				ED9D34801806F7F500ADBEF1 /* Sources */,
 				ED9D34811806F7F500ADBEF1 /* Frameworks */,
@@ -1843,14 +1843,14 @@
 			);
 			dependencies = (
 			);
-			name = germany;
+			name = Germany;
 			productName = germany;
 			productReference = ED9D34841806F7F500ADBEF1 /* Germany.app */;
 			productType = "com.apple.product-type.application";
 		};
-		ED9D34E71806F97700ADBEF1 /* greece */ = {
+		ED9D34E71806F97700ADBEF1 /* Greece */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = ED9D35191806F97800ADBEF1 /* Build configuration list for PBXNativeTarget "greece" */;
+			buildConfigurationList = ED9D35191806F97800ADBEF1 /* Build configuration list for PBXNativeTarget "Greece" */;
 			buildPhases = (
 				ED9D34E41806F97700ADBEF1 /* Sources */,
 				ED9D34E51806F97700ADBEF1 /* Frameworks */,
@@ -1860,14 +1860,14 @@
 			);
 			dependencies = (
 			);
-			name = greece;
+			name = Greece;
 			productName = greece;
 			productReference = ED9D34E81806F97700ADBEF1 /* Greece.app */;
 			productType = "com.apple.product-type.application";
 		};
-		ED9D354D1806FADF00ADBEF1 /* italy */ = {
+		ED9D354D1806FADF00ADBEF1 /* Italy */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = ED9D357F1806FAE000ADBEF1 /* Build configuration list for PBXNativeTarget "italy" */;
+			buildConfigurationList = ED9D357F1806FAE000ADBEF1 /* Build configuration list for PBXNativeTarget "Italy" */;
 			buildPhases = (
 				ED9D354A1806FADF00ADBEF1 /* Sources */,
 				ED9D354B1806FADF00ADBEF1 /* Frameworks */,
@@ -1877,14 +1877,14 @@
 			);
 			dependencies = (
 			);
-			name = italy;
+			name = Italy;
 			productName = italy;
 			productReference = ED9D354E1806FADF00ADBEF1 /* Italy.app */;
 			productType = "com.apple.product-type.application";
 		};
-		ED9D35B21806FBD300ADBEF1 /* japan */ = {
+		ED9D35B21806FBD300ADBEF1 /* Japan */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = ED9D35E41806FBD400ADBEF1 /* Build configuration list for PBXNativeTarget "japan" */;
+			buildConfigurationList = ED9D35E41806FBD400ADBEF1 /* Build configuration list for PBXNativeTarget "Japan" */;
 			buildPhases = (
 				ED9D35AF1806FBD300ADBEF1 /* Sources */,
 				ED9D35B01806FBD300ADBEF1 /* Frameworks */,
@@ -1894,14 +1894,14 @@
 			);
 			dependencies = (
 			);
-			name = japan;
+			name = Japan;
 			productName = japan;
 			productReference = ED9D35B31806FBD300ADBEF1 /* Japan.app */;
 			productType = "com.apple.product-type.application";
 		};
-		ED9D36171806FF3500ADBEF1 /* russia */ = {
+		ED9D36171806FF3500ADBEF1 /* Russia */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = ED9D36491806FF3600ADBEF1 /* Build configuration list for PBXNativeTarget "russia" */;
+			buildConfigurationList = ED9D36491806FF3600ADBEF1 /* Build configuration list for PBXNativeTarget "Russia" */;
 			buildPhases = (
 				ED9D36141806FF3500ADBEF1 /* Sources */,
 				ED9D36151806FF3500ADBEF1 /* Frameworks */,
@@ -1911,14 +1911,14 @@
 			);
 			dependencies = (
 			);
-			name = russia;
+			name = Russia;
 			productName = russia;
 			productReference = ED9D36181806FF3500ADBEF1 /* Russia.app */;
 			productType = "com.apple.product-type.application";
 		};
-		ED9D367C180700EE00ADBEF1 /* spain */ = {
+		ED9D367C180700EE00ADBEF1 /* Spain */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = ED9D36AE180700F000ADBEF1 /* Build configuration list for PBXNativeTarget "spain" */;
+			buildConfigurationList = ED9D36AE180700F000ADBEF1 /* Build configuration list for PBXNativeTarget "Spain" */;
 			buildPhases = (
 				ED9D3679180700EE00ADBEF1 /* Sources */,
 				ED9D367A180700EE00ADBEF1 /* Frameworks */,
@@ -1928,14 +1928,14 @@
 			);
 			dependencies = (
 			);
-			name = spain;
+			name = Spain;
 			productName = spain;
 			productReference = ED9D367D180700EE00ADBEF1 /* Spain.app */;
 			productType = "com.apple.product-type.application";
 		};
-		ED9D36E1180701FD00ADBEF1 /* switzerland */ = {
+		ED9D36E1180701FD00ADBEF1 /* Switzerland */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = ED9D3713180701FE00ADBEF1 /* Build configuration list for PBXNativeTarget "switzerland" */;
+			buildConfigurationList = ED9D3713180701FE00ADBEF1 /* Build configuration list for PBXNativeTarget "Switzerland" */;
 			buildPhases = (
 				ED9D36DE180701FD00ADBEF1 /* Sources */,
 				ED9D36DF180701FD00ADBEF1 /* Frameworks */,
@@ -1945,14 +1945,14 @@
 			);
 			dependencies = (
 			);
-			name = switzerland;
+			name = Switzerland;
 			productName = switzerland;
 			productReference = ED9D36E2180701FD00ADBEF1 /* Switzerland.app */;
 			productType = "com.apple.product-type.application";
 		};
-		ED9D3746180703FA00ADBEF1 /* turkey */ = {
+		ED9D3746180703FA00ADBEF1 /* Turkey */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = ED9D3778180703FC00ADBEF1 /* Build configuration list for PBXNativeTarget "turkey" */;
+			buildConfigurationList = ED9D3778180703FC00ADBEF1 /* Build configuration list for PBXNativeTarget "Turkey" */;
 			buildPhases = (
 				ED9D3743180703FA00ADBEF1 /* Sources */,
 				ED9D3744180703FA00ADBEF1 /* Frameworks */,
@@ -1962,7 +1962,7 @@
 			);
 			dependencies = (
 			);
-			name = turkey;
+			name = Turkey;
 			productName = turkey;
 			productReference = ED9D3747180703FA00ADBEF1 /* Turkey.app */;
 			productType = "com.apple.product-type.application";
@@ -1989,18 +1989,18 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				ED81954217AED762004F3803 /* offlineguides */,
-				ED9ABA071805671D00E4F635 /* hawaii */,
-				ED31540F1806E77F000BBA7B /* california */,
-				ED9D33BC1806F32600ADBEF1 /* france */,
-				ED9D34831806F7F500ADBEF1 /* germany */,
-				ED9D34E71806F97700ADBEF1 /* greece */,
-				ED9D354D1806FADF00ADBEF1 /* italy */,
-				ED9D35B21806FBD300ADBEF1 /* japan */,
-				ED9D36171806FF3500ADBEF1 /* russia */,
-				ED9D367C180700EE00ADBEF1 /* spain */,
-				ED9D36E1180701FD00ADBEF1 /* switzerland */,
-				ED9D3746180703FA00ADBEF1 /* turkey */,
+				ED81954217AED762004F3803 /* UK */,
+				ED9ABA071805671D00E4F635 /* Hawaii */,
+				ED31540F1806E77F000BBA7B /* California */,
+				ED9D33BC1806F32600ADBEF1 /* France */,
+				ED9D34831806F7F500ADBEF1 /* Germany */,
+				ED9D34E71806F97700ADBEF1 /* Greece */,
+				ED9D354D1806FADF00ADBEF1 /* Italy */,
+				ED9D35B21806FBD300ADBEF1 /* Japan */,
+				ED9D36171806FF3500ADBEF1 /* Russia */,
+				ED9D367C180700EE00ADBEF1 /* Spain */,
+				ED9D36E1180701FD00ADBEF1 /* Switzerland */,
+				ED9D3746180703FA00ADBEF1 /* Turkey */,
 			);
 		};
 /* End PBXProject section */
@@ -3383,7 +3383,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		ED3154471806E780000BBA7B /* Build configuration list for PBXNativeTarget "california" */ = {
+		ED3154471806E780000BBA7B /* Build configuration list for PBXNativeTarget "California" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				ED3154411806E780000BBA7B /* Debug */,
@@ -3403,7 +3403,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		ED81956017AED762004F3803 /* Build configuration list for PBXNativeTarget "offlineguides" */ = {
+		ED81956017AED762004F3803 /* Build configuration list for PBXNativeTarget "UK" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				ED81956117AED762004F3803 /* Debug */,
@@ -3413,7 +3413,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		ED9ABA391805671D00E4F635 /* Build configuration list for PBXNativeTarget "hawaii" */ = {
+		ED9ABA391805671D00E4F635 /* Build configuration list for PBXNativeTarget "Hawaii" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				ED9ABA3A1805671D00E4F635 /* Debug */,
@@ -3423,7 +3423,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		ED9D33F41806F32700ADBEF1 /* Build configuration list for PBXNativeTarget "france" */ = {
+		ED9D33F41806F32700ADBEF1 /* Build configuration list for PBXNativeTarget "France" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				ED9D33EE1806F32700ADBEF1 /* Debug */,
@@ -3433,7 +3433,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		ED9D34B51806F7F600ADBEF1 /* Build configuration list for PBXNativeTarget "germany" */ = {
+		ED9D34B51806F7F600ADBEF1 /* Build configuration list for PBXNativeTarget "Germany" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				ED9D34B61806F7F600ADBEF1 /* Debug */,
@@ -3443,7 +3443,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		ED9D35191806F97800ADBEF1 /* Build configuration list for PBXNativeTarget "greece" */ = {
+		ED9D35191806F97800ADBEF1 /* Build configuration list for PBXNativeTarget "Greece" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				ED9D351A1806F97800ADBEF1 /* Debug */,
@@ -3453,7 +3453,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		ED9D357F1806FAE000ADBEF1 /* Build configuration list for PBXNativeTarget "italy" */ = {
+		ED9D357F1806FAE000ADBEF1 /* Build configuration list for PBXNativeTarget "Italy" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				ED9D35801806FAE000ADBEF1 /* Debug */,
@@ -3463,7 +3463,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		ED9D35E41806FBD400ADBEF1 /* Build configuration list for PBXNativeTarget "japan" */ = {
+		ED9D35E41806FBD400ADBEF1 /* Build configuration list for PBXNativeTarget "Japan" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				ED9D35E51806FBD400ADBEF1 /* Debug */,
@@ -3473,7 +3473,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		ED9D36491806FF3600ADBEF1 /* Build configuration list for PBXNativeTarget "russia" */ = {
+		ED9D36491806FF3600ADBEF1 /* Build configuration list for PBXNativeTarget "Russia" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				ED9D364A1806FF3600ADBEF1 /* Debug */,
@@ -3483,7 +3483,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		ED9D36AE180700F000ADBEF1 /* Build configuration list for PBXNativeTarget "spain" */ = {
+		ED9D36AE180700F000ADBEF1 /* Build configuration list for PBXNativeTarget "Spain" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				ED9D36AF180700F000ADBEF1 /* Debug */,
@@ -3493,7 +3493,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		ED9D3713180701FE00ADBEF1 /* Build configuration list for PBXNativeTarget "switzerland" */ = {
+		ED9D3713180701FE00ADBEF1 /* Build configuration list for PBXNativeTarget "Switzerland" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				ED9D3714180701FE00ADBEF1 /* Debug */,
@@ -3503,7 +3503,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		ED9D3778180703FC00ADBEF1 /* Build configuration list for PBXNativeTarget "turkey" */ = {
+		ED9D3778180703FC00ADBEF1 /* Build configuration list for PBXNativeTarget "Turkey" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				ED9D3779180703FC00ADBEF1 /* Debug */,
