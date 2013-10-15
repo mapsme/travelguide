@@ -1021,7 +1021,7 @@ BLOCKQUOTE:after
 	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABsAAAAQCAYAAADnEwSWAAAAc0lEQVQ4ja3QSw2AQBCD4V8CUpC0AhGBBKTgYDhAAiGQ3Xbm0NM8vqREBEqACViBWb41oA0IYFdBFwoHzEAy6EKLAzpQu2ZNBS3osSOBNuSAKUgF05AClkCjYBk0ApZCPfALS0E/4Im9aiyBXuBdY+XzXg7oYrvAm9NaKAAAAABJRU5ErkJggg==);
 	padding-right: 45px;
 	border-bottom: 1px solid #E2E3E4;
-	margin-bottom: 9pt;
+/*	margin-bottom: 9pt;*/
 }
 .client-js A.section_anchors
 {
@@ -1056,7 +1056,32 @@ BLOCKQUOTE:after
 .page-loading .section_anchors.openSection, .page-loading .content_block.openSection, .client-js .content_block.openSection, div.openSection
 {
 	display: block;
+/* experimental css animation
+  overflow: hidden;
+  -webkit-animation-name: sectionAppear;
+  -webkit-animation-duration: .3s;
+  -moz-animation-name: sectionAppear;
+  -moz-animation-duration: .3s;
+  animation-name: sectionAppear;
+  animation-duration: .3s;*/
 }
+/*
+@-webkit-keyframes sectionAppear {
+  from { max-height: 0%; }
+  to   { max-height: 100%;
+         scrollTop: 0; }
+}
+
+@-moz-keyframes sectionAppear {
+  from { max-height: 0%; }
+  to   { max-height: 100%; }
+}
+
+@keyframes sectionAppear {
+  from { max-height: 0%; }
+  to   { max-height: 100%; }
+}
+*/
 .stub .section_heading
 {
 	background: none;
