@@ -52,9 +52,9 @@ function onSectionClick(event) {
       sectionToClose.className = next(sectionToClose).className = "";
     });
 
-    animateScroll(this, 200);
-
     this.className = contentSection.className = "openSection";
+
+    animateScroll(this, 200);
 
   } else {
     this.className = contentSection.className = "";
@@ -87,8 +87,6 @@ function animateScroll(element, duration) {
   if (duration < 0)
     return;
   var yLeft = element.getBoundingClientRect().top;
-  if (yLeft <= 0)
-    return;
   var dy = yLeft / duration * ANIMATION_INTERVAL;
   window.scrollBy(0, dy);
 
