@@ -1015,6 +1015,7 @@ BLOCKQUOTE:after
 .client-js H2
 {
   border-bottom: 1px solid #E2E3E4;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
 }
 .client-js H2.openSection
 {
