@@ -153,6 +153,15 @@ def writeHtml(content, fileName):
 def fixTitle(title):
     return title.split('/')[-1].replace('_', ' ')
 
+def quote_argument(argument):
+    return '"%s"' % (
+        argument
+        .replace('\\', '\\\\')
+        .replace('"', '\"')
+        .replace('$', '\$')
+        .replace('`', '\`')
+    )
+
 if len(sys.argv) < 9:
     print "Usage: " + sys.argv[0] + " <directory with html articles> <images directory> <article set info file> <redirect info file> <geocoords file> <output directory> <threadIndex> <cpu core count>"
     exit(1)
@@ -235,7 +244,7 @@ IMAGES_COMMANDS["svg"] = IMAGES_COMMANDS["png"]
 
 for image in imageSet:
     image_as_png = image.replace('.svg', '.png')
-    os.system(IMAGES_COMMANDS[image[-3:].lower()] % {"infile": os.path.join(imagesSrcDir, imageFiles[image]),
+    os.system(IMAGES_COMMANDS[image[-3:].lower()] % {"infile": quote_argument(os.path.join(imagesSrcDir, imageFiles[image])),
                                             "outfile": os.path.join(imagesDstDir, image_as_png)})
 
 THUMB_COMMANDS = {
@@ -253,5 +262,5 @@ if not os.path.exists(thumbsDstDir):
 for k, v in articleImages.iteritems():
     sanitized_name = sanitizeFileName(v)
     if k in thisFiles and sanitized_name in imageFiles:
-        os.system( THUMB_COMMANDS[sanitized_name[-3:].lower()] % {"infile": os.path.join(imagesSrcDir, imageFiles[sanitized_name]),
-                                                         "outfile": os.path.join(thumbsDstDir, k + ".jpg")})
+        os.system( THUMB_COMMANDS[sanitized_name[-3:].lower()] % {"infile": quote_argument(os.path.join(imagesSrcDir, imageFiles[sanitized_name])),
+                                                                 "outfile": os.path.join(thumbsDstDir, k + ".jpg")})
