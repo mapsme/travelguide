@@ -6,7 +6,7 @@ cat countries_to_generate.txt | while read country; do
 
     # copy index
     rm ../../android/assets/index.dat || echo "No previous index found."
-    cp -f Countries/$country/index.dat ../../android/assets/
+    cp -f Countries/$country/content/data/index.dat ../../android/assets/
 
     # copy resources
     toCopy=(drawable-ldpi drawable-mdpi drawable-hdpi \
@@ -39,5 +39,5 @@ cat countries_to_generate.txt | while read country; do
         "-PGWMappName=$TITLE Guide With Me" clean assembleRelease
     popd
 
-    cp  ../../android/build/apk/* Countries/$country/
+    cp  ../../android/build/apk/*release.apk Countries/$country/
 done
