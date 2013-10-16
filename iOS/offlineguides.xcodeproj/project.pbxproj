@@ -59,6 +59,18 @@
 		ED3154711806E807000BBA7B /* bg_header@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED4F8B9D17B2A52200ADD795 /* bg_header@2x.png */; };
 		ED3154721806E807000BBA7B /* bg_search.png in Resources */ = {isa = PBXBuildFile; fileRef = ED64332217B4D14F000985FE /* bg_search.png */; };
 		ED3154731806E807000BBA7B /* bg_search@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED64332317B4D14F000985FE /* bg_search@2x.png */; };
+		ED32B161180E7DB800065EE7 /* data in Resources */ = {isa = PBXBuildFile; fileRef = ED32B160180E7DB800065EE7 /* data */; };
+		ED32B163180E7DC300065EE7 /* data in Resources */ = {isa = PBXBuildFile; fileRef = ED32B162180E7DC300065EE7 /* data */; };
+		ED32B165180E7DD200065EE7 /* data in Resources */ = {isa = PBXBuildFile; fileRef = ED32B164180E7DD200065EE7 /* data */; };
+		ED32B169180E7DF000065EE7 /* data in Resources */ = {isa = PBXBuildFile; fileRef = ED32B168180E7DF000065EE7 /* data */; };
+		ED32B16B180E7DFA00065EE7 /* data in Resources */ = {isa = PBXBuildFile; fileRef = ED32B16A180E7DFA00065EE7 /* data */; };
+		ED32B16D180E7E0C00065EE7 /* data in Resources */ = {isa = PBXBuildFile; fileRef = ED32B16C180E7E0C00065EE7 /* data */; };
+		ED32B16F180E7E1800065EE7 /* data in Resources */ = {isa = PBXBuildFile; fileRef = ED32B16E180E7E1800065EE7 /* data */; };
+		ED32B171180E7E2800065EE7 /* data in Resources */ = {isa = PBXBuildFile; fileRef = ED32B170180E7E2800065EE7 /* data */; };
+		ED32B173180E7E3300065EE7 /* data in Resources */ = {isa = PBXBuildFile; fileRef = ED32B172180E7E3300065EE7 /* data */; };
+		ED32B175180E7E4100065EE7 /* data in Resources */ = {isa = PBXBuildFile; fileRef = ED32B174180E7E4100065EE7 /* data */; };
+		ED32B177180E7E4C00065EE7 /* data in Resources */ = {isa = PBXBuildFile; fileRef = ED32B176180E7E4C00065EE7 /* data */; };
+		ED32B179180E7E5900065EE7 /* data in Resources */ = {isa = PBXBuildFile; fileRef = ED32B178180E7E5800065EE7 /* data */; };
 		ED4F8B9E17B2A52200ADD795 /* bg_header.png in Resources */ = {isa = PBXBuildFile; fileRef = ED4F8B9C17B2A52200ADD795 /* bg_header.png */; };
 		ED4F8B9F17B2A52200ADD795 /* bg_header@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED4F8B9D17B2A52200ADD795 /* bg_header@2x.png */; };
 		ED4F8BA417B2C97300ADD795 /* ic_articleselection.png in Resources */ = {isa = PBXBuildFile; fileRef = ED4F8BA017B2C97300ADD795 /* ic_articleselection.png */; };
@@ -725,6 +737,18 @@
 		A3E2220E17AFD9E10018AB9E /* assert.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = assert.cpp; path = ../../env/assert.cpp; sourceTree = "<group>"; };
 		A3E2221017AFDA0A0018AB9E /* source_address.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = source_address.cpp; path = ../../env/source_address.cpp; sourceTree = "<group>"; };
 		ED3154101806E77F000BBA7B /* California.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = California.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		ED32B160180E7DB800065EE7 /* data */ = {isa = PBXFileReference; lastKnownFileType = folder; name = data; path = ../builder/wikivoyage/Countries/California/content/data; sourceTree = "<group>"; };
+		ED32B162180E7DC300065EE7 /* data */ = {isa = PBXFileReference; lastKnownFileType = folder; name = data; path = ../builder/wikivoyage/Countries/France/content/data; sourceTree = "<group>"; };
+		ED32B164180E7DD200065EE7 /* data */ = {isa = PBXFileReference; lastKnownFileType = folder; name = data; path = ../builder/wikivoyage/Countries/Germany/content/data; sourceTree = "<group>"; };
+		ED32B168180E7DF000065EE7 /* data */ = {isa = PBXFileReference; lastKnownFileType = folder; name = data; path = ../builder/wikivoyage/Countries/Greece/content/data; sourceTree = "<group>"; };
+		ED32B16A180E7DFA00065EE7 /* data */ = {isa = PBXFileReference; lastKnownFileType = folder; name = data; path = ../builder/wikivoyage/Countries/Hawaii/content/data; sourceTree = "<group>"; };
+		ED32B16C180E7E0C00065EE7 /* data */ = {isa = PBXFileReference; lastKnownFileType = folder; name = data; path = ../builder/wikivoyage/Countries/Italy/content/data; sourceTree = "<group>"; };
+		ED32B16E180E7E1800065EE7 /* data */ = {isa = PBXFileReference; lastKnownFileType = folder; name = data; path = ../builder/wikivoyage/Countries/Japan/content/data; sourceTree = "<group>"; };
+		ED32B170180E7E2800065EE7 /* data */ = {isa = PBXFileReference; lastKnownFileType = folder; name = data; path = ../builder/wikivoyage/Countries/Russia/content/data; sourceTree = "<group>"; };
+		ED32B172180E7E3300065EE7 /* data */ = {isa = PBXFileReference; lastKnownFileType = folder; name = data; path = ../builder/wikivoyage/Countries/Spain/content/data; sourceTree = "<group>"; };
+		ED32B174180E7E4100065EE7 /* data */ = {isa = PBXFileReference; lastKnownFileType = folder; name = data; path = ../builder/wikivoyage/Countries/Switzerland/content/data; sourceTree = "<group>"; };
+		ED32B176180E7E4C00065EE7 /* data */ = {isa = PBXFileReference; lastKnownFileType = folder; name = data; path = ../builder/wikivoyage/Countries/Turkey/content/data; sourceTree = "<group>"; };
+		ED32B178180E7E5800065EE7 /* data */ = {isa = PBXFileReference; lastKnownFileType = folder; name = data; path = ../builder/wikivoyage/Countries/United_Kingdom/content/data; sourceTree = "<group>"; };
 		ED4F8B9C17B2A52200ADD795 /* bg_header.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bg_header.png; path = offlineguides/bg_header.png; sourceTree = "<group>"; };
 		ED4F8B9D17B2A52200ADD795 /* bg_header@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bg_header@2x.png"; path = "offlineguides/bg_header@2x.png"; sourceTree = "<group>"; };
 		ED4F8BA017B2C97300ADD795 /* ic_articleselection.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ic_articleselection.png; path = offlineguides/ic_articleselection.png; sourceTree = "<group>"; };
@@ -1219,6 +1243,18 @@
 		ED81F53517BA65A800361D6D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				ED32B178180E7E5800065EE7 /* data */,
+				ED32B176180E7E4C00065EE7 /* data */,
+				ED32B174180E7E4100065EE7 /* data */,
+				ED32B172180E7E3300065EE7 /* data */,
+				ED32B170180E7E2800065EE7 /* data */,
+				ED32B16E180E7E1800065EE7 /* data */,
+				ED32B16C180E7E0C00065EE7 /* data */,
+				ED32B16A180E7DFA00065EE7 /* data */,
+				ED32B168180E7DF000065EE7 /* data */,
+				ED32B164180E7DD200065EE7 /* data */,
+				ED32B162180E7DC300065EE7 /* data */,
+				ED32B160180E7DB800065EE7 /* data */,
 				ED95A03D1807EAFA005FAA93 /* Hawaii */,
 				ED95A0161807EAF0005FAA93 /* California */,
 				ED959FEF1807EADE005FAA93 /* United_Kingdom */,
@@ -1990,6 +2026,7 @@
 				ED31545F1806E807000BBA7B /* Default-568h@2x.png in Resources */,
 				ED3154671806E807000BBA7B /* Default-Portrait-1024@2x~ipad.png in Resources */,
 				ED3154641806E807000BBA7B /* Default-Portrait@2x~ipad.png in Resources */,
+				ED32B161180E7DB800065EE7 /* data in Resources */,
 				ED3154621806E807000BBA7B /* Default-Landscape@2x~ipad.png in Resources */,
 				ED3154691806E807000BBA7B /* Default-Landscape-1024@2x~ipad.png in Resources */,
 				ED3154731806E807000BBA7B /* bg_search@2x.png in Resources */,
@@ -2035,6 +2072,7 @@
 				ED4F8BA717B2C97300ADD795 /* ic_articleselection@2x.png in Resources */,
 				ED95A00A1807EADE005FAA93 /* GWM.png in Resources */,
 				ED64332417B4D14F000985FE /* bg_search.png in Resources */,
+				ED32B179180E7E5900065EE7 /* data in Resources */,
 				ED64332517B4D14F000985FE /* bg_search@2x.png in Resources */,
 				ED64332817B4D6CB000985FE /* bg_landscape_header.png in Resources */,
 				ED95A0131807EADE005FAA93 /* GWM76x76@2x.png in Resources */,
@@ -2080,6 +2118,7 @@
 				ED95A0531807EAFA005FAA93 /* GWM-72@2x.png in Resources */,
 				ED9ABA491805678000E4F635 /* Default-Portrait-1024@2x~ipad.png in Resources */,
 				ED9ABA501805678000E4F635 /* ic_back@2x.png in Resources */,
+				ED32B16B180E7DFA00065EE7 /* data in Resources */,
 				ED95A05D1807EAFA005FAA93 /* GWM40x40@2x.png in Resources */,
 				ED9ABA471805678000E4F635 /* Default-Portrait~ipad.png in Resources */,
 				ED9ABA411805678000E4F635 /* Default-568h@2x.png in Resources */,
@@ -2125,6 +2164,7 @@
 				ED9D340A1806F42A00ADBEF1 /* Default@2x.png in Resources */,
 				ED9D341C1806F42A00ADBEF1 /* bg_search.png in Resources */,
 				ED9D34121806F42A00ADBEF1 /* Default-Landscape-1024~ipad.png in Resources */,
+				ED32B163180E7DC300065EE7 /* data in Resources */,
 				ED9D340E1806F42A00ADBEF1 /* Default-Portrait@2x~ipad.png in Resources */,
 				ED9D34071806F41700ADBEF1 /* Settings.bundle in Resources */,
 				ED9D34161806F42A00ADBEF1 /* ic_articleselection.png in Resources */,
@@ -2170,6 +2210,7 @@
 				ED9D34DA1806F83D00ADBEF1 /* bg_landscape_header.png in Resources */,
 				ED9D34DB1806F83D00ADBEF1 /* bg_landscape_header@2x.png in Resources */,
 				ED9D34D61806F83D00ADBEF1 /* Default-Portrait-1024~ipad.png in Resources */,
+				ED32B165180E7DD200065EE7 /* data in Resources */,
 				ED9D34D41806F83D00ADBEF1 /* Default-Portrait@2x~ipad.png in Resources */,
 				ED9D34DE1806F83D00ADBEF1 /* ic_back@2x.png in Resources */,
 				ED9D34E21806F83D00ADBEF1 /* bg_search.png in Resources */,
@@ -2215,6 +2256,7 @@
 				ED9D35361806FA0E00ADBEF1 /* Default@2x.png in Resources */,
 				ED9D35481806FA0E00ADBEF1 /* bg_search.png in Resources */,
 				ED9D353E1806FA0E00ADBEF1 /* Default-Landscape-1024~ipad.png in Resources */,
+				ED32B169180E7DF000065EE7 /* data in Resources */,
 				ED9D353A1806FA0E00ADBEF1 /* Default-Portrait@2x~ipad.png in Resources */,
 				ED9D35321806F9FF00ADBEF1 /* Settings.bundle in Resources */,
 				ED9D35421806FA0E00ADBEF1 /* ic_articleselection.png in Resources */,
@@ -2260,6 +2302,7 @@
 				ED9D359B1806FB1B00ADBEF1 /* Default@2x.png in Resources */,
 				ED9D35AD1806FB1B00ADBEF1 /* bg_search.png in Resources */,
 				ED9D35A31806FB1B00ADBEF1 /* Default-Landscape-1024~ipad.png in Resources */,
+				ED32B16D180E7E0C00065EE7 /* data in Resources */,
 				ED9D359F1806FB1B00ADBEF1 /* Default-Portrait@2x~ipad.png in Resources */,
 				ED9D35991806FB1000ADBEF1 /* Settings.bundle in Resources */,
 				ED9D35A71806FB1B00ADBEF1 /* ic_articleselection.png in Resources */,
@@ -2305,6 +2348,7 @@
 				ED9D36091806FC4500ADBEF1 /* bg_landscape_header.png in Resources */,
 				ED9D360A1806FC4500ADBEF1 /* bg_landscape_header@2x.png in Resources */,
 				ED9D36051806FC4500ADBEF1 /* Default-Portrait-1024~ipad.png in Resources */,
+				ED32B16F180E7E1800065EE7 /* data in Resources */,
 				ED9D36031806FC4500ADBEF1 /* Default-Portrait@2x~ipad.png in Resources */,
 				ED9D360D1806FC4500ADBEF1 /* ic_back@2x.png in Resources */,
 				ED9D36111806FC4500ADBEF1 /* bg_search.png in Resources */,
@@ -2350,6 +2394,7 @@
 				ED9D36651806FF8F00ADBEF1 /* Default@2x.png in Resources */,
 				ED9D36771806FF8F00ADBEF1 /* bg_search.png in Resources */,
 				ED9D366D1806FF8F00ADBEF1 /* Default-Landscape-1024~ipad.png in Resources */,
+				ED32B171180E7E2800065EE7 /* data in Resources */,
 				ED9D36691806FF8F00ADBEF1 /* Default-Portrait@2x~ipad.png in Resources */,
 				ED9D36621806FF7000ADBEF1 /* Settings.bundle in Resources */,
 				ED9D36711806FF8F00ADBEF1 /* ic_articleselection.png in Resources */,
@@ -2395,6 +2440,7 @@
 				ED9D36CA1807012300ADBEF1 /* Default@2x.png in Resources */,
 				ED9D36DC1807012300ADBEF1 /* bg_search.png in Resources */,
 				ED9D36D21807012300ADBEF1 /* Default-Landscape-1024~ipad.png in Resources */,
+				ED32B173180E7E3300065EE7 /* data in Resources */,
 				ED9D36CE1807012300ADBEF1 /* Default-Portrait@2x~ipad.png in Resources */,
 				ED9D36C81807011900ADBEF1 /* Settings.bundle in Resources */,
 				ED9D36D61807012300ADBEF1 /* ic_articleselection.png in Resources */,
@@ -2440,6 +2486,7 @@
 				ED9D372F1807024700ADBEF1 /* Default@2x.png in Resources */,
 				ED9D37411807024700ADBEF1 /* bg_search.png in Resources */,
 				ED9D37371807024700ADBEF1 /* Default-Landscape-1024~ipad.png in Resources */,
+				ED32B175180E7E4100065EE7 /* data in Resources */,
 				ED9D37331807024700ADBEF1 /* Default-Portrait@2x~ipad.png in Resources */,
 				ED9D372C1807023E00ADBEF1 /* Settings.bundle in Resources */,
 				ED9D373B1807024700ADBEF1 /* ic_articleselection.png in Resources */,
@@ -2485,6 +2532,7 @@
 				ED959FEC1807EAD1005FAA93 /* GWM76x76@2x.png in Resources */,
 				ED9D379E1807043500ADBEF1 /* bg_landscape_header@2x.png in Resources */,
 				ED9D37991807043500ADBEF1 /* Default-Portrait-1024~ipad.png in Resources */,
+				ED32B177180E7E4C00065EE7 /* data in Resources */,
 				ED9D37971807043500ADBEF1 /* Default-Portrait@2x~ipad.png in Resources */,
 				ED959FEB1807EAD1005FAA93 /* GWM76x76.png in Resources */,
 				ED9D37A11807043500ADBEF1 /* ic_back@2x.png in Resources */,
