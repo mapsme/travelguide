@@ -55,21 +55,14 @@ download_images: image_url.txt image_url_desktop.txt
 	wget --wait=0.2 --random-wait --no-clobber --directory-prefix=images --input-file=image_url_desktop.txt || true
 	touch download_images
 
-rename_articles_mobile:
+rename_articles:
 	for f in articles/*; do mv $$f $$(echo $$f | sed 's/wiki.curid=//g'); done
-	touch rename_articles_mobile
-
-rename_articles_desktop:
-	for f in articles_desktop/*; do mv $$f $$(echo $$f | sed 's/wiki.curid=//g'); done
-	touch rename_articles_desktop
-
-rename_articles: rename_articles_mobile rename_articles_desktop
 	touch rename_articles
 
 countries.txt: load_sql_dumps
 	$$BIN/generate_article_info.sh
 
-clean_up_countries: countries.txt
+clean_up_countries: countries.txt rename_articles
 	$$BIN/clean_up_countries.sh
 
 geocodes_from_html.txt: download_articles
@@ -87,12 +80,12 @@ geocodes.txt: geocodes_from_html.txt geocodes_todo.txt
 	cp geocodes_from_html.txt geocodes.txt
 	touch geocodes.txt
 
-process_html: clean_up_countries
+process_html: clean_up_countries geocodes.txt
 	cat countries_to_generate.txt | while read country; do mkdir -p Countries/$$country/content/data; ../htmlprocessor/processor.sh articles/ images/ $$country.info.txt $$country.redirect.txt geocodes.txt Countries/$$country/content/data; done
 	touch process_html
 
 genindex: geocodes.txt clean_up_countries
-	cat countries_to_generate.txt | while read country; do ../genindex/genindex $$country.info.txt $$country.redirect.txt geocodes.txt Countries/$$country/index.dat; done
+	cat countries_to_generate.txt | while read country; do ../genindex/genindex $$country.info.txt $$country.redirect.txt geocodes.txt Countries/$$country/content/data/index.dat; done
 	touch genindex
 
 make_obb: process_html
