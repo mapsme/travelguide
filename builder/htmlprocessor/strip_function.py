@@ -40,10 +40,16 @@ def cleanUp(soup):
     sections = content.findAll("h2")
     for section in sections:
         content_div = section.findNextSibling("div")
-        if not content_div.text.strip():
-            print section.text, " : is empty"
-            content_div.decompose()
-            section.decompose()
+        try:
+            if not content_div.text.strip():
+                content_div.decompose()
+                section.decompose()
+        except:
+            print "error in :", content_div
+
+    # remove all no-print
+    [tag.decompose for tag in content.findAll(attrs={"class":"noprint"})]
+
 
     # Wrap content with our own header and body, and restore original div structure for css
     divContentWrapper = soup.new_tag("div", id="content_wrapper")
