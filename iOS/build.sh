@@ -16,9 +16,9 @@ RESULT_DIR="${PROJECT_BUILDDIR}"
 declare arr=(UK Japan Russia Spain Hawaii California Germany Italy France Turkey Switzerland Greece)
 
 # Copy provisioning profiles from repo to the build system
-SYSTEM_PROVISIONING_DIR="~/Library/MobileDevice/Provisioning Profiles"
-rm -rf "${SYSTEM_PROVISIONING_DIR}/*"
-cp "${PROVISIONING_PROFILE_CONST}/*" "${SYSTEM_PROVISIONING_DIR}"
+SYSTEM_PROVISIONING_DIR=~/Library/MobileDevice/Provisioning\ Profiles
+rm -rf "${SYSTEM_PROVISIONING_DIR}/"*
+cp "${PROVISIONING_PROFILE_CONST}/"* "${SYSTEM_PROVISIONING_DIR}"
 
 # if launched with any parameter, build adhoc versions
 if [ $# == 1 ]; then
