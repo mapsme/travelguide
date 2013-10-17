@@ -274,7 +274,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 
 -(NSString *)getAppName
 {
-  return [NSString stringWithFormat:@"%@ %@", [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"], @"GuideWithMe"];
+  return [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"];
 }
 
 @end

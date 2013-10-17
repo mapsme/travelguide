@@ -155,7 +155,7 @@ static BOOL openUrlOnBalloonClick = NO;
     return NO;
   }
 
-  NSString * appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
+  NSString * appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"];
   NSMutableString * str = [[NSMutableString alloc] initWithFormat:@"%@map?v=%d&appname=%@&", MWMUrlScheme, MAPSWITHME_API_VERSION,
                            [MWMApi percentEncode:appName]];
 
