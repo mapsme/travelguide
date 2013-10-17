@@ -23,6 +23,7 @@
   if (self)
   {
     _webView = [[UIWebView alloc] init];
+    self.webView.scrollView.decelerationRate = UIScrollViewDecelerationRateNormal;
     [self.webView setFrame:self.view.frame];
     UIPanGestureRecognizer * pinch = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(onPinch:)];
     pinch.delegate = self;
