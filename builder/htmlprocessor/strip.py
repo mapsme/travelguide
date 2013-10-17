@@ -157,9 +157,9 @@ def quote_argument(argument):
     return '"%s"' % (
         argument
         .replace('\\', '\\\\')
-        .replace('"', '\"')
-        .replace('$', '\$')
-        .replace('`', '\`')
+        .replace('"', r'\"')
+        .replace('$', r'\$')
+        .replace('`', r'\`')
     )
 
 if len(sys.argv) < 9:
@@ -234,8 +234,8 @@ if not os.path.exists(imagesDstDir):
     os.makedirs(imagesDstDir)
 
 IMAGES_COMMANDS = {
-    "jpg": "convert \"%(infile)s\" -auto-orient -quality 53 -strip -thumbnail '1536x1536>' \"%(outfile)s\"",
-    "png": "convert \"%(infile)s\" -auto-orient -quality 99 -strip -thumbnail '1536x1536>' \"PNG8:%(outfile)s\""
+    "jpg": "convert %(infile)s -auto-orient -quality 53 -strip -thumbnail '1536x1536>' \"%(outfile)s\"",
+    "png": "convert %(infile)s -auto-orient -quality 99 -strip -thumbnail '1536x1536>' \"PNG8:%(outfile)s\""
 }
 IMAGES_COMMANDS["peg"] = IMAGES_COMMANDS["jpg"]
 IMAGES_COMMANDS["gif"] = IMAGES_COMMANDS["png"]
@@ -248,8 +248,8 @@ for image in imageSet:
                                             "outfile": os.path.join(imagesDstDir, image_as_png)})
 
 THUMB_COMMANDS = {
-    "png": "convert \"%(infile)s\" -auto-orient -quality 53 -thumbnail '256x256>' %(outfile)s",
-    "jpg": "convert  -define jpeg:size=400x280 \"%(infile)s\" -auto-orient -quality 53 -thumbnail '500x280>' -strip -liquid-rescale '256x256!>' %(outfile)s"
+    "png": "convert %(infile)s -auto-orient -quality 53 -thumbnail '256x256>' %(outfile)s",
+    "jpg": "convert  -define jpeg:size=400x280 %(infile)s -auto-orient -quality 53 -thumbnail '500x280>' -strip -liquid-rescale '256x256!>' %(outfile)s"
 }
 THUMB_COMMANDS["peg"] = THUMB_COMMANDS["jpg"]
 THUMB_COMMANDS["gif"] = THUMB_COMMANDS["png"]
