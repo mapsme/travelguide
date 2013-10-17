@@ -48,7 +48,7 @@ def cleanUp(soup):
             print "error in :", content_div
 
     # remove all no-print
-    [tag.decompose for tag in content.findAll(attrs={"class":"noprint"})]
+    [tag.decompose() for tag in content.findAll(attrs={"class":"noprint"})]
 
 
     # Wrap content with our own header and body, and restore original div structure for css
