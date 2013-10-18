@@ -8,7 +8,7 @@ buildscript {
 apply plugin:'base'
 
 task ndkBuild(type:Exec) {
-   def clParts = (['ndk-build', '-j', Runtime.runtime.availableProcessors() + 1] + GWMndkFlags.split(' ')).flatten()
+  def clParts = (['ndk-build', '-j', Runtime.runtime.availableProcessors() + 1] + GWMndkFlags.split(' ')).flatten()
   println(clParts.join(" "))
   commandLine clParts
 }
