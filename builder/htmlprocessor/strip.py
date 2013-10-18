@@ -224,8 +224,10 @@ for file in thisFiles:
             # insert default image
             def_img_path = sanitizeFileName(country_name + ".jpg")
             print "image not found:", articleImages[file], "for: ", file, "using: ", def_img_path
-            insertArticleImage(soup, def_img_path)
+            insertArticleImage(soup, imageSanitizedPath(def_img_path))
             imageSet.add(def_img_path)
+            # add thumb
+            articleImages[file] = country_name + ".jpg"
 
         # Change src tag of images to s tag.
         soup = changeImgSrcAttr(soup)
