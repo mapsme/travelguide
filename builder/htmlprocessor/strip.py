@@ -188,6 +188,7 @@ pageIdToTitle = {v: fixTitle(str(k)) for k, v in idMapping.iteritems()}
 outDir = sys.argv[6]
 threadIndex = int(sys.argv[7])
 coreCount = int(sys.argv[8])
+country_name = str(sys.argv[9])
 files = [urllib.unquote(file) for file in idMapping.values()]
 
 thisFiles = files[threadIndex * len(files) / coreCount: (threadIndex + 1) * len(files) / coreCount]
@@ -220,7 +221,13 @@ for file in thisFiles:
         if articleImage:
             insertArticleImage(soup, articleImage)
         else:
-            print "article image not found:", articleImages[file]
+            # insert default image
+            def_img_path = sanitizeFileName(country_name + ".jpg")
+            print "image not found:", articleImages[file], "for: ", file, "using: ", def_img_path
+            insertArticleImage(soup, imageSanitizedPath(def_img_path))
+            imageSet.add(def_img_path)
+            # add thumb
+            articleImages[file] = country_name + ".jpg"
 
         # Change src tag of images to s tag.
         soup = changeImgSrcAttr(soup)
