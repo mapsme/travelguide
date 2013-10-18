@@ -81,7 +81,7 @@ geocodes.txt: geocodes_from_html.txt geocodes_todo.txt
 	touch geocodes.txt
 
 process_html: clean_up_countries geocodes.txt
-	cat countries_to_generate.txt | while read country; do mkdir -p Countries/$$country/content/data; rm Countries/$$country/content/data/*.html; ../htmlprocessor/processor.sh articles/ images/ $$country.info.txt $$country.redirect.txt geocodes.txt Countries/$$country/content/data; done
+	cp default_images/* images; cat countries_to_generate.txt | while read country; do mkdir -p Countries/$$country/content/data; rm Countries/$$country/content/data/*.html; ../htmlprocessor/processor.sh articles/ images/ $$country.info.txt $$country.redirect.txt geocodes.txt Countries/$$country/content/data $$country; done
 	touch process_html
 
 genindex: geocodes.txt clean_up_countries
