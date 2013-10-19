@@ -3118,30 +3118,30 @@
 		ED9D351A1806F97800ADBEF1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_ID = com.guidewithme.grecee;
+				BUNDLE_ID = com.guidewithme.greece;
 				PRODUCT_NAME = Greece;
-				URL_SCHEME = "guidewithme-grecee";
 				WRAPPER_EXTENSION = app;
+				URL_SCHEME = "guidewithme-greece";
 			};
 			name = Debug;
 		};
 		ED9D351B1806F97800ADBEF1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_ID = com.guidewithme.grecee;
+				BUNDLE_ID = com.guidewithme.greece;
 				PRODUCT_NAME = Greece;
-				URL_SCHEME = "guidewithme-grecee";
 				WRAPPER_EXTENSION = app;
+				URL_SCHEME = "guidewithme-greece";
 			};
 			name = Release;
 		};
 		ED9D351C1806F97800ADBEF1 /* Production */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_ID = com.guidewithme.grecee;
+				BUNDLE_ID = com.guidewithme.greece;
 				PRODUCT_NAME = Greece;
-				URL_SCHEME = "guidewithme-grecee";
 				WRAPPER_EXTENSION = app;
+				URL_SCHEME = "guidewithme-greece";
 			};
 			name = Production;
 		};
