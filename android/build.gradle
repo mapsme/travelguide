@@ -68,7 +68,7 @@ android {
   }
 
   defaultConfig {
-    versionCode = GWMvc
+    versionCode = Integer.valueOf(GWMvc)
     versionName = GWMvn
     packageName = GWMpn
     minSdkVersion 9
