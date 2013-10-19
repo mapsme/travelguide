@@ -2858,7 +2858,6 @@
 				BUNDLE_ID = com.guidewithme.california;
 				PRODUCT_NAME = California;
 				URL_SCHEME = "guidewithme-california";
-				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
 		};
@@ -2868,7 +2867,6 @@
 				BUNDLE_ID = com.guidewithme.california;
 				PRODUCT_NAME = California;
 				URL_SCHEME = "guidewithme-california";
-				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
 		};
@@ -2878,7 +2876,6 @@
 				BUNDLE_ID = com.guidewithme.california;
 				PRODUCT_NAME = California;
 				URL_SCHEME = "guidewithme-california";
-				WRAPPER_EXTENSION = app;
 			};
 			name = Production;
 		};
@@ -3009,7 +3006,6 @@
 				PRODUCT_NAME = Hawaii;
 				URL_SCHEME = "guidewithme-hawaii";
 				USER_HEADER_SEARCH_PATHS = ../3rdparty/boost;
-				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
 		};
@@ -3027,7 +3023,6 @@
 				PRODUCT_NAME = Hawaii;
 				URL_SCHEME = "guidewithme-hawaii";
 				USER_HEADER_SEARCH_PATHS = ../3rdparty/boost;
-				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
 		};
@@ -3045,7 +3040,6 @@
 				PRODUCT_NAME = Hawaii;
 				URL_SCHEME = "guidewithme-hawaii";
 				USER_HEADER_SEARCH_PATHS = ../3rdparty/boost;
-				WRAPPER_EXTENSION = app;
 			};
 			name = Production;
 		};
@@ -3056,7 +3050,6 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				PRODUCT_NAME = France;
 				URL_SCHEME = "guidewithme-france";
-				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
 		};
@@ -3067,7 +3060,6 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				PRODUCT_NAME = France;
 				URL_SCHEME = "guidewithme-france";
-				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
 		};
@@ -3078,7 +3070,6 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				PRODUCT_NAME = France;
 				URL_SCHEME = "guidewithme-france";
-				WRAPPER_EXTENSION = app;
 			};
 			name = Production;
 		};
@@ -3089,7 +3080,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = Germany;
 				URL_SCHEME = "guidewithme-germany";
-				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
 		};
@@ -3100,7 +3090,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = Germany;
 				URL_SCHEME = "guidewithme-germany";
-				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
 		};
@@ -3111,37 +3100,33 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = Germany;
 				URL_SCHEME = "guidewithme-germany";
-				WRAPPER_EXTENSION = app;
 			};
 			name = Production;
 		};
 		ED9D351A1806F97800ADBEF1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_ID = com.guidewithme.grecee;
+				BUNDLE_ID = com.guidewithme.greece;
 				PRODUCT_NAME = Greece;
-				URL_SCHEME = "guidewithme-grecee";
-				WRAPPER_EXTENSION = app;
+				URL_SCHEME = "guidewithme-greece";
 			};
 			name = Debug;
 		};
 		ED9D351B1806F97800ADBEF1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_ID = com.guidewithme.grecee;
+				BUNDLE_ID = com.guidewithme.greece;
 				PRODUCT_NAME = Greece;
-				URL_SCHEME = "guidewithme-grecee";
-				WRAPPER_EXTENSION = app;
+				URL_SCHEME = "guidewithme-greece";
 			};
 			name = Release;
 		};
 		ED9D351C1806F97800ADBEF1 /* Production */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_ID = com.guidewithme.grecee;
+				BUNDLE_ID = com.guidewithme.greece;
 				PRODUCT_NAME = Greece;
-				URL_SCHEME = "guidewithme-grecee";
-				WRAPPER_EXTENSION = app;
+				URL_SCHEME = "guidewithme-greece";
 			};
 			name = Production;
 		};
@@ -3151,7 +3136,6 @@
 				BUNDLE_ID = com.guidewithme.italy;
 				PRODUCT_NAME = Italy;
 				URL_SCHEME = "guidewithme-italy";
-				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
 		};
@@ -3161,7 +3145,6 @@
 				BUNDLE_ID = com.guidewithme.italy;
 				PRODUCT_NAME = Italy;
 				URL_SCHEME = "guidewithme-italy";
-				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
 		};
@@ -3171,7 +3154,6 @@
 				BUNDLE_ID = com.guidewithme.italy;
 				PRODUCT_NAME = Italy;
 				URL_SCHEME = "guidewithme-italy";
-				WRAPPER_EXTENSION = app;
 			};
 			name = Production;
 		};
@@ -3181,7 +3163,6 @@
 				BUNDLE_ID = com.guidewithme.japan;
 				PRODUCT_NAME = Japan;
 				URL_SCHEME = "guidewithme-japan";
-				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
 		};
@@ -3191,7 +3172,6 @@
 				BUNDLE_ID = com.guidewithme.japan;
 				PRODUCT_NAME = Japan;
 				URL_SCHEME = "guidewithme-japan";
-				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
 		};
@@ -3201,7 +3181,6 @@
 				BUNDLE_ID = com.guidewithme.japan;
 				PRODUCT_NAME = Japan;
 				URL_SCHEME = "guidewithme-japan";
-				WRAPPER_EXTENSION = app;
 			};
 			name = Production;
 		};
@@ -3211,7 +3190,6 @@
 				BUNDLE_ID = com.guidewithme.russia;
 				PRODUCT_NAME = Russia;
 				URL_SCHEME = "guidewithme-russia";
-				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
 		};
@@ -3221,7 +3199,6 @@
 				BUNDLE_ID = com.guidewithme.russia;
 				PRODUCT_NAME = Russia;
 				URL_SCHEME = "guidewithme-russia";
-				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
 		};
@@ -3231,7 +3208,6 @@
 				BUNDLE_ID = com.guidewithme.russia;
 				PRODUCT_NAME = Russia;
 				URL_SCHEME = "guidewithme-russia";
-				WRAPPER_EXTENSION = app;
 			};
 			name = Production;
 		};
@@ -3241,7 +3217,6 @@
 				BUNDLE_ID = com.guidewithme.spain;
 				PRODUCT_NAME = Spain;
 				URL_SCHEME = "guidewithme-spain";
-				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
 		};
@@ -3251,7 +3226,6 @@
 				BUNDLE_ID = com.guidewithme.spain;
 				PRODUCT_NAME = Spain;
 				URL_SCHEME = "guidewithme-spain";
-				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
 		};
@@ -3261,7 +3235,6 @@
 				BUNDLE_ID = com.guidewithme.spain;
 				PRODUCT_NAME = Spain;
 				URL_SCHEME = "guidewithme-spain";
-				WRAPPER_EXTENSION = app;
 			};
 			name = Production;
 		};
@@ -3271,7 +3244,6 @@
 				BUNDLE_ID = com.guidewithme.switzerland;
 				PRODUCT_NAME = Switzerland;
 				URL_SCHEME = "guidewithme-switzerland";
-				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
 		};
@@ -3281,7 +3253,6 @@
 				BUNDLE_ID = com.guidewithme.switzerland;
 				PRODUCT_NAME = Switzerland;
 				URL_SCHEME = "guidewithme-switzerland";
-				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
 		};
@@ -3291,7 +3262,6 @@
 				BUNDLE_ID = com.guidewithme.switzerland;
 				PRODUCT_NAME = Switzerland;
 				URL_SCHEME = "guidewithme-switzerland";
-				WRAPPER_EXTENSION = app;
 			};
 			name = Production;
 		};
@@ -3301,7 +3271,6 @@
 				BUNDLE_ID = com.guidewithme.turkey;
 				PRODUCT_NAME = Turkey;
 				URL_SCHEME = "guidewithme-turkey";
-				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
 		};
@@ -3311,7 +3280,6 @@
 				BUNDLE_ID = com.guidewithme.turkey;
 				PRODUCT_NAME = Turkey;
 				URL_SCHEME = "guidewithme-turkey";
-				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
 		};
@@ -3321,7 +3289,6 @@
 				BUNDLE_ID = com.guidewithme.turkey;
 				PRODUCT_NAME = Turkey;
 				URL_SCHEME = "guidewithme-turkey";
-				WRAPPER_EXTENSION = app;
 			};
 			name = Production;
 		};
