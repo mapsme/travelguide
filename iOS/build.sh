@@ -5,8 +5,11 @@ LOCAL_DIRNAME="${PWD}/$(dirname "$0")"
 
 TARGET_SDK="iphoneos"
 PROJECT_BUILDDIR="${LOCAL_DIRNAME}/Builds"
-DEVELOPER_NAME="Yury Melnichek"
-PROVISIONING_PROFILE_CONST="${LOCAL_DIRNAME}/Profiles"
+GUIDES_PROVISIONING_DIR="${LOCAL_DIRNAME}/Profiles"
+SYSTEM_PROVISIONING_DIR=~/Library/MobileDevice/Provisioning\ Profiles
+KEYCHAIN=~/Library/Keychains/iOS.keychain
+DEFAULT_KEYCHAIN=~/Library/Keychains/login.keychain
+KEYCHAIN_PASSWORD="ioskeychain"
 BUILD_CONFIGURATION="Production"
 DATE=$(date +%F)
 APP_DSYM_FOLDER="${PROJECT_BUILDDIR}/APP_AND_DSYM-${DATE}"
@@ -14,17 +17,17 @@ RESULT_DIR="${PROJECT_BUILDDIR}"
 
 declare arr=(UK Japan Russia Spain Hawaii California Germany Italy France Turkey Switzerland Greece)
 
-# Copy provisioning profiles from repo to the build system
-SYSTEM_PROVISIONING_DIR=~/Library/MobileDevice/Provisioning\ Profiles
-rm -rf "${SYSTEM_PROVISIONING_DIR}/"*
-cp "${PROVISIONING_PROFILE_CONST}/"* "${SYSTEM_PROVISIONING_DIR}"
-
+# copy all provisioning profiles first
+cp "$GUIDES_PROVISIONING_DIR"/* "${SYSTEM_PROVISIONING_DIR}"
 # if launched with any parameter, build adhoc versions
 if [ $# == 1 ]; then
-  PROVISIONING_PROFILE="${PROVISIONING_PROFILE_CONST}/GuideWithMe_AdHoc.mobileprovision"
   RESULT_DIR="${RESULT_DIR}/Adhoc-${DATE}"
+  # To correctly sign AdHoc versions from target's XCode project settings, we need to delete all Distribution provisioning
+  rm "${SYSTEM_PROVISIONING_DIR}"/*_GuideWithMe_Distribution.mobileprovision
 else
   RESULT_DIR="${RESULT_DIR}/AppStore-${DATE}"
+  # To correctly sign Distribution versions from target's XCode project settings, we need to delete AdHoc provisioning
+  rm "${SYSTEM_PROVISIONING_DIR}"/GuideWithMe_AdHoc.mobileprovision
 fi
 
 if [ -d "$APP_DSYM_FOLDER" ]; then
@@ -37,16 +40,23 @@ if [ -d "$RESULT_DIR" ]; then
 fi
 mkdir -p "$RESULT_DIR"
 
+# switch to the keychain with private key
+security list-keychains -s "$KEYCHAIN"
+# need to unlock keychain to avoid "User interaction is not allowed" error
+security unlock -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN"
+# keep keychain unlocked for ten hours
+security set-keychain-settings -t 36000 -l "$KEYCHAIN"
+
 for i in ${arr[@]}
 do
-  if [ $# -lt 1 ]; then
-    PROVISIONING_PROFILE="${PROVISIONING_PROFILE_CONST}/${i}_GuideWithMe_Distribution.mobileprovision"
-  fi
   xcodebuild -target "${i}" -sdk "${TARGET_SDK}" -configuration "${BUILD_CONFIGURATION}" SYMROOT="${PROJECT_BUILDDIR}/${i}"
-  xcrun -sdk "${TARGET_SDK}" PackageApplication -v "${PROJECT_BUILDDIR}/${i}/${BUILD_CONFIGURATION}-${TARGET_SDK}/${i}.app" -o "${RESULT_DIR}/${i}.ipa" --sign "${DEVELOPER_NAME}" --embed "${PROVISIONING_PROFILE}"
+  xcrun -sdk "${TARGET_SDK}" PackageApplication -v "${PROJECT_BUILDDIR}/${i}/${BUILD_CONFIGURATION}-${TARGET_SDK}/${i}.app" -o "${RESULT_DIR}/${i}.ipa"
   cp -r "${PROJECT_BUILDDIR}/${i}/${BUILD_CONFIGURATION}-${TARGET_SDK}/"* "$APP_DSYM_FOLDER"
   rm -rf "${PROJECT_BUILDDIR}/${i}"
 done
 
 zip -r -9 "${RESULT_DIR}/APP_AND_DSYM.zip" "${APP_DSYM_FOLDER}"
 rm -rf "${APP_DSYM_FOLDER}"
+
+# switch back to the default keychain
+security list-keychains -s "$DEFAULT_KEYCHAIN"
