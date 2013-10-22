@@ -40,6 +40,12 @@ if [ -d "$RESULT_DIR" ]; then
 fi
 mkdir -p "$RESULT_DIR"
 
+if [ $# == 1 ]; then
+  cp "$LOCAL_DIRNAME"/index.php  "$RESULT_DIR"/index.php
+  chmod g+w "$RESULT_DIR"/
+  chown :_www "$RESULT_DIR"/
+fi
+
 # switch to the keychain with private key
 security list-keychains -s "$KEYCHAIN"
 # need to unlock keychain to avoid "User interaction is not allowed" error
