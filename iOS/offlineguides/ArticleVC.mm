@@ -215,12 +215,18 @@
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
-  [self.locationManager stopUpdatingLocation];
+  if ([self isValidCoordinates])
+  {
+    m_storage.QueryArticleInfo([self.searchBar.text UTF8String], self.locationManager.location.coordinate.latitude, self.locationManager.location.coordinate.longitude);
+    [self.tableView reloadData];
+    [self.locationManager stopUpdatingLocation];
+  }
 }
 
 -(BOOL)isValidCoordinates
 {
-  BOOL isValid = (self.locationManager.location != nil);
+  CLLocation * l = self.locationManager.location;
+  BOOL isValid = (l != nil && (l.coordinate.latitude || l.coordinate.latitude));
   if ([self.locationManager.location.timestamp timeIntervalSinceNow] > -1500.0)
     [self.locationManager startUpdatingLocation];
   return isValid;
