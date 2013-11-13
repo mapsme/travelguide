@@ -559,6 +559,42 @@
 		EDF925631833AA0400539672 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF925591833A9F600539672 /* Security.framework */; };
 		EDF925641833AA0500539672 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF925591833A9F600539672 /* Security.framework */; };
 		EDF925651833AA0600539672 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF925591833A9F600539672 /* Security.framework */; };
+		EDF925681833AA3900539672 /* Statistics.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF925671833AA3900539672 /* Statistics.m */; };
+		EDF925691833AA3900539672 /* Statistics.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF925671833AA3900539672 /* Statistics.m */; };
+		EDF9256A1833AA3900539672 /* Statistics.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF925671833AA3900539672 /* Statistics.m */; };
+		EDF9256B1833AA3900539672 /* Statistics.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF925671833AA3900539672 /* Statistics.m */; };
+		EDF9256C1833AA3900539672 /* Statistics.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF925671833AA3900539672 /* Statistics.m */; };
+		EDF9256D1833AA3900539672 /* Statistics.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF925671833AA3900539672 /* Statistics.m */; };
+		EDF9256E1833AA3900539672 /* Statistics.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF925671833AA3900539672 /* Statistics.m */; };
+		EDF9256F1833AA3900539672 /* Statistics.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF925671833AA3900539672 /* Statistics.m */; };
+		EDF925701833AA3900539672 /* Statistics.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF925671833AA3900539672 /* Statistics.m */; };
+		EDF925711833AA3900539672 /* Statistics.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF925671833AA3900539672 /* Statistics.m */; };
+		EDF925721833AA3900539672 /* Statistics.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF925671833AA3900539672 /* Statistics.m */; };
+		EDF925731833AA3900539672 /* Statistics.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF925671833AA3900539672 /* Statistics.m */; };
+		EDF925751833AAE900539672 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF925741833AAE900539672 /* CFNetwork.framework */; };
+		EDF925761833AAED00539672 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF925741833AAE900539672 /* CFNetwork.framework */; };
+		EDF925771833AAED00539672 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF925741833AAE900539672 /* CFNetwork.framework */; };
+		EDF925781833AAEE00539672 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF925741833AAE900539672 /* CFNetwork.framework */; };
+		EDF925791833AAEF00539672 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF925741833AAE900539672 /* CFNetwork.framework */; };
+		EDF9257A1833AAEF00539672 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF925741833AAE900539672 /* CFNetwork.framework */; };
+		EDF9257B1833AAF000539672 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF925741833AAE900539672 /* CFNetwork.framework */; };
+		EDF9257C1833AAF100539672 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF925741833AAE900539672 /* CFNetwork.framework */; };
+		EDF9257D1833AAF100539672 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF925741833AAE900539672 /* CFNetwork.framework */; };
+		EDF9257E1833AAF200539672 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF925741833AAE900539672 /* CFNetwork.framework */; };
+		EDF9257F1833AAF200539672 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF925741833AAE900539672 /* CFNetwork.framework */; };
+		EDF925801833AAF300539672 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF925741833AAE900539672 /* CFNetwork.framework */; };
+		EDF925821833AB8F00539672 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF925811833AB8F00539672 /* SystemConfiguration.framework */; };
+		EDF925831833AB9200539672 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF925811833AB8F00539672 /* SystemConfiguration.framework */; };
+		EDF925841833AB9200539672 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF925811833AB8F00539672 /* SystemConfiguration.framework */; };
+		EDF925851833AB9300539672 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF925811833AB8F00539672 /* SystemConfiguration.framework */; };
+		EDF925861833AB9300539672 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF925811833AB8F00539672 /* SystemConfiguration.framework */; };
+		EDF925871833AB9400539672 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF925811833AB8F00539672 /* SystemConfiguration.framework */; };
+		EDF925881833AB9400539672 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF925811833AB8F00539672 /* SystemConfiguration.framework */; };
+		EDF925891833AB9500539672 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF925811833AB8F00539672 /* SystemConfiguration.framework */; };
+		EDF9258A1833AB9500539672 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF925811833AB8F00539672 /* SystemConfiguration.framework */; };
+		EDF9258C1833AB9700539672 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF925811833AB8F00539672 /* SystemConfiguration.framework */; };
+		EDF9258D1833AB9700539672 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF925811833AB8F00539672 /* SystemConfiguration.framework */; };
+		EDF9258E1833AB9800539672 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF925811833AB8F00539672 /* SystemConfiguration.framework */; };
 		FA699CEB18141D3600A2FBF7 /* 50@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FA699C3818141D2600A2FBF7 /* 50@2x.png */; };
 		FA699CEC18141D3600A2FBF7 /* 57@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FA699C3918141D2600A2FBF7 /* 57@2x.png */; };
 		FA699CED18141D3600A2FBF7 /* 60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FA699C3A18141D2600A2FBF7 /* 60@2x.png */; };
@@ -808,6 +844,10 @@
 		EDF9254B1833A92300539672 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Flurry.h; path = Flurry/Flurry.h; sourceTree = "<group>"; };
 		EDF9254C1833A92300539672 /* libFlurry_4.3.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFlurry_4.3.0.a; path = Flurry/libFlurry_4.3.0.a; sourceTree = "<group>"; };
 		EDF925591833A9F600539672 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		EDF925661833AA3900539672 /* Statistics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Statistics.h; sourceTree = "<group>"; };
+		EDF925671833AA3900539672 /* Statistics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Statistics.m; sourceTree = "<group>"; };
+		EDF925741833AAE900539672 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		EDF925811833AB8F00539672 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		FA699C3818141D2600A2FBF7 /* 50@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "50@2x.png"; sourceTree = "<group>"; };
 		FA699C3918141D2600A2FBF7 /* 57@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "57@2x.png"; sourceTree = "<group>"; };
 		FA699C3A18141D2600A2FBF7 /* 60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "60@2x.png"; sourceTree = "<group>"; };
@@ -985,9 +1025,11 @@
 			files = (
 				ED3154491806E7C7000BBA7B /* CoreLocation.framework in Frameworks */,
 				ED3154121806E77F000BBA7B /* CoreGraphics.framework in Frameworks */,
+				EDF925801833AAF300539672 /* CFNetwork.framework in Frameworks */,
 				EDF9254D1833A92300539672 /* libFlurry_4.3.0.a in Frameworks */,
 				ED3154131806E77F000BBA7B /* UIKit.framework in Frameworks */,
 				EDF9255B1833A9FF00539672 /* Security.framework in Frameworks */,
+				EDF9258E1833AB9800539672 /* SystemConfiguration.framework in Frameworks */,
 				ED3154111806E77F000BBA7B /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -998,9 +1040,11 @@
 			files = (
 				ED64331117B41534000985FE /* CoreLocation.framework in Frameworks */,
 				ED81954717AED762004F3803 /* UIKit.framework in Frameworks */,
+				EDF925761833AAED00539672 /* CFNetwork.framework in Frameworks */,
 				EDF925581833A92400539672 /* libFlurry_4.3.0.a in Frameworks */,
 				ED81954917AED762004F3803 /* Foundation.framework in Frameworks */,
 				EDF925641833AA0500539672 /* Security.framework in Frameworks */,
+				EDF925831833AB9200539672 /* SystemConfiguration.framework in Frameworks */,
 				ED81954B17AED762004F3803 /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1011,9 +1055,11 @@
 			files = (
 				ED29530D1806C48C00311E19 /* CoreLocation.framework in Frameworks */,
 				ED9ABA0A1805671D00E4F635 /* CoreGraphics.framework in Frameworks */,
+				EDF9257C1833AAF100539672 /* CFNetwork.framework in Frameworks */,
 				EDF925511833A92300539672 /* libFlurry_4.3.0.a in Frameworks */,
 				ED9ABA0B1805671D00E4F635 /* UIKit.framework in Frameworks */,
 				EDF9255F1833AA0100539672 /* Security.framework in Frameworks */,
+				EDF925891833AB9500539672 /* SystemConfiguration.framework in Frameworks */,
 				ED9ABA091805671D00E4F635 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1024,9 +1070,11 @@
 			files = (
 				ED9D33F61806F38500ADBEF1 /* CoreLocation.framework in Frameworks */,
 				ED9D33BF1806F32600ADBEF1 /* CoreGraphics.framework in Frameworks */,
+				EDF9257F1833AAF200539672 /* CFNetwork.framework in Frameworks */,
 				EDF9254E1833A92300539672 /* libFlurry_4.3.0.a in Frameworks */,
 				ED9D33C01806F32600ADBEF1 /* UIKit.framework in Frameworks */,
 				EDF9255C1833A9FF00539672 /* Security.framework in Frameworks */,
+				EDF9258C1833AB9700539672 /* SystemConfiguration.framework in Frameworks */,
 				ED9D33BE1806F32600ADBEF1 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1037,9 +1085,11 @@
 			files = (
 				ED9D34BD1806F82100ADBEF1 /* CoreLocation.framework in Frameworks */,
 				ED9D34861806F7F500ADBEF1 /* CoreGraphics.framework in Frameworks */,
+				EDF9257E1833AAF200539672 /* CFNetwork.framework in Frameworks */,
 				EDF9254F1833A92300539672 /* libFlurry_4.3.0.a in Frameworks */,
 				ED9D34871806F7F500ADBEF1 /* UIKit.framework in Frameworks */,
 				EDF9255D1833AA0000539672 /* Security.framework in Frameworks */,
+				EDF9258D1833AB9700539672 /* SystemConfiguration.framework in Frameworks */,
 				ED9D34851806F7F500ADBEF1 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1050,9 +1100,11 @@
 			files = (
 				ED9D35211806F9E300ADBEF1 /* CoreLocation.framework in Frameworks */,
 				ED9D34EA1806F97700ADBEF1 /* CoreGraphics.framework in Frameworks */,
+				EDF9257D1833AAF100539672 /* CFNetwork.framework in Frameworks */,
 				EDF925501833A92300539672 /* libFlurry_4.3.0.a in Frameworks */,
 				ED9D34EB1806F97700ADBEF1 /* UIKit.framework in Frameworks */,
 				EDF9255E1833AA0000539672 /* Security.framework in Frameworks */,
+				EDF9258A1833AB9500539672 /* SystemConfiguration.framework in Frameworks */,
 				ED9D34E91806F97700ADBEF1 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1063,9 +1115,11 @@
 			files = (
 				ED9D35871806FAF800ADBEF1 /* CoreLocation.framework in Frameworks */,
 				ED9D35501806FAE000ADBEF1 /* CoreGraphics.framework in Frameworks */,
+				EDF9257B1833AAF000539672 /* CFNetwork.framework in Frameworks */,
 				EDF925521833A92300539672 /* libFlurry_4.3.0.a in Frameworks */,
 				ED9D35511806FAE000ADBEF1 /* UIKit.framework in Frameworks */,
 				EDF925611833AA0200539672 /* Security.framework in Frameworks */,
+				EDF925881833AB9400539672 /* SystemConfiguration.framework in Frameworks */,
 				ED9D354F1806FAE000ADBEF1 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1076,9 +1130,11 @@
 			files = (
 				ED9D35FD1806FC3700ADBEF1 /* CoreLocation.framework in Frameworks */,
 				ED9D35B51806FBD300ADBEF1 /* CoreGraphics.framework in Frameworks */,
+				EDF9257A1833AAEF00539672 /* CFNetwork.framework in Frameworks */,
 				EDF925531833A92300539672 /* libFlurry_4.3.0.a in Frameworks */,
 				ED9D35B61806FBD300ADBEF1 /* UIKit.framework in Frameworks */,
 				EDF925601833AA0100539672 /* Security.framework in Frameworks */,
+				EDF925871833AB9400539672 /* SystemConfiguration.framework in Frameworks */,
 				ED9D35B41806FBD300ADBEF1 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1087,6 +1143,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EDF925821833AB8F00539672 /* SystemConfiguration.framework in Frameworks */,
+				EDF925751833AAE900539672 /* CFNetwork.framework in Frameworks */,
 				EDF9255A1833A9F600539672 /* Security.framework in Frameworks */,
 				ED9D36631806FF7500ADBEF1 /* CoreLocation.framework in Frameworks */,
 				ED9D361A1806FF3500ADBEF1 /* CoreGraphics.framework in Frameworks */,
@@ -1102,9 +1160,11 @@
 			files = (
 				ED9D36B61807010400ADBEF1 /* CoreLocation.framework in Frameworks */,
 				ED9D367F180700EF00ADBEF1 /* CoreGraphics.framework in Frameworks */,
+				EDF925791833AAEF00539672 /* CFNetwork.framework in Frameworks */,
 				EDF925551833A92300539672 /* libFlurry_4.3.0.a in Frameworks */,
 				ED9D3680180700EF00ADBEF1 /* UIKit.framework in Frameworks */,
 				EDF925621833AA0300539672 /* Security.framework in Frameworks */,
+				EDF925861833AB9300539672 /* SystemConfiguration.framework in Frameworks */,
 				ED9D367E180700EF00ADBEF1 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1115,9 +1175,11 @@
 			files = (
 				ED9D371B1807021200ADBEF1 /* CoreLocation.framework in Frameworks */,
 				ED9D36E4180701FD00ADBEF1 /* CoreGraphics.framework in Frameworks */,
+				EDF925781833AAEE00539672 /* CFNetwork.framework in Frameworks */,
 				EDF925561833A92300539672 /* libFlurry_4.3.0.a in Frameworks */,
 				ED9D36E5180701FD00ADBEF1 /* UIKit.framework in Frameworks */,
 				EDF925631833AA0400539672 /* Security.framework in Frameworks */,
+				EDF925851833AB9300539672 /* SystemConfiguration.framework in Frameworks */,
 				ED9D36E3180701FD00ADBEF1 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1128,9 +1190,11 @@
 			files = (
 				ED9D37801807040C00ADBEF1 /* CoreLocation.framework in Frameworks */,
 				ED9D3749180703FA00ADBEF1 /* CoreGraphics.framework in Frameworks */,
+				EDF925771833AAED00539672 /* CFNetwork.framework in Frameworks */,
 				EDF925571833A92300539672 /* libFlurry_4.3.0.a in Frameworks */,
 				ED9D374A180703FB00ADBEF1 /* UIKit.framework in Frameworks */,
 				EDF925651833AA0600539672 /* Security.framework in Frameworks */,
+				EDF925841833AB9200539672 /* SystemConfiguration.framework in Frameworks */,
 				ED9D3748180703FA00ADBEF1 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1195,6 +1259,8 @@
 		ED81954517AED762004F3803 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EDF925811833AB8F00539672 /* SystemConfiguration.framework */,
+				EDF925741833AAE900539672 /* CFNetwork.framework */,
 				EDF925591833A9F600539672 /* Security.framework */,
 				ED64331017B41533000985FE /* CoreLocation.framework */,
 				ED81954617AED762004F3803 /* UIKit.framework */,
@@ -1222,6 +1288,8 @@
 				ED81956917AEF6B6004F3803 /* GuideVC.mm */,
 				ED64330D17B3F672000985FE /* GuideCell.h */,
 				ED64330E17B3F673000985FE /* GuideCell.m */,
+				EDF925661833AA3900539672 /* Statistics.h */,
+				EDF925671833AA3900539672 /* Statistics.m */,
 			);
 			path = offlineguides;
 			sourceTree = "<group>";
@@ -2349,6 +2417,7 @@
 				ED3154541806E7F0000BBA7B /* posix.cpp in Sources */,
 				ED3154521806E7F0000BBA7B /* utf8proc.c in Sources */,
 				ED3154501806E7DD000BBA7B /* GuideCell.m in Sources */,
+				EDF925681833AA3900539672 /* Statistics.m in Sources */,
 				ED3154571806E7F0000BBA7B /* source_address.cpp in Sources */,
 				ED31545A1806E7F0000BBA7B /* article_info.cpp in Sources */,
 				ED31545E1806E7FE000BBA7B /* main.m in Sources */,
@@ -2373,6 +2442,7 @@
 				7722E14817B01B0700CFB817 /* article_info.cpp in Sources */,
 				ED81956E17B10578004F3803 /* strings.cpp in Sources */,
 				ED81957117B10598004F3803 /* utf8proc.c in Sources */,
+				EDF925731833AA3900539672 /* Statistics.m in Sources */,
 				7722E14A17B15C3600CFB817 /* distance.cpp in Sources */,
 				ED893F6917B223920074E05A /* MapsWithMeAPI.m in Sources */,
 				ED893F6C17B231F20074E05A /* IPadSplitVC.m in Sources */,
@@ -2397,6 +2467,7 @@
 				ED9ABA57180567B600E4F635 /* ArticleVC.mm in Sources */,
 				ED9ABA58180567B600E4F635 /* IPadSplitVC.m in Sources */,
 				ED9ABA5E180567D300E4F635 /* utf8proc.c in Sources */,
+				EDF9256C1833AA3900539672 /* Statistics.m in Sources */,
 				ED9ABA60180567D300E4F635 /* posix.cpp in Sources */,
 				ED9ABA64180567D300E4F635 /* assert.cpp in Sources */,
 				ED29530C1806B92600311E19 /* main.m in Sources */,
@@ -2421,6 +2492,7 @@
 				ED9D33FF1806F41300ADBEF1 /* posix.cpp in Sources */,
 				ED9D33FD1806F41300ADBEF1 /* utf8proc.c in Sources */,
 				ED9D33FB1806F40600ADBEF1 /* GuideCell.m in Sources */,
+				EDF925691833AA3900539672 /* Statistics.m in Sources */,
 				ED9D34021806F41300ADBEF1 /* source_address.cpp in Sources */,
 				ED9D34051806F41300ADBEF1 /* article_info.cpp in Sources */,
 				ED9D34081806F41F00ADBEF1 /* main.m in Sources */,
@@ -2445,6 +2517,7 @@
 				ED9D34CA1806F82F00ADBEF1 /* AppDelegate.mm in Sources */,
 				ED9D34CB1806F82F00ADBEF1 /* ArticleVC.mm in Sources */,
 				ED9D34CE1806F82F00ADBEF1 /* GuideCell.m in Sources */,
+				EDF9256A1833AA3900539672 /* Statistics.m in Sources */,
 				ED9D34CD1806F82F00ADBEF1 /* GuideVC.mm in Sources */,
 				ED9D34C81806F82F00ADBEF1 /* article_info.cpp in Sources */,
 				ED9D34C71806F82F00ADBEF1 /* distance.cpp in Sources */,
@@ -2469,6 +2542,7 @@
 				ED9D352A1806F9FA00ADBEF1 /* MapsWithMeAPI.m in Sources */,
 				ED9D35281806F9F400ADBEF1 /* GuideVC.mm in Sources */,
 				ED9D35251806F9F400ADBEF1 /* AppDelegate.mm in Sources */,
+				EDF9256B1833AA3900539672 /* Statistics.m in Sources */,
 				ED9D352B1806F9FA00ADBEF1 /* utf8proc.c in Sources */,
 				ED9D352E1806F9FA00ADBEF1 /* file_handle.cpp in Sources */,
 				ED9D35341806FA0500ADBEF1 /* main.m in Sources */,
@@ -2493,6 +2567,7 @@
 				ED9D35921806FB0700ADBEF1 /* ArticleVC.mm in Sources */,
 				ED9D358B1806FB0700ADBEF1 /* strings.cpp in Sources */,
 				ED9D358D1806FB0700ADBEF1 /* assert.cpp in Sources */,
+				EDF9256D1833AA3900539672 /* Statistics.m in Sources */,
 				ED9D358C1806FB0700ADBEF1 /* source_address.cpp in Sources */,
 				ED9D35931806FB0700ADBEF1 /* IPadSplitVC.m in Sources */,
 				ED9D35961806FB0D00ADBEF1 /* main.m in Sources */,
@@ -2517,6 +2592,7 @@
 				ED9D35F81806FC3000ADBEF1 /* AppDelegate.mm in Sources */,
 				ED9D35F91806FC3000ADBEF1 /* ArticleVC.mm in Sources */,
 				ED9D35FC1806FC3000ADBEF1 /* GuideCell.m in Sources */,
+				EDF9256E1833AA3900539672 /* Statistics.m in Sources */,
 				ED9D35FB1806FC3000ADBEF1 /* GuideVC.mm in Sources */,
 				ED9D35F61806FC3000ADBEF1 /* article_info.cpp in Sources */,
 				ED9D35F51806FC3000ADBEF1 /* distance.cpp in Sources */,
@@ -2541,6 +2617,7 @@
 				ED9D365D1806FF6B00ADBEF1 /* AppDelegate.mm in Sources */,
 				ED9D365E1806FF6B00ADBEF1 /* ArticleVC.mm in Sources */,
 				ED9D36611806FF6B00ADBEF1 /* GuideCell.m in Sources */,
+				EDF9256F1833AA3900539672 /* Statistics.m in Sources */,
 				ED9D36601806FF6B00ADBEF1 /* GuideVC.mm in Sources */,
 				ED9D365B1806FF6B00ADBEF1 /* article_info.cpp in Sources */,
 				ED9D365A1806FF6B00ADBEF1 /* distance.cpp in Sources */,
@@ -2565,6 +2642,7 @@
 				ED9D36C31807011700ADBEF1 /* AppDelegate.mm in Sources */,
 				ED9D36C41807011700ADBEF1 /* ArticleVC.mm in Sources */,
 				ED9D36C71807011700ADBEF1 /* GuideCell.m in Sources */,
+				EDF925701833AA3900539672 /* Statistics.m in Sources */,
 				ED9D36C61807011700ADBEF1 /* GuideVC.mm in Sources */,
 				ED9D36C11807011700ADBEF1 /* article_info.cpp in Sources */,
 				ED9D36C01807011700ADBEF1 /* distance.cpp in Sources */,
@@ -2589,6 +2667,7 @@
 				ED9D37261807022A00ADBEF1 /* ArticleVC.mm in Sources */,
 				ED9D37201807022300ADBEF1 /* posix.cpp in Sources */,
 				ED9D37211807022300ADBEF1 /* file_handle.cpp in Sources */,
+				EDF925711833AA3900539672 /* Statistics.m in Sources */,
 				ED9D371C1807021F00ADBEF1 /* distance.cpp in Sources */,
 				ED9D37271807022A00ADBEF1 /* IPadSplitVC.m in Sources */,
 				ED9D372D1807024100ADBEF1 /* main.m in Sources */,
@@ -2613,6 +2692,7 @@
 				ED9D37821807041700ADBEF1 /* ArticleVC.mm in Sources */,
 				ED9D37861807042200ADBEF1 /* distance.cpp in Sources */,
 				ED9D37871807042200ADBEF1 /* article_info.cpp in Sources */,
+				EDF925721833AA3900539672 /* Statistics.m in Sources */,
 				ED9D378A1807042600ADBEF1 /* posix.cpp in Sources */,
 				ED9D378E1807042600ADBEF1 /* assert.cpp in Sources */,
 				ED9D37911807042F00ADBEF1 /* main.m in Sources */,
@@ -2690,7 +2770,7 @@
 				GWM = GuideWithMe;
 				INFOPLIST_FILE = "offlineguides/offlineguides-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				LIBRARY_SEARCH_PATHS = "${SRCROOT}/Flurry";
+				LIBRARY_SEARCH_PATHS = "${SRCROOT}/offlineguides/Flurry";
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = GuideWithMe;
 				SDKROOT = iphoneos;
@@ -2736,7 +2816,7 @@
 				GWM = GuideWithMe;
 				INFOPLIST_FILE = "offlineguides/offlineguides-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				LIBRARY_SEARCH_PATHS = "${SRCROOT}/Flurry";
+				LIBRARY_SEARCH_PATHS = "${SRCROOT}/offlineguides/Flurry";
 				PRODUCT_NAME = GuideWithMe;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -3104,7 +3184,7 @@
 				GWM = GuideWithMe;
 				INFOPLIST_FILE = "offlineguides/offlineguides-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				LIBRARY_SEARCH_PATHS = "${SRCROOT}/Flurry";
+				LIBRARY_SEARCH_PATHS = "${SRCROOT}/offlineguides/Flurry";
 				PRODUCT_NAME = GuideWithMe;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
