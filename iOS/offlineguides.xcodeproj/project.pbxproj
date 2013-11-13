@@ -535,6 +535,30 @@
 		EDBD0D0317FDC3440007776B /* Default-Landscape-1024@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = EDBD0CFF17FDC3440007776B /* Default-Landscape-1024@2x~ipad.png */; };
 		EDBD0D0417FDC3440007776B /* Default-Portrait-1024~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = EDBD0D0017FDC3440007776B /* Default-Portrait-1024~ipad.png */; };
 		EDBD0D0517FDC3440007776B /* Default-Landscape-1024~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = EDBD0D0117FDC3440007776B /* Default-Landscape-1024~ipad.png */; };
+		EDF9254D1833A92300539672 /* libFlurry_4.3.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF9254C1833A92300539672 /* libFlurry_4.3.0.a */; };
+		EDF9254E1833A92300539672 /* libFlurry_4.3.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF9254C1833A92300539672 /* libFlurry_4.3.0.a */; };
+		EDF9254F1833A92300539672 /* libFlurry_4.3.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF9254C1833A92300539672 /* libFlurry_4.3.0.a */; };
+		EDF925501833A92300539672 /* libFlurry_4.3.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF9254C1833A92300539672 /* libFlurry_4.3.0.a */; };
+		EDF925511833A92300539672 /* libFlurry_4.3.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF9254C1833A92300539672 /* libFlurry_4.3.0.a */; };
+		EDF925521833A92300539672 /* libFlurry_4.3.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF9254C1833A92300539672 /* libFlurry_4.3.0.a */; };
+		EDF925531833A92300539672 /* libFlurry_4.3.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF9254C1833A92300539672 /* libFlurry_4.3.0.a */; };
+		EDF925541833A92300539672 /* libFlurry_4.3.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF9254C1833A92300539672 /* libFlurry_4.3.0.a */; };
+		EDF925551833A92300539672 /* libFlurry_4.3.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF9254C1833A92300539672 /* libFlurry_4.3.0.a */; };
+		EDF925561833A92300539672 /* libFlurry_4.3.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF9254C1833A92300539672 /* libFlurry_4.3.0.a */; };
+		EDF925571833A92300539672 /* libFlurry_4.3.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF9254C1833A92300539672 /* libFlurry_4.3.0.a */; };
+		EDF925581833A92400539672 /* libFlurry_4.3.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF9254C1833A92300539672 /* libFlurry_4.3.0.a */; };
+		EDF9255A1833A9F600539672 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF925591833A9F600539672 /* Security.framework */; };
+		EDF9255B1833A9FF00539672 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF925591833A9F600539672 /* Security.framework */; };
+		EDF9255C1833A9FF00539672 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF925591833A9F600539672 /* Security.framework */; };
+		EDF9255D1833AA0000539672 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF925591833A9F600539672 /* Security.framework */; };
+		EDF9255E1833AA0000539672 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF925591833A9F600539672 /* Security.framework */; };
+		EDF9255F1833AA0100539672 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF925591833A9F600539672 /* Security.framework */; };
+		EDF925601833AA0100539672 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF925591833A9F600539672 /* Security.framework */; };
+		EDF925611833AA0200539672 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF925591833A9F600539672 /* Security.framework */; };
+		EDF925621833AA0300539672 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF925591833A9F600539672 /* Security.framework */; };
+		EDF925631833AA0400539672 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF925591833A9F600539672 /* Security.framework */; };
+		EDF925641833AA0500539672 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF925591833A9F600539672 /* Security.framework */; };
+		EDF925651833AA0600539672 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF925591833A9F600539672 /* Security.framework */; };
 		FA699CEB18141D3600A2FBF7 /* 50@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FA699C3818141D2600A2FBF7 /* 50@2x.png */; };
 		FA699CEC18141D3600A2FBF7 /* 57@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FA699C3918141D2600A2FBF7 /* 57@2x.png */; };
 		FA699CED18141D3600A2FBF7 /* 60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FA699C3A18141D2600A2FBF7 /* 60@2x.png */; };
@@ -781,6 +805,9 @@
 		EDBD0CFF17FDC3440007776B /* Default-Landscape-1024@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape-1024@2x~ipad.png"; sourceTree = "<group>"; };
 		EDBD0D0017FDC3440007776B /* Default-Portrait-1024~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait-1024~ipad.png"; sourceTree = "<group>"; };
 		EDBD0D0117FDC3440007776B /* Default-Landscape-1024~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape-1024~ipad.png"; sourceTree = "<group>"; };
+		EDF9254B1833A92300539672 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Flurry.h; path = Flurry/Flurry.h; sourceTree = "<group>"; };
+		EDF9254C1833A92300539672 /* libFlurry_4.3.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFlurry_4.3.0.a; path = Flurry/libFlurry_4.3.0.a; sourceTree = "<group>"; };
+		EDF925591833A9F600539672 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		FA699C3818141D2600A2FBF7 /* 50@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "50@2x.png"; sourceTree = "<group>"; };
 		FA699C3918141D2600A2FBF7 /* 57@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "57@2x.png"; sourceTree = "<group>"; };
 		FA699C3A18141D2600A2FBF7 /* 60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "60@2x.png"; sourceTree = "<group>"; };
@@ -958,7 +985,9 @@
 			files = (
 				ED3154491806E7C7000BBA7B /* CoreLocation.framework in Frameworks */,
 				ED3154121806E77F000BBA7B /* CoreGraphics.framework in Frameworks */,
+				EDF9254D1833A92300539672 /* libFlurry_4.3.0.a in Frameworks */,
 				ED3154131806E77F000BBA7B /* UIKit.framework in Frameworks */,
+				EDF9255B1833A9FF00539672 /* Security.framework in Frameworks */,
 				ED3154111806E77F000BBA7B /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -969,7 +998,9 @@
 			files = (
 				ED64331117B41534000985FE /* CoreLocation.framework in Frameworks */,
 				ED81954717AED762004F3803 /* UIKit.framework in Frameworks */,
+				EDF925581833A92400539672 /* libFlurry_4.3.0.a in Frameworks */,
 				ED81954917AED762004F3803 /* Foundation.framework in Frameworks */,
+				EDF925641833AA0500539672 /* Security.framework in Frameworks */,
 				ED81954B17AED762004F3803 /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -980,7 +1011,9 @@
 			files = (
 				ED29530D1806C48C00311E19 /* CoreLocation.framework in Frameworks */,
 				ED9ABA0A1805671D00E4F635 /* CoreGraphics.framework in Frameworks */,
+				EDF925511833A92300539672 /* libFlurry_4.3.0.a in Frameworks */,
 				ED9ABA0B1805671D00E4F635 /* UIKit.framework in Frameworks */,
+				EDF9255F1833AA0100539672 /* Security.framework in Frameworks */,
 				ED9ABA091805671D00E4F635 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -991,7 +1024,9 @@
 			files = (
 				ED9D33F61806F38500ADBEF1 /* CoreLocation.framework in Frameworks */,
 				ED9D33BF1806F32600ADBEF1 /* CoreGraphics.framework in Frameworks */,
+				EDF9254E1833A92300539672 /* libFlurry_4.3.0.a in Frameworks */,
 				ED9D33C01806F32600ADBEF1 /* UIKit.framework in Frameworks */,
+				EDF9255C1833A9FF00539672 /* Security.framework in Frameworks */,
 				ED9D33BE1806F32600ADBEF1 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1002,7 +1037,9 @@
 			files = (
 				ED9D34BD1806F82100ADBEF1 /* CoreLocation.framework in Frameworks */,
 				ED9D34861806F7F500ADBEF1 /* CoreGraphics.framework in Frameworks */,
+				EDF9254F1833A92300539672 /* libFlurry_4.3.0.a in Frameworks */,
 				ED9D34871806F7F500ADBEF1 /* UIKit.framework in Frameworks */,
+				EDF9255D1833AA0000539672 /* Security.framework in Frameworks */,
 				ED9D34851806F7F500ADBEF1 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1013,7 +1050,9 @@
 			files = (
 				ED9D35211806F9E300ADBEF1 /* CoreLocation.framework in Frameworks */,
 				ED9D34EA1806F97700ADBEF1 /* CoreGraphics.framework in Frameworks */,
+				EDF925501833A92300539672 /* libFlurry_4.3.0.a in Frameworks */,
 				ED9D34EB1806F97700ADBEF1 /* UIKit.framework in Frameworks */,
+				EDF9255E1833AA0000539672 /* Security.framework in Frameworks */,
 				ED9D34E91806F97700ADBEF1 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1024,7 +1063,9 @@
 			files = (
 				ED9D35871806FAF800ADBEF1 /* CoreLocation.framework in Frameworks */,
 				ED9D35501806FAE000ADBEF1 /* CoreGraphics.framework in Frameworks */,
+				EDF925521833A92300539672 /* libFlurry_4.3.0.a in Frameworks */,
 				ED9D35511806FAE000ADBEF1 /* UIKit.framework in Frameworks */,
+				EDF925611833AA0200539672 /* Security.framework in Frameworks */,
 				ED9D354F1806FAE000ADBEF1 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1035,7 +1076,9 @@
 			files = (
 				ED9D35FD1806FC3700ADBEF1 /* CoreLocation.framework in Frameworks */,
 				ED9D35B51806FBD300ADBEF1 /* CoreGraphics.framework in Frameworks */,
+				EDF925531833A92300539672 /* libFlurry_4.3.0.a in Frameworks */,
 				ED9D35B61806FBD300ADBEF1 /* UIKit.framework in Frameworks */,
+				EDF925601833AA0100539672 /* Security.framework in Frameworks */,
 				ED9D35B41806FBD300ADBEF1 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1044,8 +1087,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EDF9255A1833A9F600539672 /* Security.framework in Frameworks */,
 				ED9D36631806FF7500ADBEF1 /* CoreLocation.framework in Frameworks */,
 				ED9D361A1806FF3500ADBEF1 /* CoreGraphics.framework in Frameworks */,
+				EDF925541833A92300539672 /* libFlurry_4.3.0.a in Frameworks */,
 				ED9D361B1806FF3500ADBEF1 /* UIKit.framework in Frameworks */,
 				ED9D36191806FF3500ADBEF1 /* Foundation.framework in Frameworks */,
 			);
@@ -1057,7 +1102,9 @@
 			files = (
 				ED9D36B61807010400ADBEF1 /* CoreLocation.framework in Frameworks */,
 				ED9D367F180700EF00ADBEF1 /* CoreGraphics.framework in Frameworks */,
+				EDF925551833A92300539672 /* libFlurry_4.3.0.a in Frameworks */,
 				ED9D3680180700EF00ADBEF1 /* UIKit.framework in Frameworks */,
+				EDF925621833AA0300539672 /* Security.framework in Frameworks */,
 				ED9D367E180700EF00ADBEF1 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1068,7 +1115,9 @@
 			files = (
 				ED9D371B1807021200ADBEF1 /* CoreLocation.framework in Frameworks */,
 				ED9D36E4180701FD00ADBEF1 /* CoreGraphics.framework in Frameworks */,
+				EDF925561833A92300539672 /* libFlurry_4.3.0.a in Frameworks */,
 				ED9D36E5180701FD00ADBEF1 /* UIKit.framework in Frameworks */,
+				EDF925631833AA0400539672 /* Security.framework in Frameworks */,
 				ED9D36E3180701FD00ADBEF1 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1079,7 +1128,9 @@
 			files = (
 				ED9D37801807040C00ADBEF1 /* CoreLocation.framework in Frameworks */,
 				ED9D3749180703FA00ADBEF1 /* CoreGraphics.framework in Frameworks */,
+				EDF925571833A92300539672 /* libFlurry_4.3.0.a in Frameworks */,
 				ED9D374A180703FB00ADBEF1 /* UIKit.framework in Frameworks */,
+				EDF925651833AA0600539672 /* Security.framework in Frameworks */,
 				ED9D3748180703FA00ADBEF1 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1144,6 +1195,7 @@
 		ED81954517AED762004F3803 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EDF925591833A9F600539672 /* Security.framework */,
 				ED64331017B41533000985FE /* CoreLocation.framework */,
 				ED81954617AED762004F3803 /* UIKit.framework */,
 				ED81954817AED762004F3803 /* Foundation.framework */,
@@ -1186,6 +1238,8 @@
 		ED81956F17B10585004F3803 /* 3rdParty */ = {
 			isa = PBXGroup;
 			children = (
+				EDF9254B1833A92300539672 /* Flurry.h */,
+				EDF9254C1833A92300539672 /* libFlurry_4.3.0.a */,
 				ED893F6717B223920074E05A /* MapsWithMeAPI.h */,
 				ED893F6817B223920074E05A /* MapsWithMeAPI.m */,
 				ED81957017B10598004F3803 /* utf8proc.c */,
@@ -2636,6 +2690,7 @@
 				GWM = GuideWithMe;
 				INFOPLIST_FILE = "offlineguides/offlineguides-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				LIBRARY_SEARCH_PATHS = "${SRCROOT}/Flurry";
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = GuideWithMe;
 				SDKROOT = iphoneos;
@@ -2681,6 +2736,7 @@
 				GWM = GuideWithMe;
 				INFOPLIST_FILE = "offlineguides/offlineguides-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				LIBRARY_SEARCH_PATHS = "${SRCROOT}/Flurry";
 				PRODUCT_NAME = GuideWithMe;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -3048,6 +3104,7 @@
 				GWM = GuideWithMe;
 				INFOPLIST_FILE = "offlineguides/offlineguides-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				LIBRARY_SEARCH_PATHS = "${SRCROOT}/Flurry";
 				PRODUCT_NAME = GuideWithMe;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
