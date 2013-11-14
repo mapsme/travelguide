@@ -2722,7 +2722,6 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = Hawaii;
 				URL_SCHEME = "guidewithme-hawaii";
 				USER_HEADER_SEARCH_PATHS = ../3rdparty/boost;
@@ -2739,7 +2738,6 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "offlineguides/offlineguides-Prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = Hawaii;
 				URL_SCHEME = "guidewithme-hawaii";
 				USER_HEADER_SEARCH_PATHS = ../3rdparty/boost;
@@ -2756,7 +2754,6 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "offlineguides/offlineguides-Prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = Hawaii;
 				URL_SCHEME = "guidewithme-hawaii";
 				USER_HEADER_SEARCH_PATHS = ../3rdparty/boost;
@@ -2797,7 +2794,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_ID = com.guidewithme.germany;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = Germany;
 				URL_SCHEME = "guidewithme-germany";
 			};
@@ -2807,7 +2803,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_ID = com.guidewithme.germany;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = Germany;
 				URL_SCHEME = "guidewithme-germany";
 			};
@@ -2817,7 +2812,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_ID = com.guidewithme.germany;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = Germany;
 				URL_SCHEME = "guidewithme-germany";
 			};
