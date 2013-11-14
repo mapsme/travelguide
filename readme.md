@@ -28,6 +28,10 @@ In this folder there is content/data folder with *.html files, css, js, images a
 
 ## Android notes
 
+### IMPORTANT
+Don't forget to edit file android/src/com/guidewithme/expansion/KeyMap.java
+Please add Google Play public license key at the end of the COUTRY_2_KEY map AND increment KEY_COUNT constant. 
+
 There is one script you need to use to build guides for Android:
  **build-with-android.sh**. It places it's result (obb, apk) into countries
  folder *Countries/&lt;country_name&gt;*.
