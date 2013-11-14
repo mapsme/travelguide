@@ -3,6 +3,7 @@
 #import "GuideVC.h"
 #import "IPadSplitVC.h"
 #import "MapsWithMeAPI.h"
+#import "Statistics.h"
 
 @implementation AppDelegate
 
@@ -15,6 +16,7 @@
     self.window.rootViewController = [[IPadSplitVC alloc] init];
   [self.window makeKeyAndVisible];
   [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+  [[Statistics instance] startSession];
   return YES;
 }
 
