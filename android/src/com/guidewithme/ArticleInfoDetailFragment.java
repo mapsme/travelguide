@@ -1,6 +1,9 @@
 package com.guidewithme;
 
 import static com.guidewithme.util.Utils.notNull;
+
+import java.io.InputStream;
+
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
@@ -14,6 +17,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.webkit.URLUtil;
+import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebSettings.LayoutAlgorithm;
 import android.webkit.WebView;
@@ -24,8 +28,8 @@ import com.guidewithme.ArticleInfoListFragment.OnListIconClickedListener;
 import com.guidewithme.article.ArticleInfo;
 import com.guidewithme.article.ArticlePathFinder;
 import com.guidewithme.article.ObbPathFinder;
+import com.guidewithme.async.ZippedGuidesHelper;
 import com.guidewithme.cpp.Storage;
-import com.guidewithme.R;
 import com.guidewithme.util.Utils;
 import com.mapswithme.maps.api.MapsWithMeApi;
 
@@ -47,6 +51,8 @@ public class ArticleInfoDetailFragment extends Fragment
   private TextView mTitle;
   private View mShowList;
   private View mProgressContainer;
+
+  private ZippedGuidesHelper mGuidesHelper;
 
   private ArticlePathFinder mFinder;
 //  private Storage mStorage;
@@ -73,6 +79,8 @@ public class ArticleInfoDetailFragment extends Fragment
       mItem = (ArticleInfo) savedInstanceState.getSerializable(ARTICLE_INFO);
 
     mFinder = new ObbPathFinder(getActivity().getApplicationContext());
+
+    mGuidesHelper = new ZippedGuidesHelper(getActivity(), "Hawaii.data.zip");
   }
 
   @Override
@@ -196,6 +204,14 @@ public class ArticleInfoDetailFragment extends Fragment
 
       return super.shouldOverrideUrlLoading(view, url);
     }
+
+    @Override
+    public WebResourceResponse shouldInterceptRequest(WebView view, String url)
+    {
+      log(url);
+      final InputStream is = mGuidesHelper.getData(url.replace("file://null/", ""));
+      return new WebResourceResponse(getActivity().getContentResolver().getType(Uri.parse(url)), "UTF-8", is);
+    }
   }
 
   @Override
@@ -231,6 +247,16 @@ public class ArticleInfoDetailFragment extends Fragment
   public Storage getStorage()
   {
     return Storage.get(getActivity());
+  }
+
+  private static void log(String msg)
+  {
+    Log.d("ZIPZIP", msg);
+  }
+
+  private static void log(String format, Object ... args)
+  {
+    Log.d("ZIPZIP", String.format(format, args));
   }
 
 }
