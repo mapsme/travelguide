@@ -11,7 +11,6 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -26,10 +25,9 @@ import android.widget.TextView;
 
 import com.guidewithme.ArticleInfoListFragment.OnListIconClickedListener;
 import com.guidewithme.article.ArticleInfo;
-import com.guidewithme.article.ArticlePathFinder;
-import com.guidewithme.article.ObbPathFinder;
-import com.guidewithme.async.ZippedGuidesHelper;
+import com.guidewithme.async.ZippedGuidesStorage;
 import com.guidewithme.cpp.Storage;
+import com.guidewithme.util.Expansion;
 import com.guidewithme.util.Utils;
 import com.mapswithme.maps.api.MapsWithMeApi;
 
@@ -52,10 +50,7 @@ public class ArticleInfoDetailFragment extends Fragment
   private View mShowList;
   private View mProgressContainer;
 
-  private ZippedGuidesHelper mGuidesHelper;
-
-  private ArticlePathFinder mFinder;
-//  private Storage mStorage;
+  private ZippedGuidesStorage mZippedGuidesStorage;
 
   private OnListIconClickedListener mIconClickedListener;
 
@@ -78,9 +73,7 @@ public class ArticleInfoDetailFragment extends Fragment
     else if (savedInstanceState != null && savedInstanceState.containsKey(ARTICLE_INFO))
       mItem = (ArticleInfo) savedInstanceState.getSerializable(ARTICLE_INFO);
 
-    mFinder = new ObbPathFinder(getActivity().getApplicationContext());
-
-    mGuidesHelper = new ZippedGuidesHelper(getActivity(), "Hawaii.data.zip");
+    mZippedGuidesStorage = new ZippedGuidesStorage(Expansion.findPackageObbFile(getActivity().getPackageName()));
   }
 
   @Override
@@ -93,9 +86,10 @@ public class ArticleInfoDetailFragment extends Fragment
   public void setArticleInfo(ArticleInfo info)
   {
     mItem = info;
-
-    final String url = mFinder.getPath(mItem);
+    // we need to set correct scheme for the web view
+    final String url = "file:///" + mItem.getArticleId();
     mTitle.setText(mItem.getName());
+
 
     if (!url.equalsIgnoreCase(mWebView.getUrl()))
       mWebView.loadUrl(url);
@@ -208,8 +202,7 @@ public class ArticleInfoDetailFragment extends Fragment
     @Override
     public WebResourceResponse shouldInterceptRequest(WebView view, String url)
     {
-      log(url);
-      final InputStream is = mGuidesHelper.getData(url.replace("file://null/", ""));
+      final InputStream is = mZippedGuidesStorage.getData(url.replace("file:///", "data/"));
       return new WebResourceResponse(getActivity().getContentResolver().getType(Uri.parse(url)), "UTF-8", is);
     }
   }
@@ -247,16 +240,6 @@ public class ArticleInfoDetailFragment extends Fragment
   public Storage getStorage()
   {
     return Storage.get(getActivity());
-  }
-
-  private static void log(String msg)
-  {
-    Log.d("ZIPZIP", msg);
-  }
-
-  private static void log(String format, Object ... args)
-  {
-    Log.d("ZIPZIP", String.format(format, args));
   }
 
 }

@@ -1,17 +1,13 @@
 package com.guidewithme.thumb;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Enumeration;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
 import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.os.Environment;
-import android.util.Log;
 
 public class ZipThumbnailsProvider implements ThumbnailsProvider
 {
@@ -23,11 +19,7 @@ public class ZipThumbnailsProvider implements ThumbnailsProvider
     mContext = context;
     try
     {
-      final String fullPath = Environment.getExternalStorageDirectory().getAbsoluteFile()
-                              + File.separator + filename;
-
-      Log.d("ZIPZIP", fullPath);
-      mZFile = new ZipFile(fullPath);
+      mZFile = new ZipFile(filename);
     }
     catch (final IOException e)
     {
@@ -41,14 +33,6 @@ public class ZipThumbnailsProvider implements ThumbnailsProvider
     try
     {
       final ZipEntry ze = mZFile.getEntry("data/thumb/" + url);
-      Log.d("ZIPZIP", url);
-      if (ze == null)
-      {
-        final Enumeration<? extends ZipEntry> entries = mZFile.entries();
-        while (entries.hasMoreElements())
-          Log.d("ZIPZIP", entries.nextElement().getName());
-      }
-
       final InputStream is = mZFile.getInputStream(ze);
       return new BitmapDrawable(mContext.getResources(), is);
     }
