@@ -202,8 +202,13 @@ public class ArticleInfoDetailFragment extends Fragment
     @Override
     public WebResourceResponse shouldInterceptRequest(WebView view, String url)
     {
-      final InputStream is = mZippedGuidesStorage.getData(url.replace("file:///", "data/"));
-      return new WebResourceResponse(getActivity().getContentResolver().getType(Uri.parse(url)), "UTF-8", is);
+      if (url.startsWith("file:///"))
+      {
+        final InputStream is = mZippedGuidesStorage.getData(url.replace("file:///", "data/"));
+        return new WebResourceResponse(getActivity().getContentResolver().getType(Uri.parse(url)), "UTF-8", is);
+      }
+      else
+        return super.shouldInterceptRequest(view, url);
     }
   }
 
