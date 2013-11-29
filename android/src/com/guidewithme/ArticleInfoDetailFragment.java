@@ -1,6 +1,9 @@
 package com.guidewithme;
 
 import static com.guidewithme.util.Utils.notNull;
+
+import java.io.InputStream;
+
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
@@ -8,12 +11,12 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.webkit.URLUtil;
+import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebSettings.LayoutAlgorithm;
 import android.webkit.WebView;
@@ -22,10 +25,9 @@ import android.widget.TextView;
 
 import com.guidewithme.ArticleInfoListFragment.OnListIconClickedListener;
 import com.guidewithme.article.ArticleInfo;
-import com.guidewithme.article.ArticlePathFinder;
-import com.guidewithme.article.ObbPathFinder;
+import com.guidewithme.async.ZippedGuidesStorage;
 import com.guidewithme.cpp.Storage;
-import com.guidewithme.R;
+import com.guidewithme.util.Expansion;
 import com.guidewithme.util.Utils;
 import com.mapswithme.maps.api.MapsWithMeApi;
 
@@ -48,8 +50,7 @@ public class ArticleInfoDetailFragment extends Fragment
   private View mShowList;
   private View mProgressContainer;
 
-  private ArticlePathFinder mFinder;
-//  private Storage mStorage;
+  private ZippedGuidesStorage mZippedGuidesStorage;
 
   private OnListIconClickedListener mIconClickedListener;
 
@@ -72,7 +73,7 @@ public class ArticleInfoDetailFragment extends Fragment
     else if (savedInstanceState != null && savedInstanceState.containsKey(ARTICLE_INFO))
       mItem = (ArticleInfo) savedInstanceState.getSerializable(ARTICLE_INFO);
 
-    mFinder = new ObbPathFinder(getActivity().getApplicationContext());
+    mZippedGuidesStorage = new ZippedGuidesStorage(Expansion.findPackageObbFile(getActivity().getPackageName()));
   }
 
   @Override
@@ -85,9 +86,10 @@ public class ArticleInfoDetailFragment extends Fragment
   public void setArticleInfo(ArticleInfo info)
   {
     mItem = info;
-
-    final String url = mFinder.getPath(mItem);
+    // we need to set correct scheme for the web view
+    final String url = "file:///" + mItem.getArticleId();
     mTitle.setText(mItem.getName());
+
 
     if (!url.equalsIgnoreCase(mWebView.getUrl()))
       mWebView.loadUrl(url);
@@ -195,6 +197,18 @@ public class ArticleInfoDetailFragment extends Fragment
       }
 
       return super.shouldOverrideUrlLoading(view, url);
+    }
+
+    @Override
+    public WebResourceResponse shouldInterceptRequest(WebView view, String url)
+    {
+      if (url.startsWith("file:///"))
+      {
+        final InputStream is = mZippedGuidesStorage.getData(url.replace("file:///", "data/"));
+        return new WebResourceResponse(getActivity().getContentResolver().getType(Uri.parse(url)), "UTF-8", is);
+      }
+      else
+        return super.shouldInterceptRequest(view, url);
     }
   }
 

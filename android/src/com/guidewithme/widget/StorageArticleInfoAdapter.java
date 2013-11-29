@@ -8,14 +8,14 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.guidewithme.R;
 import com.guidewithme.article.ArticleInfo;
 import com.guidewithme.cpp.Storage;
-import com.guidewithme.thumb.ObbThumbnailProvider;
 import com.guidewithme.thumb.ThumbnailsProvider;
-import com.guidewithme.R;
+import com.guidewithme.thumb.ZipThumbnailsProvider;
+import com.guidewithme.util.Expansion;
 
 public class StorageArticleInfoAdapter extends BaseAdapter
-                                       implements ObbThumbnailProvider.MountStateChangedListener
 {
   private final Storage mStorage;
   private final Context mContext;
@@ -25,7 +25,8 @@ public class StorageArticleInfoAdapter extends BaseAdapter
   {
     mStorage = storage;
     mContext = context;
-    mThumbnailsProvider = new ObbThumbnailProvider(context, this);
+    mThumbnailsProvider = new ZipThumbnailsProvider(context,
+        Expansion.findPackageObbFile(mContext.getPackageName()));
   }
 
   @Override
@@ -88,11 +89,4 @@ public class StorageArticleInfoAdapter extends BaseAdapter
       mThumbnail.setImageDrawable(mThumbnailsProvider.getThumbnailByUrl(info.getIconUrl()));
     }
   }
-
-  @Override
-  public void onMountStateChanged(int newState)
-  {
-    notifyDataSetChanged();
-  }
-
 }
