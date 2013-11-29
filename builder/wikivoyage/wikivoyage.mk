@@ -37,11 +37,11 @@ article_page_url_desktop.txt: article_page_url.txt
 	cat article_page_url.txt | sed 's/[.]m[.]/./' > article_page_url_desktop.txt
 
 download_articles: article_page_url.txt
-	wget --wait=0.2 --random-wait --no-clobber --directory-prefix=articles --input-file=article_page_url.txt || true
+	wget --no-clobber --directory-prefix=articles --input-file=article_page_url.txt || true
 	touch download_articles
 
 download_articles_desktop: article_page_url_desktop.txt
-	wget --wait=0.2 --random-wait --no-clobber --directory-prefix=articles_desktop --input-file=article_page_url_desktop.txt || true
+	wget --no-clobber --directory-prefix=articles_desktop --input-file=article_page_url_desktop.txt || true
 	touch download_articles_desktop
 
 image_url.txt: download_articles
@@ -51,8 +51,8 @@ image_url_desktop.txt: download_articles_desktop
 	grep --only-matching --no-filename --mmap '<img[^/]*src=\"[^">]*"' -r articles_desktop/ | sed 's/<img.*src="//g' | sed 's/"$$//g' | sed 's:/thumb\(/.*\)/[0-9][0-9]*px-.*$$:\1:' | sed 's@^//@http://@' | sort -u > image_url_desktop.txt
 
 download_images: image_url.txt image_url_desktop.txt
-	wget --wait=0.2 --random-wait --no-clobber --directory-prefix=images --input-file=image_url.txt || true
-	wget --wait=0.2 --random-wait --no-clobber --directory-prefix=images --input-file=image_url_desktop.txt || true
+	wget --no-clobber --directory-prefix=images --input-file=image_url.txt || true
+	wget --no-clobber --directory-prefix=images --input-file=image_url_desktop.txt || true
 	touch download_images
 
 rename_articles:
@@ -88,11 +88,11 @@ genindex: geocodes.txt clean_up_countries
 	cat countries_to_generate.txt | while read country; do ../genindex/genindex $$country.info.txt $$country.redirect.txt geocodes.txt Countries/$$country/content/data/index.dat; done
 	touch genindex
 
-make_obb: process_html
-	bash makeobb.sh
+make_data_zip: process_html
+	bash makezip.sh
 
 make_apk: genindex
 	bash makeapk.sh
 
-make_android: make_obb make_apk
-	echo "Please collect .apk and .obb files from Countries/ directory."
+make_android: make_data_zip make_apk
+	echo "Please collect .apk and .zip files from Countries/ directory."
