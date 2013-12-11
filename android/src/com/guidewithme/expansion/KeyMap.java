@@ -10,7 +10,7 @@ public class KeyMap
   final static Map<String, String> COUTRY_2_KEY = new HashMap<String, String>();
 
   private final static int KEY_LENGHT = 392;
-  private final static int KEY_COUNT = 12;
+  private final static int KEY_COUNT = 13;
 
   static
   {
@@ -26,7 +26,7 @@ public class KeyMap
     COUTRY_2_KEY.put("switzerland", "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAn5s5bicbujNjm8IdqTT87TISYgIHEilt9cjl/pcfpKiIXA+e6VBl1ePdaZoQiS1g2nN4a1tLTtfe6QVwsZpwxt4NogpOsBTd1LNsUjRPdqI3Co2Yb9KhaHeLVrw6wuXJvDrmdvHo4lq3B791PVzL7kmAJflGL/MDbiJrKDI7Kea2Ah00igZw/xy01wLklYx++oXYRgXTZYtLjLWJu0cxIYIZ+FstXR91Sgk/zsudycEZdFCsHAbggJF8nBvzCfOfaTGnUem7Jc0zYLvUf//ZUwpJtkwrtAb+THv2Isnc2ZkE9Lv+HnJXmvx0k9ZI0P5fccmjscFOpzWIgqt56f7nbwIDAQAB");
     COUTRY_2_KEY.put("turkey", "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0wOCJ6FwP+6EclHeZOLvYqDq3gml/16SxdtobkNP7qxYjGJfmjoxYWIa2XxgmgHmJEanKCtNbzpW++seP4f/9FJzepy4UMNrzubpK24yvOpHssMNjEiKcrT/rfMznbiPAMcLw7AMU2iulk+TWbmQD9Roj/sx0nANkO9FZ6kHkzBy4Z5qjGOqDFzhKdVWHQrjKIUWCEs1kRsT6EEkdDV+MKRl18s/tgA3FqSil7GCGko5aArF0EJWkbNryiwpfUMIQ3x2k66YRXzEFHwGm+26V+fMV3Bm3yBfkE7yC81KeiVrIXvSduOBn8j0bQd2qhtKc7JR8KZ/s6JmNASicWEs6QIDAQAB");
     COUTRY_2_KEY.put("uk", "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAu1XiE4QTmYZvKH5VPu5RwSeW0B5SzGyVGFc9fBona0J7gNHGBb7zW6MJzxrnen725/JvWCsQQPjEbfGQGn8SZcxCrKMcN4rBQLtw66fmllEJgtFORZMep0WlH+8Wk9Ss4CvYwnvwUsHtTRAQbFKYBbaGVHZwZBKDyVNzTAuM+jQo8RPocbkbhv8bcBy3z4oolAMhBZghAIOBafi608zv+AVW3L1SJZ9gWrVC/+F5YlxXV4+7npImHjThwB9ZDjWkSJZjlQSiDkNf6H0PnyMv+yymyOumXMoiXW4uLTGAWXhpUxrLuIpAd8M2lDU3Ofwxz2tMkd7QuB/ZSgEmlyCs0QIDAQAB");
-
+    COUTRY_2_KEY.put("new.zealand", "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvQ25Eib6bGvKr0EcRJjdB48xPs38kcsVzw4+AIsqj6xuGR+xvz2PdaQb+iC18P5ztlYPHQofvEUhFAsN35loESKjjqXHelLY1FrtNCnx/hHtUtTFQn4+dwPi9giDd+vg7vI8jR/YJkQwHtCnMskgu1sPNbrf4EFms6YiyTMvHrq0K6/phxFZ4R1lVsVB4uTaUDhzLfRCXJj0s+hN9kh+VH0rsEKCiBv2rCw/ttoJe0YOkWPQVEdSocA13FCMvvwjF0iFveWLeOqXJ2jX+aSy2w25r+K7G9rapXNtrc/NFkdYBlNFRgOqGw0hWrkzLumfdrZvHsSMQmC4eLzOp2n4PQIDAQAB");
     validateKeys();
   }
 
