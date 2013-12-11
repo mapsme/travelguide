@@ -10,3 +10,4 @@ Switzerland
 Japan
 California
 Hawaii
+New_Zealand
