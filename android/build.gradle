@@ -41,8 +41,8 @@ dependencies {
 }
 
 android {
-  compileSdkVersion 18
-  buildToolsVersion "18.1.0"
+  compileSdkVersion 19
+  buildToolsVersion "19"
   project.archivesBaseName = GWMapk + "_" + GWMvn + "_" +GWMvc
 
   signingConfigs {
@@ -71,8 +71,8 @@ android {
     versionCode = Integer.valueOf(GWMvc)
     versionName = GWMvn
     packageName = GWMpn
-    minSdkVersion 9
-    targetSdkVersion 18
+    minSdkVersion 11
+    targetSdkVersion 19
   }
 
   sourceSets {
