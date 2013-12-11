@@ -12,9 +12,14 @@ cat countries_to_generate.txt | while read country; do
     toCopy=(drawable-ldpi drawable-mdpi drawable-hdpi \
         drawable-xhdpi drawable-xxhdpi)
 
+    COUNTRY_RES_DIR="../../android/icons/$country"
+    if [ ! -d "$COUNTRY_RES_DIR" ]; then
+        COUNTRY_RES_DIR="../../android/icons/default"
+        echo "ERROR: Icons are missing for $country - default icons are used"
+    fi
     for resDir in ${toCopy[*]}
     do
-        cp -f ../../android/icons/$country/$resDir/* ../../android/res/$resDir
+        cp -f $COUNTRY_RES_DIR/$resDir/* ../../android/res/$resDir
         echo "Copied $resDir for $country"
     done
 
