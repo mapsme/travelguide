@@ -9,7 +9,7 @@
 		<dict>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
-			<key>Title</key>
+			<key>FooterText</key>
 			<string>Hey friends!
 
 We designed the app aiming to provide you interesting and useful travel information. Hope it helps to make your trips bright and remarkable.
