@@ -1951,9 +1951,9 @@
 			productReference = ED9D3747180703FA00ADBEF1 /* Turkey.app */;
 			productType = "com.apple.product-type.application";
 		};
-		FA9448C518586CFD002C6FFB /* New Zealand */ = {
+		FA9448C518586CFD002C6FFB /* New_Zealand */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = FA94490818586CFD002C6FFB /* Build configuration list for PBXNativeTarget "New Zealand" */;
+			buildConfigurationList = FA94490818586CFD002C6FFB /* Build configuration list for PBXNativeTarget "New_Zealand" */;
 			buildPhases = (
 				FA9448C618586CFD002C6FFB /* Sources */,
 				FA9448D918586CFD002C6FFB /* Frameworks */,
@@ -1963,7 +1963,7 @@
 			);
 			dependencies = (
 			);
-			name = "New Zealand";
+			name = New_Zealand;
 			productName = newzealand;
 			productReference = FA94490C18586CFD002C6FFB /* New Zealand.app */;
 			productType = "com.apple.product-type.application";
@@ -2002,7 +2002,7 @@
 				ED9D36E1180701FD00ADBEF1 /* Switzerland */,
 				ED9D3746180703FA00ADBEF1 /* Turkey */,
 				ED81954217AED762004F3803 /* UK */,
-				FA9448C518586CFD002C6FFB /* New Zealand */,
+				FA9448C518586CFD002C6FFB /* New_Zealand */,
 			);
 		};
 /* End PBXProject section */
@@ -3569,7 +3569,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		FA94490818586CFD002C6FFB /* Build configuration list for PBXNativeTarget "New Zealand" */ = {
+		FA94490818586CFD002C6FFB /* Build configuration list for PBXNativeTarget "New_Zealand" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				FA94490918586CFD002C6FFB /* Debug */,
