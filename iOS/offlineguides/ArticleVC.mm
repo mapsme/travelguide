@@ -34,14 +34,23 @@
   size_t const count = m_storage.GetResultsCount();
   NSMutableArray * pins = [[NSMutableArray alloc] initWithCapacity:count];
 
+  // Hack for New Zealand to display correct rect when viewing all articles.
+  // It's needed because one article lies close to -180 lon, while all other
+  // articles are close to +180 lon, and MapsWithMe calculates incorrect display rect
+  BOOL const isNewZealand = [[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIdentifier"] isEqualToString:@"com.guidewithme.new.zealand"];
+
   for (size_t i = 0; i < count; ++ i)
   {
     ArticleInfo const & article = m_storage.GetResult(i);
-	double lat, lon;
+    double lat, lon;
     // Do not check for redirects as they don't contain valid coordinates
     if (/*!article.IsRedirect() && */article.GetLatLon(lat, lon))
     {
       NSString * title = [NSString stringWithUTF8String:article.GetTitle().c_str()];
+      // <-- New Zealand hack continues here
+      if (isNewZealand && count > 1 && [title rangeOfString:@"Chatham Islands"].location != NSNotFound)
+        continue;
+      // <-- End of New Zealand hack
       NSString * pageId = [NSString stringWithUTF8String:article.GetUrl().c_str()];
       [pins addObject:[[MWMPin alloc] initWithLat:lat lon:lon title:title andId:pageId]];
     }
