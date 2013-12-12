@@ -120,7 +120,7 @@ public class ArticleInfoListActivity extends FragmentActivity
     final MWMResponse mwmResponse = MWMResponse.extractFromIntent(this, intent);
     final MWMPoint point = mwmResponse.getPoint();
 
-    if (point.getId() != null)
+    if (point != null && point.getId() != null)
     {
       final String id = point.getId();
       Log.d(TAG, id);

@@ -23,3 +23,6 @@ builder/wikivoyage/images
 builder/wikivoyage/articles
 builder/wikivoyage/articles_desktop
 builder/wikivoyage/Countries
+
+# This is separate git repository with MWM API
+3rdparty/android-mwm
