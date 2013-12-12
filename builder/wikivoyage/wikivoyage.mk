@@ -12,7 +12,7 @@ DUMP_FILES = page.sql.gz redirect.sql.gz category.sql.gz page_props.sql.gz image
 
 
 .PHONY: all
-all: download_images rename_articles countries.txt geocodes.txt process_html make_obb make_apk
+all: download_images rename_articles countries.txt geocodes.txt process_html make_data_zip make_apk
 
 .PHONY: clean
 clean:
