@@ -2,6 +2,7 @@ package com.guidewithme.async;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URLDecoder;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
@@ -25,8 +26,9 @@ public class ZippedGuidesStorage
   {
     try
     {
-      final ZipEntry ze = mZFile.getEntry(url);
-      return mZFile.getInputStream(ze);
+      final String decodedUrl = URLDecoder.decode(url, "utf-8");
+      final ZipEntry ze = mZFile.getEntry(decodedUrl);
+      return ze == null ? null : mZFile.getInputStream(ze);
     }
     catch (final IOException e)
     {
