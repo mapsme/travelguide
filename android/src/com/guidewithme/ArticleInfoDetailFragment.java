@@ -205,10 +205,10 @@ public class ArticleInfoDetailFragment extends Fragment
       if (url.startsWith("file:///"))
       {
         final InputStream is = mZippedGuidesStorage.getData(url.replace("file:///", "data/"));
-        return new WebResourceResponse(getActivity().getContentResolver().getType(Uri.parse(url)), "UTF-8", is);
+        if (is != null)
+          return new WebResourceResponse(getActivity().getContentResolver().getType(Uri.parse(url)), "UTF-8", is);
       }
-      else
-        return super.shouldInterceptRequest(view, url);
+      return super.shouldInterceptRequest(view, url);
     }
   }
 
