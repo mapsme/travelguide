@@ -13,6 +13,8 @@ public class QueryResultLoader extends AsyncTaskLoader<Storage>
   private final double  mLon;
   private final boolean mUseLocation;
 
+  private boolean mIsReady = false;
+
   public QueryResultLoader(Context context, Storage storage, String query)
   {
     super(context);
@@ -36,7 +38,17 @@ public class QueryResultLoader extends AsyncTaskLoader<Storage>
   public Storage loadInBackground()
   {
     mStorage.query(mQuery, mUseLocation, mLat, mLon);
+    mIsReady = true;
     return mStorage;
+  }
+
+  @Override
+  protected void onStartLoading()
+  {
+    if (mIsReady && !takeContentChanged())
+      deliverResult(mStorage);
+    else
+      forceLoad();
   }
 
 }
