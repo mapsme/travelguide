@@ -30,7 +30,6 @@ import android.widget.TextView;
 import com.guidewithme.article.ArticleInfo;
 import com.guidewithme.async.QueryResultLoader;
 import com.guidewithme.cpp.Storage;
-import com.guidewithme.R;
 import com.guidewithme.util.Utils;
 import com.guidewithme.widget.StorageArticleInfoAdapter;
 import com.mapswithme.maps.api.MWMPoint;
@@ -47,7 +46,7 @@ import com.mapswithme.maps.api.MapsWithMeApi;
  */
 public class ArticleInfoListFragment extends ListFragment
                                      implements LoaderCallbacks<Storage>, TextWatcher,
-                                       OnClickListener, LocationListener
+                                                OnClickListener, LocationListener
 {
 
   public interface OnListIconClickedListener
@@ -293,20 +292,20 @@ public class ArticleInfoListFragment extends ListFragment
   {
     final Bundle args = new Bundle(1);
     args.putString(KEY_QUERY, s.toString());
-    getLoaderManager().restartLoader(SEARCH_LOADER, args, this).forceLoad();
+    getLoaderManager().restartLoader(SEARCH_LOADER, args, this);
 
     hideIf(TextUtils.isEmpty(s), mCross);
   }
 
   @Override
   public void onTextChanged(CharSequence s, int start, int before, int count)
-  {
-    search(s);
-  }
+  {}
 
   @Override
   public void afterTextChanged(Editable s)
-  {}
+  {
+    search(s.toString());
+  }
 
   @Override
   public void beforeTextChanged(CharSequence s, int start, int count, int after)
