@@ -4,6 +4,7 @@ import java.io.File;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.Random;
 
 import android.app.Activity;
 import android.content.Context;
@@ -24,6 +25,11 @@ public class Utils
   {
     view.setVisibility(View.GONE);
     return view;
+  }
+
+  public static int random(int max)
+  {
+    return new Random().nextInt(max);
   }
 
   public static View showView(View view)
