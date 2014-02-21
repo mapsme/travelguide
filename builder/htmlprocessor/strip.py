@@ -97,6 +97,8 @@ def imageSanitizedPath(fileName):
 
 
 def rewriteImages(soup):
+    thumbinners = []
+    thumbTrights = []
     imgTag = soup.findAll("img")
 
     for imgElement in imgTag:
@@ -104,7 +106,6 @@ def rewriteImages(soup):
         # todo rewrite srcset attr if we can get callback on image loading in webview
         del imgElement["srcset"]
 
-        index = -1
         splitSrc = imgElement["src"].split("/")
         splitSrc.reverse()
         # checking just two last elements (preview name, real name)
@@ -115,7 +116,19 @@ def rewriteImages(soup):
                 break
         else:
             print "Stripping image", imgElement["src"]
-            [s.decompose() for s in imgElement.fetchParents("div", {"class": ["thumb tright", "thumbinner", "image"]})]
+            thumbCaption = imgElement.fetchParents("div", {"class" : "thumbcaption"})
+            if len(thumbCaption) > 0:
+                for t in thumbCaption:
+                    t.decompose()
+            else:
+                thumbinners = imgElement.fetchParents("div", {"class" : "thumbinner"})
+                thumbTrights = imgElement.fetchParents("div", {"class" : "thumb tright"})
+
+    for inner in thumbinners:
+        inner.decompose()
+
+    for rigth in thumbTrights:
+        rigth.decompose()
 
 
 def rewriteCrossLinks(soup):
