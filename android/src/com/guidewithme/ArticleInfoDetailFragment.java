@@ -11,6 +11,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -39,7 +40,7 @@ import com.mapswithme.maps.api.MapsWithMeApi;
 public class ArticleInfoDetailFragment extends Fragment
                                        implements OnClickListener
 {
-
+  private static final String TAG = "ArticleInfoDetailFragment";
   public static final String ARTICLE_INFO = "article_info";
 
   private static ArticleInfo mItem;
@@ -206,7 +207,16 @@ public class ArticleInfoDetailFragment extends Fragment
       {
         final InputStream is = mZippedGuidesStorage.getData(url.replace("file:///", "data/"));
         if (is != null)
-          return new WebResourceResponse(getActivity().getContentResolver().getType(Uri.parse(url)), "UTF-8", is);
+        {
+          final String type = getActivity().getContentResolver().getType(Uri.parse(url));
+          if (type == null)
+          {
+            Log.d(TAG, "ERROR: Unknown mime-type for " + url);
+            ex.printStackTrace();
+            type = "application/octet-stream";
+          }
+          return new WebResourceResponse(type, "UTF-8", is);
+        }
       }
       return super.shouldInterceptRequest(view, url);
     }
