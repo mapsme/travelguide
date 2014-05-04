@@ -1,49 +1,21 @@
 buildscript {
   repositories { mavenCentral() }
-
-  dependencies { classpath 'com.android.tools.build:gradle:0.5.7' }
-}
-
-// need it for :clean
-apply plugin:'base'
-
-task ndkBuild(type:Exec) {
-  def clParts = (['ndk-build', '-j', Runtime.runtime.availableProcessors() + 1] + GWMndkFlags.split(' ')).flatten()
-  println(clParts.join(" "))
-  commandLine clParts
-}
-
-task ndkBuildClean(type:Exec) {
-  commandLine 'ndk-build','clean'
-}
-
-task copyNativeLibs(type: Copy, dependsOn: 'ndkBuild') {
-  from(new File('libs')) { include '**/*.so' }
-  into new File(buildDir, 'native-libs')
-}
-
-tasks.withType(Compile) { compileTask -> compileTask.dependsOn ndkBuild }
-tasks.withType(Compile) { compileTask -> compileTask.dependsOn copyNativeLibs }
-
-clean.dependsOn 'cleanCopyNativeLibs'
-clean.dependsOn 'ndkBuildClean'
-
-tasks.withType(com.android.build.gradle.tasks.PackageApplication) { pkgTask ->
-  pkgTask.jniDir new File(buildDir, 'native-libs')
+  dependencies { classpath 'com.android.tools.build:gradle:0.9.2' }
 }
 
 apply plugin: 'android'
 
 dependencies {
-  compile fileTree(dir: 'libs', include: '*.jar')
-  compile project(':android-mwm')
+  compile propAndroidSupportLibrary
+  compile project(':3rdparty:play_licensing')
+  compile project(':3rdparty:api-android:lib')
   compile project(':3rdparty:expansion_downloader')
 }
 
 android {
-  compileSdkVersion 19
-  buildToolsVersion "19"
-  project.archivesBaseName = GWMapk + "_" + GWMvn + "_" +GWMvc
+  compileSdkVersion propTargetSdkVersion.toInteger()
+  buildToolsVersion propBuildToolsVersion
+  project.archivesBaseName = GWMapk + "_" + GWMvn + "_" + GWMvc
 
   signingConfigs {
 
@@ -71,8 +43,8 @@ android {
     versionCode = Integer.valueOf(GWMvc)
     versionName = GWMvn
     packageName = GWMpn
-    minSdkVersion 11
-    targetSdkVersion 19
+    minSdkVersion propMinSdkVersion.toInteger()
+    targetSdkVersion propTargetSdkVersion.toInteger()
   }
 
   sourceSets {
@@ -85,10 +57,6 @@ android {
       res.srcDirs = ['res']
       assets.srcDirs = ['assets']
     }
-
-    instrumentTest.setRoot('tests')
-    debug.setRoot('build-types/debug')
-    release.setRoot('build-types/release')
   }
 }
 
@@ -106,6 +74,35 @@ android.applicationVariants.all { variant ->
   }
 }
 
-task wrapper(type: Wrapper) {
-    gradleVersion = '1.7'
+// need it for :clean
+apply plugin:'base'
+
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+def NDK_BUILD = properties.getProperty('ndk.dir') + '/ndk-build'
+
+task ndkBuild(type:Exec) {
+  def clParts = ([NDK_BUILD, '-j' + (Runtime.runtime.availableProcessors() + 1)] + GWMndkFlags.split(' ')).flatten()
+  println(clParts.join(" "))
+  commandLine clParts
+}
+
+task ndkBuildClean(type:Exec) {
+  commandLine NDK_BUILD, 'clean'
+}
+
+task copyNativeLibs(type: Copy, dependsOn: 'ndkBuild') {
+  from(new File('libs')) { include '**/*.so' }
+  into new File(buildDir, 'native-libs')
+}
+
+tasks.withType(Compile) { compileTask -> compileTask.dependsOn ndkBuild }
+tasks.withType(Compile) { compileTask -> compileTask.dependsOn copyNativeLibs }
+
+clean.dependsOn 'cleanCopyNativeLibs'
+clean.dependsOn 'ndkBuildClean'
+
+tasks.withType(com.android.build.gradle.tasks.PackageApplication) { pkgTask ->
+  pkgTask.jniFolders = new HashSet<File>()
+  pkgTask.jniFolders.add(new File(buildDir, 'native-libs'))
 }
