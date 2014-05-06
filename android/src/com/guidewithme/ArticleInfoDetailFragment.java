@@ -208,11 +208,10 @@ public class ArticleInfoDetailFragment extends Fragment
         final InputStream is = mZippedGuidesStorage.getData(url.replace("file:///", "data/"));
         if (is != null)
         {
-          final String type = getActivity().getContentResolver().getType(Uri.parse(url));
+          String type = getActivity().getContentResolver().getType(Uri.parse(url));
           if (type == null)
           {
             Log.d(TAG, "ERROR: Unknown mime-type for " + url);
-            ex.printStackTrace();
             type = "application/octet-stream";
           }
           return new WebResourceResponse(type, "UTF-8", is);

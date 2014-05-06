@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-     Copyright (C) 2010 The Android Open Source Project
+<!-- Copyright (C) 2010 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -17,16 +16,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.google.android.vending.licensing"
     android:versionCode="2"
-    android:versionName="1.5" >
-
+    android:versionName="1.5">
     <!-- Devices >= 3 have version of Android Market that supports licensing. -->
-    <uses-sdk
-        android:minSdkVersion="3"
-        android:targetSdkVersion="19" />
+    <!--<uses-sdk android:minSdkVersion="3" android:targetSdkVersion="15" />-->
     <!-- Required permission to check licensing. -->
-    <uses-permission
-        android:name="com.android.vending.CHECK_LICENSE" />
-
-    <application />
-
+    <uses-permission android:name="com.android.vending.CHECK_LICENSE" />
 </manifest>

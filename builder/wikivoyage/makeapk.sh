@@ -1,5 +1,3 @@
-export PATH=~/android-ndk-r9/:$PATH
-
 set -e -u
 
 cat countries_to_generate.txt | while read country; do
