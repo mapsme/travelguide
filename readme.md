@@ -14,13 +14,14 @@ Now you'r ready to build new amazing guides with me!
 
 ## iOS - add new country
 
-1. Duplicate any existing iOS target and give it a name of new country
+0. Duplicate any existing iOS target and give it a name of new country
+1. Delete copy of plist which was created by XCode
 2. Some target's proj settings are set to default values and should be fixed/set equal to other targets
 3. Set *PRODUCT_NAME* in target project properties equal to a name of new country
 4. Set *BUNDLE_ID* in target properties to *com.guidewithme.newcountry* (all lowercase, dots instead of spaces)
 5. Set *URL_SCHEME* in target properties to *guidewithme-newcountry* (all lowercase)
 6. Add all necessary app icons to the corresponding folder
-7. Fix new and duplicated target icons "target membership" checkboxes
+7. Fix "target membership" for icons and for data folder in resources for original target which was duplicated
 8. Drag "../builder/wikivoyage/Countries/<Country Name>/content/data" folder to the Resources and create folder reference
 9. Add new target name to iOS/build.sh to use Jenkins autobuild
 10. Create new app/key in Flurry and add it to iOS/offlineguides/Statistics.m file
