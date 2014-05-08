@@ -15,7 +15,7 @@ DATE=$(date +%F)
 APP_DSYM_FOLDER="${PROJECT_BUILDDIR}/APP_AND_DSYM-${DATE}"
 RESULT_DIR="${PROJECT_BUILDDIR}"
 
-declare arr=(UK Japan Russia Spain Hawaii California Germany Italy France Turkey Switzerland Greece New_Zealand)
+declare arr=(UK Japan Russia Spain Hawaii California Germany Italy France Turkey Switzerland Greece New_Zealand Thailand)
 
 # copy all provisioning profiles first
 cp "$GUIDES_PROVISIONING_DIR"/* "${SYSTEM_PROVISIONING_DIR}"
@@ -27,7 +27,7 @@ if [ $# == 1 ]; then
 else
   RESULT_DIR="${RESULT_DIR}/AppStore-${DATE}"
   # To correctly sign Distribution versions from target's XCode project settings, we need to delete AdHoc provisioning
-  rm "${SYSTEM_PROVISIONING_DIR}"/GuideWithMe_AdHoc.mobileprovision
+  rm "${SYSTEM_PROVISIONING_DIR}"/MapsWithMe_AdHoc.mobileprovision
 fi
 
 if [ -d "$APP_DSYM_FOLDER" ]; then

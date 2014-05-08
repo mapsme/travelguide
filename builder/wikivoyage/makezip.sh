@@ -6,7 +6,7 @@ cat countries_to_generate.txt | while read country; do
     # copy js, css
     cp -r ../../data/* $DATA_PATH
 
-    echo "Generation .zip for : $country"
+    echo "Generate .zip for : $country"
 
     # zip content with pushd to avoid adding full path
     pushd Countries/$country/content
