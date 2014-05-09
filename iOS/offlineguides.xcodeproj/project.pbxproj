@@ -1173,7 +1173,7 @@
 		FADD0FC11918022800448824 /* 72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "72@2x.png"; sourceTree = "<group>"; };
 		FADD0FC21918022800448824 /* 76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 76.png; sourceTree = "<group>"; };
 		FADD0FC31918022800448824 /* 76@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "76@2x.png"; sourceTree = "<group>"; };
-		FADD0FD21918038F00448824 /* data */ = {isa = PBXFileReference; lastKnownFileType = folder; name = data; path = Countries/Thailand/content/data; sourceTree = "<group>"; };
+		FADD0FD21918038F00448824 /* data */ = {isa = PBXFileReference; lastKnownFileType = folder; name = data; path = ../builder/wikivoyage/Countries/Thailand/content/data; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
