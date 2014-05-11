@@ -23,7 +23,6 @@
 
 @property (nonatomic, strong) UISearchBar * searchBar;
 @property (nonatomic, strong) CLLocationManager * locationManager;
-@property (nonatomic, strong) NSString * currentName;
 @property (nonatomic, strong) NSString * currentSubtitle;
 @end
 
@@ -181,6 +180,7 @@
   [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
   ArticleInfo const * info = [self infoByIndexPath:indexPath];
   NSString * url = [NSString stringWithUTF8String:info->GetUrl().c_str()];
+  self.currentName = [NSString stringWithUTF8String:info->GetTitle().c_str()];
   if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
     [self loadGuideAndPushToNavigationController:url];
   [self.delegate selectHtmlPageUrl:url];

@@ -72,7 +72,7 @@
     UITextAttributeTextColor       : [UIColor colorWithRed:253.f/255.f green:241.f/255.f blue:43.f/255.f alpha:1.f],
     UITextAttributeTextShadowColor : [UIColor clearColor]
   };
-  self.navigationItem.title = [self getAppName];
+  [self updateArticleTitle];
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request
@@ -246,6 +246,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
         [[self getArticleController] updateView:[htmlId substringFromIndex:slashLocation.location + 1]];
       else
         [[self getArticleController] updateView:htmlId];
+      [self updateArticleTitle];
     }
   }
 }
@@ -272,9 +273,9 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
   return YES;
 }
 
--(NSString *)getAppName
+-(void)updateArticleTitle
 {
-  return [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"];
+  self.navigationItem.title = [self getArticleController].currentName;
 }
 
 @end
