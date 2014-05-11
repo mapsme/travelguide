@@ -25,4 +25,4 @@ builder/wikivoyage/articles_desktop
 builder/wikivoyage/Countries
 
 # This is separate git repository with MWM API
-3rdparty/android-mwm
+android/3rdparty/api-android
