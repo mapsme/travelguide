@@ -42,7 +42,7 @@ There is one script you need to use to build guides for Android:
  folder *Countries/&lt;country_name&gt;*.
 
 Android applications have package name made of lowercased country name
-and underscores replaced with dotes, added to "com.guidewithme.". For instance:
+and underscores replaced with dots, added to "com.guidewithme.". For instance:
 *United_States -> com.guidewithme.united.states*
 
 
