@@ -23,7 +23,7 @@ cp "$GUIDES_PROVISIONING_DIR"/* "${SYSTEM_PROVISIONING_DIR}"
 if [ $# == 1 ]; then
   RESULT_DIR="${RESULT_DIR}/Adhoc-${DATE}"
   # To correctly sign AdHoc versions from target's XCode project settings, we need to delete all Distribution provisioning
-  rm "${SYSTEM_PROVISIONING_DIR}"/*_GuideWithMe_Distribution.mobileprovision
+  rm "${SYSTEM_PROVISIONING_DIR}"/*_GuideWithMe.mobileprovision
 else
   RESULT_DIR="${RESULT_DIR}/AppStore-${DATE}"
   # To correctly sign Distribution versions from target's XCode project settings, we need to delete AdHoc provisioning
