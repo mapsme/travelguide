@@ -535,18 +535,18 @@
 		EDBD0D0317FDC3440007776B /* Default-Landscape-1024@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = EDBD0CFF17FDC3440007776B /* Default-Landscape-1024@2x~ipad.png */; };
 		EDBD0D0417FDC3440007776B /* Default-Portrait-1024~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = EDBD0D0017FDC3440007776B /* Default-Portrait-1024~ipad.png */; };
 		EDBD0D0517FDC3440007776B /* Default-Landscape-1024~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = EDBD0D0117FDC3440007776B /* Default-Landscape-1024~ipad.png */; };
-		EDF9254D1833A92300539672 /* libFlurry_4.3.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF9254C1833A92300539672 /* libFlurry_4.3.0.a */; };
-		EDF9254E1833A92300539672 /* libFlurry_4.3.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF9254C1833A92300539672 /* libFlurry_4.3.0.a */; };
-		EDF9254F1833A92300539672 /* libFlurry_4.3.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF9254C1833A92300539672 /* libFlurry_4.3.0.a */; };
-		EDF925501833A92300539672 /* libFlurry_4.3.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF9254C1833A92300539672 /* libFlurry_4.3.0.a */; };
-		EDF925511833A92300539672 /* libFlurry_4.3.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF9254C1833A92300539672 /* libFlurry_4.3.0.a */; };
-		EDF925521833A92300539672 /* libFlurry_4.3.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF9254C1833A92300539672 /* libFlurry_4.3.0.a */; };
-		EDF925531833A92300539672 /* libFlurry_4.3.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF9254C1833A92300539672 /* libFlurry_4.3.0.a */; };
-		EDF925541833A92300539672 /* libFlurry_4.3.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF9254C1833A92300539672 /* libFlurry_4.3.0.a */; };
-		EDF925551833A92300539672 /* libFlurry_4.3.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF9254C1833A92300539672 /* libFlurry_4.3.0.a */; };
-		EDF925561833A92300539672 /* libFlurry_4.3.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF9254C1833A92300539672 /* libFlurry_4.3.0.a */; };
-		EDF925571833A92300539672 /* libFlurry_4.3.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF9254C1833A92300539672 /* libFlurry_4.3.0.a */; };
-		EDF925581833A92400539672 /* libFlurry_4.3.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF9254C1833A92300539672 /* libFlurry_4.3.0.a */; };
+		EDF9254D1833A92300539672 /* libFlurry_5.0.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF9254C1833A92300539672 /* libFlurry_5.0.0.a */; };
+		EDF9254E1833A92300539672 /* libFlurry_5.0.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF9254C1833A92300539672 /* libFlurry_5.0.0.a */; };
+		EDF9254F1833A92300539672 /* libFlurry_5.0.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF9254C1833A92300539672 /* libFlurry_5.0.0.a */; };
+		EDF925501833A92300539672 /* libFlurry_5.0.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF9254C1833A92300539672 /* libFlurry_5.0.0.a */; };
+		EDF925511833A92300539672 /* libFlurry_5.0.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF9254C1833A92300539672 /* libFlurry_5.0.0.a */; };
+		EDF925521833A92300539672 /* libFlurry_5.0.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF9254C1833A92300539672 /* libFlurry_5.0.0.a */; };
+		EDF925531833A92300539672 /* libFlurry_5.0.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF9254C1833A92300539672 /* libFlurry_5.0.0.a */; };
+		EDF925541833A92300539672 /* libFlurry_5.0.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF9254C1833A92300539672 /* libFlurry_5.0.0.a */; };
+		EDF925551833A92300539672 /* libFlurry_5.0.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF9254C1833A92300539672 /* libFlurry_5.0.0.a */; };
+		EDF925561833A92300539672 /* libFlurry_5.0.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF9254C1833A92300539672 /* libFlurry_5.0.0.a */; };
+		EDF925571833A92300539672 /* libFlurry_5.0.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF9254C1833A92300539672 /* libFlurry_5.0.0.a */; };
+		EDF925581833A92400539672 /* libFlurry_5.0.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF9254C1833A92300539672 /* libFlurry_5.0.0.a */; };
 		EDF9255A1833A9F600539672 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF925591833A9F600539672 /* Security.framework */; };
 		EDF9255B1833A9FF00539672 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF925591833A9F600539672 /* Security.framework */; };
 		EDF9255C1833A9FF00539672 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF925591833A9F600539672 /* Security.framework */; };
@@ -784,7 +784,7 @@
 		FA9448DA18586CFD002C6FFB /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED64331017B41533000985FE /* CoreLocation.framework */; };
 		FA9448DB18586CFD002C6FFB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED81954A17AED762004F3803 /* CoreGraphics.framework */; };
 		FA9448DC18586CFD002C6FFB /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF925741833AAE900539672 /* CFNetwork.framework */; };
-		FA9448DD18586CFD002C6FFB /* libFlurry_4.3.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF9254C1833A92300539672 /* libFlurry_4.3.0.a */; };
+		FA9448DD18586CFD002C6FFB /* libFlurry_5.0.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF9254C1833A92300539672 /* libFlurry_5.0.0.a */; };
 		FA9448DE18586CFD002C6FFB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED81954617AED762004F3803 /* UIKit.framework */; };
 		FA9448DF18586CFD002C6FFB /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF925591833A9F600539672 /* Security.framework */; };
 		FA9448E018586CFD002C6FFB /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF925811833AB8F00539672 /* SystemConfiguration.framework */; };
@@ -847,7 +847,7 @@
 		FADD0F7F1917FE4E00448824 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED64331017B41533000985FE /* CoreLocation.framework */; };
 		FADD0F801917FE4E00448824 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED81954A17AED762004F3803 /* CoreGraphics.framework */; };
 		FADD0F811917FE4E00448824 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF925741833AAE900539672 /* CFNetwork.framework */; };
-		FADD0F821917FE4E00448824 /* libFlurry_4.3.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF9254C1833A92300539672 /* libFlurry_4.3.0.a */; };
+		FADD0F821917FE4E00448824 /* libFlurry_5.0.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF9254C1833A92300539672 /* libFlurry_5.0.0.a */; };
 		FADD0F831917FE4E00448824 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED81954617AED762004F3803 /* UIKit.framework */; };
 		FADD0F841917FE4E00448824 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF925591833A9F600539672 /* Security.framework */; };
 		FADD0F851917FE4E00448824 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF925811833AB8F00539672 /* SystemConfiguration.framework */; };
@@ -968,7 +968,7 @@
 		EDBD0D0017FDC3440007776B /* Default-Portrait-1024~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait-1024~ipad.png"; sourceTree = "<group>"; };
 		EDBD0D0117FDC3440007776B /* Default-Landscape-1024~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape-1024~ipad.png"; sourceTree = "<group>"; };
 		EDF9254B1833A92300539672 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Flurry.h; path = Flurry/Flurry.h; sourceTree = "<group>"; };
-		EDF9254C1833A92300539672 /* libFlurry_4.3.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFlurry_4.3.0.a; path = Flurry/libFlurry_4.3.0.a; sourceTree = "<group>"; };
+		EDF9254C1833A92300539672 /* libFlurry_5.0.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFlurry_5.0.0.a; path = Flurry/libFlurry_5.0.0.a; sourceTree = "<group>"; };
 		EDF925591833A9F600539672 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		EDF925661833AA3900539672 /* Statistics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Statistics.h; sourceTree = "<group>"; };
 		EDF925671833AA3900539672 /* Statistics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Statistics.m; sourceTree = "<group>"; };
@@ -1184,7 +1184,7 @@
 				ED3154491806E7C7000BBA7B /* CoreLocation.framework in Frameworks */,
 				ED3154121806E77F000BBA7B /* CoreGraphics.framework in Frameworks */,
 				EDF925801833AAF300539672 /* CFNetwork.framework in Frameworks */,
-				EDF9254D1833A92300539672 /* libFlurry_4.3.0.a in Frameworks */,
+				EDF9254D1833A92300539672 /* libFlurry_5.0.0.a in Frameworks */,
 				ED3154131806E77F000BBA7B /* UIKit.framework in Frameworks */,
 				EDF9255B1833A9FF00539672 /* Security.framework in Frameworks */,
 				EDF9258E1833AB9800539672 /* SystemConfiguration.framework in Frameworks */,
@@ -1199,7 +1199,7 @@
 				ED64331117B41534000985FE /* CoreLocation.framework in Frameworks */,
 				ED81954717AED762004F3803 /* UIKit.framework in Frameworks */,
 				EDF925761833AAED00539672 /* CFNetwork.framework in Frameworks */,
-				EDF925581833A92400539672 /* libFlurry_4.3.0.a in Frameworks */,
+				EDF925581833A92400539672 /* libFlurry_5.0.0.a in Frameworks */,
 				ED81954917AED762004F3803 /* Foundation.framework in Frameworks */,
 				EDF925641833AA0500539672 /* Security.framework in Frameworks */,
 				EDF925831833AB9200539672 /* SystemConfiguration.framework in Frameworks */,
@@ -1214,7 +1214,7 @@
 				ED29530D1806C48C00311E19 /* CoreLocation.framework in Frameworks */,
 				ED9ABA0A1805671D00E4F635 /* CoreGraphics.framework in Frameworks */,
 				EDF9257C1833AAF100539672 /* CFNetwork.framework in Frameworks */,
-				EDF925511833A92300539672 /* libFlurry_4.3.0.a in Frameworks */,
+				EDF925511833A92300539672 /* libFlurry_5.0.0.a in Frameworks */,
 				ED9ABA0B1805671D00E4F635 /* UIKit.framework in Frameworks */,
 				EDF9255F1833AA0100539672 /* Security.framework in Frameworks */,
 				EDF925891833AB9500539672 /* SystemConfiguration.framework in Frameworks */,
@@ -1229,7 +1229,7 @@
 				ED9D33F61806F38500ADBEF1 /* CoreLocation.framework in Frameworks */,
 				ED9D33BF1806F32600ADBEF1 /* CoreGraphics.framework in Frameworks */,
 				EDF9257F1833AAF200539672 /* CFNetwork.framework in Frameworks */,
-				EDF9254E1833A92300539672 /* libFlurry_4.3.0.a in Frameworks */,
+				EDF9254E1833A92300539672 /* libFlurry_5.0.0.a in Frameworks */,
 				ED9D33C01806F32600ADBEF1 /* UIKit.framework in Frameworks */,
 				EDF9255C1833A9FF00539672 /* Security.framework in Frameworks */,
 				EDF9258C1833AB9700539672 /* SystemConfiguration.framework in Frameworks */,
@@ -1244,7 +1244,7 @@
 				ED9D34BD1806F82100ADBEF1 /* CoreLocation.framework in Frameworks */,
 				ED9D34861806F7F500ADBEF1 /* CoreGraphics.framework in Frameworks */,
 				EDF9257E1833AAF200539672 /* CFNetwork.framework in Frameworks */,
-				EDF9254F1833A92300539672 /* libFlurry_4.3.0.a in Frameworks */,
+				EDF9254F1833A92300539672 /* libFlurry_5.0.0.a in Frameworks */,
 				ED9D34871806F7F500ADBEF1 /* UIKit.framework in Frameworks */,
 				EDF9255D1833AA0000539672 /* Security.framework in Frameworks */,
 				EDF9258D1833AB9700539672 /* SystemConfiguration.framework in Frameworks */,
@@ -1259,7 +1259,7 @@
 				ED9D35211806F9E300ADBEF1 /* CoreLocation.framework in Frameworks */,
 				ED9D34EA1806F97700ADBEF1 /* CoreGraphics.framework in Frameworks */,
 				EDF9257D1833AAF100539672 /* CFNetwork.framework in Frameworks */,
-				EDF925501833A92300539672 /* libFlurry_4.3.0.a in Frameworks */,
+				EDF925501833A92300539672 /* libFlurry_5.0.0.a in Frameworks */,
 				ED9D34EB1806F97700ADBEF1 /* UIKit.framework in Frameworks */,
 				EDF9255E1833AA0000539672 /* Security.framework in Frameworks */,
 				EDF9258A1833AB9500539672 /* SystemConfiguration.framework in Frameworks */,
@@ -1274,7 +1274,7 @@
 				ED9D35871806FAF800ADBEF1 /* CoreLocation.framework in Frameworks */,
 				ED9D35501806FAE000ADBEF1 /* CoreGraphics.framework in Frameworks */,
 				EDF9257B1833AAF000539672 /* CFNetwork.framework in Frameworks */,
-				EDF925521833A92300539672 /* libFlurry_4.3.0.a in Frameworks */,
+				EDF925521833A92300539672 /* libFlurry_5.0.0.a in Frameworks */,
 				ED9D35511806FAE000ADBEF1 /* UIKit.framework in Frameworks */,
 				EDF925611833AA0200539672 /* Security.framework in Frameworks */,
 				EDF925881833AB9400539672 /* SystemConfiguration.framework in Frameworks */,
@@ -1289,7 +1289,7 @@
 				ED9D35FD1806FC3700ADBEF1 /* CoreLocation.framework in Frameworks */,
 				ED9D35B51806FBD300ADBEF1 /* CoreGraphics.framework in Frameworks */,
 				EDF9257A1833AAEF00539672 /* CFNetwork.framework in Frameworks */,
-				EDF925531833A92300539672 /* libFlurry_4.3.0.a in Frameworks */,
+				EDF925531833A92300539672 /* libFlurry_5.0.0.a in Frameworks */,
 				ED9D35B61806FBD300ADBEF1 /* UIKit.framework in Frameworks */,
 				EDF925601833AA0100539672 /* Security.framework in Frameworks */,
 				EDF925871833AB9400539672 /* SystemConfiguration.framework in Frameworks */,
@@ -1306,7 +1306,7 @@
 				EDF9255A1833A9F600539672 /* Security.framework in Frameworks */,
 				ED9D36631806FF7500ADBEF1 /* CoreLocation.framework in Frameworks */,
 				ED9D361A1806FF3500ADBEF1 /* CoreGraphics.framework in Frameworks */,
-				EDF925541833A92300539672 /* libFlurry_4.3.0.a in Frameworks */,
+				EDF925541833A92300539672 /* libFlurry_5.0.0.a in Frameworks */,
 				ED9D361B1806FF3500ADBEF1 /* UIKit.framework in Frameworks */,
 				ED9D36191806FF3500ADBEF1 /* Foundation.framework in Frameworks */,
 			);
@@ -1319,7 +1319,7 @@
 				ED9D36B61807010400ADBEF1 /* CoreLocation.framework in Frameworks */,
 				ED9D367F180700EF00ADBEF1 /* CoreGraphics.framework in Frameworks */,
 				EDF925791833AAEF00539672 /* CFNetwork.framework in Frameworks */,
-				EDF925551833A92300539672 /* libFlurry_4.3.0.a in Frameworks */,
+				EDF925551833A92300539672 /* libFlurry_5.0.0.a in Frameworks */,
 				ED9D3680180700EF00ADBEF1 /* UIKit.framework in Frameworks */,
 				EDF925621833AA0300539672 /* Security.framework in Frameworks */,
 				EDF925861833AB9300539672 /* SystemConfiguration.framework in Frameworks */,
@@ -1334,7 +1334,7 @@
 				ED9D371B1807021200ADBEF1 /* CoreLocation.framework in Frameworks */,
 				ED9D36E4180701FD00ADBEF1 /* CoreGraphics.framework in Frameworks */,
 				EDF925781833AAEE00539672 /* CFNetwork.framework in Frameworks */,
-				EDF925561833A92300539672 /* libFlurry_4.3.0.a in Frameworks */,
+				EDF925561833A92300539672 /* libFlurry_5.0.0.a in Frameworks */,
 				ED9D36E5180701FD00ADBEF1 /* UIKit.framework in Frameworks */,
 				EDF925631833AA0400539672 /* Security.framework in Frameworks */,
 				EDF925851833AB9300539672 /* SystemConfiguration.framework in Frameworks */,
@@ -1349,7 +1349,7 @@
 				ED9D37801807040C00ADBEF1 /* CoreLocation.framework in Frameworks */,
 				ED9D3749180703FA00ADBEF1 /* CoreGraphics.framework in Frameworks */,
 				EDF925771833AAED00539672 /* CFNetwork.framework in Frameworks */,
-				EDF925571833A92300539672 /* libFlurry_4.3.0.a in Frameworks */,
+				EDF925571833A92300539672 /* libFlurry_5.0.0.a in Frameworks */,
 				ED9D374A180703FB00ADBEF1 /* UIKit.framework in Frameworks */,
 				EDF925651833AA0600539672 /* Security.framework in Frameworks */,
 				EDF925841833AB9200539672 /* SystemConfiguration.framework in Frameworks */,
@@ -1364,7 +1364,7 @@
 				FA9448DA18586CFD002C6FFB /* CoreLocation.framework in Frameworks */,
 				FA9448DB18586CFD002C6FFB /* CoreGraphics.framework in Frameworks */,
 				FA9448DC18586CFD002C6FFB /* CFNetwork.framework in Frameworks */,
-				FA9448DD18586CFD002C6FFB /* libFlurry_4.3.0.a in Frameworks */,
+				FA9448DD18586CFD002C6FFB /* libFlurry_5.0.0.a in Frameworks */,
 				FA9448DE18586CFD002C6FFB /* UIKit.framework in Frameworks */,
 				FA9448DF18586CFD002C6FFB /* Security.framework in Frameworks */,
 				FA9448E018586CFD002C6FFB /* SystemConfiguration.framework in Frameworks */,
@@ -1379,7 +1379,7 @@
 				FADD0F7F1917FE4E00448824 /* CoreLocation.framework in Frameworks */,
 				FADD0F801917FE4E00448824 /* CoreGraphics.framework in Frameworks */,
 				FADD0F811917FE4E00448824 /* CFNetwork.framework in Frameworks */,
-				FADD0F821917FE4E00448824 /* libFlurry_4.3.0.a in Frameworks */,
+				FADD0F821917FE4E00448824 /* libFlurry_5.0.0.a in Frameworks */,
 				FADD0F831917FE4E00448824 /* UIKit.framework in Frameworks */,
 				FADD0F841917FE4E00448824 /* Security.framework in Frameworks */,
 				FADD0F851917FE4E00448824 /* SystemConfiguration.framework in Frameworks */,
@@ -1497,7 +1497,7 @@
 			isa = PBXGroup;
 			children = (
 				EDF9254B1833A92300539672 /* Flurry.h */,
-				EDF9254C1833A92300539672 /* libFlurry_4.3.0.a */,
+				EDF9254C1833A92300539672 /* libFlurry_5.0.0.a */,
 				ED893F6717B223920074E05A /* MapsWithMeAPI.h */,
 				ED893F6817B223920074E05A /* MapsWithMeAPI.m */,
 				ED81957017B10598004F3803 /* utf8proc.c */,
