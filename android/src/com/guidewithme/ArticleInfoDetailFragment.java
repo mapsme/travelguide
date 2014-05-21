@@ -203,6 +203,7 @@ public class ArticleInfoDetailFragment extends Fragment
     @Override
     public WebResourceResponse shouldInterceptRequest(WebView view, String url)
     {
+      Log.d(TAG, "DEBUG: URI " + url);
       if (url.startsWith("file:///"))
       {
         final InputStream is = mZippedGuidesStorage.getData(url.replace("file:///", "data/"));
