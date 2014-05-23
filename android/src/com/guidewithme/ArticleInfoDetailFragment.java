@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.webkit.MimeTypeMap;
 import android.webkit.URLUtil;
 import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
@@ -203,13 +204,15 @@ public class ArticleInfoDetailFragment extends Fragment
     @Override
     public WebResourceResponse shouldInterceptRequest(WebView view, String url)
     {
-      Log.d(TAG, "DEBUG: URI " + url);
       if (url.startsWith("file:///"))
       {
         final InputStream is = mZippedGuidesStorage.getData(url.replace("file:///", "data/"));
         if (is != null)
         {
           String type = getActivity().getContentResolver().getType(Uri.parse(url));
+          // On KitKat it can return null
+          if (type == null)
+            type = MimeTypeMap.getSingleton().getMimeTypeFromExtension(MimeTypeMap.getFileExtensionFromUrl(url));
           if (type == null)
           {
             Log.d(TAG, "ERROR: Unknown mime-type for " + url);
