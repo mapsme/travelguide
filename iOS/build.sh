@@ -15,7 +15,7 @@ DATE=$(date +%F)
 APP_DSYM_FOLDER="${PROJECT_BUILDDIR}/APP_AND_DSYM-${DATE}"
 RESULT_DIR="${PROJECT_BUILDDIR}"
 
-declare arr=(UK Japan Russia Spain Hawaii California Germany Italy France Turkey Switzerland Greece New_Zealand Thailand Taiwan \
+declare arr=(Czech_Republic UK Japan Russia Spain Hawaii California Germany Italy France Turkey Switzerland Greece New_Zealand Thailand Taiwan \
              Estonia Poland Latvia Lithuania Sri_Lanka Hong_Kong Nepal Singapore Malaysia)
 
 # copy all provisioning profiles first
