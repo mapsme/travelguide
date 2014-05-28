@@ -10,8 +10,6 @@ HTML_ARTICLE_PREFIX="http://en.m.wikivoyage.org/wiki?curid="
 DUMP_FILES = page.sql.gz redirect.sql.gz category.sql.gz page_props.sql.gz image.sql.gz site_stats.sql.gz interwiki.sql.gz \
              pagelinks.sql.gz imagelinks.sql.gz categorylinks.sql.gz langlinks.sql.gz externallinks.sql.gz templatelinks.sql.gz
 
-WGET="wget --waitretry=10 --timeout=10"
-
 
 .PHONY: all
 all: download_images rename_articles countries.txt geocodes.txt process_html make_data_zip make_apk
@@ -22,7 +20,7 @@ clean:
 	rm -r Countries
 
 $(DUMP_FILES):
-	$WGET $(DUMP_URL_PREFIX)"-"$@ -O $@
+	wget --waitretry=10 --timeout=10 $(DUMP_URL_PREFIX)"-"$@ -O $@
 
 load_sql_dumps: $(DUMP_FILES)
 	echo "CREATE DATABASE IF NOT EXISTS $(MYSQL_DATABASE)" | $(MYSQL_BINARY) --user=$(MYSQL_USER)
@@ -39,11 +37,11 @@ article_page_url_desktop.txt: article_page_url.txt
 	cat article_page_url.txt | sed 's/[.]m[.]/./' > article_page_url_desktop.txt
 
 download_articles: article_page_url.txt
-	$WGET --no-clobber --directory-prefix=articles --input-file=article_page_url.txt || true
+	wget --waitretry=10 --timeout=10 --directory-prefix=articles --input-file=article_page_url.txt || true
 	touch download_articles
 
 download_articles_desktop: article_page_url_desktop.txt
-	$WGET --no-clobber --directory-prefix=articles_desktop --input-file=article_page_url_desktop.txt || true
+	wget --waitretry=10 --timeout=10 --directory-prefix=articles_desktop --input-file=article_page_url_desktop.txt || true
 	touch download_articles_desktop
 
 image_url.txt: download_articles
@@ -53,8 +51,8 @@ image_url_desktop.txt: download_articles_desktop
 	grep --only-matching --no-filename --mmap '<img[^/]*src=\"[^">]*"' -r articles_desktop/ | sed 's/<img.*src="//g' | sed 's/"$$//g' | sed 's:/thumb\(/.*\)/[0-9][0-9]*px-.*$$:\1:' | sed 's@^//@http://@' | sort -u > image_url_desktop.txt
 
 download_images: image_url.txt image_url_desktop.txt
-	$WGET --no-clobber --directory-prefix=images --input-file=image_url.txt || true
-	$WGET --no-clobber --directory-prefix=images --input-file=image_url_desktop.txt || true
+	wget --waitretry=10 --timeout=10 --no-clobber --directory-prefix=images --input-file=image_url.txt || true
+	wget --waitretry=10 --timeout=10 --no-clobber --directory-prefix=images --input-file=image_url_desktop.txt || true
 	touch download_images
 
 rename_articles:
