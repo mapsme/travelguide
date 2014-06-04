@@ -10,7 +10,7 @@ public class KeyMap
   final static Map<String, String> COUTRY_2_KEY = new HashMap<String, String>();
 
   private final static int KEY_LENGHT = 392;
-  private final static int KEY_COUNT = 24;
+  private final static int KEY_COUNT = 25;
 
   static
   {
@@ -38,6 +38,7 @@ public class KeyMap
     COUTRY_2_KEY.put("hong.kong", "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAzonydwjfBzkeD9LxSpE+iTxBr/YN6aWNtJZx7oSW15UoHi+t4yqhTKPk8L746933AbhneEePHiLfq+qwN/lM0zoX1Ha+tOgobB81QhgmcTKR/ktMI19l1ocnA1uF59oKLQIG44pWjA+LO/i4NOkI9E4qCXya4dj6IB4jOd1q0DUcyfN18bBPEfOrpqbBAA+c9rEp0Kn6RgPPfKVSPApGoSC79ReJ8d5JgZzcmhcB65qU/6GmdSrxTaQZiMSuMyEQgp0gmXwmfVAOKjTiWMsAUmzIuk9uA7d9uh4CvL/hixeH08MgXQrP841SBDPlLKJ7OyXmLCiSdQ+nvIWA1W4FdQIDAQAB");
     COUTRY_2_KEY.put("estonia", "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwclELUxwmY+ZwxiK/U7y6o//N4CMpf1AXg1pK/A0iwl8uvBpEBKJDogNYoRzqJJbkX212KKpQlZ3/9BJW87/Wm/oVv3Gk9a9JrF9fznWET5LynkL3vY/ovTCA1+XPyAGjAueBsv5ZdgaK/vWP6kjSzXrM82ccKTkJ8OyYOJVeL5tOrzsEhbRsIGacszaYdpLgzSw3SMHFNVQalqzDvOyZb+fnOmtINklFX+KHo6skm1zLH38MBa6VNCktyP8ve+an+MbKJvGQaU5Sx+c1HzrpP1Bj6dKN7+C9hf58afittQTlMOxfEN01Zd4NsCSKhZ5aG0CeLevPdc58plNyXU+5wIDAQAB");
     COUTRY_2_KEY.put("czech.republic","MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwey0Hlx2BOIHbuCB8EfEFdnk6P6IpZQG3L1IKUV4/fVUSixkoDcqiyIc1gIkEMChUX2EbbirVcznv2xsA24j5AmKONBPk9kY1xzmguBwKtPxhp/FtCJLevdMgYS3ErCueV/Q5oKjROguLAxMKtzkJpCOzaqtsqyYAIl7vZ7JfNmpo32r/5M9QCh4SWgxQDSVY6jEs/aIriwINJ96p+ybBHVmda2KeavWvx6q/GnLMMt/LVF8n9iljyZ4r3uPtcHItcvweUQKRgQm8p+t1KsnKSCAdWlvuAFb99R3AmipJxNjaS/QiD4Zfy9AP1yHHP3EX6gfutfRkrf/UqhOCVXKSwIDAQAB");
+    COUTRY_2_KEY.put("czech.republic","MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArssKd2AkzgMcQJmetOQVyhHyPpyPR3BrdkCTnG3VvVxXkr6AK4DINSucBVCP7ROzNmMX8tSQR1AklxMVLCNNWduCMHdUBXWTfVvMc8RjDtcwBxQRXUkLWvi2kcFH9HFLw7g4nQxJD637mqzAFNjfUV0Sms4saAjj6pbguuxVTW5Mj8CpJffiWJEBFmTDB9nduuBKl4g31KIMljnkaBgLrdgN+NbXC4S6psoRDsZxob1GVKYFrz1e3ja3FFdlTwt14hMjjYsiARRHSKgXbhEuHPLASFVTWVUTH4jBh7u0kB0lyfLX1GTFlh2qfNOKgLjMRxR9JybqA4kh/SRY7nygjwIDAQAB");
     validateKeys();
   }
 
