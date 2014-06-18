@@ -1,6 +1,6 @@
 buildscript {
   repositories { mavenCentral() }
-  dependencies { classpath 'com.android.tools.build:gradle:0.9.2' }
+  dependencies { classpath 'com.android.tools.build:gradle:0.11.+' }
 }
 
 apply plugin: 'android'
@@ -63,7 +63,7 @@ android {
 // replace app name
 android.applicationVariants.all { variant ->
   variant.mergeResources.doLast {
-      File valuesFile = file("${buildDir}/res/all/${variant.dirName}/values/values.xml")
+      File valuesFile = file("${buildDir}/intermediates/res/${variant.dirName}/values/values.xml")
       println "Replacing app name in " + valuesFile
       println "App name = " + GWMappName
 
