@@ -42,5 +42,5 @@ cat countries_to_generate.txt | while read country; do
         "-PGWMappName=GuideWithMe $TITLE" clean assembleRelease
     popd
 
-    cp  ../../android/build/apk/*release.apk Countries/$country/
+    cp  ../../android/build/outputs/apk/*release.apk Countries/$country/
 done
