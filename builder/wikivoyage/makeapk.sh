@@ -4,7 +4,7 @@ cat countries_to_generate.txt | while read country; do
 
     # copy index
     rm ../../android/assets/index.dat || echo "No previous index found."
-    cp -f Countries/$country/content/data/index.dat ../../android/assets/
+    cp -f "Countries/$country/content/data/index.dat" ../../android/assets/
 
     # copy resources
     toCopy=(drawable-ldpi drawable-mdpi drawable-hdpi \
@@ -17,15 +17,16 @@ cat countries_to_generate.txt | while read country; do
     fi
     for resDir in ${toCopy[*]}
     do
-        cp -f $COUNTRY_RES_DIR/$resDir/* ../../android/res/$resDir
+        cp -f "$COUNTRY_RES_DIR/$resDir/"* ../../android/res/$resDir
         echo "Copied $resDir for $country"
     done
 
     rm  ../../android/build/apk/* || true
-    rm Countries/$country/*.apk || true
+    rm "Countries/$country/*.apk" || true
 
     # make packages lower case and dot-separated
-    PACKAGE="com.guidewithme."$(echo "$country" | tr '[:upper:]' '[:lower:]' | \
+    STRIPPED_COUNTRY="${country/_(*/}"
+    PACKAGE="com.guidewithme."$(echo "$STRIPPED_COUNTRY" | tr '[:upper:]' '[:lower:]' | \
         sed 's/_/\./g')
 
     # hack for UK
@@ -35,12 +36,12 @@ cat countries_to_generate.txt | while read country; do
     fi
 
     # remove underscores from title
-    TITLE=$(echo "$country" | sed 's/_/ /g')
+    TITLE=$(echo "$STRIPPED_COUNTRY" | sed 's/_/ /g')
 
     pushd ../../android/
     ./gradlew "-PGWMpn=$PACKAGE" "-PGWMapk=GuideWithMe $country" \
         "-PGWMappName=GuideWithMe $TITLE" clean assembleRelease
     popd
 
-    cp  ../../android/build/outputs/apk/*release.apk Countries/$country/
+    cp  ../../android/build/outputs/apk/*release.apk "Countries/$country/"
 done

@@ -7,6 +7,9 @@ rm article_info.tmp || true
 
 cat countries_to_generate.txt | while read REGION
 do
+    REGION_UNESCAPED="$REGION"
+    REGION="${REGION/(/_}"
+    REGION="${REGION/)/_}"
     # Create an empty table.
     $MYSQL_BINARY --user=$MYSQL_USER --database=$MYSQL_DATABASE --execute="DROP TABLE IF EXISTS $REGION"
     $MYSQL_BINARY --user=$MYSQL_USER --database=$MYSQL_DATABASE --execute="CREATE TABLE $REGION \
@@ -14,7 +17,7 @@ do
 
     # Insert the seed category.
     $MYSQL_BINARY --user=$MYSQL_USER --database=$MYSQL_DATABASE --execute="INSERT INTO $REGION(id, gen) \
-        SELECT page_id, 0 FROM page WHERE page_title = '$REGION';"
+        SELECT page_id, 0 FROM page WHERE page_title = '$REGION_UNESCAPED';"
 
     # In a loop insert all children (both pages and categories).
     for i in `seq 1 10`
@@ -74,9 +77,9 @@ do
         JOIN page ON page_id = id \
         WHERE page_namespace = 0 AND page_is_redirect = 0 \
         ORDER BY page_title" \
-        --skip-column-names > $REGION.info.txt
+        --skip-column-names > "$REGION_UNESCAPED.info.txt"
 
-    REDIRECT_TABLE=$REGION"_redirect"
+    REDIRECT_TABLE="${REGION}_redirect"
     $MYSQL_BINARY --user=$MYSQL_USER --database=$MYSQL_DATABASE --execute="DROP TABLE IF EXISTS $REDIRECT_TABLE"
     $MYSQL_BINARY --user=$MYSQL_USER --database=$MYSQL_DATABASE --execute="CREATE TABLE $REDIRECT_TABLE \
         (from_id int(10), from_title varbinary(255), to_title varbinary(255))"
@@ -106,9 +109,9 @@ do
         JOIN page ON page_title = to_title AND page_namespace = 0 AND page_is_redirect = 0
         JOIN $REGION ON id = page_id
         ORDER BY from_title" \
-        --skip-column-names > $REGION.redirect.txt
+        --skip-column-names > "$REGION_UNESCAPED.redirect.txt"
 
-    echo $REGION >> countries.tmp
+    echo "$REGION_UNESCAPED" >> countries.tmp
 done
 
 # Now we are done. Create the final file.
