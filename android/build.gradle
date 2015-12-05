@@ -1,9 +1,9 @@
 buildscript {
   repositories { mavenCentral() }
-  dependencies { classpath 'com.android.tools.build:gradle:0.11.+' }
+  dependencies { classpath 'com.android.tools.build:gradle:1.3.1' }
 }
 
-apply plugin: 'android'
+apply plugin: 'com.android.application'
 
 dependencies {
   compile propAndroidSupportLibrary
@@ -30,8 +30,8 @@ android {
   buildTypes {
 
     debug {
-      jniDebugBuild true
-      packageNameSuffix ".debug"
+      jniDebuggable true
+      applicationIdSuffix ".debug"
     }
 
     release {
@@ -42,7 +42,7 @@ android {
   defaultConfig {
     versionCode = Integer.valueOf(GWMvc)
     versionName = GWMvn
-    packageName = GWMpn
+    applicationId = GWMpn
     minSdkVersion propMinSdkVersion.toInteger()
     targetSdkVersion propTargetSdkVersion.toInteger()
   }
@@ -63,7 +63,7 @@ android {
 // replace app name
 android.applicationVariants.all { variant ->
   variant.mergeResources.doLast {
-      File valuesFile = file("${buildDir}/intermediates/res/${variant.dirName}/values/values.xml")
+      File valuesFile = file("${buildDir}/intermediates/res/merged/${variant.dirName}/values/values.xml")
       println "Replacing app name in " + valuesFile
       println "App name = " + GWMappName
 
@@ -96,8 +96,8 @@ task copyNativeLibs(type: Copy, dependsOn: 'ndkBuild') {
   into new File(buildDir, 'native-libs')
 }
 
-tasks.withType(Compile) { compileTask -> compileTask.dependsOn ndkBuild }
-tasks.withType(Compile) { compileTask -> compileTask.dependsOn copyNativeLibs }
+tasks.withType(JavaCompile) { compileTask -> compileTask.dependsOn ndkBuild }
+tasks.withType(JavaCompile) { compileTask -> compileTask.dependsOn copyNativeLibs }
 
 clean.dependsOn 'cleanCopyNativeLibs'
 clean.dependsOn 'ndkBuildClean'

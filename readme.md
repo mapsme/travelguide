@@ -1,3 +1,23 @@
+Welcome to Offline Travel Guides based on Wikivoyage open data!
+
+You can check live guides here: http://guidewithme.com/
+
+# Basic setup
+
+All guides apps need pre-built data, which is taken from Wikivoyage project.
+Please check out scripts in builder folder to understand how to do it, now they're lacking any documentation.
+
+NOTE: Guides were never built on Windows. If you manage to do it, please
+share a pull request with your fixes.
+
+For Android, create android/local.properties file with content:
+```
+sdk.dir=/full/path/to/android-sdk
+ndk.dir=/full/path/to/android-ndk
+```
+You also need to clone MAPS.ME android api repo (don't forget to update it if already cloned):
+```cd android/3rdparty; git clone git@github.com:mapsme/api-android.git```
+
 # How to build guide for a new country
 
 To add new country to generation list please follow next steps:

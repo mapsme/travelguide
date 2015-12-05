@@ -5532,7 +5532,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				GWM = GuideWithMe;
 				INFOPLIST_FILE = "offlineguides/offlineguides-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = GuideWithMe;
 				SDKROOT = iphoneos;
@@ -5579,7 +5579,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				GWM = GuideWithMe;
 				INFOPLIST_FILE = "offlineguides/offlineguides-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = GuideWithMe;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -5942,7 +5942,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				GWM = GuideWithMe;
 				INFOPLIST_FILE = "offlineguides/offlineguides-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = GuideWithMe;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
