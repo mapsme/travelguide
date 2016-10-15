@@ -7,7 +7,7 @@ DUMP_REDIRECT_URL=$(DUMP_URL_PREFIX)"-redirect.sql.gz"
 HTML_ARTICLE_PREFIX="http://en.m.wikivoyage.org/wiki?curid="
 
 
-DUMP_FILES = page.sql.gz redirect.sql.gz category.sql.gz page_props.sql.gz image.sql.gz site_stats.sql.gz interwiki.sql.gz \
+DUMP_FILES = page.sql.gz redirect.sql.gz category.sql.gz page_props.sql.gz image.sql.gz site_stats.sql.gz iwlinks.sql.gz \
              pagelinks.sql.gz imagelinks.sql.gz categorylinks.sql.gz langlinks.sql.gz externallinks.sql.gz templatelinks.sql.gz
 
 
@@ -28,7 +28,7 @@ load_sql_dumps: $(DUMP_FILES)
 	touch load_sql_dumps
 
 article_page_id.txt: load_sql_dumps
-	$(MYSQL_BINARY) --user=$(MYSQL_USER) --database=$(MYSQL_DATABASE) --execute="SELECT page_id from page where page_namespace = 0" | tail +2 > article_page_id.txt
+	$(MYSQL_BINARY) --user=$(MYSQL_USER) --database=$(MYSQL_DATABASE) --execute="SELECT page_id from page where page_namespace = 0" | tail -n +2 > article_page_id.txt
 
 article_page_url.txt: article_page_id.txt
 	cat article_page_id.txt | sed "s@^@$(HTML_ARTICLE_PREFIX)@" > article_page_url.txt
