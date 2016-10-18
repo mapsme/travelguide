@@ -31,3 +31,5 @@ builder/wikivoyage/Countries
 
 # This is separate git repository with MWM API
 android/3rdparty/api-android
+builder/genindex/.qmake.stash
+builder/genindex/Makefile
