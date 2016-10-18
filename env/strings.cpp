@@ -17,10 +17,10 @@ string MakeNormalizeAndLowerUtf8(string const & s)
 
   vector<int32_t> buffer(count);
   int sz = utf8proc_decompose(reinterpret_cast<uint8_t const *>(s.c_str()), count, buffer.data(), count,
-                              UTF8PROC_CASEFOLD | UTF8PROC_DECOMPOSE | UTF8PROC_STRIPMARK);
+                              utf8proc_option_t(UTF8PROC_CASEFOLD | UTF8PROC_DECOMPOSE | UTF8PROC_STRIPMARK));
   CHECK(sz >= 0 && sz <= count, ());
 
-  sz = utf8proc_reencode(buffer.data(), sz, 0);
+  sz = utf8proc_reencode(buffer.data(), sz, utf8proc_option_t(0));
   return string(reinterpret_cast<char *>(buffer.data()), sz);
 }
 
