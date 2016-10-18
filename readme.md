@@ -18,6 +18,12 @@ ndk.dir=/full/path/to/android-ndk
 You also need to clone MAPS.ME android api repo (don't forget to update it if already cloned):
 ```cd android/3rdparty; git clone git@github.com:mapsme/api-android.git```
 
+To generate search indexes for guides you need to pre-build *genindex* binary.
+If you already have qmake installed, Go to builder/genindex and run:
+```qmake genindex.pro; make```
+
+P.S. If you can contribute clean Makefile without qmake, you are always welcome!
+
 # How to build guide for a new country
 
 To add new country to generation list please follow next steps:
