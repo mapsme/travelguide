@@ -1,5 +1,5 @@
 #pragma once
-
+#include <cstring> 
 #include "article_info.hpp"
 
 #include "../env/assert.hpp"

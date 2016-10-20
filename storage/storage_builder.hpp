@@ -1,5 +1,5 @@
 #pragma once
-
+#include <stdint.h>
 #include "storage.hpp"
 #include "article_info.hpp"
 
