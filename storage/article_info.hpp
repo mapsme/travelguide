@@ -2,7 +2,7 @@
 
 #include "../std/string.hpp"
 #include "../std/algorithm.hpp"
-
+#include "../std/stdint.hpp"
 
 namespace wr { class Writer; }
 namespace rd { class Reader; }

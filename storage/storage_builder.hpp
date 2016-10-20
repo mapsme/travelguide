@@ -4,7 +4,7 @@
 #include "article_info.hpp"
 
 #include "../std/map.hpp"
-
+#include "../std/stdint.hpp"
 
 class ArticleInfoBuilder : public ArticleInfo
 {

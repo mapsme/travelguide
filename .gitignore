@@ -8,6 +8,9 @@ build/
 *.pyc
 .idea
 *.iml
+*.o
+Makefile
+.qmake.stash
 
 project.xcworkspace
 xcuserdata
@@ -18,6 +21,8 @@ data/images/
 data/thumb/
 data/index.dat
 data/header_images/
+
+env/env_tests
 
 builder/genindex/genindex
 
@@ -31,5 +36,3 @@ builder/wikivoyage/Countries
 
 # This is separate git repository with MWM API
 android/3rdparty/api-android
-builder/genindex/.qmake.stash
-builder/genindex/Makefile

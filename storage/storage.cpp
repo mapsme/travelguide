@@ -7,7 +7,7 @@
 #include "../std/algorithm.hpp"
 #include "../std/utility.hpp"
 #include "../std/iterator.hpp"
-
+#include "../std/stdint.hpp"
 
 void Storage::Load(rd::Reader & reader)
 {

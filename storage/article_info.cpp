@@ -13,7 +13,7 @@
 #include "../std/cmath.hpp"
 #include "../std/static_assert.hpp"
 #include "../std/array.hpp"
-
+#include "../std/cstring.hpp"
 
 namespace
 {
