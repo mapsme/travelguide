@@ -1,5 +1,5 @@
 #pragma once
-
+#include <cstring>
 #include "../std/string.hpp"
 #include "../std/algorithm.hpp"
 #include "../std/stdint.hpp"
