@@ -1,5 +1,6 @@
 #include "article_info.hpp"
 #include "distance.hpp"
+#include <cstring>
 
 #include "../env/strings.hpp"
 #include "../env/writer.hpp"
