@@ -3,6 +3,8 @@ TARGET = genindex
 CONFIG += console warn_on
 CONFIG -= app_bundle qt
 
+QMAKE_CXXFLAGS += -Wno-unused-parameter -Wno-unused-local-typedef
+
 INCLUDEPATH += ../../3rdparty/boost
 
 include (../../defines.pri)
