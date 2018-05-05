@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// (C) Copyright Ion Gaztanaga 2005-2012. Distributed under the Boost
+// (C) Copyright Ion Gaztanaga 2005-2013. Distributed under the Boost
 // Software License, Version 1.0. (See accompanying file
 // LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 //
@@ -11,25 +11,36 @@
 #ifndef BOOST_CONTAINER_DETAIL_ADAPTIVE_NODE_POOL_IMPL_HPP
 #define BOOST_CONTAINER_DETAIL_ADAPTIVE_NODE_POOL_IMPL_HPP
 
-#if (defined _MSC_VER) && (_MSC_VER >= 1200)
+#ifndef BOOST_CONFIG_HPP
+#  include <boost/config.hpp>
+#endif
+
+#if defined(BOOST_HAS_PRAGMA_ONCE)
 #  pragma once
 #endif
 
-#include "config_begin.hpp"
-#include <boost/container/container_fwd.hpp>
+#include <boost/container/detail/config_begin.hpp>
 #include <boost/container/detail/workaround.hpp>
-#include <boost/container/detail/utilities.hpp>
+
+// container
+#include <boost/container/container_fwd.hpp>
+#include <boost/container/throw_exception.hpp>
+// container/detail
+#include <boost/container/detail/pool_common.hpp>
+#include <boost/container/detail/iterator.hpp>
+#include <boost/move/detail/iterator_to_raw_pointer.hpp>
+#include <boost/container/detail/math_functions.hpp>
+#include <boost/container/detail/mpl.hpp>
+#include <boost/move/detail/to_raw_pointer.hpp>
+#include <boost/container/detail/type_traits.hpp>
+// intrusive
 #include <boost/intrusive/pointer_traits.hpp>
 #include <boost/intrusive/set.hpp>
 #include <boost/intrusive/list.hpp>
 #include <boost/intrusive/slist.hpp>
-#include <boost/container/detail/type_traits.hpp>
-#include <boost/container/detail/math_functions.hpp>
-#include <boost/container/detail/mpl.hpp>
-#include <boost/container/detail/pool_common.hpp>
-#include <boost/container/throw_exception.hpp>
+// other
 #include <boost/assert.hpp>
-#include <boost/detail/no_exceptions_support.hpp>
+#include <boost/core/no_exceptions_support.hpp>
 #include <cstddef>
 
 namespace boost {
@@ -44,7 +55,7 @@ static const unsigned int address_ordered = 1u << 2u;
 
 }  //namespace adaptive_pool_flag{
 
-namespace container_detail {
+namespace dtl {
 
 template<class size_type>
 struct hdr_offset_holder_t
@@ -367,7 +378,7 @@ class private_adaptive_node_pool_impl
 
    //!Returns the segment manager. Never throws
    segment_manager_base_type* get_segment_manager_base()const
-   {  return container_detail::to_raw_pointer(mp_segment_mngr_base);  }
+   {  return boost::movelib::to_raw_pointer(mp_segment_mngr_base);  }
 
    //!Allocates array of count elements. Can throw
    void *allocate_node()
@@ -379,7 +390,7 @@ class private_adaptive_node_pool_impl
          free_nodes_t &free_nodes = m_block_container.begin()->free_nodes;
          BOOST_ASSERT(!free_nodes.empty());
          const size_type free_nodes_count = free_nodes.size();
-         void *first_node = container_detail::to_raw_pointer(free_nodes.pop_front());
+         void *first_node = boost::movelib::to_raw_pointer(free_nodes.pop_front());
          if(free_nodes.empty()){
             block_container_traits_t::erase_first(m_block_container);
          }
@@ -390,7 +401,7 @@ class private_adaptive_node_pool_impl
       else{
          multiallocation_chain chain;
          this->priv_append_from_new_blocks(1, chain, IsAlignOnly());
-         return container_detail::to_raw_pointer(chain.pop_front());
+         return boost::movelib::to_raw_pointer(chain.pop_front());
       }
    }
 
@@ -481,7 +492,7 @@ class private_adaptive_node_pool_impl
          free_nodes_iterator itf(nodes.begin()), itbf(itbb);
          size_type splice_node_count = size_type(-1);
          while(itf != ite){
-            void *pElem = container_detail::to_raw_pointer(&*itf);
+            void *pElem = boost::movelib::to_raw_pointer(boost::movelib::iterator_to_raw_pointer(itf));
             block_info_t &block_info = *this->priv_block_from_node(pElem);
             BOOST_ASSERT(block_info.free_nodes.size() < m_real_num_node);
             ++splice_node_count;
@@ -620,7 +631,7 @@ class private_adaptive_node_pool_impl
          BOOST_ASSERT(to_deallocate->free_nodes.size() == mp_impl->m_real_num_node);
          BOOST_ASSERT(0 == to_deallocate->hdr_offset);
          hdr_offset_holder *hdr_off_holder =
-            mp_impl->priv_first_subblock_from_block(container_detail::to_raw_pointer(to_deallocate));
+            mp_impl->priv_first_subblock_from_block(boost::movelib::to_raw_pointer(to_deallocate));
          m_chain.push_back(hdr_off_holder);
       }
 
@@ -638,7 +649,7 @@ class private_adaptive_node_pool_impl
 
       {  //We iterate through the block tree to free the memory
          const_block_iterator it(m_block_container.begin());
-   
+
          if(it != itend){
             for(++it; it != itend; ++it){
                const_block_iterator prev(it);
@@ -752,7 +763,7 @@ class private_adaptive_node_pool_impl
       //First add all possible nodes to the chain
       const size_type left = total_elements - chain.size();
       const size_type max_chain = (num_node < left) ? num_node : left;
-      mem_address = static_cast<char *>(container_detail::to_raw_pointer
+      mem_address = static_cast<char *>(boost::movelib::to_raw_pointer
          (chain.incorporate_after(chain.last(), void_pointer(mem_address), m_real_node_size, max_chain)));
       //Now store remaining nodes in the free list
       if(const size_type max_free = num_node - max_chain){
@@ -865,7 +876,7 @@ class private_adaptive_node_pool_impl
    size_type                           m_totally_free_blocks;  //Free blocks
 };
 
-}  //namespace container_detail {
+}  //namespace dtl {
 }  //namespace container {
 }  //namespace boost {
 

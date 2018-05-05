@@ -6,7 +6,7 @@
 // accompanying file LICENSE_1_0.txt or copy at
 // http://www.boost.org/LICENSE_1_0.txt)
 //
-// $Id: deduced.hpp 83393 2013-03-10 03:48:33Z steven_watanabe $
+// $Id$
 
 #ifndef BOOST_TYPE_ERASURE_DEDUCED_HPP_INCLUDED
 #define BOOST_TYPE_ERASURE_DEDUCED_HPP_INCLUDED
@@ -37,7 +37,11 @@ struct deduced : ::boost::type_erasure::placeholder
         ::boost::mpl::empty<
             typename ::boost::type_erasure::detail::get_placeholders<
                 Metafunction,
+#ifndef BOOST_TYPE_ERASURE_USE_MP11
                 ::boost::mpl::set0<>
+#else
+                ::boost::mp11::mp_list<>
+#endif
             >::type
         >,
         Metafunction,

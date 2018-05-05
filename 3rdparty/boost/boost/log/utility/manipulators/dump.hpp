@@ -1,5 +1,5 @@
 /*
- *          Copyright Andrey Semashev 2007 - 2013.
+ *          Copyright Andrey Semashev 2007 - 2015.
  * Distributed under the Boost Software License, Version 1.0.
  *    (See accompanying file LICENSE_1_0.txt or copy at
  *          http://www.boost.org/LICENSE_1_0.txt)
@@ -20,7 +20,7 @@
 #include <boost/log/detail/config.hpp>
 #include <boost/log/detail/header.hpp>
 
-#ifdef BOOST_LOG_HAS_PRAGMA_ONCE
+#ifdef BOOST_HAS_PRAGMA_ONCE
 #pragma once
 #endif
 
@@ -32,14 +32,14 @@ namespace aux {
 
 typedef void dump_data_char_t(const void* data, std::size_t size, std::basic_ostream< char >& strm);
 extern BOOST_LOG_API dump_data_char_t* dump_data_char;
-BOOST_LOG_FORCEINLINE void dump_data(const void* data, std::size_t size, std::basic_ostream< char >& strm)
+BOOST_FORCEINLINE void dump_data(const void* data, std::size_t size, std::basic_ostream< char >& strm)
 {
     (dump_data_char)(data, size, strm);
 }
 
 typedef void dump_data_wchar_t(const void* data, std::size_t size, std::basic_ostream< wchar_t >& strm);
 extern BOOST_LOG_API dump_data_wchar_t* dump_data_wchar;
-BOOST_LOG_FORCEINLINE void dump_data(const void* data, std::size_t size, std::basic_ostream< wchar_t >& strm)
+BOOST_FORCEINLINE void dump_data(const void* data, std::size_t size, std::basic_ostream< wchar_t >& strm)
 {
     (dump_data_wchar)(data, size, strm);
 }
@@ -47,7 +47,7 @@ BOOST_LOG_FORCEINLINE void dump_data(const void* data, std::size_t size, std::ba
 #if !defined(BOOST_NO_CXX11_CHAR16_T)
 typedef void dump_data_char16_t(const void* data, std::size_t size, std::basic_ostream< char16_t >& strm);
 extern BOOST_LOG_API dump_data_char16_t* dump_data_char16;
-BOOST_LOG_FORCEINLINE void dump_data(const void* data, std::size_t size, std::basic_ostream< char16_t >& strm)
+BOOST_FORCEINLINE void dump_data(const void* data, std::size_t size, std::basic_ostream< char16_t >& strm)
 {
     (dump_data_char16)(data, size, strm);
 }
@@ -56,7 +56,7 @@ BOOST_LOG_FORCEINLINE void dump_data(const void* data, std::size_t size, std::ba
 #if !defined(BOOST_NO_CXX11_CHAR32_T)
 typedef void dump_data_char32_t(const void* data, std::size_t size, std::basic_ostream< char32_t >& strm);
 extern BOOST_LOG_API dump_data_char32_t* dump_data_char32;
-BOOST_LOG_FORCEINLINE void dump_data(const void* data, std::size_t size, std::basic_ostream< char32_t >& strm)
+BOOST_FORCEINLINE void dump_data(const void* data, std::size_t size, std::basic_ostream< char32_t >& strm)
 {
     (dump_data_char32)(data, size, strm);
 }
@@ -200,7 +200,7 @@ inline dump_manip dump_elements(T* data, std::size_t count) BOOST_NOEXCEPT
  * \brief Creates a stream manipulator that will output contents of a memory region in hexadecimal form
  * \param data The pointer to the beginning of the region
  * \param size The size of the region, in bytes
- * \params max_size The maximum number of bytes of the region to output
+ * \param max_size The maximum number of bytes of the region to output
  * \return The manipulator that is to be put to a stream
  */
 template< typename T >
@@ -213,7 +213,7 @@ inline typename aux::enable_dump< T, bounded_dump_manip >::type dump(T* data, st
  * \brief Creates a stream manipulator that will dump elements of an array in hexadecimal form
  * \param data The pointer to the beginning of the array
  * \param count The size of the region, in number of \c T elements
- * \params max_count The maximum number of elements to output
+ * \param max_count The maximum number of elements to output
  * \return The manipulator that is to be put to a stream
  */
 template< typename T >

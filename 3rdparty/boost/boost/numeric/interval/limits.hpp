@@ -1,7 +1,7 @@
 /* Boost interval/limits.hpp template implementation file
  *
  * Copyright 2000 Jens Maurer
- * Copyright 2002-2003 Hervé Brönnimann, Guillaume Melquiond, Sylvain Pion
+ * Copyright 2002-2003 HervÃ© BrÃ¶nnimann, Guillaume Melquiond, Sylvain Pion
  *
  * Distributed under the Boost Software License, Version 1.0.
  * (See accompanying file LICENSE_1_0.txt or
@@ -11,7 +11,6 @@
 #ifndef BOOST_NUMERIC_INTERVAL_LIMITS_HPP
 #define BOOST_NUMERIC_INTERVAL_LIMITS_HPP
 
-#ifndef BOOST_NO_TEMPLATE_PARTIAL_SPECIALIZATION
 
 #include <boost/config.hpp>
 #include <boost/limits.hpp>
@@ -46,6 +45,5 @@ private:
 
 } // namespace std
 
-#endif
 
 #endif // BOOST_NUMERIC_INTERVAL_LIMITS_HPP

@@ -16,6 +16,7 @@
 #include "parser/tree/node.hpp"
 #include "parser/parser.hpp"
 #include "containers/ptr_list.hpp"
+#include <boost/move/unique_ptr.hpp>
 #include "rules.hpp"
 #include "state_machine.hpp"
 
@@ -116,10 +117,10 @@ public:
 protected:
     typedef detail::basic_charset<CharT> charset;
     typedef detail::ptr_list<charset> charset_list;
-    typedef std::auto_ptr<charset> charset_ptr;
+    typedef boost::movelib::unique_ptr<charset> charset_ptr;
     typedef detail::equivset equivset;
     typedef detail::ptr_list<equivset> equivset_list;
-    typedef std::auto_ptr<equivset> equivset_ptr;
+    typedef boost::movelib::unique_ptr<equivset> equivset_ptr;
     typedef typename charset::index_set index_set;
     typedef std::vector<index_set> index_set_vector;
     typedef detail::basic_parser<CharT> parser;
@@ -186,10 +187,10 @@ protected:
         while (regex_iter_ != regex_iter_end_)
         {
             // re-declare var, otherwise we perform an assignment..!
-            const typename rules::string &regex_ = *regex_iter_;
+            const typename rules::string &regex2_ = *regex_iter_;
 
-            root_ = parser::parse (regex_.c_str (),
-                regex_.c_str () + regex_.size (), *ids_iter_,
+            root_ = parser::parse (regex2_.c_str (),
+                regex2_.c_str () + regex2_.size (), *ids_iter_,
                 *unique_ids_iter_, *states_iter_, rules_.flags (),
                 rules_.locale (), node_ptr_vector_, macromap_, token_map_,
                 internals_._seen_BOL_assertion,
@@ -337,16 +338,16 @@ protected:
                         equiv_end_ = equivset_->_index_vector.end ();
                         equiv_iter_ != equiv_end_; ++equiv_iter_)
                     {
-                        const std::size_t index_ = *equiv_iter_;
+                        const std::size_t equiv_index_ = *equiv_iter_;
 
-                        if (index_ == bol_token)
+                        if (equiv_index_ == bol_token)
                         {
                             if (ptr_[eol_index] == 0)
                             {
                                 ptr_[bol_index] = transition_;
                             }
                         }
-                        else if (index_ == eol_token)
+                        else if (equiv_index_ == eol_token)
                         {
                             if (ptr_[bol_index] == 0)
                             {
@@ -355,7 +356,7 @@ protected:
                         }
                         else
                         {
-                            ptr_[index_ + dfa_offset] = transition_;
+                            ptr_[equiv_index_ + dfa_offset] = transition_;
                         }
                     }
                 }
@@ -377,8 +378,8 @@ protected:
         if (followpos_->empty ()) return npos;
 
         std::size_t index_ = 0;
-        std::auto_ptr<node_set> set_ptr_ (new node_set);
-        std::auto_ptr<node_vector> vector_ptr_ (new node_vector);
+        boost::movelib::unique_ptr<node_set> set_ptr_ (new node_set);
+        boost::movelib::unique_ptr<node_vector> vector_ptr_ (new node_vector);
 
         for (typename detail::node::node_vector::const_iterator iter_ =
             followpos_->begin (), end_ = followpos_->end ();
@@ -494,21 +495,13 @@ protected:
                         delete *l_iter_;
                         *l_iter_ = overlap_.release ();
 
-                        // VC++ 6 Hack:
-                        charset_ptr temp_overlap_ (new charset);
-
-                        overlap_ = temp_overlap_;
+                        overlap_.reset (new charset);
                         ++iter_;
                     }
                     else if (r_->empty ())
                     {
-                        delete r_.release ();
-                        r_ = overlap_;
-
-                        // VC++ 6 Hack:
-                        charset_ptr temp_overlap_ (new charset);
-
-                        overlap_ = temp_overlap_;
+                        overlap_.swap (r_);
+                        overlap_.reset (new charset);
                         break;
                     }
                     else
@@ -517,10 +510,7 @@ protected:
                             static_cast<charset *>(0));
                         *iter_ = overlap_.release ();
 
-                        // VC++ 6 Hack:
-                        charset_ptr temp_overlap_ (new charset);
-
-                        overlap_ = temp_overlap_;
+                        overlap_.reset(new charset);
                         ++iter_;
                         end_ = lhs_->end ();
                     }
@@ -561,7 +551,12 @@ protected:
 
         if (token_._negated)
         {
-            CharT curr_char_ = (std::numeric_limits<CharT>::min)();
+            // $$$ FIXME JDG July 2014 $$$
+            // this code is problematic on platforms where wchar_t is signed
+            // with min generating negative numbers. This crashes with BAD_ACCESS
+            // because of the vector index below:
+            //  ptr_[static_cast<typename Traits::index_type>(curr_char_)]
+            CharT curr_char_ = 0; // (std::numeric_limits<CharT>::min)();
             std::size_t i_ = 0;
 
             while (curr_ < chars_end_)
@@ -637,21 +632,13 @@ protected:
                         delete *l_iter_;
                         *l_iter_ = overlap_.release ();
 
-                        // VC++ 6 Hack:
-                        equivset_ptr temp_overlap_ (new equivset);
-
-                        overlap_ = temp_overlap_;
+                        overlap_.reset (new equivset);
                         ++iter_;
                     }
                     else if (r_->empty ())
                     {
-                        delete r_.release ();
-                        r_ = overlap_;
-
-                        // VC++ 6 Hack:
-                        equivset_ptr temp_overlap_ (new equivset);
-
-                        overlap_ = temp_overlap_;
+                        overlap_.swap (r_);
+                        overlap_.reset (new equivset);
                         break;
                     }
                     else
@@ -660,10 +647,7 @@ protected:
                             static_cast<equivset *>(0));
                         *iter_ = overlap_.release ();
 
-                        // VC++ 6 Hack:
-                        equivset_ptr temp_overlap_ (new equivset);
-
-                        overlap_ = temp_overlap_;
+                        overlap_.reset (new equivset);
                         ++iter_;
                         end_ = lhs_->end ();
                     }

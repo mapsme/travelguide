@@ -113,16 +113,13 @@ namespace boost {
                  IndexMapThis index_map_this, IndexMapOther index_map_other)
         : graph_this_(graph_this), graph_other_(graph_other), 
           index_map_this_(index_map_this), index_map_other_(index_map_other), 
+          core_vec_(num_vertices(graph_this_), graph_traits<GraphOther>::null_vertex()),
+          core_(core_vec_.begin(), index_map_this_),
+          in_vec_(num_vertices(graph_this_), 0),
+          out_vec_(num_vertices(graph_this_), 0),
+          in_(in_vec_.begin(), index_map_this_),
+          out_(out_vec_.begin(), index_map_this_),
           term_in_count_(0), term_out_count_(0), term_both_count_(0), core_count_(0) {
-
-        core_vec_.resize(num_vertices(graph_this_), graph_traits<GraphOther>::null_vertex());
-        core_ = make_iterator_property_map(core_vec_.begin(), index_map_this_);
-
-        in_vec_.resize(num_vertices(graph_this_), 0);
-        in_ = make_iterator_property_map(in_vec_.begin(), index_map_this_);
-
-        out_vec_.resize(num_vertices(graph_this_), 0);
-        out_ = make_iterator_property_map(out_vec_.begin(), index_map_this_);
       }
 
       // Adds a vertex pair to the state of graph graph_this
@@ -690,11 +687,13 @@ namespace boost {
     
       typedef vf2_match_continuation<Graph1, Graph2, VertexOrder1> match_continuation_type;
       std::vector<match_continuation_type> k;
+      bool found_match = false;
   
       recur:
       if (s.success()) {
         if (!s.call_back(user_callback)) 
-          return false;
+          return true;
+        found_match = true;
 
         goto back_track;
       }
@@ -726,7 +725,7 @@ namespace boost {
 
       back_track:
       if (k.empty()) 
-        return true;    
+        return found_match;    
       
       const match_continuation_type kk = k.back();
       graph1_verts_iter = kk.graph1_verts_iter;
@@ -887,9 +886,6 @@ namespace boost {
       if (num_edges_small > num_edges_large)
         return false;
     
-      if ((num_vertices(graph_small) == 0) && (num_vertices(graph_large) == 0))
-        return true;
-
       detail::state<GraphSmall, GraphLarge, IndexMapSmall, IndexMapLarge,
                     EdgeEquivalencePredicate, VertexEquivalencePredicate,
                     SubGraphIsoMapCallback, problem_selection> 
@@ -1014,8 +1010,6 @@ namespace boost {
   bool vf2_subgraph_iso(const GraphSmall& graph_small, const GraphLarge& graph_large, 
                         SubGraphIsoMapCallback user_callback) {
 
-    typedef typename graph_traits<GraphSmall>::vertex_descriptor vertex_small_type;
-    
     return vf2_subgraph_iso(graph_small, graph_large, user_callback, 
                             get(vertex_index, graph_small), get(vertex_index, graph_large),
                             vertex_order_by_mult(graph_small),
@@ -1125,9 +1119,6 @@ namespace boost {
     if (num_edges1 != num_edges2)
       return false;
 
-    if ((num_vertices(graph1) == 0) && (num_vertices(graph2) == 0))
-      return true;
-        
     detail::state<Graph1, Graph2, IndexMap1, IndexMap2,
                   EdgeEquivalencePredicate, VertexEquivalencePredicate,
                   GraphIsoMapCallback, detail::isomorphism> 
@@ -1144,8 +1135,6 @@ namespace boost {
   bool vf2_graph_iso(const Graph1& graph1, const Graph2& graph2, 
                      GraphIsoMapCallback user_callback) {
     
-    typedef typename graph_traits<Graph1>::vertex_descriptor vertex1_type;
-
     return vf2_graph_iso(graph1, graph2, user_callback, 
                          get(vertex_index, graph1), get(vertex_index, graph2),
                          vertex_order_by_mult(graph1),

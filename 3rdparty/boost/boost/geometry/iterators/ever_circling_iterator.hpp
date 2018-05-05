@@ -15,7 +15,6 @@
 #define BOOST_GEOMETRY_ITERATORS_EVER_CIRCLING_ITERATOR_HPP
 
 #include <boost/range.hpp>
-#include <boost/iterator.hpp>
 #include <boost/iterator/iterator_adaptor.hpp>
 #include <boost/iterator/iterator_categories.hpp>
 
@@ -119,15 +118,6 @@ struct ever_circling_range_iterator
         , m_index(0)
     {}
 
-    inline ever_circling_range_iterator<Range>& operator=(ever_circling_range_iterator<Range> const& source)
-    {
-        m_range = source.m_range;
-        m_iterator = source.m_iterator;
-        m_size = source.m_size;
-        m_index = source.m_index;
-        return *this;
-    }
-
     typedef std::ptrdiff_t difference_type;
 
 private:
@@ -177,7 +167,7 @@ private:
 
     inline void advance(difference_type n)
     {
-        if (m_index >= 0 && m_index < m_size 
+        if (m_index >= 0 && m_index < m_size
             && m_index + n >= 0 && m_index + n < m_size)
         {
             m_index += n;

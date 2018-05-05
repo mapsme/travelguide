@@ -1,5 +1,5 @@
 /*
- *          Copyright Andrey Semashev 2007 - 2013.
+ *          Copyright Andrey Semashev 2007 - 2015.
  * Distributed under the Boost Software License, Version 1.0.
  *    (See accompanying file LICENSE_1_0.txt or copy at
  *          http://www.boost.org/LICENSE_1_0.txt)
@@ -10,7 +10,7 @@
  * \date   14.03.2009
  *
  * \brief  This header is the Boost.Log library implementation, see the library documentation
- *         at http://www.boost.org/libs/log/doc/log.html.
+ *         at http://www.boost.org/doc/libs/release/libs/log/doc/html/index.html.
  */
 
 #ifndef BOOST_LOG_DETAIL_SINK_INIT_HELPERS_HPP_INCLUDED_
@@ -20,7 +20,7 @@
 #include <boost/mpl/bool.hpp>
 #include <boost/parameter/binding.hpp>
 #include <boost/type_traits/is_void.hpp>
-#include <boost/utility/enable_if.hpp>
+#include <boost/core/enable_if.hpp>
 #include <boost/phoenix/core/is_actor.hpp>
 #include <boost/log/detail/config.hpp>
 #include <boost/log/core/core.hpp>
@@ -32,7 +32,7 @@
 #include <boost/log/keywords/format.hpp>
 #include <boost/log/detail/header.hpp>
 
-#ifdef BOOST_LOG_HAS_PRAGMA_ONCE
+#ifdef BOOST_HAS_PRAGMA_ONCE
 #pragma once
 #endif
 
@@ -54,8 +54,8 @@ inline filter acquire_filter(std::basic_string< CharT, TraitsT, AllocatorT > con
     return boost::log::parse_filter(filter);
 }
 template< typename FilterT >
-inline typename enable_if<
-    phoenix::is_actor< FilterT >,
+inline typename boost::enable_if_c<
+    phoenix::is_actor< FilterT >::value,
     FilterT const&
 >::type acquire_filter(FilterT const& filter)
 {
@@ -87,8 +87,8 @@ inline basic_formatter< CharT > acquire_formatter(std::basic_string< CharT, Trai
     return boost::log::parse_formatter(formatter);
 }
 template< typename FormatterT >
-inline typename enable_if<
-    phoenix::is_actor< FormatterT >,
+inline typename boost::enable_if_c<
+    phoenix::is_actor< FormatterT >::value,
     FormatterT const&
 >::type acquire_formatter(FormatterT const& formatter)
 {

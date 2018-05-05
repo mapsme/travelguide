@@ -15,18 +15,47 @@
 //#define BOOST_THREAD_DONT_PROVIDE_INTERRUPTIONS
 // ATTRIBUTE_MAY_ALIAS
 
-#if defined(__GNUC__) && (__GNUC__ * 100 + __GNUC_MINOR__) > 302 \
-    && !defined(__INTEL_COMPILER)
+//#if defined(__GNUC__) && !defined(__INTEL_COMPILER)
+#if !defined(BOOST_NO_MAY_ALIAS)
 
-  // GCC since 3.3 has may_alias attribute that helps to alleviate optimizer issues with
-  // regard to violation of the strict aliasing rules.
+  // GCC since 3.3 and some other compilers have may_alias attribute that helps
+  // to alleviate optimizer issues with regard to violation of the strict aliasing rules.
 
   #define BOOST_THREAD_DETAIL_USE_ATTRIBUTE_MAY_ALIAS
-  #define BOOST_THREAD_ATTRIBUTE_MAY_ALIAS __attribute__((__may_alias__))
+#endif
+#if defined(BOOST_MAY_ALIAS)
+#define BOOST_THREAD_ATTRIBUTE_MAY_ALIAS BOOST_MAY_ALIAS
 #else
-  #define BOOST_THREAD_ATTRIBUTE_MAY_ALIAS
+#define BOOST_THREAD_ATTRIBUTE_MAY_ALIAS
 #endif
 
+#if defined(BOOST_THREAD_CHRONO_WINDOWS_API)
+# warning Boost.Thread will use the Windows API for time
+#elif defined(BOOST_THREAD_CHRONO_MAC_API)
+# warning Boost.Thread will use the Mac API  for time
+#elif defined(BOOST_THREAD_CHRONO_POSIX_API)
+# warning Boost.Thread will use the POSIX API  for time
+#endif
+
+# if defined( BOOST_THREAD_CHRONO_WINDOWS_API ) && defined( BOOST_THREAD_CHRONO_POSIX_API )
+#   error both BOOST_THREAD_CHRONO_WINDOWS_API and BOOST_THREAD_CHRONO_POSIX_API are defined
+# elif defined( BOOST_THREAD_CHRONO_WINDOWS_API ) && defined( BOOST_THREAD_CHRONO_MAC_API )
+#   error both BOOST_THREAD_CHRONO_WINDOWS_API and BOOST_THREAD_CHRONO_MAC_API are defined
+# elif defined( BOOST_THREAD_CHRONO_MAC_API ) && defined( BOOST_THREAD_CHRONO_POSIX_API )
+#   error both BOOST_THREAD_CHRONO_MAC_API and BOOST_THREAD_CHRONO_POSIX_API are defined
+# elif !defined( BOOST_THREAD_CHRONO_WINDOWS_API ) && !defined( BOOST_THREAD_CHRONO_MAC_API ) && !defined( BOOST_THREAD_CHRONO_POSIX_API )
+#   if (defined(_WIN32) || defined(__WIN32__) || defined(WIN32))
+#     define BOOST_THREAD_CHRONO_WINDOWS_API
+#   elif defined(macintosh) || defined(__APPLE__) || defined(__APPLE_CC__)
+#     define BOOST_THREAD_CHRONO_MAC_API
+#   else
+#     define BOOST_THREAD_CHRONO_POSIX_API
+#   endif
+# endif
+
+#if !defined(BOOST_THREAD_POLL_INTERVAL_MILLISECONDS)
+#define BOOST_THREAD_POLL_INTERVAL_MILLISECONDS 100
+#endif
 
 #if defined BOOST_THREAD_THROW_IF_PRECONDITION_NOT_SATISFIED
 #define BOOST_THREAD_ASSERT_PRECONDITION(EXPR, EX) \
@@ -94,15 +123,15 @@
 
 /// RVALUE_REFERENCES_DONT_MATCH_FUNTION_PTR
 //#if defined BOOST_NO_CXX11_RVALUE_REFERENCES || defined BOOST_MSVC
-#define BOOST_THREAD_RVALUE_REFERENCES_DONT_MATCH_FUNTION_PTR
+#define BOOST_THREAD_RVALUE_REFERENCES_DONT_MATCH_FUNCTION_PTR
 //#endif
 
 // Default version
 #if !defined BOOST_THREAD_VERSION
 #define BOOST_THREAD_VERSION 2
 #else
-#if BOOST_THREAD_VERSION!=2  && BOOST_THREAD_VERSION!=3 && BOOST_THREAD_VERSION!=4
-#error "BOOST_THREAD_VERSION must be 2, 3 or 4"
+#if BOOST_THREAD_VERSION!=2  && BOOST_THREAD_VERSION!=3 && BOOST_THREAD_VERSION!=4 && BOOST_THREAD_VERSION!=5
+#error "BOOST_THREAD_VERSION must be 2, 3, 4 or 5"
 #endif
 #endif
 
@@ -240,13 +269,29 @@
     ! defined(BOOST_NO_CXX11_VARIADIC_TEMPLATES) && \
     ! defined(BOOST_NO_CXX11_DECLTYPE) && \
     ! defined(BOOST_NO_CXX11_DECLTYPE_N3276) && \
-    ! defined(BOOST_NO_CXX11_AUTO) && \
+    ! defined(BOOST_NO_CXX11_TRAILING_RESULT_TYPES) && \
     ! defined(BOOST_NO_CXX11_RVALUE_REFERENCES) && \
     ! defined(BOOST_NO_CXX11_HDR_TUPLE)
 
 #define BOOST_THREAD_PROVIDES_VARIADIC_THREAD
 #endif
 #endif
+
+#if ! defined BOOST_THREAD_PROVIDES_FUTURE_WHEN_ALL_WHEN_ANY \
+ && ! defined BOOST_THREAD_DONT_PROVIDE_FUTURE_WHEN_ALL_WHEN_ANY
+
+#if ! defined(BOOST_NO_CXX11_VARIADIC_TEMPLATES) && \
+    ! defined(BOOST_NO_CXX11_HDR_TUPLE)
+
+#define BOOST_THREAD_PROVIDES_FUTURE_WHEN_ALL_WHEN_ANY
+#endif
+#endif
+
+//    ! defined(BOOST_NO_SFINAE_EXPR) &&
+//    ! defined(BOOST_NO_CXX11_RVALUE_REFERENCES) &&
+//    ! defined(BOOST_NO_CXX11_AUTO) &&
+//    ! defined(BOOST_NO_CXX11_DECLTYPE) &&
+//    ! defined(BOOST_NO_CXX11_DECLTYPE_N3276) &&
 
 
 // MAKE_READY_AT_THREAD_EXIT
@@ -262,6 +307,11 @@
 #if ! defined BOOST_THREAD_PROVIDES_FUTURE_CONTINUATION \
  && ! defined BOOST_THREAD_DONT_PROVIDE_FUTURE_CONTINUATION
 #define BOOST_THREAD_PROVIDES_FUTURE_CONTINUATION
+#endif
+
+#if ! defined BOOST_THREAD_PROVIDES_FUTURE_UNWRAP \
+ && ! defined BOOST_THREAD_DONT_PROVIDE_FUTURE_UNWRAP
+#define BOOST_THREAD_PROVIDES_FUTURE_UNWRAP
 #endif
 
 // FUTURE_INVALID_AFTER_GET
@@ -284,6 +334,13 @@
 
 #endif // BOOST_THREAD_VERSION>=4
 
+
+#if BOOST_THREAD_VERSION>=5
+//#define BOOST_THREAD_FUTURE_BLOCKING
+#else
+//#define BOOST_THREAD_FUTURE_BLOCKING
+#define BOOST_THREAD_ASYNC_FUTURE_WAITS
+#endif
 // INTERRUPTIONS
 #if ! defined BOOST_THREAD_PROVIDES_INTERRUPTIONS \
  && ! defined BOOST_THREAD_DONT_PROVIDE_INTERRUPTIONS
@@ -333,6 +390,12 @@
 
 #endif
 
+
+//#if ! defined BOOST_NO_CXX11_RVALUE_REFERENCES || defined BOOST_THREAD_USES_MOVE
+#if ! defined BOOST_NO_CXX11_RVALUE_REFERENCES
+#define BOOST_THREAD_FUTURE_USES_OPTIONAL
+#endif
+
 #if BOOST_WORKAROUND(__BORLANDC__, < 0x600)
 #  pragma warn -8008 // Condition always true/false
 #  pragma warn -8080 // Identifier declared but never used
@@ -349,16 +412,41 @@
   #   endif
 #endif
 
+#if defined(BOOST_THREAD_CHRONO_WINDOWS_API)
+  #define BOOST_THREAD_HAS_MONO_CLOCK
+  #define BOOST_THREAD_INTERNAL_CLOCK_IS_MONO
+#elif defined(BOOST_THREAD_CHRONO_MAC_API)
+  #define BOOST_THREAD_HAS_MONO_CLOCK
+#else
+  #include <time.h> // check for CLOCK_MONOTONIC
+  #if defined(CLOCK_MONOTONIC)
+    #define BOOST_THREAD_HAS_MONO_CLOCK
+    #define BOOST_THREAD_INTERNAL_CLOCK_IS_MONO
+  #endif
+#endif
+
+#if defined(BOOST_THREAD_PLATFORM_WIN32)
+#elif ! defined BOOST_THREAD_INTERNAL_CLOCK_IS_MONO
+#if defined BOOST_PTHREAD_HAS_TIMEDLOCK
+#define BOOST_THREAD_USES_PTHREAD_TIMEDLOCK
+#elif (defined(_POSIX_TIMEOUTS) && (_POSIX_TIMEOUTS-0)>=200112L) \
+ || (defined(__ANDROID__) && defined(__ANDROID_API__) && __ANDROID_API__ >= 21)
+#define BOOST_THREAD_USES_PTHREAD_TIMEDLOCK
+#endif
+#endif
+
 // provided for backwards compatibility, since this
 // macro was used for several releases by mistake.
-#if defined(BOOST_THREAD_DYN_DLL) && ! defined BOOST_THREAD_DYN_LINK
+#if defined(BOOST_THREAD_DYN_DLL) && ! defined(BOOST_THREAD_DYN_LINK)
 # define BOOST_THREAD_DYN_LINK
 #endif
 
 // compatibility with the rest of Boost's auto-linking code:
 #if defined(BOOST_THREAD_DYN_LINK) || defined(BOOST_ALL_DYN_LINK)
 # undef  BOOST_THREAD_USE_LIB
-# define BOOST_THREAD_USE_DLL
+# if !defined(BOOST_THREAD_USE_DLL)
+#  define BOOST_THREAD_USE_DLL
+# endif
 #endif
 
 #if defined(BOOST_THREAD_BUILD_DLL)   //Build dll
@@ -408,7 +496,7 @@
 // Tell the autolink to link dynamically, this will get undef'ed by auto_link.hpp
 // once it's done with it:
 //
-#if defined(BOOST_THREAD_USE_DLL)
+#if defined(BOOST_THREAD_USE_DLL) &  ! defined(BOOST_DYN_LINK)
 #   define BOOST_DYN_LINK
 #endif
 //

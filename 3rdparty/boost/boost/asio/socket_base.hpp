@@ -2,7 +2,7 @@
 // socket_base.hpp
 // ~~~~~~~~~~~~~~~
 //
-// Copyright (c) 2003-2013 Christopher M. Kohlhoff (chris at kohlhoff dot com)
+// Copyright (c) 2003-2018 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -44,9 +44,9 @@ public:
     /// Shutdown both send and receive on the socket.
     shutdown_both = implementation_defined
 #else
-    shutdown_receive = boost::asio::detail::shutdown_receive,
-    shutdown_send = boost::asio::detail::shutdown_send,
-    shutdown_both = boost::asio::detail::shutdown_both
+    shutdown_receive = BOOST_ASIO_OS_DEF(SHUT_RD),
+    shutdown_send = BOOST_ASIO_OS_DEF(SHUT_WR),
+    shutdown_both = BOOST_ASIO_OS_DEF(SHUT_RDWR)
 #endif
   };
 
@@ -67,14 +67,30 @@ public:
   static const int message_end_of_record = implementation_defined;
 #else
   BOOST_ASIO_STATIC_CONSTANT(int,
-      message_peek = boost::asio::detail::message_peek);
+      message_peek = BOOST_ASIO_OS_DEF(MSG_PEEK));
   BOOST_ASIO_STATIC_CONSTANT(int,
-      message_out_of_band = boost::asio::detail::message_out_of_band);
+      message_out_of_band = BOOST_ASIO_OS_DEF(MSG_OOB));
   BOOST_ASIO_STATIC_CONSTANT(int,
-      message_do_not_route = boost::asio::detail::message_do_not_route);
+      message_do_not_route = BOOST_ASIO_OS_DEF(MSG_DONTROUTE));
   BOOST_ASIO_STATIC_CONSTANT(int,
-      message_end_of_record = boost::asio::detail::message_end_of_record);
+      message_end_of_record = BOOST_ASIO_OS_DEF(MSG_EOR));
 #endif
+
+  /// Wait types.
+  /**
+   * For use with basic_socket::wait() and basic_socket::async_wait().
+   */
+  enum wait_type
+  {
+    /// Wait for a socket to become ready to read.
+    wait_read,
+
+    /// Wait for a socket to become ready to write.
+    wait_write,
+
+    /// Wait for a socket to have error conditions pending.
+    wait_error
+  };
 
   /// Socket option to permit sending of broadcast messages.
   /**
@@ -83,7 +99,7 @@ public:
    * @par Examples
    * Setting the option:
    * @code
-   * boost::asio::ip::udp::socket socket(io_service); 
+   * boost::asio::ip::udp::socket socket(io_context); 
    * ...
    * boost::asio::socket_base::broadcast option(true);
    * socket.set_option(option);
@@ -92,7 +108,7 @@ public:
    * @par
    * Getting the current option value:
    * @code
-   * boost::asio::ip::udp::socket socket(io_service); 
+   * boost::asio::ip::udp::socket socket(io_context); 
    * ...
    * boost::asio::socket_base::broadcast option;
    * socket.get_option(option);
@@ -106,7 +122,8 @@ public:
   typedef implementation_defined broadcast;
 #else
   typedef boost::asio::detail::socket_option::boolean<
-    SOL_SOCKET, SO_BROADCAST> broadcast;
+    BOOST_ASIO_OS_DEF(SOL_SOCKET), BOOST_ASIO_OS_DEF(SO_BROADCAST)>
+      broadcast;
 #endif
 
   /// Socket option to enable socket-level debugging.
@@ -116,7 +133,7 @@ public:
    * @par Examples
    * Setting the option:
    * @code
-   * boost::asio::ip::tcp::socket socket(io_service); 
+   * boost::asio::ip::tcp::socket socket(io_context); 
    * ...
    * boost::asio::socket_base::debug option(true);
    * socket.set_option(option);
@@ -125,7 +142,7 @@ public:
    * @par
    * Getting the current option value:
    * @code
-   * boost::asio::ip::tcp::socket socket(io_service); 
+   * boost::asio::ip::tcp::socket socket(io_context); 
    * ...
    * boost::asio::socket_base::debug option;
    * socket.get_option(option);
@@ -139,7 +156,7 @@ public:
   typedef implementation_defined debug;
 #else
   typedef boost::asio::detail::socket_option::boolean<
-    SOL_SOCKET, SO_DEBUG> debug;
+    BOOST_ASIO_OS_DEF(SOL_SOCKET), BOOST_ASIO_OS_DEF(SO_DEBUG)> debug;
 #endif
 
   /// Socket option to prevent routing, use local interfaces only.
@@ -149,7 +166,7 @@ public:
    * @par Examples
    * Setting the option:
    * @code
-   * boost::asio::ip::udp::socket socket(io_service); 
+   * boost::asio::ip::udp::socket socket(io_context); 
    * ...
    * boost::asio::socket_base::do_not_route option(true);
    * socket.set_option(option);
@@ -158,7 +175,7 @@ public:
    * @par
    * Getting the current option value:
    * @code
-   * boost::asio::ip::udp::socket socket(io_service); 
+   * boost::asio::ip::udp::socket socket(io_context); 
    * ...
    * boost::asio::socket_base::do_not_route option;
    * socket.get_option(option);
@@ -172,7 +189,8 @@ public:
   typedef implementation_defined do_not_route;
 #else
   typedef boost::asio::detail::socket_option::boolean<
-    SOL_SOCKET, SO_DONTROUTE> do_not_route;
+    BOOST_ASIO_OS_DEF(SOL_SOCKET), BOOST_ASIO_OS_DEF(SO_DONTROUTE)>
+      do_not_route;
 #endif
 
   /// Socket option to send keep-alives.
@@ -182,7 +200,7 @@ public:
    * @par Examples
    * Setting the option:
    * @code
-   * boost::asio::ip::tcp::socket socket(io_service); 
+   * boost::asio::ip::tcp::socket socket(io_context); 
    * ...
    * boost::asio::socket_base::keep_alive option(true);
    * socket.set_option(option);
@@ -191,7 +209,7 @@ public:
    * @par
    * Getting the current option value:
    * @code
-   * boost::asio::ip::tcp::socket socket(io_service); 
+   * boost::asio::ip::tcp::socket socket(io_context); 
    * ...
    * boost::asio::socket_base::keep_alive option;
    * socket.get_option(option);
@@ -205,7 +223,7 @@ public:
   typedef implementation_defined keep_alive;
 #else
   typedef boost::asio::detail::socket_option::boolean<
-    SOL_SOCKET, SO_KEEPALIVE> keep_alive;
+    BOOST_ASIO_OS_DEF(SOL_SOCKET), BOOST_ASIO_OS_DEF(SO_KEEPALIVE)> keep_alive;
 #endif
 
   /// Socket option for the send buffer size of a socket.
@@ -215,7 +233,7 @@ public:
    * @par Examples
    * Setting the option:
    * @code
-   * boost::asio::ip::tcp::socket socket(io_service); 
+   * boost::asio::ip::tcp::socket socket(io_context); 
    * ...
    * boost::asio::socket_base::send_buffer_size option(8192);
    * socket.set_option(option);
@@ -224,7 +242,7 @@ public:
    * @par
    * Getting the current option value:
    * @code
-   * boost::asio::ip::tcp::socket socket(io_service); 
+   * boost::asio::ip::tcp::socket socket(io_context); 
    * ...
    * boost::asio::socket_base::send_buffer_size option;
    * socket.get_option(option);
@@ -238,7 +256,8 @@ public:
   typedef implementation_defined send_buffer_size;
 #else
   typedef boost::asio::detail::socket_option::integer<
-    SOL_SOCKET, SO_SNDBUF> send_buffer_size;
+    BOOST_ASIO_OS_DEF(SOL_SOCKET), BOOST_ASIO_OS_DEF(SO_SNDBUF)>
+      send_buffer_size;
 #endif
 
   /// Socket option for the send low watermark.
@@ -248,7 +267,7 @@ public:
    * @par Examples
    * Setting the option:
    * @code
-   * boost::asio::ip::tcp::socket socket(io_service); 
+   * boost::asio::ip::tcp::socket socket(io_context); 
    * ...
    * boost::asio::socket_base::send_low_watermark option(1024);
    * socket.set_option(option);
@@ -257,7 +276,7 @@ public:
    * @par
    * Getting the current option value:
    * @code
-   * boost::asio::ip::tcp::socket socket(io_service); 
+   * boost::asio::ip::tcp::socket socket(io_context); 
    * ...
    * boost::asio::socket_base::send_low_watermark option;
    * socket.get_option(option);
@@ -271,7 +290,8 @@ public:
   typedef implementation_defined send_low_watermark;
 #else
   typedef boost::asio::detail::socket_option::integer<
-    SOL_SOCKET, SO_SNDLOWAT> send_low_watermark;
+    BOOST_ASIO_OS_DEF(SOL_SOCKET), BOOST_ASIO_OS_DEF(SO_SNDLOWAT)>
+      send_low_watermark;
 #endif
 
   /// Socket option for the receive buffer size of a socket.
@@ -281,7 +301,7 @@ public:
    * @par Examples
    * Setting the option:
    * @code
-   * boost::asio::ip::tcp::socket socket(io_service); 
+   * boost::asio::ip::tcp::socket socket(io_context); 
    * ...
    * boost::asio::socket_base::receive_buffer_size option(8192);
    * socket.set_option(option);
@@ -290,7 +310,7 @@ public:
    * @par
    * Getting the current option value:
    * @code
-   * boost::asio::ip::tcp::socket socket(io_service); 
+   * boost::asio::ip::tcp::socket socket(io_context); 
    * ...
    * boost::asio::socket_base::receive_buffer_size option;
    * socket.get_option(option);
@@ -304,7 +324,8 @@ public:
   typedef implementation_defined receive_buffer_size;
 #else
   typedef boost::asio::detail::socket_option::integer<
-    SOL_SOCKET, SO_RCVBUF> receive_buffer_size;
+    BOOST_ASIO_OS_DEF(SOL_SOCKET), BOOST_ASIO_OS_DEF(SO_RCVBUF)>
+      receive_buffer_size;
 #endif
 
   /// Socket option for the receive low watermark.
@@ -314,7 +335,7 @@ public:
    * @par Examples
    * Setting the option:
    * @code
-   * boost::asio::ip::tcp::socket socket(io_service); 
+   * boost::asio::ip::tcp::socket socket(io_context); 
    * ...
    * boost::asio::socket_base::receive_low_watermark option(1024);
    * socket.set_option(option);
@@ -323,7 +344,7 @@ public:
    * @par
    * Getting the current option value:
    * @code
-   * boost::asio::ip::tcp::socket socket(io_service); 
+   * boost::asio::ip::tcp::socket socket(io_context); 
    * ...
    * boost::asio::socket_base::receive_low_watermark option;
    * socket.get_option(option);
@@ -337,7 +358,8 @@ public:
   typedef implementation_defined receive_low_watermark;
 #else
   typedef boost::asio::detail::socket_option::integer<
-    SOL_SOCKET, SO_RCVLOWAT> receive_low_watermark;
+    BOOST_ASIO_OS_DEF(SOL_SOCKET), BOOST_ASIO_OS_DEF(SO_RCVLOWAT)>
+      receive_low_watermark;
 #endif
 
   /// Socket option to allow the socket to be bound to an address that is
@@ -348,7 +370,7 @@ public:
    * @par Examples
    * Setting the option:
    * @code
-   * boost::asio::ip::tcp::acceptor acceptor(io_service); 
+   * boost::asio::ip::tcp::acceptor acceptor(io_context); 
    * ...
    * boost::asio::socket_base::reuse_address option(true);
    * acceptor.set_option(option);
@@ -357,7 +379,7 @@ public:
    * @par
    * Getting the current option value:
    * @code
-   * boost::asio::ip::tcp::acceptor acceptor(io_service); 
+   * boost::asio::ip::tcp::acceptor acceptor(io_context); 
    * ...
    * boost::asio::socket_base::reuse_address option;
    * acceptor.get_option(option);
@@ -371,7 +393,8 @@ public:
   typedef implementation_defined reuse_address;
 #else
   typedef boost::asio::detail::socket_option::boolean<
-    SOL_SOCKET, SO_REUSEADDR> reuse_address;
+    BOOST_ASIO_OS_DEF(SOL_SOCKET), BOOST_ASIO_OS_DEF(SO_REUSEADDR)>
+      reuse_address;
 #endif
 
   /// Socket option to specify whether the socket lingers on close if unsent
@@ -382,7 +405,7 @@ public:
    * @par Examples
    * Setting the option:
    * @code
-   * boost::asio::ip::tcp::socket socket(io_service); 
+   * boost::asio::ip::tcp::socket socket(io_context); 
    * ...
    * boost::asio::socket_base::linger option(true, 30);
    * socket.set_option(option);
@@ -391,7 +414,7 @@ public:
    * @par
    * Getting the current option value:
    * @code
-   * boost::asio::ip::tcp::socket socket(io_service); 
+   * boost::asio::ip::tcp::socket socket(io_context); 
    * ...
    * boost::asio::socket_base::linger option;
    * socket.get_option(option);
@@ -406,7 +429,42 @@ public:
   typedef implementation_defined linger;
 #else
   typedef boost::asio::detail::socket_option::linger<
-    SOL_SOCKET, SO_LINGER> linger;
+    BOOST_ASIO_OS_DEF(SOL_SOCKET), BOOST_ASIO_OS_DEF(SO_LINGER)>
+      linger;
+#endif
+
+  /// Socket option for putting received out-of-band data inline.
+  /**
+   * Implements the SOL_SOCKET/SO_OOBINLINE socket option.
+   *
+   * @par Examples
+   * Setting the option:
+   * @code
+   * boost::asio::ip::tcp::socket socket(io_context);
+   * ...
+   * boost::asio::socket_base::out_of_band_inline option(true);
+   * socket.set_option(option);
+   * @endcode
+   *
+   * @par
+   * Getting the current option value:
+   * @code
+   * boost::asio::ip::tcp::socket socket(io_context);
+   * ...
+   * boost::asio::socket_base::out_of_band_inline option;
+   * socket.get_option(option);
+   * bool value = option.value();
+   * @endcode
+   *
+   * @par Concepts:
+   * Socket_Option, Boolean_Socket_Option.
+   */
+#if defined(GENERATING_DOCUMENTATION)
+  typedef implementation_defined out_of_band_inline;
+#else
+  typedef boost::asio::detail::socket_option::boolean<
+    BOOST_ASIO_OS_DEF(SOL_SOCKET), BOOST_ASIO_OS_DEF(SO_OOBINLINE)>
+      out_of_band_inline;
 #endif
 
   /// Socket option to report aborted connections on accept.
@@ -418,7 +476,7 @@ public:
    * @par Examples
    * Setting the option:
    * @code
-   * boost::asio::ip::tcp::acceptor acceptor(io_service); 
+   * boost::asio::ip::tcp::acceptor acceptor(io_context); 
    * ...
    * boost::asio::socket_base::enable_connection_aborted option(true);
    * acceptor.set_option(option);
@@ -427,7 +485,7 @@ public:
    * @par
    * Getting the current option value:
    * @code
-   * boost::asio::ip::tcp::acceptor acceptor(io_service); 
+   * boost::asio::ip::tcp::acceptor acceptor(io_context); 
    * ...
    * boost::asio::socket_base::enable_connection_aborted option;
    * acceptor.get_option(option);
@@ -446,28 +504,6 @@ public:
     enable_connection_aborted;
 #endif
 
-  /// (Deprecated: Use non_blocking().) IO control command to
-  /// set the blocking mode of the socket.
-  /**
-   * Implements the FIONBIO IO control command.
-   *
-   * @par Example
-   * @code
-   * boost::asio::ip::tcp::socket socket(io_service); 
-   * ...
-   * boost::asio::socket_base::non_blocking_io command(true);
-   * socket.io_control(command);
-   * @endcode
-   *
-   * @par Concepts:
-   * IO_Control_Command, Boolean_IO_Control_Command.
-   */
-#if defined(GENERATING_DOCUMENTATION)
-  typedef implementation_defined non_blocking_io;
-#else
-  typedef boost::asio::detail::io_control::non_blocking_io non_blocking_io;
-#endif
-
   /// IO control command to get the amount of data that can be read without
   /// blocking.
   /**
@@ -475,7 +511,7 @@ public:
    *
    * @par Example
    * @code
-   * boost::asio::ip::tcp::socket socket(io_service); 
+   * boost::asio::ip::tcp::socket socket(io_context); 
    * ...
    * boost::asio::socket_base::bytes_readable command(true);
    * socket.io_control(command);
@@ -493,10 +529,22 @@ public:
 
   /// The maximum length of the queue of pending incoming connections.
 #if defined(GENERATING_DOCUMENTATION)
+  static const int max_listen_connections = implementation_defined;
+#else
+  BOOST_ASIO_STATIC_CONSTANT(int, max_listen_connections
+      = BOOST_ASIO_OS_DEF(SOMAXCONN));
+#endif
+
+#if !defined(BOOST_ASIO_NO_DEPRECATED)
+  /// (Deprecated: Use max_listen_connections.) The maximum length of the queue
+  /// of pending incoming connections.
+#if defined(GENERATING_DOCUMENTATION)
   static const int max_connections = implementation_defined;
 #else
-  BOOST_ASIO_STATIC_CONSTANT(int, max_connections = SOMAXCONN);
+  BOOST_ASIO_STATIC_CONSTANT(int, max_connections
+      = BOOST_ASIO_OS_DEF(SOMAXCONN));
 #endif
+#endif // !defined(BOOST_ASIO_NO_DEPRECATED)
 
 protected:
   /// Protected destructor to prevent deletion through this type.

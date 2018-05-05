@@ -6,7 +6,7 @@
 // accompanying file LICENSE_1_0.txt or copy at
 // http://www.boost.org/LICENSE_1_0.txt)
 //
-// $Id: derived.hpp 80974 2012-10-13 00:02:25Z steven_watanabe $
+// $Id$
 
 #ifndef BOOST_TYPE_ERASURE_DERIVED_HPP_INCLUDED
 #define BOOST_TYPE_ERASURE_DERIVED_HPP_INCLUDED
@@ -30,6 +30,13 @@ struct derived
     typedef typename T::_boost_type_erasure_derived_type type;
 #endif
 };
+
+#ifndef BOOST_NO_CXX11_TEMPLATE_ALIASES
+
+template<class T>
+using derived_t = typename T::_boost_type_erasure_derived_type;
+
+#endif
 
 }
 }

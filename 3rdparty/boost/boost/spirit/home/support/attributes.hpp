@@ -28,7 +28,6 @@
 #include <boost/fusion/include/for_each.hpp>
 #include <boost/fusion/include/is_view.hpp>
 #include <boost/fusion/include/mpl.hpp>
-#include <boost/foreach.hpp>
 #include <boost/utility/value_init.hpp>
 #include <boost/type_traits/is_same.hpp>
 #include <boost/type_traits/is_convertible.hpp>
@@ -202,6 +201,19 @@ namespace boost { namespace spirit { namespace traits
     struct is_weak_substitute<T, optional<Expected> >
       : is_weak_substitute<T, Expected> {};
 
+#if !defined(BOOST_VARIANT_DO_NOT_USE_VARIADIC_TEMPLATES)
+    template <typename T, typename Expected>
+    struct is_weak_substitute<boost::variant<T>, Expected>
+      : is_weak_substitute<T, Expected>
+    {};
+
+    template <typename T0, typename T1, typename ...TN, typename Expected>
+    struct is_weak_substitute<boost::variant<T0, T1, TN...>,
+            Expected>
+      : mpl::bool_<is_weak_substitute<T0, Expected>::type::value &&
+            is_weak_substitute<boost::variant<T1, TN...>, Expected>::type::value>
+    {};
+#else
 #define BOOST_SPIRIT_IS_WEAK_SUBSTITUTE(z, N, _)                              \
     is_weak_substitute<BOOST_PP_CAT(T, N), Expected>::type::value &&          \
     /***/
@@ -220,6 +232,7 @@ namespace boost { namespace spirit { namespace traits
     {};
 
 #undef BOOST_SPIRIT_IS_WEAK_SUBSTITUTE
+#endif
 
     template <typename T>
     struct is_weak_substitute<T, T
@@ -265,11 +278,6 @@ namespace boost { namespace spirit { namespace traits
       : mpl::false_
     {};
 
-    template <typename T, typename Domain>
-    struct not_is_variant<boost::optional<T>, Domain>
-      : not_is_variant<T, Domain>
-    {};
-
     // we treat every type as if it where the variant (as this meta function is
     // invoked for variant types only)
     template <typename T>
@@ -280,6 +288,11 @@ namespace boost { namespace spirit { namespace traits
     template <typename T>
     struct variant_type<boost::optional<T> >
       : variant_type<T>
+    {};
+
+    template <typename T, typename Domain>
+    struct not_is_variant_or_variant_in_optional
+      : not_is_variant<typename variant_type<T>::type, Domain>
     {};
 
     ///////////////////////////////////////////////////////////////////////////
@@ -325,7 +338,7 @@ namespace boost { namespace spirit { namespace traits
 
     template <typename Variant, typename Expected>
     struct compute_compatible_component_variant<Variant, Expected, mpl::false_
-      , typename enable_if<detail::has_types<Variant> >::type>
+      , typename enable_if<detail::has_types<typename variant_type<Variant>::type> >::type>
     {
         typedef typename traits::variant_type<Variant>::type variant_type;
         typedef typename variant_type::types types;
@@ -358,7 +371,7 @@ namespace boost { namespace spirit { namespace traits
     template <typename Expected, typename Attribute, typename Domain>
     struct compute_compatible_component
       : compute_compatible_component_variant<Attribute, Expected
-          , typename spirit::traits::not_is_variant<Attribute, Domain>::type> {};
+          , typename not_is_variant_or_variant_in_optional<Attribute, Domain>::type> {};
 
     template <typename Expected, typename Domain>
     struct compute_compatible_component<Expected, unused_type, Domain>
@@ -516,7 +529,7 @@ namespace boost { namespace spirit { namespace traits
         {
             if (!val)
                 return 0;
-            return val.get();
+            return traits::size(val.get());
         }
     };
 
@@ -771,7 +784,7 @@ namespace boost { namespace spirit { namespace traits
             };
 
             // never called, but needed for decltype-based result_of (C++0x)
-#ifndef BOOST_NO_RVALUE_REFERENCES
+#ifndef BOOST_NO_CXX11_RVALUE_REFERENCES
             template <typename Element>
             typename result<element_attribute(Element)>::type
             operator()(Element&&) const;
@@ -1018,8 +1031,7 @@ namespace boost { namespace spirit { namespace traits
     template <typename T>
     void swap_impl(T& a, T& b)
     {
-        using namespace std;
-        swap(a, b);
+        boost::swap(a, b);
     }
 
     template <typename A>
@@ -1046,12 +1058,13 @@ namespace boost { namespace spirit { namespace traits
         typedef T type;
     };
 
+#if !defined(BOOST_FUSION_HAS_VARIADIC_VECTOR)
     template <typename T>
     struct strip_single_element_vector<fusion::vector1<T> >
     {
         typedef T type;
     };
-
+#endif
     template <typename T>
     struct strip_single_element_vector<fusion::vector<T> >
     {
@@ -1139,7 +1152,7 @@ namespace boost { namespace spirit { namespace traits
         static void call(boost::optional<T>& val)
         {
             if (val)
-                val = none_t();   // leave optional uninitialized
+                val = none;   // leave optional uninitialized
         }
     };
 
@@ -1181,8 +1194,8 @@ namespace boost { namespace spirit { namespace traits
         template <typename Out>
         struct print_fusion_sequence
         {
-            print_fusion_sequence(Out& out)
-              : out(out), is_first(true) {}
+            print_fusion_sequence(Out& out_)
+              : out(out_), is_first(true) {}
 
             typedef void result_type;
 
@@ -1204,7 +1217,7 @@ namespace boost { namespace spirit { namespace traits
         template <typename Out>
         struct print_visitor : static_visitor<>
         {
-            print_visitor(Out& out) : out(out) {}
+            print_visitor(Out& out_) : out(out_) {}
 
             template <typename T>
             void operator()(T const& val) const

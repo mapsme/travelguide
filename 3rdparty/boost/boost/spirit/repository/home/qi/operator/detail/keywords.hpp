@@ -1,9 +1,9 @@
 /*=============================================================================
   Copyright (c) 2011-2012 Thomas Bernard
 
-    Distributed under the Boost Software License, Version 1.0. (See accompanying
-    file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
-=============================================================================*/
+  Distributed under the Boost Software License, Version 1.0. (See accompanying
+  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+  =============================================================================*/
 #if !defined(SPIRIT_KEYWORDS_DETAIL_MARCH_13_2007_1145PM)
 #define SPIRIT_KEYWORDS_DETAIL_MARCH_13_2007_1145PM
 
@@ -14,11 +14,11 @@
 #include <boost/spirit/home/qi/string/lit.hpp>
 #include <boost/fusion/include/at.hpp>
 namespace boost { namespace spirit { namespace repository { namespace qi { namespace detail {
-        // Variant visitor class which handles dispatching the parsing to the selected parser
-        // This also handles passing the correct attributes and flags/counters to the subject parsers       
+    // Variant visitor class which handles dispatching the parsing to the selected parser
+    // This also handles passing the correct attributes and flags/counters to the subject parsers
     template<typename T>
     struct is_distinct : T::distinct { };
- 
+    
     template<typename T, typename Action>
     struct is_distinct< spirit::qi::action<T,Action> > : T::distinct { };
 
@@ -27,10 +27,10 @@ namespace boost { namespace spirit { namespace repository { namespace qi { names
 
 
 
-        template < typename Elements, typename Iterator ,typename Context ,typename Skipper
-                  ,typename Flags ,typename Counters ,typename Attribute, typename NoCasePass>
+    template < typename Elements, typename Iterator ,typename Context ,typename Skipper
+        ,typename Flags ,typename Counters ,typename Attribute, typename NoCasePass>
         struct parse_dispatcher
-            : public boost::static_visitor<bool>
+        : public boost::static_visitor<bool>
         {
 
             typedef Iterator iterator_type;
@@ -38,60 +38,60 @@ namespace boost { namespace spirit { namespace repository { namespace qi { names
             typedef Skipper skipper_type;
             typedef Elements elements_type;
 
-            typedef typename add_reference<Attribute>::type attr_reference; 
+            typedef typename add_reference<Attribute>::type attr_reference;
             public:
             parse_dispatcher(const Elements &elements,Iterator& first, Iterator const& last
-          , Context& context, Skipper const& skipper
-          , Flags &flags, Counters &counters, attr_reference attr) : 
-                 elements(elements), first(first), last(last)
-               , context(context), skipper(skipper)
-               , flags(flags),counters(counters), attr(attr)
+                    , Context& context, Skipper const& skipper
+                    , Flags &flags, Counters &counters, attr_reference attr) :
+                elements(elements), first(first), last(last)
+                , context(context), skipper(skipper)
+                , flags(flags),counters(counters), attr(attr)
             {}
-            
+
             template<typename T> bool operator()(T& idx) const
-            {    
+            {
                 return call(idx,typename traits::not_is_unused<Attribute>::type());
             }
-            
-            template <typename Subject,typename Index> 
-            bool call_subject_unused(
-                  Subject const &subject, Iterator &first, Iterator const &last
-                , Context& context, Skipper const& skipper
-                , Index& idx ) const
-            {
-                Iterator save = first;
+
+            template <typename Subject,typename Index>
+                bool call_subject_unused(
+                        Subject const &subject, Iterator &first, Iterator const &last
+                        , Context& context, Skipper const& skipper
+                        , Index& /*idx*/ ) const
+                {
+                    Iterator save = first;
                     skipper_keyword_marker<Skipper,NoCasePass>
                         marked_skipper(skipper,flags[Index::value],counters[Index::value]);
-                
-                if(subject.parse(first,last,context,marked_skipper,unused))
-                {
+
+                    if(subject.parse(first,last,context,marked_skipper,unused))
+                    {
                         return true;
+                    }
+                    save = save;
+                    return false;
                 }
-                save = save;
-                return false;
-            }            
- 
-            
-            template <typename Subject,typename Index> 
-            bool call_subject(
-                  Subject const &subject, Iterator &first, Iterator const &last
-                , Context& context, Skipper const& skipper
-                , Index& idx ) const
-            {
-               
-                Iterator save = first;
+
+
+            template <typename Subject,typename Index>
+                bool call_subject(
+                        Subject const &subject, Iterator &first, Iterator const &last
+                        , Context& context, Skipper const& skipper
+                        , Index& /*idx*/ ) const
+                {
+
+                    Iterator save = first;
                     skipper_keyword_marker<Skipper,NoCasePass> 
                         marked_skipper(skipper,flags[Index::value],counters[Index::value]);
-                if(subject.parse(first,last,context,marked_skipper,fusion::at_c<Index::value>(attr)))
-                {
+                    if(subject.parse(first,last,context,marked_skipper,fusion::at_c<Index::value>(attr)))
+                    {
                         return true;
+                    }
+                    save = save;
+                    return false;
                 }
-                save = save;
-                return false;
-            }
 
             // Handle unused attributes
-            template <typename T> bool call(T &idx, mpl::false_) const{                            
+            template <typename T> bool call(T &idx, mpl::false_) const{
  
                 typedef typename mpl::at<Elements,T>::type ElementType;
                 if(
@@ -99,8 +99,8 @@ namespace boost { namespace spirit { namespace repository { namespace qi { names
                     || skipper.parse(first,last,unused,unused,unused)
                   ){
                       spirit::qi::skip_over(first, last, skipper);
-                return call_subject_unused(fusion::at_c<T::value>(elements), first, last, context, skipper, idx );
-            }
+                      return call_subject_unused(fusion::at_c<T::value>(elements), first, last, context, skipper, idx );
+                    }
                 return false;
             }
             // Handle normal attributes
@@ -110,11 +110,11 @@ namespace boost { namespace spirit { namespace repository { namespace qi { names
                        (!is_distinct<ElementType>::value)
                     || skipper.parse(first,last,unused,unused,unused)
                   ){
-                return call_subject(fusion::at_c<T::value>(elements), first, last, context, skipper, idx);
-            }
+                      return call_subject(fusion::at_c<T::value>(elements), first, last, context, skipper, idx);
+                  }
                 return false;
             }
-            
+
             const Elements &elements;
             Iterator &first;
             const Iterator &last;
@@ -132,7 +132,7 @@ namespace boost { namespace spirit { namespace repository { namespace qi { names
             typedef typename
                 spirit::detail::as_variant<
                 IndexList >::type        parser_index_type;
-      
+
             ///////////////////////////////////////////////////////////////////////////
             // build_char_type_sequence
             //
@@ -164,9 +164,11 @@ namespace boost { namespace spirit { namespace repository { namespace qi { names
                             };
 
                         // never called, but needed for decltype-based result_of (C++0x)
+#ifndef BOOST_NO_CXX11_RVALUE_REFERENCES
                         template <typename Element>
                             typename result<element_char_type(Element)>::type
-                            operator()(Element&) const;
+                            operator()(Element&&) const;
+#endif
                     };
 
                     // Compute the list of character types of the child kwd directives
@@ -264,9 +266,11 @@ namespace boost { namespace spirit { namespace repository { namespace qi { names
                             };
 
                         // never called, but needed for decltype-based result_of (C++0x)
+#ifndef BOOST_NO_CXX11_RVALUE_REFERENCES
                         template <typename Element>
                             typename result<element_case_type(Element)>::type
-                            operator()(Element&) const;
+                            operator()(Element&&) const;
+#endif
                     };
 
                     // Compute the list of character types of the child kwd directives
@@ -369,8 +373,8 @@ namespace boost { namespace spirit { namespace repository { namespace qi { names
 
                         // Make the keyword/parse index entry in the tst parser
                         lookup->add(
-                                traits::get_begin<char_type>(parser.subject.keyword.str),
-                                traits::get_end<char_type>(parser.subject.keyword.str),
+                                traits::get_begin<char_type>(get_string(parser.subject.keyword)),
+                                traits::get_end<char_type>(get_string(parser.subject.keyword)),
                                 position
                                 );
                         // Get the initial state of the flags array and store it in the flags initializer
@@ -397,8 +401,8 @@ namespace boost { namespace spirit { namespace repository { namespace qi { names
                     {
                         // Make the keyword/parse index entry in the tst parser
                         lookup->add(
-                                traits::get_begin<char_type>(parser.subject.keyword.str),
-                                traits::get_end<char_type>(parser.subject.keyword.str),
+                                traits::get_begin<char_type>(get_string(parser.subject.keyword)),
+                                traits::get_end<char_type>(get_string(parser.subject.keyword)),
                                 position
                                 );
                         // Get the initial state of the flags array and store it in the flags initializer
@@ -406,19 +410,20 @@ namespace boost { namespace spirit { namespace repository { namespace qi { names
                         return 0;
                     }
 
+
                 template <typename String, bool no_attribute>
-                const String & get_string(const boost::spirit::qi::literal_string<String,no_attribute> &parser) const
+                const String get_string(const boost::spirit::qi::literal_string<String,no_attribute> &parser) const
                 {
                         return parser.str;
                 }
 
-                template <typename String, bool no_attribute>
+        template <typename String, bool no_attribute>
                 const typename boost::spirit::qi::no_case_literal_string<String,no_attribute>::string_type &
                         get_string(const boost::spirit::qi::no_case_literal_string<String,no_attribute> &parser) const
                 {
                         return parser.str_lo;
                 }
-
+   
 
 
                 shared_ptr<keywords_type> lookup;
@@ -439,7 +444,7 @@ namespace boost { namespace spirit { namespace repository { namespace qi { names
                         Iterator &first,
                         const Iterator &last,
                         const ParseVisitor &parse_visitor,
-                        const Skipper &skipper) const
+                        const Skipper &/*skipper*/) const
                 {
                     if(parser_index_type* val_ptr =
                             lookup->find(first,last,first_pass_filter_type()))
@@ -458,7 +463,7 @@ namespace boost { namespace spirit { namespace repository { namespace qi { names
                         const Iterator &last,
                         const ParseVisitor &parse_visitor,
                         const NoCaseParseVisitor &no_case_parse_visitor,
-                        const Skipper &skipper) const
+                        const Skipper &/*skipper*/) const
                 {
                     Iterator saved_first = first;
                     if(parser_index_type* val_ptr =
@@ -502,27 +507,27 @@ namespace boost { namespace spirit { namespace repository { namespace qi { names
 
         template <typename Iterator,typename ParseVisitor, typename NoCaseParseVisitor,typename Skipper>
         bool parse(
-                        Iterator &first,
-                        const Iterator &last,
-                        const ParseVisitor &parse_visitor,
-                        const NoCaseParseVisitor &no_case_parse_visitor,
-                        const Skipper &skipper) const
+                        Iterator &/*first*/,
+                        const Iterator &/*last*/,
+                        const ParseVisitor &/*parse_visitor*/,
+                        const NoCaseParseVisitor &/*no_case_parse_visitor*/,
+                        const Skipper &/*skipper*/) const
                 {
                         return false;
                 }
 
         template <typename Iterator,typename ParseVisitor, typename Skipper>
                 bool parse(
-                        Iterator &first,
-                        const Iterator &last,
-                        const ParseVisitor &parse_visitor,
-                        const Skipper &skipper) const
+                        Iterator &/*first*/,
+                        const Iterator &/*last*/,
+                        const ParseVisitor &/*parse_visitor*/,
+                        const Skipper &/*skipper*/) const
                 {
                     return false;
                 }
 
         template <typename ParseFunction>
-        bool parse( ParseFunction &function ) const
+        bool parse( ParseFunction &/*function*/ ) const
                 {
                    return false;
                 }
@@ -549,7 +554,7 @@ namespace boost { namespace spirit { namespace repository { namespace qi { names
                     }
 
                 template <typename T, typename Position, typename Action>
-                    int call(const spirit::qi::action<T,Action> &parser, const Position position ) const
+                    int call(const spirit::qi::action<T,Action> &parser, const Position /*position*/ ) const
                     {
                         // Get the initial state of the flags array and store it in the flags initializer
                         flags[Position::value]=parser.subject.iter.flag_init();
@@ -557,7 +562,7 @@ namespace boost { namespace spirit { namespace repository { namespace qi { names
                     }
 
                 template <typename T, typename Position>
-                    int call( const T & parser, const Position position) const
+                    int call( const T & parser, const Position /*position*/) const
                     {
                         // Get the initial state of the flags array and store it in the flags initializer
                         flags[Position::value]=parser.iter.flag_init();
@@ -565,7 +570,7 @@ namespace boost { namespace spirit { namespace repository { namespace qi { names
                     }
 
                 template <typename T, typename Position>
-                    int call( const spirit::qi::hold_directive<T> & parser, const Position position) const
+                    int call( const spirit::qi::hold_directive<T> & parser, const Position /*position*/) const
                     {
                         // Get the initial state of the flags array and store it in the flags initializer
                         flags[Position::value]=parser.subject.iter.flag_init();

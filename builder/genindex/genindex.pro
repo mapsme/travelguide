@@ -1,13 +1,15 @@
 TEMPLATE = app
 TARGET = genindex
-CONFIG += console warn_on
-CONFIG -= app_bundle qt
-
-QMAKE_CXXFLAGS += -Wno-unused-parameter -Wno-unused-local-typedef
+CONFIG += console
+CONFIG -= app_bundle qt warn_on
 
 INCLUDEPATH += ../../3rdparty/boost
 
 include (../../defines.pri)
+
+# To exclude specific warnings from -Wall, they should be defined AFTER -Wall.
+# CONFIG -= warn_on above removes "automatic" -Wall from qmake spec and allows to correctly silence warnings below.
+QMAKE_CXXFLAGS += -Wall -Wno-unused-parameter -Wno-unused-local-typedef
 
 SOURCES += \
   main.cpp \

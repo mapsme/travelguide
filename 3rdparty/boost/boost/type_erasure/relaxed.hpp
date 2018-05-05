@@ -6,7 +6,7 @@
 // accompanying file LICENSE_1_0.txt or copy at
 // http://www.boost.org/LICENSE_1_0.txt)
 //
-// $Id: relaxed.hpp 83252 2013-03-02 19:58:42Z steven_watanabe $
+// $Id$
 
 #ifndef BOOST_TYPE_ERASURE_RELAXED_HPP_INCLUDED
 #define BOOST_TYPE_ERASURE_RELAXED_HPP_INCLUDED
@@ -52,7 +52,7 @@ struct is_relaxed_impl :
  * - A raw value can be assigned to an @ref any.  This will replace
  *   the value stored by the @ref any.  (But note that if @ref assignable
  *   is present, it takes priority.)
- * - copy assignment of @ref any uses the copy constructor if it can't
+ * - assignment of @ref any uses the constructor if it can't
  *   use @ref assignable (either because @ref assignable is missing,
  *   or because the stored types do not match).
  * - default construction of @ref any is allowed and creates a null any.

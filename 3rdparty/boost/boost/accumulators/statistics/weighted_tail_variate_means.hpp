@@ -107,8 +107,8 @@ namespace impl
     struct weighted_tail_variate_means_impl
       : accumulator_base
     {
-        typedef typename numeric::functional::average<Weight, Weight>::result_type float_type;
-        typedef typename numeric::functional::average<typename numeric::functional::multiplies<VariateType, Weight>::result_type, Weight>::result_type array_type;
+        typedef typename numeric::functional::fdiv<Weight, Weight>::result_type float_type;
+        typedef typename numeric::functional::fdiv<typename numeric::functional::multiplies<VariateType, Weight>::result_type, Weight>::result_type array_type;
         // for boost::result_of
         typedef iterator_range<typename array_type::iterator> result_type;
 
@@ -169,7 +169,11 @@ namespace impl
                 this->tail_means_.begin()
               , this->tail_means_.end()
               , this->tail_means_.begin()
+#ifdef BOOST_NO_CXX98_BINDERS
+              , std::bind(numeric::functional::divides<typename array_type::value_type const, float_type const>(), std::placeholders::_1, factor)
+#else
               , std::bind2nd(numeric::functional::divides<typename array_type::value_type const, float_type const>(), factor)
+#endif
             );
 
             return make_iterator_range(this->tail_means_);

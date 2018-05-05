@@ -14,7 +14,7 @@
 #include <boost/spirit/home/support/unused.hpp>
 #include <boost/spirit/home/qi/nonterminal/rule.hpp>
 #include <boost/spirit/home/qi/nonterminal/debug_handler_state.hpp>
-#include <boost/spirit/home/qi/operator/expect.hpp>
+#include <boost/spirit/home/qi/detail/expectation_failure.hpp>
 #include <boost/function.hpp>
 #include <boost/fusion/include/at.hpp>
 #include <boost/fusion/include/vector.hpp>
@@ -36,12 +36,12 @@ namespace boost { namespace spirit { namespace qi
         function_type;
 
         debug_handler(
-            function_type subject
-          , F f
-          , std::string const& rule_name)
-          : subject(subject)
-          , f(f)
-          , rule_name(rule_name)
+            function_type subject_
+          , F f_
+          , std::string const& rule_name_)
+          : subject(subject_)
+          , f(f_)
+          , rule_name(rule_name_)
         {
         }
 

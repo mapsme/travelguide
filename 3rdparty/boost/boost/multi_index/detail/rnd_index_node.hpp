@@ -1,4 +1,4 @@
-/* Copyright 2003-2008 Joaquin M Lopez Munoz.
+/* Copyright 2003-2018 Joaquin M Lopez Munoz.
  * Distributed under the Boost Software License, Version 1.0.
  * (See accompanying file LICENSE_1_0.txt or copy at
  * http://www.boost.org/LICENSE_1_0.txt)
@@ -9,17 +9,18 @@
 #ifndef BOOST_MULTI_INDEX_DETAIL_RND_INDEX_NODE_HPP
 #define BOOST_MULTI_INDEX_DETAIL_RND_INDEX_NODE_HPP
 
-#if defined(_MSC_VER)&&(_MSC_VER>=1200)
+#if defined(_MSC_VER)
 #pragma once
 #endif
 
 #include <boost/config.hpp> /* keep it first to prevent nasty warns in MSVC */
 #include <algorithm>
 #include <boost/detail/allocator_utilities.hpp>
-#include <boost/math/common_factor_rt.hpp>
-#include <boost/multi_index/detail/prevent_eti.hpp>
+#include <boost/integer/common_factor_rt.hpp>
+#include <boost/multi_index/detail/raw_ptr.hpp>
 #include <cstddef>
 #include <functional>
+#include <memory>
 
 namespace boost{
 
@@ -30,25 +31,28 @@ namespace detail{
 template<typename Allocator>
 struct random_access_index_node_impl
 {
-  typedef typename prevent_eti<
-    Allocator,
-    typename boost::detail::allocator::rebind_to<
-      Allocator,random_access_index_node_impl
-    >::type
-  >::type::pointer                                pointer;
-  typedef typename prevent_eti<
-    Allocator,
-    typename boost::detail::allocator::rebind_to<
-      Allocator,random_access_index_node_impl
-    >::type
-  >::type::const_pointer                          const_pointer;
-  typedef typename prevent_eti<
-    Allocator,
-    typename boost::detail::allocator::rebind_to<
-      Allocator,pointer
-    >::type
-  >::type::pointer                                ptr_pointer;
-
+  typedef typename
+  boost::detail::allocator::rebind_to<
+    Allocator,random_access_index_node_impl
+  >::type                                        node_allocator;
+#ifdef BOOST_NO_CXX11_ALLOCATOR
+  typedef typename node_allocator::pointer       pointer;
+  typedef typename node_allocator::const_pointer const_pointer;
+#else
+  typedef std::allocator_traits<node_allocator>  node_traits;
+  typedef typename node_traits::pointer          pointer;
+  typedef typename node_traits::const_pointer    const_pointer;
+#endif
+  typedef typename
+  boost::detail::allocator::rebind_to<
+    Allocator,pointer
+  >::type                                        ptr_allocator;
+#ifdef BOOST_NO_CXX11_ALLOCATOR
+  typedef typename ptr_allocator::pointer        ptr_pointer;
+#else
+  typedef std::allocator_traits<ptr_allocator>   ptr_traits;
+  typedef typename ptr_traits::pointer           ptr_pointer;
+#endif
   ptr_pointer& up(){return up_;}
   ptr_pointer  up()const{return up_;}
 
@@ -112,7 +116,7 @@ struct random_access_index_node_impl
     std::ptrdiff_t n=end-begin;
     std::ptrdiff_t m=middle-begin;
     std::ptrdiff_t n_m=n-m;
-    std::ptrdiff_t p=math::gcd(n,m);
+    std::ptrdiff_t p=integer::gcd(n,m);
 
     for(std::ptrdiff_t i=0;i<p;++i){
       pointer tmp=begin[i];
@@ -181,25 +185,19 @@ private:
 
 template<typename Super>
 struct random_access_index_node_trampoline:
-  prevent_eti<
-    Super,
-    random_access_index_node_impl<
-      typename boost::detail::allocator::rebind_to<
-        typename Super::allocator_type,
-        char
-      >::type
-    >
-  >::type
+  random_access_index_node_impl<
+    typename boost::detail::allocator::rebind_to<
+      typename Super::allocator_type,
+      char
+    >::type
+  >
 {
-  typedef typename prevent_eti<
-    Super,
-    random_access_index_node_impl<
-      typename boost::detail::allocator::rebind_to<
-        typename Super::allocator_type,
-        char
-      >::type
-    >
-  >::type impl_type;
+  typedef random_access_index_node_impl<
+    typename boost::detail::allocator::rebind_to<
+      typename Super::allocator_type,
+      char
+    >::type
+  > impl_type;
 };
 
 template<typename Super>
@@ -232,14 +230,18 @@ public:
 
   static random_access_index_node* from_impl(impl_pointer x)
   {
-    return static_cast<random_access_index_node*>(
-      static_cast<trampoline*>(&*x));
+    return
+      static_cast<random_access_index_node*>(
+        static_cast<trampoline*>(
+          raw_ptr<impl_type*>(x)));
   }
 
   static const random_access_index_node* from_impl(const_impl_pointer x)
   {
-    return static_cast<const random_access_index_node*>(
-      static_cast<const trampoline*>(&*x));
+    return
+      static_cast<const random_access_index_node*>(
+        static_cast<const trampoline*>(
+          raw_ptr<const impl_type*>(x)));
   }
 
   /* interoperability with rnd_node_iterator */

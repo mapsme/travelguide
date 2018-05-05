@@ -2,7 +2,7 @@
 // detail/impl/signal_set_service.ipp
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //
-// Copyright (c) 2003-2013 Christopher M. Kohlhoff (chris at kohlhoff dot com)
+// Copyright (c) 2003-2018 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -18,10 +18,12 @@
 #include <boost/asio/detail/config.hpp>
 
 #include <cstring>
+#include <stdexcept>
 #include <boost/asio/detail/reactor.hpp>
 #include <boost/asio/detail/signal_blocker.hpp>
 #include <boost/asio/detail/signal_set_service.hpp>
 #include <boost/asio/detail/static_mutex.hpp>
+#include <boost/asio/detail/throw_exception.hpp>
 
 #include <boost/asio/detail/push_options.hpp>
 
@@ -57,25 +59,33 @@ signal_state* get_signal_state()
   return &state;
 }
 
-void asio_signal_handler(int signal_number)
+void boost_asio_signal_handler(int signal_number)
 {
-#if defined(BOOST_ASIO_WINDOWS) || defined(__CYGWIN__)
+#if defined(BOOST_ASIO_WINDOWS) \
+  || defined(BOOST_ASIO_WINDOWS_RUNTIME) \
+  || defined(__CYGWIN__)
   signal_set_service::deliver_signal(signal_number);
-#else // defined(BOOST_ASIO_WINDOWS) || defined(__CYGWIN__)
+#else // defined(BOOST_ASIO_WINDOWS)
+      //   || defined(BOOST_ASIO_WINDOWS_RUNTIME)
+      //   || defined(__CYGWIN__)
   int saved_errno = errno;
   signal_state* state = get_signal_state();
   signed_size_type result = ::write(state->write_descriptor_,
       &signal_number, sizeof(signal_number));
   (void)result;
   errno = saved_errno;
-#endif // defined(BOOST_ASIO_WINDOWS) || defined(__CYGWIN__)
+#endif // defined(BOOST_ASIO_WINDOWS)
+       //   || defined(BOOST_ASIO_WINDOWS_RUNTIME)
+       //   || defined(__CYGWIN__)
 
 #if defined(BOOST_ASIO_HAS_SIGNAL) && !defined(BOOST_ASIO_HAS_SIGACTION)
-  ::signal(signal_number, asio_signal_handler);
+  ::signal(signal_number, boost_asio_signal_handler);
 #endif // defined(BOOST_ASIO_HAS_SIGNAL) && !defined(BOOST_ASIO_HAS_SIGACTION)
 }
 
-#if !defined(BOOST_ASIO_WINDOWS) && !defined(__CYGWIN__)
+#if !defined(BOOST_ASIO_WINDOWS) \
+  && !defined(BOOST_ASIO_WINDOWS_RUNTIME) \
+  && !defined(__CYGWIN__)
 class signal_set_service::pipe_read_op : public reactor_op
 {
 public:
@@ -84,7 +94,7 @@ public:
   {
   }
 
-  static bool do_perform(reactor_op*)
+  static status do_perform(reactor_op*)
   {
     signal_state* state = get_signal_state();
 
@@ -94,10 +104,10 @@ public:
       if (signal_number >= 0 && signal_number < max_signal_number)
         signal_set_service::deliver_signal(signal_number);
 
-    return false;
+    return not_done;
   }
 
-  static void do_complete(io_service_impl* /*owner*/, operation* base,
+  static void do_complete(void* /*owner*/, operation* base,
       const boost::system::error_code& /*ec*/,
       std::size_t /*bytes_transferred*/)
   {
@@ -105,22 +115,33 @@ public:
     delete o;
   }
 };
-#endif // !defined(BOOST_ASIO_WINDOWS) && !defined(__CYGWIN__)
+#endif // !defined(BOOST_ASIO_WINDOWS)
+       //   && !defined(BOOST_ASIO_WINDOWS_RUNTIME)
+       //   && !defined(__CYGWIN__)
 
 signal_set_service::signal_set_service(
-    boost::asio::io_service& io_service)
-  : io_service_(boost::asio::use_service<io_service_impl>(io_service)),
-#if !defined(BOOST_ASIO_WINDOWS) && !defined(__CYGWIN__)
-    reactor_(boost::asio::use_service<reactor>(io_service)),
-#endif // !defined(BOOST_ASIO_WINDOWS) && !defined(__CYGWIN__)
+    boost::asio::io_context& io_context)
+  : service_base<signal_set_service>(io_context),
+    io_context_(boost::asio::use_service<io_context_impl>(io_context)),
+#if !defined(BOOST_ASIO_WINDOWS) \
+  && !defined(BOOST_ASIO_WINDOWS_RUNTIME) \
+  && !defined(__CYGWIN__)
+    reactor_(boost::asio::use_service<reactor>(io_context)),
+#endif // !defined(BOOST_ASIO_WINDOWS)
+       //   && !defined(BOOST_ASIO_WINDOWS_RUNTIME)
+       //   && !defined(__CYGWIN__)
     next_(0),
     prev_(0)
 {
   get_signal_state()->mutex_.init();
 
-#if !defined(BOOST_ASIO_WINDOWS) && !defined(__CYGWIN__)
+#if !defined(BOOST_ASIO_WINDOWS) \
+  && !defined(BOOST_ASIO_WINDOWS_RUNTIME) \
+  && !defined(__CYGWIN__)
   reactor_.init_task();
-#endif // !defined(BOOST_ASIO_WINDOWS) && !defined(__CYGWIN__)
+#endif // !defined(BOOST_ASIO_WINDOWS)
+       //   && !defined(BOOST_ASIO_WINDOWS_RUNTIME)
+       //   && !defined(__CYGWIN__)
 
   for (int i = 0; i < max_signal_number; ++i)
     registrations_[i] = 0;
@@ -133,7 +154,7 @@ signal_set_service::~signal_set_service()
   remove_service(this);
 }
 
-void signal_set_service::shutdown_service()
+void signal_set_service::shutdown()
 {
   remove_service(this);
 
@@ -149,27 +170,30 @@ void signal_set_service::shutdown_service()
     }
   }
 
-  io_service_.abandon_operations(ops);
+  io_context_.abandon_operations(ops);
 }
 
-void signal_set_service::fork_service(
-    boost::asio::io_service::fork_event fork_ev)
+void signal_set_service::notify_fork(
+    boost::asio::io_context::fork_event fork_ev)
 {
-#if !defined(BOOST_ASIO_WINDOWS) && !defined(__CYGWIN__)
+#if !defined(BOOST_ASIO_WINDOWS) \
+  && !defined(BOOST_ASIO_WINDOWS_RUNTIME) \
+  && !defined(__CYGWIN__)
   signal_state* state = get_signal_state();
   static_mutex::scoped_lock lock(state->mutex_);
 
   switch (fork_ev)
   {
-  case boost::asio::io_service::fork_prepare:
+  case boost::asio::io_context::fork_prepare:
     {
       int read_descriptor = state->read_descriptor_;
       state->fork_prepared_ = true;
       lock.unlock();
       reactor_.deregister_internal_descriptor(read_descriptor, reactor_data_);
+      reactor_.cleanup_descriptor_data(reactor_data_);
     }
     break;
-  case boost::asio::io_service::fork_parent:
+  case boost::asio::io_context::fork_parent:
     if (state->fork_prepared_)
     {
       int read_descriptor = state->read_descriptor_;
@@ -179,7 +203,7 @@ void signal_set_service::fork_service(
           read_descriptor, reactor_data_, new pipe_read_op);
     }
     break;
-  case boost::asio::io_service::fork_child:
+  case boost::asio::io_context::fork_child:
     if (state->fork_prepared_)
     {
       boost::asio::detail::signal_blocker blocker;
@@ -195,9 +219,13 @@ void signal_set_service::fork_service(
   default:
     break;
   }
-#else // !defined(BOOST_ASIO_WINDOWS) && !defined(__CYGWIN__)
+#else // !defined(BOOST_ASIO_WINDOWS)
+      //   && !defined(BOOST_ASIO_WINDOWS_RUNTIME)
+      //   && !defined(__CYGWIN__)
   (void)fork_ev;
-#endif // !defined(BOOST_ASIO_WINDOWS) && !defined(__CYGWIN__)
+#endif // !defined(BOOST_ASIO_WINDOWS)
+       //   && !defined(BOOST_ASIO_WINDOWS_RUNTIME)
+       //   && !defined(__CYGWIN__)
 }
 
 void signal_set_service::construct(
@@ -219,7 +247,7 @@ boost::system::error_code signal_set_service::add(
     int signal_number, boost::system::error_code& ec)
 {
   // Check that the signal number is valid.
-  if (signal_number < 0 || signal_number > max_signal_number)
+  if (signal_number < 0 || signal_number >= max_signal_number)
   {
     ec = boost::asio::error::invalid_argument;
     return ec;
@@ -250,11 +278,11 @@ boost::system::error_code signal_set_service::add(
       using namespace std; // For memset.
       struct sigaction sa;
       memset(&sa, 0, sizeof(sa));
-      sa.sa_handler = asio_signal_handler;
+      sa.sa_handler = boost_asio_signal_handler;
       sigfillset(&sa.sa_mask);
       if (::sigaction(signal_number, &sa, 0) == -1)
 # else // defined(BOOST_ASIO_HAS_SIGACTION)
-      if (::signal(signal_number, asio_signal_handler) == SIG_ERR)
+      if (::signal(signal_number, boost_asio_signal_handler) == SIG_ERR)
 # endif // defined(BOOST_ASIO_HAS_SIGACTION)
       {
 # if defined(BOOST_ASIO_WINDOWS) || defined(__CYGWIN__)
@@ -293,7 +321,7 @@ boost::system::error_code signal_set_service::remove(
     int signal_number, boost::system::error_code& ec)
 {
   // Check that the signal number is valid.
-  if (signal_number < 0 || signal_number > max_signal_number)
+  if (signal_number < 0 || signal_number >= max_signal_number)
   {
     ec = boost::asio::error::invalid_argument;
     return ec;
@@ -414,7 +442,8 @@ boost::system::error_code signal_set_service::cancel(
     signal_set_service::implementation_type& impl,
     boost::system::error_code& ec)
 {
-  BOOST_ASIO_HANDLER_OPERATION(("signal_set", &impl, "cancel"));
+  BOOST_ASIO_HANDLER_OPERATION((io_context_.context(),
+        "signal_set", &impl, 0, "cancel"));
 
   op_queue<operation> ops;
   {
@@ -429,7 +458,7 @@ boost::system::error_code signal_set_service::cancel(
     }
   }
 
-  io_service_.post_deferred_completions(ops);
+  io_context_.post_deferred_completions(ops);
 
   ec = boost::system::error_code();
   return ec;
@@ -465,7 +494,7 @@ void signal_set_service::deliver_signal(int signal_number)
       reg = reg->next_in_table_;
     }
 
-    service->io_service_.post_deferred_completions(ops);
+    service->io_context_.post_deferred_completions(ops);
 
     service = service->next_;
   }
@@ -482,6 +511,22 @@ void signal_set_service::add_service(signal_set_service* service)
     open_descriptors();
 #endif // !defined(BOOST_ASIO_WINDOWS) && !defined(__CYGWIN__)
 
+  // If an io_context object is thread-unsafe then it must be the only
+  // io_context used to create signal_set objects.
+  if (state->service_list_ != 0)
+  {
+    if (!BOOST_ASIO_CONCURRENCY_HINT_IS_LOCKING(SCHEDULER,
+          service->io_context_.concurrency_hint())
+        || !BOOST_ASIO_CONCURRENCY_HINT_IS_LOCKING(SCHEDULER,
+          state->service_list_->io_context_.concurrency_hint()))
+    {
+      std::logic_error ex(
+          "Thread-unsafe io_context objects require "
+          "exclusive access to signal handling.");
+      boost::asio::detail::throw_exception(ex);
+    }
+  }
+
   // Insert service into linked list of all services.
   service->next_ = state->service_list_;
   service->prev_ = 0;
@@ -489,13 +534,17 @@ void signal_set_service::add_service(signal_set_service* service)
     state->service_list_->prev_ = service;
   state->service_list_ = service;
 
-#if !defined(BOOST_ASIO_WINDOWS) && !defined(__CYGWIN__)
+#if !defined(BOOST_ASIO_WINDOWS) \
+  && !defined(BOOST_ASIO_WINDOWS_RUNTIME) \
+  && !defined(__CYGWIN__)
   // Register for pipe readiness notifications.
   int read_descriptor = state->read_descriptor_;
   lock.unlock();
   service->reactor_.register_internal_descriptor(reactor::read_op,
       read_descriptor, service->reactor_data_, new pipe_read_op);
-#endif // !defined(BOOST_ASIO_WINDOWS) && !defined(__CYGWIN__)
+#endif // !defined(BOOST_ASIO_WINDOWS)
+       //   && !defined(BOOST_ASIO_WINDOWS_RUNTIME)
+       //   && !defined(__CYGWIN__)
 }
 
 void signal_set_service::remove_service(signal_set_service* service)
@@ -505,14 +554,19 @@ void signal_set_service::remove_service(signal_set_service* service)
 
   if (service->next_ || service->prev_ || state->service_list_ == service)
   {
-#if !defined(BOOST_ASIO_WINDOWS) && !defined(__CYGWIN__)
+#if !defined(BOOST_ASIO_WINDOWS) \
+  && !defined(BOOST_ASIO_WINDOWS_RUNTIME) \
+  && !defined(__CYGWIN__)
     // Disable the pipe readiness notifications.
     int read_descriptor = state->read_descriptor_;
     lock.unlock();
-    service->reactor_.deregister_descriptor(
-        read_descriptor, service->reactor_data_, false);
+    service->reactor_.deregister_internal_descriptor(
+        read_descriptor, service->reactor_data_);
+    service->reactor_.cleanup_descriptor_data(service->reactor_data_);
     lock.lock();
-#endif // !defined(BOOST_ASIO_WINDOWS) && !defined(__CYGWIN__)
+#endif // !defined(BOOST_ASIO_WINDOWS)
+       //   && !defined(BOOST_ASIO_WINDOWS_RUNTIME)
+       //   && !defined(__CYGWIN__)
 
     // Remove service from linked list of all services.
     if (state->service_list_ == service)
@@ -534,7 +588,9 @@ void signal_set_service::remove_service(signal_set_service* service)
 
 void signal_set_service::open_descriptors()
 {
-#if !defined(BOOST_ASIO_WINDOWS) && !defined(__CYGWIN__)
+#if !defined(BOOST_ASIO_WINDOWS) \
+  && !defined(BOOST_ASIO_WINDOWS_RUNTIME) \
+  && !defined(__CYGWIN__)
   signal_state* state = get_signal_state();
 
   int pipe_fds[2];
@@ -557,12 +613,16 @@ void signal_set_service::open_descriptors()
         boost::asio::error::get_system_category());
     boost::asio::detail::throw_error(ec, "signal_set_service pipe");
   }
-#endif // !defined(BOOST_ASIO_WINDOWS) && !defined(__CYGWIN__)
+#endif // !defined(BOOST_ASIO_WINDOWS)
+       //   && !defined(BOOST_ASIO_WINDOWS_RUNTIME)
+       //   && !defined(__CYGWIN__)
 }
 
 void signal_set_service::close_descriptors()
 {
-#if !defined(BOOST_ASIO_WINDOWS) && !defined(__CYGWIN__)
+#if !defined(BOOST_ASIO_WINDOWS) \
+  && !defined(BOOST_ASIO_WINDOWS_RUNTIME) \
+  && !defined(__CYGWIN__)
   signal_state* state = get_signal_state();
 
   if (state->read_descriptor_ != -1)
@@ -572,13 +632,15 @@ void signal_set_service::close_descriptors()
   if (state->write_descriptor_ != -1)
     ::close(state->write_descriptor_);
   state->write_descriptor_ = -1;
-#endif // !defined(BOOST_ASIO_WINDOWS) && !defined(__CYGWIN__)
+#endif // !defined(BOOST_ASIO_WINDOWS)
+       //   && !defined(BOOST_ASIO_WINDOWS_RUNTIME)
+       //   && !defined(__CYGWIN__)
 }
 
 void signal_set_service::start_wait_op(
     signal_set_service::implementation_type& impl, signal_op* op)
 {
-  io_service_.work_started();
+  io_context_.work_started();
 
   signal_state* state = get_signal_state();
   static_mutex::scoped_lock lock(state->mutex_);
@@ -589,7 +651,8 @@ void signal_set_service::start_wait_op(
     if (reg->undelivered_ > 0)
     {
       --reg->undelivered_;
-      io_service_.post_deferred_completion(op);
+      op->signal_number_ = reg->signal_number_;
+      io_context_.post_deferred_completion(op);
       return;
     }
 

@@ -1,4 +1,4 @@
-/* Copyright 2003-2008 Joaquin M Lopez Munoz.
+/* Copyright 2003-2018 Joaquin M Lopez Munoz.
  * Distributed under the Boost Software License, Version 1.0.
  * (See accompanying file LICENSE_1_0.txt or copy at
  * http://www.boost.org/LICENSE_1_0.txt)
@@ -9,7 +9,7 @@
 #ifndef BOOST_MULTI_INDEX_DETAIL_RND_INDEX_PTR_ARRAY_HPP
 #define BOOST_MULTI_INDEX_DETAIL_RND_INDEX_PTR_ARRAY_HPP
 
-#if defined(_MSC_VER)&&(_MSC_VER>=1200)
+#if defined(_MSC_VER)
 #pragma once
 #endif
 
@@ -17,10 +17,10 @@
 #include <algorithm>
 #include <boost/detail/allocator_utilities.hpp>
 #include <boost/multi_index/detail/auto_space.hpp>
-#include <boost/multi_index/detail/prevent_eti.hpp>
 #include <boost/multi_index/detail/rnd_index_node.hpp>
 #include <boost/noncopyable.hpp>
 #include <cstddef>
+#include <memory>
 
 namespace boost{
 
@@ -33,29 +33,30 @@ namespace detail{
 template<typename Allocator>
 class random_access_index_ptr_array:private noncopyable
 {
-  typedef typename prevent_eti<
-    Allocator,
-    random_access_index_node_impl<
-      typename boost::detail::allocator::rebind_to<
-        Allocator,
-        char
-      >::type
-    >
-  >::type                                           node_impl_type;
+  typedef random_access_index_node_impl<
+    typename boost::detail::allocator::rebind_to<
+      Allocator,
+      char
+    >::type
+  >                                                     node_impl_type;
 
 public:
-  typedef typename node_impl_type::pointer          value_type;
-  typedef typename prevent_eti<
-    Allocator,
-    typename boost::detail::allocator::rebind_to<
-      Allocator,value_type
-    >::type
-  >::type::pointer                                  pointer;
+  typedef typename node_impl_type::pointer              value_type;
+  typedef typename boost::detail::allocator::rebind_to<
+    Allocator,value_type
+  >::type                                               value_allocator;
+#ifdef BOOST_NO_CXX11_ALLOCATOR
+  typedef typename value_allocator::pointer             pointer;
+#else
+  typedef typename std::allocator_traits<
+    value_allocator
+  >::pointer                                            pointer;
+#endif
 
   random_access_index_ptr_array(
-    const Allocator& al,value_type end_,std::size_t size):
-    size_(size),
-    capacity_(size),
+    const Allocator& al,value_type end_,std::size_t sz):
+    size_(sz),
+    capacity_(sz),
     spc(al,capacity_+1)
   {
     *end()=end_;
@@ -74,12 +75,12 @@ public:
 
   void reserve(std::size_t c)
   {
-    if(c>capacity_){
-      auto_space<value_type,Allocator> spc1(spc.get_allocator(),c+1);
-      node_impl_type::transfer(begin(),end()+1,spc1.data());
-      spc.swap(spc1);
-      capacity_=c;
-    }
+    if(c>capacity_)set_capacity(c);
+  }
+
+  void shrink_to_fit()
+  {
+    if(capacity_>size_)set_capacity(size_);
   }
 
   pointer begin()const{return ptrs();}
@@ -123,6 +124,14 @@ private:
   pointer ptrs()const
   {
     return spc.data();
+  }
+
+  void set_capacity(std::size_t c)
+  {
+    auto_space<value_type,Allocator> spc1(spc.get_allocator(),c+1);
+    node_impl_type::transfer(begin(),end()+1,spc1.data());
+    spc.swap(spc1);
+    capacity_=c;
   }
 };
 

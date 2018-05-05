@@ -79,6 +79,18 @@ namespace boost { namespace spirit { namespace karma { namespace detail
             return track_position_data.get_count();
         }
 
+	// return the current line in the output
+	std::size_t get_line() const
+	{
+	    return track_position_data.get_line();
+	}
+
+	// return the current column in the output
+	std::size_t get_column() const
+	{
+	    return track_position_data.get_column();
+	}
+
     private:
         position_sink track_position_data;            // for position tracking
     };
@@ -292,7 +304,7 @@ namespace boost { namespace spirit { namespace karma { namespace detail
     struct no_buffering_policy
     {
         no_buffering_policy() {}
-        no_buffering_policy(no_counting_policy const&) {}
+        no_buffering_policy(no_buffering_policy const&) {}
 
         template <typename T>
         bool output(T const& /*value*/) 

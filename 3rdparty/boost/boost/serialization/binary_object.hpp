@@ -2,7 +2,7 @@
 #define BOOST_SERIALIZATION_BINARY_OBJECT_HPP
 
 // MS compatible compilers support #pragma once
-#if defined(_MSC_VER) && (_MSC_VER >= 1020)
+#if defined(_MSC_VER)
 # pragma once
 #endif
 
@@ -55,7 +55,7 @@ struct binary_object :
         m_size = rhs.m_size;
         return *this;
     }
-    binary_object(/* const */ void * const t, std::size_t size) :
+    binary_object(const void * const t, std::size_t size) :
         m_t(t),
         m_size(size)
     {}
@@ -68,11 +68,8 @@ struct binary_object :
 // just a little helper to support the convention that all serialization
 // wrappers follow the naming convention make_xxxxx
 inline 
-#ifndef BOOST_NO_FUNCTION_TEMPLATE_ORDERING
-const
-#endif
-binary_object 
-make_binary_object(/* const */ void * t, std::size_t size){
+const binary_object
+make_binary_object(const void * t, std::size_t size){
     return binary_object(t, size);
 }
 

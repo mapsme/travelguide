@@ -2,7 +2,7 @@
 // detail/descriptor_ops.hpp
 // ~~~~~~~~~~~~~~~~~~~~~~~~~
 //
-// Copyright (c) 2003-2013 Christopher M. Kohlhoff (chris at kohlhoff dot com)
+// Copyright (c) 2003-2018 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -17,9 +17,12 @@
 
 #include <boost/asio/detail/config.hpp>
 
-#if !defined(BOOST_ASIO_WINDOWS) && !defined(__CYGWIN__)
+#if !defined(BOOST_ASIO_WINDOWS) \
+  && !defined(BOOST_ASIO_WINDOWS_RUNTIME) \
+  && !defined(__CYGWIN__)
 
 #include <cstddef>
+#include <boost/asio/error.hpp>
 #include <boost/system/error_code.hpp>
 #include <boost/asio/detail/socket_types.hpp>
 
@@ -99,6 +102,9 @@ BOOST_ASIO_DECL int poll_read(int d,
 BOOST_ASIO_DECL int poll_write(int d,
     state_type state, boost::system::error_code& ec);
 
+BOOST_ASIO_DECL int poll_error(int d,
+    state_type state, boost::system::error_code& ec);
+
 } // namespace descriptor_ops
 } // namespace detail
 } // namespace asio
@@ -110,6 +116,8 @@ BOOST_ASIO_DECL int poll_write(int d,
 # include <boost/asio/detail/impl/descriptor_ops.ipp>
 #endif // defined(BOOST_ASIO_HEADER_ONLY)
 
-#endif // !defined(BOOST_ASIO_WINDOWS) && !defined(__CYGWIN__)
+#endif // !defined(BOOST_ASIO_WINDOWS)
+       //   && !defined(BOOST_ASIO_WINDOWS_RUNTIME)
+       //   && !defined(__CYGWIN__)
 
 #endif // BOOST_ASIO_DETAIL_DESCRIPTOR_OPS_HPP

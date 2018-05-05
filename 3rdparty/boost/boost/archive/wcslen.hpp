@@ -2,7 +2,7 @@
 #define BOOST_ARCHIVE_WCSLEN_HPP
 
 // MS compatible compilers support #pragma once
-#if defined(_MSC_VER) && (_MSC_VER >= 1020)
+#if defined(_MSC_VER)
 # pragma once
 #endif
 
@@ -44,7 +44,9 @@ inline std::size_t wcslen(const wchar_t * ws)
 
 #else
 
+#ifndef BOOST_NO_CWCHAR
 #include <cwchar>
+#endif
 #ifdef BOOST_NO_STDC_NAMESPACE
 namespace std{ using ::wcslen; }
 #endif

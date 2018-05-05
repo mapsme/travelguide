@@ -50,17 +50,9 @@ namespace boost { namespace numeric
 
         template<typename Left, typename Right>
         struct outer_product<Left, Right, std_vector_tag, std_vector_tag>
-          : std::binary_function<
-                Left
-              , Right
-              , ublas::matrix<
-                    typename functional::multiplies<
-                        typename Left::value_type
-                      , typename Right::value_type
-                    >::result_type
-                >
-            >
         {
+            typedef Left first_argument_type;
+            typedef Right second_argument_type;
             typedef
                 ublas::matrix<
                     typename functional::multiplies<
@@ -122,8 +114,8 @@ namespace impl
     struct covariance_impl
       : accumulator_base
     {
-        typedef typename numeric::functional::average<Sample, std::size_t>::result_type sample_type;
-        typedef typename numeric::functional::average<VariateType, std::size_t>::result_type variate_type;
+        typedef typename numeric::functional::fdiv<Sample, std::size_t>::result_type sample_type;
+        typedef typename numeric::functional::fdiv<VariateType, std::size_t>::result_type variate_type;
         // for boost::result_of
         typedef typename numeric::functional::outer_product<sample_type, variate_type>::result_type result_type;
 
@@ -131,8 +123,8 @@ namespace impl
         covariance_impl(Args const &args)
           : cov_(
                 numeric::outer_product(
-                    numeric::average(args[sample | Sample()], (std::size_t)1)
-                  , numeric::average(args[parameter::keyword<VariateTag>::get() | VariateType()], (std::size_t)1)
+                    numeric::fdiv(args[sample | Sample()], (std::size_t)1)
+                  , numeric::fdiv(args[parameter::keyword<VariateTag>::get() | VariateType()], (std::size_t)1)
                 )
             )
         {

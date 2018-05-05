@@ -8,7 +8,7 @@
 #ifndef BOOST_FUSION_CONTAINER_SET_DETAIL_VALUE_OF_DATA_IMPL_HPP
 #define BOOST_FUSION_CONTAINER_SET_DETAIL_VALUE_OF_DATA_IMPL_HPP
 
-#include <boost/fusion/container/set/detail/value_of_data_impl.hpp>
+#include <boost/fusion/support/config.hpp>
 
 namespace boost { namespace fusion { namespace extension
 {

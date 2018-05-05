@@ -6,7 +6,7 @@
 // accompanying file LICENSE_1_0.txt or copy at
 // http://www.boost.org/LICENSE_1_0.txt)
 //
-// $Id: placeholder.hpp 78484 2012-05-15 17:54:14Z steven_watanabe $
+// $Id$
 
 #ifndef BOOST_TYPE_ERASURE_PLACEHOLDERS_HPP_INCLUDED
 #define BOOST_TYPE_ERASURE_PLACEHOLDERS_HPP_INCLUDED
@@ -45,7 +45,10 @@ namespace type_erasure {
  * explicitly, but the substitution still works the
  * same way.
  */
-struct placeholder {};
+struct placeholder {
+    /// INTERNAL ONLY
+    typedef void _boost_type_erasure_is_placeholder;
+};
 
 struct _a : placeholder {};
 struct _b : placeholder {};

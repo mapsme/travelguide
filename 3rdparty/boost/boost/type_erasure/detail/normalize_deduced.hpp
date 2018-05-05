@@ -6,7 +6,7 @@
 // accompanying file LICENSE_1_0.txt or copy at
 // http://www.boost.org/LICENSE_1_0.txt)
 //
-// $Id: normalize_deduced.hpp 78443 2012-05-13 00:17:07Z steven_watanabe $
+// $Id$
 
 #if !defined(BOOST_PP_IS_ITERATING)
 
@@ -16,6 +16,9 @@
 #include <boost/preprocessor/iteration/iterate.hpp>
 #include <boost/preprocessor/repetition/enum.hpp>
 #include <boost/preprocessor/repetition/enum_params.hpp>
+#include <boost/type_erasure/detail/meta.hpp>
+
+#ifndef BOOST_TYPE_ERASURE_USE_MP11
 
 namespace boost {
 namespace type_erasure {
@@ -33,6 +36,8 @@ struct normalize_placeholder;
 }
 }
 }
+
+#endif
 
 #endif
 

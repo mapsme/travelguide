@@ -6,7 +6,7 @@
 // accompanying file LICENSE_1_0.txt or copy at
 // http://www.boost.org/LICENSE_1_0.txt)
 //
-// $Id: vtable.hpp 83248 2013-03-02 18:15:06Z steven_watanabe $
+// $Id$
 
 #if !defined(BOOST_PP_IS_ITERATING)
 
@@ -17,6 +17,7 @@
 #include <boost/mpl/at.hpp>
 #include <boost/mpl/size.hpp>
 #include <boost/preprocessor/cat.hpp>
+#include <boost/preprocessor/expr_if.hpp>
 #include <boost/preprocessor/iteration/iterate.hpp>
 #include <boost/preprocessor/repetition/enum.hpp>
 #include <boost/preprocessor/repetition/enum_params.hpp>
@@ -30,7 +31,7 @@ namespace boost {
 namespace type_erasure {
 namespace detail {
 
-#if !defined(BOOST_NO_CXX11_VARIADIC_TEMPLATES) && !defined(BOOST_NO_CONSTEXPR) && !defined(BOOST_NO_DEFAULTED_FUNCTIONS)
+#if !defined(BOOST_NO_CXX11_VARIADIC_TEMPLATES) && !defined(BOOST_NO_CXX11_CONSTEXPR) && !defined(BOOST_NO_CXX11_DEFAULTED_FUNCTIONS)
 
 template<class... T>
 struct stored_arg_pack;
@@ -98,7 +99,7 @@ struct compare_vtable;
 template<>
 struct compare_vtable<> {
     template<class S>
-    static bool apply(const S& s1, const S& s2)
+    static bool apply(const S& /*s1*/, const S& /*s2*/)
     {
         return true;
     }
@@ -151,9 +152,9 @@ struct vtable_storage<>
     vtable_storage() = default;
 
     template<class Bindings, class Src>
-    void convert_from(const Src& src) {}
+    void convert_from(const Src& /*src*/) {}
 
-    bool operator==(const vtable_storage& other) const
+    bool operator==(const vtable_storage& /*other*/) const
     { return true; }
 };
 
@@ -249,12 +250,12 @@ struct BOOST_PP_CAT(vtable_storage, N)
     BOOST_PP_REPEAT(N, BOOST_TYPE_ERASURE_VTABLE_ENTRY, ~)
 
     template<class Bindings, class Src>
-    void convert_from(const Src& src)
+    void convert_from(const Src& BOOST_PP_EXPR_IF(N, src))
     {
         BOOST_PP_REPEAT(N, BOOST_TYPE_ERASURE_CONVERT_ELEMENT, ~)
     }
 
-    bool operator==(const BOOST_PP_CAT(vtable_storage, N)& other) const
+    bool operator==(const BOOST_PP_CAT(vtable_storage, N)& BOOST_PP_EXPR_IF(N, other)) const
     { return true BOOST_PP_REPEAT(N, BOOST_TYPE_ERASURE_VTABLE_COMPARE, ~); }
 };
 

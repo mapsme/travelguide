@@ -1,5 +1,5 @@
 /*
- *          Copyright Andrey Semashev 2007 - 2013.
+ *          Copyright Andrey Semashev 2007 - 2015.
  * Distributed under the Boost Software License, Version 1.0.
  *    (See accompanying file LICENSE_1_0.txt or copy at
  *          http://www.boost.org/LICENSE_1_0.txt)
@@ -17,7 +17,7 @@
 
 #include <string>
 #include <boost/move/core.hpp>
-#include <boost/move/utility.hpp>
+#include <boost/move/utility_core.hpp>
 #include <boost/phoenix/core/actor.hpp>
 #include <boost/phoenix/core/terminal_fwd.hpp>
 #include <boost/phoenix/core/is_nullary.hpp>
@@ -37,7 +37,7 @@
 #include <boost/log/utility/functional/bind.hpp>
 #include <boost/log/detail/header.hpp>
 
-#ifdef BOOST_LOG_HAS_PRAGMA_ONCE
+#ifdef BOOST_HAS_PRAGMA_ONCE
 #pragma once
 #endif
 
@@ -54,8 +54,10 @@ template< typename T, typename FallbackPolicyT, typename CharT >
 class format_date_time_terminal
 {
 public:
+#ifndef BOOST_LOG_DOXYGEN_PASS
     //! Internal typedef for type categorization
     typedef void _is_boost_log_terminal;
+#endif
 
     //! Attribute value type
     typedef T value_type;
@@ -126,7 +128,7 @@ public:
         stream_type strm(str);
         m_visitor_invoker(m_name, fusion::at_c< 0 >(phoenix::env(ctx).args()), binder1st< formatter_function_type&, stream_type& >(m_formatter, strm));
         strm.flush();
-        return boost::move(str);
+        return BOOST_LOG_NRVO_RESULT(str);
     }
 
     //! Invokation operator
@@ -137,10 +139,10 @@ public:
         stream_type strm(str);
         m_visitor_invoker(m_name, fusion::at_c< 0 >(phoenix::env(ctx).args()), binder1st< formatter_function_type const&, stream_type& >(m_formatter, strm));
         strm.flush();
-        return boost::move(str);
+        return BOOST_LOG_NRVO_RESULT(str);
     }
 
-    BOOST_LOG_DELETED_FUNCTION(format_date_time_terminal())
+    BOOST_DELETED_FUNCTION(format_date_time_terminal())
 };
 
 /*!
@@ -200,7 +202,7 @@ public:
 
 #define BOOST_LOG_AUX_OVERLOAD(left_ref, right_ref)\
     template< typename LeftExprT, typename T, typename FallbackPolicyT, typename CharT >\
-    BOOST_LOG_FORCEINLINE phoenix::actor< aux::attribute_output_terminal< phoenix::actor< LeftExprT >, T, FallbackPolicyT, typename format_date_time_actor< T, FallbackPolicyT, CharT >::formatter_function_type > >\
+    BOOST_FORCEINLINE phoenix::actor< aux::attribute_output_terminal< phoenix::actor< LeftExprT >, T, FallbackPolicyT, typename format_date_time_actor< T, FallbackPolicyT, CharT >::formatter_function_type > >\
     operator<< (phoenix::actor< LeftExprT > left_ref left, format_date_time_actor< T, FallbackPolicyT, CharT > right_ref right)\
     {\
         typedef aux::attribute_output_terminal< phoenix::actor< LeftExprT >, T, FallbackPolicyT, typename format_date_time_actor< T, FallbackPolicyT, CharT >::formatter_function_type > terminal_type;\
@@ -222,7 +224,7 @@ public:
  * \param format Format string
  */
 template< typename AttributeValueT, typename CharT >
-BOOST_LOG_FORCEINLINE format_date_time_actor< AttributeValueT, fallback_to_none, CharT > format_date_time(attribute_name const& name, const CharT* format)
+BOOST_FORCEINLINE format_date_time_actor< AttributeValueT, fallback_to_none, CharT > format_date_time(attribute_name const& name, const CharT* format)
 {
     typedef format_date_time_actor< AttributeValueT, fallback_to_none, CharT > actor_type;
     typedef typename actor_type::terminal_type terminal_type;
@@ -238,7 +240,7 @@ BOOST_LOG_FORCEINLINE format_date_time_actor< AttributeValueT, fallback_to_none,
  * \param format Format string
  */
 template< typename AttributeValueT, typename CharT >
-BOOST_LOG_FORCEINLINE format_date_time_actor< AttributeValueT, fallback_to_none, CharT > format_date_time(attribute_name const& name, std::basic_string< CharT > const& format)
+BOOST_FORCEINLINE format_date_time_actor< AttributeValueT, fallback_to_none, CharT > format_date_time(attribute_name const& name, std::basic_string< CharT > const& format)
 {
     typedef format_date_time_actor< AttributeValueT, fallback_to_none, CharT > actor_type;
     typedef typename actor_type::terminal_type terminal_type;
@@ -254,7 +256,7 @@ BOOST_LOG_FORCEINLINE format_date_time_actor< AttributeValueT, fallback_to_none,
  * \param format Format string
  */
 template< typename DescriptorT, template< typename > class ActorT, typename CharT >
-BOOST_LOG_FORCEINLINE format_date_time_actor< typename DescriptorT::value_type, fallback_to_none, CharT, ActorT >
+BOOST_FORCEINLINE format_date_time_actor< typename DescriptorT::value_type, fallback_to_none, CharT, ActorT >
 format_date_time(attribute_keyword< DescriptorT, ActorT > const& keyword, const CharT* format)
 {
     typedef format_date_time_actor< typename DescriptorT::value_type, fallback_to_none, CharT, ActorT > actor_type;
@@ -271,7 +273,7 @@ format_date_time(attribute_keyword< DescriptorT, ActorT > const& keyword, const 
  * \param format Format string
  */
 template< typename DescriptorT, template< typename > class ActorT, typename CharT >
-BOOST_LOG_FORCEINLINE format_date_time_actor< typename DescriptorT::value_type, fallback_to_none, CharT, ActorT >
+BOOST_FORCEINLINE format_date_time_actor< typename DescriptorT::value_type, fallback_to_none, CharT, ActorT >
 format_date_time(attribute_keyword< DescriptorT, ActorT > const& keyword, std::basic_string< CharT > const& format)
 {
     typedef format_date_time_actor< typename DescriptorT::value_type, fallback_to_none, CharT, ActorT > actor_type;
@@ -288,7 +290,7 @@ format_date_time(attribute_keyword< DescriptorT, ActorT > const& keyword, std::b
  * \param format Format string
  */
 template< typename T, typename FallbackPolicyT, typename TagT, template< typename > class ActorT, typename CharT >
-BOOST_LOG_FORCEINLINE format_date_time_actor< T, FallbackPolicyT, CharT, ActorT >
+BOOST_FORCEINLINE format_date_time_actor< T, FallbackPolicyT, CharT, ActorT >
 format_date_time(attribute_actor< T, FallbackPolicyT, TagT, ActorT > const& placeholder, const CharT* format)
 {
     typedef format_date_time_actor< T, FallbackPolicyT, CharT, ActorT > actor_type;
@@ -305,7 +307,7 @@ format_date_time(attribute_actor< T, FallbackPolicyT, TagT, ActorT > const& plac
  * \param format Format string
  */
 template< typename T, typename FallbackPolicyT, typename TagT, template< typename > class ActorT, typename CharT >
-BOOST_LOG_FORCEINLINE format_date_time_actor< T, FallbackPolicyT, CharT, ActorT >
+BOOST_FORCEINLINE format_date_time_actor< T, FallbackPolicyT, CharT, ActorT >
 format_date_time(attribute_actor< T, FallbackPolicyT, TagT, ActorT > const& placeholder, std::basic_string< CharT > const& format)
 {
     typedef format_date_time_actor< T, FallbackPolicyT, CharT, ActorT > actor_type;
@@ -317,6 +319,24 @@ format_date_time(attribute_actor< T, FallbackPolicyT, TagT, ActorT > const& plac
 } // namespace expressions
 
 BOOST_LOG_CLOSE_NAMESPACE // namespace log
+
+#ifndef BOOST_LOG_DOXYGEN_PASS
+
+namespace phoenix {
+
+namespace result_of {
+
+template< typename T, typename FallbackPolicyT, typename CharT >
+struct is_nullary< custom_terminal< boost::log::expressions::format_date_time_terminal< T, FallbackPolicyT, CharT > > > :
+    public mpl::false_
+{
+};
+
+} // namespace result_of
+
+} // namespace phoenix
+
+#endif // BOOST_LOG_DOXYGEN_PASS
 
 } // namespace boost
 

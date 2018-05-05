@@ -6,7 +6,7 @@
 // accompanying file LICENSE_1_0.txt or copy at
 // http://www.boost.org/LICENSE_1_0.txt)
 //
-// $Id: static_binding.hpp 78429 2012-05-12 02:37:24Z steven_watanabe $
+// $Id$
 
 #ifndef BOOST_TYPE_ERASURE_STATIC_BINDING_HPP_INCLUDED
 #define BOOST_TYPE_ERASURE_STATIC_BINDING_HPP_INCLUDED
@@ -21,7 +21,7 @@ namespace type_erasure {
  * \pre @c Map must be an MPL map whose keys are placeholders.
  */
 template<class Map>
-struct static_binding {};
+struct static_binding { typedef Map map_type; };
 
 /**
  * A convenience function to prevent constructor calls

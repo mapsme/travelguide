@@ -11,20 +11,33 @@
 //  http://www.boost.org/LICENSE_1_0.txt)
 
 #include <boost/thread/detail/config.hpp>
+#include <boost/predef/platform.h>
 #include <boost/throw_exception.hpp>
 #include <boost/assert.hpp>
 #include <boost/thread/exceptions.hpp>
 #include <boost/detail/interlocked.hpp>
+
+#include <boost/winapi/config.hpp>
+#include <boost/winapi/basic_types.hpp>
+#include <boost/winapi/semaphore.hpp>
+#include <boost/winapi/system.hpp>
+#include <boost/winapi/event.hpp>
+#include <boost/winapi/thread.hpp>
+#include <boost/winapi/get_current_thread.hpp>
+#include <boost/winapi/get_current_thread_id.hpp>
+#include <boost/winapi/get_current_process.hpp>
+#include <boost/winapi/get_current_process_id.hpp>
+#include <boost/winapi/wait.hpp>
+#include <boost/winapi/handles.hpp>
+#include <boost/winapi/access_rights.hpp>
+
+//#include <boost/winapi/synchronization.hpp>
+#include <boost/thread/win32/interlocked_read.hpp>
 #include <algorithm>
 
-#ifndef BOOST_THREAD_WIN32_HAS_GET_TICK_COUNT_64
-#if _WIN32_WINNT >= 0x0600
-#define BOOST_THREAD_WIN32_HAS_GET_TICK_COUNT_64
+#if BOOST_PLAT_WINDOWS_RUNTIME
+#include <thread>
 #endif
-#endif
-
-#if defined( BOOST_USE_WINDOWS_H )
-# include <windows.h>
 
 namespace boost
 {
@@ -32,159 +45,22 @@ namespace boost
     {
         namespace win32
         {
-#ifdef BOOST_THREAD_WIN32_HAS_GET_TICK_COUNT_64
-            typedef unsigned long long ticks_type;
-#else
-            typedef unsigned long ticks_type;
-#endif
-            typedef ULONG_PTR ulong_ptr;
-            typedef HANDLE handle;
-            unsigned const infinite=INFINITE;
-            unsigned const timeout=WAIT_TIMEOUT;
-            handle const invalid_handle_value=INVALID_HANDLE_VALUE;
-            unsigned const event_modify_state=EVENT_MODIFY_STATE;
-            unsigned const synchronize=SYNCHRONIZE;
-            unsigned const wait_abandoned=WAIT_ABANDONED;
-
-
-# ifdef BOOST_NO_ANSI_APIS
-            using ::CreateMutexW;
-            using ::CreateEventW;
-            using ::OpenEventW;
-            using ::CreateSemaphoreW;
-# else
-            using ::CreateMutexA;
-            using ::CreateEventA;
-            using ::OpenEventA;
-            using ::CreateSemaphoreA;
-# endif
-            using ::CloseHandle;
-            using ::ReleaseMutex;
-            using ::ReleaseSemaphore;
-            using ::SetEvent;
-            using ::ResetEvent;
-            using ::WaitForMultipleObjects;
-            using ::WaitForSingleObject;
-            using ::GetCurrentProcessId;
-            using ::GetCurrentThreadId;
-            using ::GetCurrentThread;
-            using ::GetCurrentProcess;
-            using ::DuplicateHandle;
-            using ::SleepEx;
-            using ::Sleep;
-            using ::QueueUserAPC;
-            using ::GetTickCount;
-#ifdef BOOST_THREAD_WIN32_HAS_GET_TICK_COUNT_64
-            using ::GetTickCount64;
-#else
-            inline ticks_type GetTickCount64() { return GetTickCount(); }
-#endif
+            typedef ::boost::winapi::HANDLE_ handle;
+            typedef ::boost::winapi::SYSTEM_INFO_ system_info;
+            typedef ::boost::winapi::ULONGLONG_ ticks_type;
+            unsigned const infinite=::boost::winapi::INFINITE_;
+            unsigned const timeout=::boost::winapi::WAIT_TIMEOUT_;
+            handle const invalid_handle_value=::boost::winapi::INVALID_HANDLE_VALUE_;
+            unsigned const event_modify_state=::boost::winapi::EVENT_MODIFY_STATE_;
+            unsigned const synchronize=::boost::winapi::SYNCHRONIZE_;
+            unsigned const wait_abandoned=::boost::winapi::WAIT_ABANDONED_;
+            unsigned const create_event_initial_set = 0x00000002;
+            unsigned const create_event_manual_reset = 0x00000001;
+            unsigned const event_all_access = ::boost::winapi::EVENT_ALL_ACCESS_;
+            unsigned const semaphore_all_access = boost::winapi::SEMAPHORE_ALL_ACCESS_;
         }
     }
 }
-#elif defined( WIN32 ) || defined( _WIN32 ) || defined( __WIN32__ )
-
-# ifdef UNDER_CE
-#  ifndef WINAPI
-#   ifndef _WIN32_WCE_EMULATION
-#    define WINAPI  __cdecl     // Note this doesn't match the desktop definition
-#   else
-#    define WINAPI  __stdcall
-#   endif
-#  endif
-
-#  ifdef __cplusplus
-extern "C" {
-#  endif
-typedef int BOOL;
-typedef unsigned long DWORD;
-typedef void* HANDLE;
-
-#  include <kfuncs.h>
-#  ifdef __cplusplus
-}
-#  endif
-# endif
-
-
-namespace boost
-{
-    namespace detail
-    {
-        namespace win32
-        {
-#ifdef BOOST_THREAD_WIN32_HAS_GET_TICK_COUNT_64
-            typedef unsigned long long ticks_type;
-#else
-            typedef unsigned long ticks_type;
-#endif
-# ifdef _WIN64
-            typedef unsigned __int64 ulong_ptr;
-# else
-            typedef unsigned long ulong_ptr;
-# endif
-            typedef void* handle;
-            unsigned const infinite=~0U;
-            unsigned const timeout=258U;
-            handle const invalid_handle_value=(handle)(-1);
-            unsigned const event_modify_state=2;
-            unsigned const synchronize=0x100000u;
-            unsigned const wait_abandoned=0x00000080u;
-
-            extern "C"
-            {
-                struct _SECURITY_ATTRIBUTES;
-# ifdef BOOST_NO_ANSI_APIS
-                __declspec(dllimport) void* __stdcall CreateMutexW(_SECURITY_ATTRIBUTES*,int,wchar_t const*);
-                __declspec(dllimport) void* __stdcall CreateSemaphoreW(_SECURITY_ATTRIBUTES*,long,long,wchar_t const*);
-                __declspec(dllimport) void* __stdcall CreateEventW(_SECURITY_ATTRIBUTES*,int,int,wchar_t const*);
-                __declspec(dllimport) void* __stdcall OpenEventW(unsigned long,int,wchar_t const*);
-# else
-                __declspec(dllimport) void* __stdcall CreateMutexA(_SECURITY_ATTRIBUTES*,int,char const*);
-                __declspec(dllimport) void* __stdcall CreateSemaphoreA(_SECURITY_ATTRIBUTES*,long,long,char const*);
-                __declspec(dllimport) void* __stdcall CreateEventA(_SECURITY_ATTRIBUTES*,int,int,char const*);
-                __declspec(dllimport) void* __stdcall OpenEventA(unsigned long,int,char const*);
-# endif
-                __declspec(dllimport) int __stdcall CloseHandle(void*);
-                __declspec(dllimport) int __stdcall ReleaseMutex(void*);
-                __declspec(dllimport) unsigned long __stdcall WaitForSingleObject(void*,unsigned long);
-                __declspec(dllimport) unsigned long __stdcall WaitForMultipleObjects(unsigned long nCount,void* const * lpHandles,int bWaitAll,unsigned long dwMilliseconds);
-                __declspec(dllimport) int __stdcall ReleaseSemaphore(void*,long,long*);
-                __declspec(dllimport) int __stdcall DuplicateHandle(void*,void*,void*,void**,unsigned long,int,unsigned long);
-                __declspec(dllimport) unsigned long __stdcall SleepEx(unsigned long,int);
-                __declspec(dllimport) void __stdcall Sleep(unsigned long);
-                typedef void (__stdcall *queue_user_apc_callback_function)(ulong_ptr);
-                __declspec(dllimport) unsigned long __stdcall QueueUserAPC(queue_user_apc_callback_function,void*,ulong_ptr);
-
-                __declspec(dllimport) unsigned long __stdcall GetTickCount();
-# ifdef BOOST_THREAD_WIN32_HAS_GET_TICK_COUNT_64
-                __declspec(dllimport) ticks_type __stdcall GetTickCount64();
-# endif
-# ifndef UNDER_CE
-                __declspec(dllimport) unsigned long __stdcall GetCurrentProcessId();
-                __declspec(dllimport) unsigned long __stdcall GetCurrentThreadId();
-                __declspec(dllimport) void* __stdcall GetCurrentThread();
-                __declspec(dllimport) void* __stdcall GetCurrentProcess();
-                __declspec(dllimport) int __stdcall SetEvent(void*);
-                __declspec(dllimport) int __stdcall ResetEvent(void*);
-# else
-                using ::GetCurrentProcessId;
-                using ::GetCurrentThreadId;
-                using ::GetCurrentThread;
-                using ::GetCurrentProcess;
-                using ::SetEvent;
-                using ::ResetEvent;
-# endif
-            }
-# ifndef BOOST_THREAD_WIN32_HAS_GET_TICK_COUNT_64
-            inline ticks_type GetTickCount64() { return GetTickCount(); }
-# endif
-        }
-    }
-}
-#else
-# error "Win32 functions not available"
-#endif
 
 #include <boost/config/abi_prefix.hpp>
 
@@ -194,6 +70,9 @@ namespace boost
     {
         namespace win32
         {
+            namespace detail { typedef ticks_type (WINAPI *gettickcount64_t)(); }
+            extern BOOST_THREAD_DECL boost::detail::win32::detail::gettickcount64_t gettickcount64;
+
             enum event_type
             {
                 auto_reset_event=false,
@@ -206,49 +85,69 @@ namespace boost
                 event_initially_set=true
             };
 
-            inline handle create_anonymous_event(event_type type,initial_event_state state)
+            inline handle create_event(
+#if !defined(BOOST_NO_ANSI_APIS)
+                const char *mutex_name,
+#else
+                const wchar_t *mutex_name,
+#endif
+                event_type type,
+                initial_event_state state)
             {
 #if !defined(BOOST_NO_ANSI_APIS)
-                handle const res=win32::CreateEventA(0,type,state,0);
+                handle const res = ::boost::winapi::CreateEventA(0, type, state, mutex_name);
+#elif BOOST_USE_WINAPI_VERSION < BOOST_WINAPI_VERSION_VISTA
+                handle const res = ::boost::winapi::CreateEventW(0, type, state, mutex_name);
 #else
-                handle const res=win32::CreateEventW(0,type,state,0);
+                handle const res = ::boost::winapi::CreateEventExW(
+                    0,
+                    mutex_name,
+                    type ? create_event_manual_reset : 0 | state ? create_event_initial_set : 0,
+                    event_all_access);
 #endif
+                return res;
+            }
+
+            inline handle create_anonymous_event(event_type type,initial_event_state state)
+            {
+                handle const res = create_event(0, type, state);
                 if(!res)
                 {
                     boost::throw_exception(thread_resource_error());
                 }
+                return res;
+            }
+
+            inline handle create_anonymous_semaphore_nothrow(long initial_count,long max_count)
+            {
+#if !defined(BOOST_NO_ANSI_APIS)
+                handle const res=::boost::winapi::CreateSemaphoreA(0,initial_count,max_count,0);
+#else
+#if BOOST_USE_WINAPI_VERSION < BOOST_WINAPI_VERSION_VISTA
+                handle const res=::boost::winapi::CreateSemaphoreEx(0,initial_count,max_count,0,0);
+#else
+                handle const res=::boost::winapi::CreateSemaphoreExW(0,initial_count,max_count,0,0,semaphore_all_access);
+#endif
+#endif
                 return res;
             }
 
             inline handle create_anonymous_semaphore(long initial_count,long max_count)
             {
-#if !defined(BOOST_NO_ANSI_APIS)
-                handle const res=CreateSemaphoreA(0,initial_count,max_count,0);
-#else
-                handle const res=CreateSemaphoreW(0,initial_count,max_count,0);
-#endif
+                handle const res=create_anonymous_semaphore_nothrow(initial_count,max_count);
                 if(!res)
                 {
                     boost::throw_exception(thread_resource_error());
                 }
                 return res;
             }
-            inline handle create_anonymous_semaphore_nothrow(long initial_count,long max_count)
-            {
-#if !defined(BOOST_NO_ANSI_APIS)
-                handle const res=CreateSemaphoreA(0,initial_count,max_count,0);
-#else
-                handle const res=CreateSemaphoreW(0,initial_count,max_count,0);
-#endif
-                return res;
-            }
 
             inline handle duplicate_handle(handle source)
             {
-                handle const current_process=GetCurrentProcess();
+                handle const current_process=::boost::winapi::GetCurrentProcess();
                 long const same_access_flag=2;
                 handle new_handle=0;
-                bool const success=DuplicateHandle(current_process,source,current_process,&new_handle,0,false,same_access_flag)!=0;
+                bool const success=::boost::winapi::DuplicateHandle(current_process,source,current_process,&new_handle,0,false,same_access_flag)!=0;
                 if(!success)
                 {
                     boost::throw_exception(thread_resource_error());
@@ -258,9 +157,66 @@ namespace boost
 
             inline void release_semaphore(handle semaphore,long count)
             {
-                BOOST_VERIFY(ReleaseSemaphore(semaphore,count,0)!=0);
+                BOOST_VERIFY(::boost::winapi::ReleaseSemaphore(semaphore,count,0)!=0);
             }
 
+            inline void get_system_info(system_info *info)
+            {
+#if BOOST_PLAT_WINDOWS_RUNTIME
+                ::boost::winapi::GetNativeSystemInfo(info);
+#else
+                ::boost::winapi::GetSystemInfo(info);
+#endif
+            }
+
+            inline void sleep(unsigned long milliseconds)
+            {
+                if(milliseconds == 0)
+                {
+#if BOOST_PLAT_WINDOWS_RUNTIME
+                    std::this_thread::yield();
+#else
+                    ::boost::winapi::Sleep(0);
+#endif
+                }
+                else
+                {
+#if BOOST_PLAT_WINDOWS_RUNTIME
+                    ::boost::winapi::WaitForSingleObjectEx(::boost::winapi::GetCurrentThread(), milliseconds, 0);
+#else
+                    ::boost::winapi::Sleep(milliseconds);
+#endif
+                }
+            }
+
+#if BOOST_PLAT_WINDOWS_RUNTIME
+            class BOOST_THREAD_DECL scoped_winrt_thread
+            {
+            public:
+                scoped_winrt_thread() : m_completionHandle(invalid_handle_value)
+                {}
+
+                ~scoped_winrt_thread()
+                {
+                    if (m_completionHandle != ::boost::detail::win32::invalid_handle_value)
+                    {
+                        ::boost::winapi::CloseHandle(m_completionHandle);
+                    }
+                }
+
+                typedef unsigned(__stdcall * thread_func)(void *);
+                bool start(thread_func address, void *parameter, unsigned int *thrdId);
+
+                handle waitable_handle() const
+                {
+                    BOOST_ASSERT(m_completionHandle != ::boost::detail::win32::invalid_handle_value);
+                    return m_completionHandle;
+                }
+
+            private:
+                handle m_completionHandle;
+            };
+#endif
             class BOOST_THREAD_DECL handle_manager
             {
             private:
@@ -272,7 +228,7 @@ namespace boost
                 {
                     if(handle_to_manage && handle_to_manage!=invalid_handle_value)
                     {
-                        BOOST_VERIFY(CloseHandle(handle_to_manage));
+                        BOOST_VERIFY(::boost::winapi::CloseHandle(handle_to_manage));
                     }
                 }
 
@@ -323,7 +279,6 @@ namespace boost
                     cleanup();
                 }
             };
-
         }
     }
 }
@@ -441,7 +396,7 @@ namespace boost
                     }
                     old=current;
                 }
-                while(true);
+                while(true) ;
                 return (old&value)!=0;
             }
 
@@ -458,7 +413,7 @@ namespace boost
                     }
                     old=current;
                 }
-                while(true);
+                while(true) ;
                 return (old&value)!=0;
             }
         }

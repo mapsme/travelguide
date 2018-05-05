@@ -6,7 +6,7 @@
 // accompanying file LICENSE_1_0.txt or copy at
 // http://www.boost.org/LICENSE_1_0.txt)
 //
-// $Id: placeholder_of.hpp 80909 2012-10-08 21:59:50Z steven_watanabe $
+// $Id$
 
 #ifndef BOOST_TYPE_ERASURE_PLACEHOLDER_OF_HPP_INCLUDED
 #define BOOST_TYPE_ERASURE_PLACEHOLDER_OF_HPP_INCLUDED
@@ -14,11 +14,15 @@
 namespace boost {
 namespace type_erasure {
 
+#ifndef BOOST_TYPE_ERASURE_DOXYGEN
+
 template<class Concept, class T>
 class any;
 
 template<class Concept, class T>
 class param;
+
+#endif
 
 /**
  * A metafunction returning the (const/reference qualified) placeholder
@@ -51,6 +55,13 @@ struct placeholder_of< ::boost::type_erasure::param<Concept, T> >
 {
     typedef T type;
 };
+
+#ifndef BOOST_NO_CXX11_TEMPLATE_ALIASES
+
+template<class T>
+using placeholder_of_t = typename ::boost::type_erasure::placeholder_of<T>::type;
+
+#endif
 
 }
 }

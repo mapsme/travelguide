@@ -9,7 +9,7 @@
 #define BOOST_XPRESSIVE_DETAIL_UTILITY_TRACKING_PTR_HPP_EAN_10_04_2005
 
 // MS compatible compilers support #pragma once
-#if defined(_MSC_VER) && (_MSC_VER >= 1020)
+#if defined(_MSC_VER)
 # pragma once
 #endif
 
@@ -112,8 +112,10 @@ private:
 //  for use with a filter_iterator to filter a node out of a list of dependencies
 template<typename Derived>
 struct filter_self
-  : std::unary_function<shared_ptr<Derived>, bool>
 {
+    typedef shared_ptr<Derived> argument_type;
+    typedef bool result_type;
+
     filter_self(enable_reference_tracking<Derived> *self)
       : self_(self)
     {

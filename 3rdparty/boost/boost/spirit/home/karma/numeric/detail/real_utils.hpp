@@ -104,8 +104,14 @@ namespace boost { namespace spirit { namespace karma
                     long exp = traits::truncate_to_long::call(-dim);
                     if (exp != -dim)
                         ++exp;
-                    dim = -exp;
-                    n *= spirit::traits::pow10<U>(exp);
+                    dim = static_cast<U>(-exp);
+                    // detect and handle denormalized numbers to prevent overflow in pow10
+                    if (exp > std::numeric_limits<U>::max_exponent10)
+                    {
+                        n *= spirit::traits::pow10<U>(std::numeric_limits<U>::max_exponent10);
+                        n *= spirit::traits::pow10<U>(exp - std::numeric_limits<U>::max_exponent10);
+                    } else
+                        n *= spirit::traits::pow10<U>(exp);
                 }
             }
 
@@ -152,10 +158,12 @@ namespace boost { namespace spirit { namespace karma
             }
 
         // call the actual generating functions to output the different parts
-            if (sign_val && traits::test_zero(long_int_part) && 
+            if ((force_sign || sign_val) &&
+                traits::test_zero(long_int_part) &&
                 traits::test_zero(long_frac_part))
             {
                 sign_val = false;     // result is zero, no sign please
+                force_sign = false;
             }
 
         // generate integer part

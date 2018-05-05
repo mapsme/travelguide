@@ -1,5 +1,5 @@
 /*
- *          Copyright Andrey Semashev 2007 - 2013.
+ *          Copyright Andrey Semashev 2007 - 2015.
  * Distributed under the Boost Software License, Version 1.0.
  *    (See accompanying file LICENSE_1_0.txt or copy at
  *          http://www.boost.org/LICENSE_1_0.txt)
@@ -22,7 +22,7 @@
 #include <iterator>
 #include <boost/cstdint.hpp>
 #include <boost/move/core.hpp>
-#include <boost/move/utility.hpp>
+#include <boost/move/utility_core.hpp>
 #include <boost/date_time/time.hpp>
 #include <boost/date_time/date.hpp>
 #include <boost/date_time/gregorian/gregorian_types.hpp>
@@ -36,7 +36,7 @@
 #include <boost/log/utility/formatting_ostream.hpp>
 #include <boost/log/detail/header.hpp>
 
-#ifdef BOOST_LOG_HAS_PRAGMA_ONCE
+#ifdef BOOST_HAS_PRAGMA_ONCE
 #pragma once
 #endif
 
@@ -55,17 +55,17 @@ inline void decompose_date(DateT const& d, boost::log::aux::decomposed_time_wrap
 {
     typedef typename DateT::ymd_type ymd_type;
     ymd_type ymd = d.year_month_day();
-    v.year = ymd.year;
-    v.month = ymd.month;
-    v.day = ymd.day;
+    v.year = static_cast< uint32_t >(ymd.year);
+    v.month = static_cast< uint32_t >(ymd.month);
+    v.day = static_cast< uint32_t >(ymd.day);
 }
 
 template< typename TimeDurationT, typename ValueT >
 inline void decompose_time_of_day(TimeDurationT const& tod, boost::log::aux::decomposed_time_wrapper< ValueT >& v)
 {
-    v.hours = tod.hours();
-    v.minutes = tod.minutes();
-    v.seconds = tod.seconds();
+    v.hours = static_cast< uint32_t >(tod.hours());
+    v.minutes = static_cast< uint32_t >(tod.minutes());
+    v.seconds = static_cast< uint32_t >(tod.seconds());
 
     typedef typename TimeDurationT::traits_type traits_type;
     enum
@@ -96,10 +96,10 @@ inline void decompose_date_duration(DateDurationT const& dur, boost::log::aux::d
     if (dur.is_negative())
     {
         v.negative = true;
-        v.day = (-dur).days();
+        v.day = static_cast< uint32_t >((-dur).days());
     }
     else
-        v.day = dur.days();
+        v.day = static_cast< uint32_t >(dur.days());
 }
 
 template< typename TimeT, typename ValueT >
@@ -142,7 +142,7 @@ struct date_time_formatter_generator_traits_impl
         typedef typename date_time_formatter_generator_traits_impl< TimeT, CharT >::value_type value_type;
 
     public:
-        BOOST_LOG_DEFAULTED_FUNCTION(formatter(), {})
+        BOOST_DEFAULTED_FUNCTION(formatter(), {})
         formatter(formatter const& that) : base_type(static_cast< base_type const& >(that)) {}
         formatter(BOOST_RV_REF(formatter) that) { this->swap(that); }
 
@@ -217,7 +217,7 @@ struct date_time_formatter_generator_traits< local_time::local_date_time_base< T
         typedef typename date_time_formatter_generator_traits< local_time::local_date_time_base< TimeT, TimeZoneT >, CharT, VoidT >::value_type value_type;
 
     public:
-        BOOST_LOG_DEFAULTED_FUNCTION(formatter(), {})
+        BOOST_DEFAULTED_FUNCTION(formatter(), {})
         formatter(formatter const& that) : base_type(static_cast< base_type const& >(that)) {}
         formatter(BOOST_RV_REF(formatter) that) { this->swap(that); }
 
@@ -320,7 +320,7 @@ struct date_formatter_generator_traits_impl
         typedef typename date_formatter_generator_traits_impl< DateT, CharT >::value_type value_type;
 
     public:
-        BOOST_LOG_DEFAULTED_FUNCTION(formatter(), {})
+        BOOST_DEFAULTED_FUNCTION(formatter(), {})
         formatter(formatter const& that) : base_type(static_cast< base_type const& >(that)) {}
         formatter(BOOST_RV_REF(formatter) that) { this->swap(that); }
 
@@ -394,7 +394,7 @@ struct time_duration_formatter_generator_traits_impl
         typedef typename time_duration_formatter_generator_traits_impl< TimeDurationT, CharT >::value_type value_type;
 
     public:
-        BOOST_LOG_DEFAULTED_FUNCTION(formatter(), {})
+        BOOST_DEFAULTED_FUNCTION(formatter(), {})
         formatter(formatter const& that) : base_type(static_cast< base_type const& >(that)) {}
         formatter(BOOST_RV_REF(formatter) that) { this->swap(that); }
 
@@ -492,7 +492,7 @@ struct date_duration_formatter_generator_traits_impl
         typedef typename date_duration_formatter_generator_traits_impl< DateDurationT, CharT >::value_type value_type;
 
     public:
-        BOOST_LOG_DEFAULTED_FUNCTION(formatter(), {})
+        BOOST_DEFAULTED_FUNCTION(formatter(), {})
         formatter(formatter const& that) : base_type(static_cast< base_type const& >(that)) {}
         formatter(BOOST_RV_REF(formatter) that) { this->swap(that); }
 

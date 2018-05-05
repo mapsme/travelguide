@@ -26,6 +26,7 @@
 
 #include <boost/checked_delete.hpp>
 #include <boost/smart_ptr/detail/sp_counted_base.hpp>
+#include <boost/core/addressof.hpp>
 
 #if defined(BOOST_SP_USE_QUICK_ALLOCATOR)
 #include <boost/smart_ptr/detail/quick_allocator.hpp>
@@ -49,6 +50,19 @@ void sp_scalar_destructor_hook( void * px, std::size_t size, void * pn );
 
 namespace detail
 {
+
+// get_local_deleter
+
+template<class D> class local_sp_deleter;
+
+template<class D> D * get_local_deleter( D * /*p*/ )
+{
+    return 0;
+}
+
+template<class D> D * get_local_deleter( local_sp_deleter<D> * p );
+
+//
 
 template<class X> class sp_counted_impl_p: public sp_counted_base
 {
@@ -78,7 +92,12 @@ public:
         boost::checked_delete( px_ );
     }
 
-    virtual void * get_deleter( detail::sp_typeinfo const & )
+    virtual void * get_deleter( sp_typeinfo const & )
+    {
+        return 0;
+    }
+
+    virtual void * get_local_deleter( sp_typeinfo const & )
     {
         return 0;
     }
@@ -153,9 +172,14 @@ public:
         del( ptr );
     }
 
-    virtual void * get_deleter( detail::sp_typeinfo const & ti )
+    virtual void * get_deleter( sp_typeinfo const & ti )
     {
         return ti == BOOST_SP_TYPEID(D)? &reinterpret_cast<char&>( del ): 0;
+    }
+
+    virtual void * get_local_deleter( sp_typeinfo const & ti )
+    {
+        return ti == BOOST_SP_TYPEID(D)? boost::detail::get_local_deleter( boost::addressof( del ) ): 0;
     }
 
     virtual void * get_untyped_deleter()
@@ -213,7 +237,7 @@ public:
     {
     }
 
-    sp_counted_impl_pda( P p, A a ): p_( p ), d_(), a_( a )
+    sp_counted_impl_pda( P p, A a ): p_( p ), d_( a ), a_( a )
     {
     }
 
@@ -224,17 +248,31 @@ public:
 
     virtual void destroy() // nothrow
     {
+#if !defined( BOOST_NO_CXX11_ALLOCATOR )
+
+        typedef typename std::allocator_traits<A>::template rebind_alloc< this_type > A2;
+
+#else
+
         typedef typename A::template rebind< this_type >::other A2;
+
+#endif
 
         A2 a2( a_ );
 
         this->~this_type();
+
         a2.deallocate( this, 1 );
     }
 
-    virtual void * get_deleter( detail::sp_typeinfo const & ti )
+    virtual void * get_deleter( sp_typeinfo const & ti )
     {
         return ti == BOOST_SP_TYPEID( D )? &reinterpret_cast<char&>( d_ ): 0;
+    }
+
+    virtual void * get_local_deleter( sp_typeinfo const & ti )
+    {
+        return ti == BOOST_SP_TYPEID(D)? boost::detail::get_local_deleter( boost::addressof( d_ ) ): 0;
     }
 
     virtual void * get_untyped_deleter()
